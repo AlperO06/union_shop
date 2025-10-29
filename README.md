@@ -212,13 +212,13 @@ Make sure the repository is public. Check to see if it opens in an incognito/pri
 
 ## Project Structure
 
-This starter repository provides a minimal skeletal structure with:
+This starter repository that you have forked provides a minimal skeletal structure with:
 
 - **Homepage** (`lib/main.dart`): A basic homepage
 - **Product Page** (`lib/product_page.dart`): A single product page
 - **Widget Tests**: Basic tests for both of the above pages (`test/home_test.dart` and `test/product_test.dart`)
 
-Here is an overview of the project structure:
+Here is an overview of the project structure after forking:
 
 ```plaintext
 union_shop/
