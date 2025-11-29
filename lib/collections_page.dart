@@ -53,8 +53,14 @@ class CollectionsPage extends StatelessWidget {
                     ),
                     child: InkWell(
                       onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Open "${c['title']}"')),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => CollectionDetailPage(
+                              title: c['title']!,
+                              subtitle: c['subtitle']!,
+                            ),
+                          ),
                         );
                       },
                       child: Padding(
@@ -99,8 +105,14 @@ class CollectionsPage extends StatelessWidget {
                     margin: const EdgeInsets.only(bottom: 12),
                     child: InkWell(
                       onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('Open "${c['title']}"')),
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => CollectionDetailPage(
+                              title: c['title']!,
+                              subtitle: c['subtitle']!,
+                            ),
+                          ),
                         );
                       },
                       child: Padding(
@@ -142,6 +154,49 @@ class CollectionsPage extends StatelessWidget {
                   );
                 },
               ),
+      ),
+    );
+  }
+}
+
+// add placeholder detail page
+class CollectionDetailPage extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
+  const CollectionDetailPage({super.key, required this.title, required this.subtitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+        backgroundColor: const Color(0xFF4d2963),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Column(
+          children: [
+            Container(
+              height: 220,
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: const Center(
+                child: Icon(Icons.image, size: 96, color: Colors.grey),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Text(subtitle, style: const TextStyle(fontSize: 16, color: Colors.black54)),
+            const SizedBox(height: 12),
+            const Text(
+              'This is a placeholder collection detail page. Replace with real content.',
+              style: TextStyle(fontSize: 14),
+            ),
+          ],
+        ),
       ),
     );
   }
