@@ -255,44 +255,73 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
               Text(widget.subtitle, style: const TextStyle(fontSize: 16, color: Colors.black54)),
               const SizedBox(height: 12),
 
-              // Dropdowns: Category + Sort
-              Row(
-                children: [
-                  const Text('Category: ', style: TextStyle(fontSize: 14)),
-                  const SizedBox(width: 8),
-                  DropdownButton<String>(
-                    value: _selectedCategory,
-                    items: _categories
-                        .map((c) => DropdownMenuItem(value: c, child: Text(c)))
-                        .toList(),
-                    onChanged: (v) {
-                      if (v == null) return;
-                      setState(() {
-                        _selectedCategory = v;
-                      });
-                    },
-                  ),
+              // Horizontal filter bar: Category + Sort, neatly spaced and padded
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                decoration: BoxDecoration(
+                  color: Colors.grey[100],
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                child: Row(
+                  children: [
+                    // Category control (left)
+                    Expanded(
+                      child: Row(
+                        children: [
+                          const Text('Category:', style: TextStyle(fontSize: 14)),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: DropdownButton<String>(
+                              isExpanded: true,
+                              value: _selectedCategory,
+                              items: _categories
+                                  .map((c) => DropdownMenuItem(value: c, child: Text(c)))
+                                  .toList(),
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  _selectedCategory = v;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
 
-                  const SizedBox(width: 20),
+                    const SizedBox(width: 16),
 
-                  const Text('Sort: ', style: TextStyle(fontSize: 14)),
-                  const SizedBox(width: 8),
-                  DropdownButton<String>(
-                    value: _selectedSort,
-                    items: _sortOptions
-                        .map((s) => DropdownMenuItem(value: s, child: Text(s)))
-                        .toList(),
-                    onChanged: (v) {
-                      if (v == null) return;
-                      setState(() {
-                        _selectedSort = v;
-                      });
-                    },
-                  ),
+                    // Sort control (center-left)
+                    Expanded(
+                      child: Row(
+                        children: [
+                          const Text('Sort:', style: TextStyle(fontSize: 14)),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: DropdownButton<String>(
+                              isExpanded: true,
+                              value: _selectedSort,
+                              items: _sortOptions
+                                  .map((s) => DropdownMenuItem(value: s, child: Text(s)))
+                                  .toList(),
+                              onChanged: (v) {
+                                if (v == null) return;
+                                setState(() {
+                                  _selectedSort = v;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
 
-                  const Spacer(),
-                  Text('${sortedProducts.length} item(s)', style: const TextStyle(color: Colors.black54)),
-                ],
+                    const SizedBox(width: 16),
+
+                    // Item count (right)
+                    Text('${sortedProducts.length} item(s)', style: const TextStyle(color: Colors.black54)),
+                  ],
+                ),
               ),
 
               const SizedBox(height: 12),
