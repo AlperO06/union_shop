@@ -54,7 +54,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight + 28),
+        // increased header height slightly
+        preferredSize: const Size.fromHeight(kToolbarHeight + 36),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -78,7 +79,8 @@ class HomeScreen extends StatelessWidget {
               backgroundColor: Colors.white,
               elevation: 0,
               automaticallyImplyLeading: false,
-              leadingWidth: 120,
+              // make room for a larger logo so it appears larger than the text links
+              leadingWidth: 140,
               leading: GestureDetector(
                 onTap: () {
                   navigateToHome(context);
@@ -87,7 +89,8 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 12.0),
                   child: Image.network(
                     'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                    height: 28,
+                    // larger logo height to stand out relative to the text links
+                    height: 40,
                     fit: BoxFit.contain,
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
@@ -126,12 +129,13 @@ class HomeScreen extends StatelessWidget {
                     child: const Text('Shop'),
                   ),
                   const SizedBox(width: 8),
+                  // make SALE visually bolder
                   TextButton(
                     onPressed: () => Navigator.pushNamed(context, '/sale'),
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.black,
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                     ),
                     child: const Text('SALE'),
                   ),
@@ -183,8 +187,9 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             // Header
+            // slightly increased header height to match AppBar adjustments
             Container(
-              height: 100,
+              height: 110,
               color: Colors.white,
               child: Column(
                 children: [
