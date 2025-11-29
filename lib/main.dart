@@ -38,6 +38,10 @@ class HomeScreen extends StatelessWidget {
     Navigator.pushNamed(context, '/product');
   }
 
+  void navigateToAbout(BuildContext context) {
+    Navigator.pushNamed(context, '/about');
+  }
+
   void placeholderCallbackForButtons() {
     // This is the event handler for buttons that don't work yet
   }
@@ -149,6 +153,19 @@ class HomeScreen extends StatelessWidget {
                                     minHeight: 32,
                                   ),
                                   onPressed: placeholderCallbackForButtons,
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.info_outline,
+                                    size: 18,
+                                    color: Colors.grey,
+                                  ),
+                                  padding: const EdgeInsets.all(8),
+                                  constraints: const BoxConstraints(
+                                    minWidth: 32,
+                                    minHeight: 32,
+                                  ),
+                                  onPressed: () => navigateToAbout(context),
                                 ),
                               ],
                             ),
