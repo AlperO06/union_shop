@@ -174,29 +174,89 @@ class CollectionDetailPage extends StatelessWidget {
         backgroundColor: const Color(0xFF4d2963),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          children: [
-            Container(
-              height: 220,
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(8),
+        padding: const EdgeInsets.all(12.0),
+        child: LayoutBuilder(builder: (context, constraints) {
+          final width = constraints.maxWidth;
+          int columns = 1;
+          if (width >= 1200) {
+            columns = 4;
+          } else if (width >= 900) {
+            columns = 3;
+          } else if (width >= 600) {
+            columns = 2;
+          }
+
+          // Dummy products for this collection
+          final products = List.generate(8, (i) {
+            return {
+              'name': '$title Product ${i + 1}',
+              'price': '£${(i + 1) * 5}.00',
+            };
+          });
+
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(subtitle, style: const TextStyle(fontSize: 16, color: Colors.black54)),
+              const SizedBox(height: 12),
+              Expanded(
+                child: GridView.builder(
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: columns,
+                    crossAxisSpacing: 12,
+                    mainAxisSpacing: 12,
+                    childAspectRatio: 0.75,
+                  ),
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    final p = products[index];
+                    return Card(
+                      clipBehavior: Clip.hardEdge,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                      child: InkWell(
+                        onTap: () {
+                          // placeholder: navigate to product detail if needed
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Expanded(
+                                child: Container(
+                                  width: double.infinity,
+                                  decoration: BoxDecoration(
+                                    color: Colors.grey[200],
+                                    borderRadius: BorderRadius.circular(4),
+                                  ),
+                                  child: const Center(
+                                    child: Icon(Icons.image, size: 48, color: Colors.grey),
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                p['name']!,
+                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                p['price']!,
+                                style: const TextStyle(fontSize: 13, color: Colors.grey),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
-              child: const Center(
-                child: Icon(Icons.image, size: 96, color: Colors.grey),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Text(subtitle, style: const TextStyle(fontSize: 16, color: Colors.black54)),
-            const SizedBox(height: 12),
-            const Text(
-              'This is a placeholder collection detail page. Replace with real content.',
-              style: TextStyle(fontSize: 14),
-            ),
-          ],
-        ),
+            ],
+          );
+        }),
       ),
     );
   }
