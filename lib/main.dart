@@ -388,7 +388,7 @@ class HomeScreen extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4)),
                               child: InkWell(
-                                onTap: () {},
+                                onTap: () => Navigator.pushNamed(context, '/product'),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
