@@ -1,5 +1,24 @@
 import 'package:flutter/material.dart';
 
+// Model for a sale product and a hardcoded list
+class SaleProduct {
+  final String name;
+  final double oldPrice;
+  final double newPrice;
+  const SaleProduct({
+    required this.name,
+    required this.oldPrice,
+    required this.newPrice,
+  });
+}
+
+const List<SaleProduct> saleProducts = [
+  SaleProduct(name: 'Leather Jacket', oldPrice: 199.99, newPrice: 129.99),
+  SaleProduct(name: 'Sneakers', oldPrice: 89.99, newPrice: 59.99),
+  SaleProduct(name: 'Jeans', oldPrice: 79.99, newPrice: 49.99),
+  SaleProduct(name: 'Wool Scarf', oldPrice: 39.99, newPrice: 19.99),
+];
+
 class SalePage extends StatelessWidget {
   const SalePage({Key? key}) : super(key: key);
 
