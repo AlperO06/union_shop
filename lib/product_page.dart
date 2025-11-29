@@ -25,118 +25,186 @@ class _ProductPageState extends State<ProductPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header
-            Container(
-              height: 100,
-              color: Colors.white,
-              child: Column(
-                children: [
-                  // Top banner
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    color: const Color(0xFF4d2963),
-                    child: const Text(
-                      'PLACEHOLDER HEADER TEXT',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
+            // --- REPLACED: legacy header (PLACEHOLDER HEADER TEXT) ---
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // thin top purple SALE banner
+                Container(
+                  height: 28,
+                  width: double.infinity,
+                  color: const Color(0xFF4d2963), // dark purple
+                  alignment: Alignment.center,
+                  child: const Text(
+                    'BIG SALE! OVER 20% OFF ESSENTIALS',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13,
                     ),
                   ),
-                  // Main header
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
-                            },
+                ),
+
+                // AppBar-like row (logo, nav buttons, action icons)
+                Material(
+                  color: Colors.white,
+                  elevation: 0,
+                  child: SizedBox(
+                    height: kToolbarHeight,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 12.0),
+                          child: GestureDetector(
+                            onTap: () => Navigator.popUntil(context, (route) => route.isFirst),
                             child: Image.network(
                               'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                              height: 18,
-                              fit: BoxFit.cover,
+                              height: 28,
+                              fit: BoxFit.contain,
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
                                   color: Colors.grey[300],
-                                  width: 18,
-                                  height: 18,
+                                  width: 28,
+                                  height: 28,
                                   child: const Center(
-                                    child: Icon(Icons.image_not_supported,
-                                        color: Colors.grey),
+                                    child: Icon(Icons.image_not_supported, color: Colors.grey),
                                   ),
                                 );
                               },
                             ),
                           ),
-                          const Spacer(),
-                          ConstrainedBox(
-                            constraints: const BoxConstraints(maxWidth: 600),
-                            child: Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.search,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
+                        ),
+                        const SizedBox(width: 12),
+                        // navigation buttons
+                        Expanded(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextButton(
+                                onPressed: () => Navigator.popUntil(context, (route) => route.isFirst),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  textStyle: const TextStyle(fontSize: 16),
                                 ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.person_outline,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
+                                child: const Text('Home'),
+                              ),
+                              const SizedBox(width: 8),
+                              TextButton(
+                                onPressed: () => Navigator.pushNamed(context, '/collections'),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  textStyle: const TextStyle(fontSize: 16),
                                 ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.shopping_bag_outlined,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
+                                child: const Text('Shop'),
+                              ),
+                              const SizedBox(width: 8),
+                              TextButton(
+                                onPressed: () => Navigator.pushNamed(context, '/sale'),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                                 ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.menu,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
-                                  onPressed: placeholderCallbackForButtons,
+                                child: const Text('SALE'),
+                              ),
+                              const SizedBox(width: 8),
+                              TextButton(
+                                onPressed: () => Navigator.pushNamed(context, '/about'),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  textStyle: const TextStyle(fontSize: 16),
                                 ),
-                              ],
-                            ),
+                                child: const Text('About'),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        // action icons
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.search, size: 18, color: Colors.grey),
+                              padding: const EdgeInsets.all(8),
+                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                              onPressed: placeholderCallbackForButtons,
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.person_outline, size: 18, color: Colors.grey),
+                              padding: const EdgeInsets.all(8),
+                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                              onPressed: placeholderCallbackForButtons,
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+                              padding: const EdgeInsets.all(8),
+                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                              onPressed: placeholderCallbackForButtons,
+                            ),
+                            IconButton(
+                              icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
+                              padding: const EdgeInsets.all(8),
+                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                              onPressed: placeholderCallbackForButtons,
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   ),
-                ],
-              ),
+                ),
+
+                // FREE UK DELIVERY / promotions banner (uses same layout as HomeScreen promotions)
+                Container(
+                  width: double.infinity,
+                  color: const Color(0xFFF6F0FB),
+                  padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1100),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'FREE UK DELIVERY on orders over £30',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: Colors.black87,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                'Available for standard UK shipping — exclusions may apply.',
+                                style: TextStyle(fontSize: 13, color: Colors.black54),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        ElevatedButton(
+                          onPressed: () => Navigator.pushNamed(context, '/collections'),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4d2963),
+                            foregroundColor: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.zero,
+                            ),
+                          ),
+                          child: const Text('SHOP NOW'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
+            // --- END REPLACED HEADER ---
 
             // Product details
             Container(
