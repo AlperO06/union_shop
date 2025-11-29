@@ -48,6 +48,23 @@ class AboutPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Page header below the AppBar with light background and centered title
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(color: Colors.grey[100]),
+                    padding: const EdgeInsets.symmetric(vertical: 18),
+                    child: Center(
+                      child: Text(
+                        'About Us',
+                        style: textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ) ??
+                            const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
                   // Intro welcome card
                   Card(
                     elevation: 2,
