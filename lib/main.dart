@@ -156,42 +156,42 @@ class UnionHeader extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: isWide
                         ? [
-                            IconButton(
-                              icon: const Icon(Icons.search, size: 18, color: Colors.grey),
-                              padding: const EdgeInsets.all(8),
-                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                            const IconButton(
+                              icon: Icon(Icons.search, size: 18, color: Colors.grey),
+                              padding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(minWidth: 32, minHeight: 32),
                               onPressed: placeholderCallbackForButtons,
                             ),
-                            IconButton(
-                              icon: const Icon(Icons.person_outline, size: 18, color: Colors.grey),
-                              padding: const EdgeInsets.all(8),
-                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                            const IconButton(
+                              icon: Icon(Icons.person_outline, size: 18, color: Colors.grey),
+                              padding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(minWidth: 32, minHeight: 32),
                               onPressed: placeholderCallbackForButtons,
                             ),
-                            IconButton(
-                              icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-                              padding: const EdgeInsets.all(8),
-                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                            const IconButton(
+                              icon: Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+                              padding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(minWidth: 32, minHeight: 32),
                               onPressed: placeholderCallbackForButtons,
                             ),
-                            IconButton(
-                              icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
-                              padding: const EdgeInsets.all(8),
-                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                            const IconButton(
+                              icon: Icon(Icons.menu, size: 18, color: Colors.grey),
+                              padding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(minWidth: 32, minHeight: 32),
                               onPressed: placeholderCallbackForButtons,
                             ),
                           ]
                         : [
-                            IconButton(
-                              icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-                              padding: const EdgeInsets.all(8),
-                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                            const IconButton(
+                              icon: Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+                              padding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(minWidth: 32, minHeight: 32),
                               onPressed: placeholderCallbackForButtons,
                             ),
-                            IconButton(
-                              icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
-                              padding: const EdgeInsets.all(8),
-                              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                            const IconButton(
+                              icon: Icon(Icons.menu, size: 18, color: Colors.grey),
+                              padding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(minWidth: 32, minHeight: 32),
                               onPressed: placeholderCallbackForButtons,
                             ),
                           ],
@@ -236,6 +236,7 @@ class HomeScreen extends StatelessWidget {
                       child: Container(
                         // fixed overlay: use withOpacity
                         decoration: BoxDecoration(
+                          // ignore: deprecated_member_use
                           color: Colors.black.withOpacity(0.58),
                         ),
                       ),
