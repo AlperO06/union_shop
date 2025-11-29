@@ -275,10 +275,10 @@ class HomeScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Expanded(
+                    const Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
-                        children: const [
+                        children: [
                           Text(
                             'Special Promotion — 20% off selected items',
                             style: TextStyle(
@@ -444,13 +444,90 @@ class HomeScreen extends StatelessWidget {
             Container(
               width: double.infinity,
               color: Colors.grey[50],
-              padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Placeholder Footer',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1100),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Divider(),
+                    const SizedBox(height: 12),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        // Help column
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Help',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text('Shipping', style: TextStyle(color: Colors.blue)),
+                              SizedBox(height: 6),
+                              Text('Returns', style: TextStyle(color: Colors.blue)),
+                              SizedBox(height: 6),
+                              Text('Contact Us', style: TextStyle(color: Colors.blue)),
+                            ],
+                          ),
+                        ),
+                        // Company column
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Company',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text('About Us', style: TextStyle(color: Colors.blue)),
+                              SizedBox(height: 6),
+                              Text('Careers', style: TextStyle(color: Colors.blue)),
+                              SizedBox(height: 6),
+                              Text('Press', style: TextStyle(color: Colors.blue)),
+                            ],
+                          ),
+                        ),
+                        // Legal column
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                'Legal',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                              SizedBox(height: 8),
+                              Text('Terms & Conditions', style: TextStyle(color: Colors.blue)),
+                              SizedBox(height: 6),
+                              Text('Privacy Policy', style: TextStyle(color: Colors.blue)),
+                              SizedBox(height: 6),
+                              Text('Cookies', style: TextStyle(color: Colors.blue)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Center(
+                      child: Text(
+                        '© 2025 Union Shop — All rights reserved',
+                        style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
