@@ -188,10 +188,14 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
     // generate dummy products with assigned categories (cycle through categories excluding 'All')
     final assignCats = _categories.where((c) => c != 'All').toList();
     _allProducts = List.generate(8, (i) {
+      // use a seeded picsum URL per product so images differ
+      final seed = '${widget.title.replaceAll(' ', '')}-$i';
+      final imageUrl = 'https://picsum.photos/seed/$seed/400/400';
       return {
         'name': '${widget.title} Product ${i + 1}',
         'price': '£${(i + 1) * 5}.00',
         'category': assignCats[i % assignCats.length],
+        'image': imageUrl, // new image field
       };
     });
   }
@@ -348,15 +352,23 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              // replaced static icon container with network image using the new 'image' field
                               Expanded(
-                                child: Container(
-                                  width: double.infinity,
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey[200],
-                                    borderRadius: BorderRadius.circular(4),
-                                  ),
-                                  child: const Center(
-                                    child: Icon(Icons.image, size: 48, color: Colors.grey),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(4),
+                                  child: Image.network(
+                                    p['image'] ?? '',
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                        color: Colors.grey[200],
+                                        child: const Center(
+                                          child: Icon(Icons.image, size: 48, color: Colors.grey),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
