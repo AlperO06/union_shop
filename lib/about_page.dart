@@ -34,25 +34,25 @@ class AboutPage extends StatelessWidget {
                 children: [
                   Text(
                     'Our Mission',
-                    style: textTheme.headline6,
+                    style: textTheme.titleLarge,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: smallSpacing),
                   Text(
                     'Union Shop is a community-focused marketplace offering handmade goods, vintage finds, and locally sourced products. We connect small makers with customers, supporting sustainable shopping and neighborhood entrepreneurship.',
-                    style: textTheme.bodyText2,
+                    style: textTheme.bodyMedium,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: sectionSpacing),
                   Text(
                     'Student Union Involvement',
-                    style: textTheme.subtitle1,
+                    style: textTheme.titleMedium,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: smallSpacing),
                   Text(
                     'We partner with the Student Union to host student vendor markets, provide resources and workshops for student entrepreneurs, and create opportunities for students to showcase their work on campus.',
-                    style: textTheme.bodyText2,
+                    style: textTheme.bodyMedium,
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: sectionSpacing),
