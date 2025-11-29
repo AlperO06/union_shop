@@ -216,7 +216,6 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header moved into the scrollable body (sale banner + navbar)
             const UnionHeader(),
             // Hero Section (updated)
             SizedBox(
