@@ -478,7 +478,7 @@ class HomeScreen extends StatelessWidget {
                     ],
                   );
 
-                  // Link column builder helper
+                  // Link column builder helper -> convert each link into a TextButton
                   Widget linkColumn(String title, List<String> links) {
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -486,7 +486,16 @@ class HomeScreen extends StatelessWidget {
                         Text(title, style: headingStyle),
                         const SizedBox(height: 8),
                         for (var i = 0; i < links.length; i++) ...[
-                          Text(links[i], style: linkStyle),
+                          TextButton(
+                            onPressed: placeholderCallbackForButtons,
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              minimumSize: Size.zero,
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              alignment: Alignment.centerLeft,
+                            ),
+                            child: Text(links[i], style: linkStyle),
+                          ),
                           if (i != links.length - 1) const SizedBox(height: 6),
                         ],
                       ],
