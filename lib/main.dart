@@ -154,18 +154,17 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                   onPressed: placeholderCallbackForButtons,
                                 ),
-                                IconButton(
-                                  icon: const Icon(
-                                    Icons.info_outline,
-                                    size: 18,
-                                    color: Colors.grey,
-                                  ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
-                                    minWidth: 32,
-                                    minHeight: 32,
-                                  ),
+                                // Small text button replacing the info icon
+                                TextButton(
                                   onPressed: () => navigateToAbout(context),
+                                  style: TextButton.styleFrom(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 8, vertical: 8),
+                                    minimumSize: const Size(32, 32),
+                                    foregroundColor: Colors.grey,
+                                    textStyle: const TextStyle(fontSize: 14),
+                                  ),
+                                  child: const Text('About'),
                                 ),
                               ],
                             ),
@@ -519,4 +518,5 @@ class ProductCard extends StatelessWidget {
       ),
     );
   }
+}
 }
