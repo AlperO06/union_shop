@@ -46,6 +46,20 @@ class AboutPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Intro welcome card
+                  Card(
+                    elevation: 2,
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        'Welcome to Union Shop — your destination for official merchandise, campus essentials, and local gifts. Browse our curated collections and support local makers.',
+                        style: textTheme.bodyMedium,
+                        textAlign: TextAlign.left,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 8),
                   // Mission card
                   Card(
                     elevation: 2,
