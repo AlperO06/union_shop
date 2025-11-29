@@ -53,134 +53,141 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight + 28),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            // thin top banner above the AppBar
-            Container(
-              height: 28,
-              width: double.infinity,
-              color: const Color(0xFF4d2963), // dark purple
-              alignment: Alignment.center,
-              child: const Text(
-                'BIG SALE! OVER 20% OFF ESSENTIALS',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 13,
-                ),
-              ),
-            ),
-            // actual AppBar (modified: white background, no centered title, left-aligned logo)
-            AppBar(
-              backgroundColor: Colors.white,
-              elevation: 0,
-              automaticallyImplyLeading: false,
-              leadingWidth: 120,
-              leading: GestureDetector(
-                onTap: () {
-                  navigateToHome(context);
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 12.0),
-                  child: Image.network(
-                    'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                    height: 28,
-                    fit: BoxFit.contain,
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: Colors.grey[300],
-                        width: 28,
-                        height: 28,
-                        child: const Center(
-                          child: Icon(Icons.image_not_supported, color: Colors.grey),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ),
-              // title now contains the navigation links next to the logo
-              title: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextButton(
-                    onPressed: () => navigateToHome(context),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      textStyle: const TextStyle(fontSize: 16),
-                    ),
-                    child: const Text('Home'),
-                  ),
-                  const SizedBox(width: 8),
-                  TextButton(
-                    onPressed: () => Navigator.pushNamed(context, '/collections'),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      textStyle: const TextStyle(fontSize: 16),
-                    ),
-                    child: const Text('Shop'),
-                  ),
-                  const SizedBox(width: 8),
-                  TextButton(
-                    onPressed: () => Navigator.pushNamed(context, '/sale'),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                    ),
-                    child: const Text('SALE'),
-                  ),
-                  const SizedBox(width: 8),
-                  TextButton(
-                    onPressed: () => navigateToAbout(context),
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.black,
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      textStyle: const TextStyle(fontSize: 16),
-                    ),
-                    child: const Text('About'),
-                  ),
-                ],
-              ),
-              // add icon buttons to the right side of the AppBar
-              actions: const [
-                IconButton(
-                  icon: Icon(Icons.search, size: 18, color: Colors.grey),
-                  padding: EdgeInsets.all(8),
-                  constraints: BoxConstraints(minWidth: 32, minHeight: 32),
-                  onPressed: placeholderCallbackForButtons,
-                ),
-                IconButton(
-                  icon: Icon(Icons.person_outline, size: 18, color: Colors.grey),
-                  padding: EdgeInsets.all(8),
-                  constraints: BoxConstraints(minWidth: 32, minHeight: 32),
-                  onPressed: placeholderCallbackForButtons,
-                ),
-                IconButton(
-                  icon: Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-                  padding: EdgeInsets.all(8),
-                  constraints: BoxConstraints(minWidth: 32, minHeight: 32),
-                  onPressed: placeholderCallbackForButtons,
-                ),
-                IconButton(
-                  icon: Icon(Icons.menu, size: 18, color: Colors.grey),
-                  padding: EdgeInsets.all(8),
-                  constraints: BoxConstraints(minWidth: 32, minHeight: 32),
-                  onPressed: placeholderCallbackForButtons,
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            // Header moved into the scrollable body (sale banner + navbar)
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                // thin top banner above the AppBar
+                Container(
+                  height: 28,
+                  width: double.infinity,
+                  color: const Color(0xFF4d2963), // dark purple
+                  alignment: Alignment.center,
+                  child: const Text(
+                    'BIG SALE! OVER 20% OFF ESSENTIALS',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 13,
+                    ),
+                  ),
+                ),
+                // actual AppBar-like row placed inside body so it scrolls away
+                Material(
+                  color: Colors.white,
+                  elevation: 0,
+                  child: SizedBox(
+                    height: kToolbarHeight,
+                    child: Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 12.0),
+                          child: GestureDetector(
+                            onTap: () => navigateToHome(context),
+                            child: Image.network(
+                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                              height: 28,
+                              fit: BoxFit.contain,
+                              errorBuilder: (context, error, stackTrace) {
+                                return Container(
+                                  color: Colors.grey[300],
+                                  width: 28,
+                                  height: 28,
+                                  child: const Center(
+                                    child: Icon(Icons.image_not_supported, color: Colors.grey),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        // navigation buttons
+                        Expanded(
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              TextButton(
+                                onPressed: () => navigateToHome(context),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),
+                                child: const Text('Home'),
+                              ),
+                              const SizedBox(width: 8),
+                              TextButton(
+                                onPressed: () => Navigator.pushNamed(context, '/collections'),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),
+                                child: const Text('Shop'),
+                              ),
+                              const SizedBox(width: 8),
+                              TextButton(
+                                onPressed: () => Navigator.pushNamed(context, '/sale'),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                                ),
+                                child: const Text('SALE'),
+                              ),
+                              const SizedBox(width: 8),
+                              TextButton(
+                                onPressed: () => navigateToAbout(context),
+                                style: TextButton.styleFrom(
+                                  foregroundColor: Colors.black,
+                                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                                  textStyle: const TextStyle(fontSize: 16),
+                                ),
+                                child: const Text('About'),
+                              ),
+                            ],
+                          ),
+                        ),
+                        // action icons
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: const [
+                            IconButton(
+                              icon: Icon(Icons.search, size: 18, color: Colors.grey),
+                              padding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(minWidth: 32, minHeight: 32),
+                              onPressed: placeholderCallbackForButtons,
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.person_outline, size: 18, color: Colors.grey),
+                              padding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(minWidth: 32, minHeight: 32),
+                              onPressed: placeholderCallbackForButtons,
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+                              padding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(minWidth: 32, minHeight: 32),
+                              onPressed: placeholderCallbackForButtons,
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.menu, size: 18, color: Colors.grey),
+                              padding: EdgeInsets.all(8),
+                              constraints: BoxConstraints(minWidth: 32, minHeight: 32),
+                              onPressed: placeholderCallbackForButtons,
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
             // Hero Section (updated)
             SizedBox(
               height: 420,
