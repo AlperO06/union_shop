@@ -60,6 +60,10 @@ class HomeScreen extends StatelessWidget {
             onPressed: () => Navigator.pushNamed(context, '/collections'),
             child: const Text('Shop', style: TextStyle(color: Colors.white)),
           ),
+          TextButton(
+            onPressed: () => Navigator.pushNamed(context, '/sale'),
+            child: const Text('SALE', style: TextStyle(color: Colors.white)),
+          ),
         ],
       ),
       body: SingleChildScrollView(
