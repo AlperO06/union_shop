@@ -24,9 +24,9 @@ class SalePage extends StatelessWidget {
                   end: Alignment.centerRight,
                 ),
               ),
-              child: Row(
+              child: const Row(
                 mainAxisSize: MainAxisSize.max,
-                children: const [
+                children: [
                   Icon(Icons.local_offer, color: Colors.white),
                   SizedBox(width: 8),
                   Expanded(

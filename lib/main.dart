@@ -113,53 +113,53 @@ class HomeScreen extends StatelessWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                IconButton(
-                                  icon: const Icon(
+                                const IconButton(
+                                  icon: Icon(
                                     Icons.search,
                                     size: 18,
                                     color: Colors.grey,
                                   ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
+                                  padding: EdgeInsets.all(8),
+                                  constraints: BoxConstraints(
                                     minWidth: 32,
                                     minHeight: 32,
                                   ),
                                   onPressed: placeholderCallbackForButtons,
                                 ),
-                                IconButton(
-                                  icon: const Icon(
+                                const IconButton(
+                                  icon: Icon(
                                     Icons.person_outline,
                                     size: 18,
                                     color: Colors.grey,
                                   ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
+                                  padding: EdgeInsets.all(8),
+                                  constraints: BoxConstraints(
                                     minWidth: 32,
                                     minHeight: 32,
                                   ),
                                   onPressed: placeholderCallbackForButtons,
                                 ),
-                                IconButton(
-                                  icon: const Icon(
+                                const IconButton(
+                                  icon: Icon(
                                     Icons.shopping_bag_outlined,
                                     size: 18,
                                     color: Colors.grey,
                                   ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
+                                  padding: EdgeInsets.all(8),
+                                  constraints: BoxConstraints(
                                     minWidth: 32,
                                     minHeight: 32,
                                   ),
                                   onPressed: placeholderCallbackForButtons,
                                 ),
-                                IconButton(
-                                  icon: const Icon(
+                                const IconButton(
+                                  icon: Icon(
                                     Icons.menu,
                                     size: 18,
                                     color: Colors.grey,
                                   ),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(
+                                  padding: EdgeInsets.all(8),
+                                  constraints: BoxConstraints(
                                     minWidth: 32,
                                     minHeight: 32,
                                   ),
@@ -438,11 +438,11 @@ class HomeScreen extends StatelessWidget {
                         );
                       }),
                       const SizedBox(height: 12),
-                      Align(
+                      const Align(
                         alignment: Alignment.center,
                         child: TextButton(
                           onPressed: placeholderCallbackForButtons,
-                          child: const Text('View all products'),
+                          child: Text('View all products'),
                         ),
                       ),
                     ],
@@ -461,18 +461,18 @@ class HomeScreen extends StatelessWidget {
                 child: LayoutBuilder(builder: (context, inner) {
                   // Slightly higher threshold so columns stack earlier on tablets/phones
                   final isNarrow = inner.maxWidth < 800;
-                  final headingStyle = const TextStyle(
+                  const headingStyle = TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
                   );
-                  final linkStyle = const TextStyle(
+                  const linkStyle = TextStyle(
                     color: Colors.blue,
                     fontSize: 14,
                     height: 1.3,
                   );
 
                   // Branding column used in both layouts
-                  final branding = Column(
+                  const branding = Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       Text(
