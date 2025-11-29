@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
+
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  String _selectedSize = 'Medium';
+  final List<String> _sizes = ['Small', 'Medium', 'Large'];
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -198,6 +206,50 @@ class ProductPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Color(0xFF4d2963),
                     ),
+                  ),
+
+                  const SizedBox(height: 16),
+
+                  // Size selector (new)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Size:',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey.shade300),
+                          borderRadius: BorderRadius.circular(6),
+                          color: Colors.white,
+                        ),
+                        child: DropdownButton<String>(
+                          value: _selectedSize,
+                          underline: const SizedBox(),
+                          items: _sizes
+                              .map((s) => DropdownMenuItem<String>(
+                                    value: s,
+                                    child: Text(s),
+                                  ))
+                              .toList(),
+                          onChanged: (val) {
+                            if (val != null) {
+                              setState(() {
+                                _selectedSize = val;
+                              });
+                            }
+                          },
+                        ),
+                      ),
+                    ],
                   ),
 
                   const SizedBox(height: 24),
