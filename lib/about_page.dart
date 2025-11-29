@@ -13,7 +13,13 @@ class AboutPage extends StatelessWidget {
         title: const Text('About Us'),
       ),
       body: const Center(
-        child: Text('About page coming soon'),
+        child: Padding(
+          padding: EdgeInsets.all(16.0),
+          child: Text(
+            'Union Shop is a community-focused marketplace offering handmade goods, vintage finds, and locally sourced products. We connect small makers with customers, supporting sustainable shopping and neighborhood entrepreneurship.',
+            textAlign: TextAlign.center,
+          ),
+        ),
       ),
     );
   }
