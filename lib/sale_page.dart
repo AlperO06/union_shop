@@ -86,6 +86,19 @@ class SalePage extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
+                          // placeholder image box
+                          Container(
+                            height: 100,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: const Center(
+                              child: Icon(Icons.image, color: Colors.grey, size: 40),
+                            ),
+                          ),
+                          const SizedBox(height: 8),
                           // product name
                           Text(
                             product.name,
