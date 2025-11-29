@@ -21,11 +21,13 @@ class AboutPage extends StatelessWidget {
         ) ??
         const TextStyle(fontSize: 20, fontWeight: FontWeight.w700);
     const double horizontalPadding = 20.0;
-    const double verticalPadding = 24.0;
+    // Slightly more vertical padding for better overall breathing room
+    const double verticalPadding = 28.0;
     // Slightly narrower max width improves readability on large screens.
     const double maxContentWidth = 640.0;
-    const double sectionSpacing = 16.0;
-    const double smallSpacing = 8.0;
+    // Increased spacing for clearer separation between sections/cards
+    const double sectionSpacing = 24.0;
+    const double smallSpacing = 12.0;
 
     return Scaffold(
       appBar: AppBar(
@@ -49,9 +51,9 @@ class AboutPage extends StatelessWidget {
                   // Intro welcome card
                   Card(
                     elevation: 2,
-                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    margin: const EdgeInsets.symmetric(vertical: 12),
                     child: Padding(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(20),
                       child: Text(
                         'Welcome to Union Shop — your destination for official merchandise, campus essentials, and local gifts. Browse our curated collections and support local makers.',
                         style: textTheme.bodyMedium,
@@ -59,13 +61,13 @@ class AboutPage extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: 12),
                   // Mission card
                   Card(
                     elevation: 2,
-                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    margin: const EdgeInsets.symmetric(vertical: 12),
                     child: Padding(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -91,9 +93,9 @@ class AboutPage extends StatelessWidget {
                   // Student Union card
                   Card(
                     elevation: 2,
-                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    margin: const EdgeInsets.symmetric(vertical: 12),
                     child: Padding(
-                      padding: const EdgeInsets.all(16),
+                      padding: const EdgeInsets.all(20),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
