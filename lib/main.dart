@@ -447,107 +447,113 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 1100),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Branding section: site name + short description
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          'Union Shop',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
+                child: LayoutBuilder(builder: (context, inner) {
+                  final isNarrow = inner.maxWidth < 700;
+                  final headingStyle = const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  );
+                  final linkStyle = const TextStyle(
+                    color: Colors.blue,
+                    fontSize: 14,
+                    height: 1.3,
+                  );
+
+                  // Branding column used in both layouts
+                  final branding = Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Union Shop',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
                         ),
-                        SizedBox(height: 6),
-                        Text(
-                          'Official merchandise, campus essentials and local gifts — supporting local makers and student ventures.',
-                          style: TextStyle(fontSize: 13, color: Colors.black54),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    const Divider(),
-                    const SizedBox(height: 12),
-                    Row(
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        'Official merchandise, campus essentials and local gifts — supporting local makers and student ventures.',
+                        style: TextStyle(fontSize: 13, color: Colors.black54),
+                      ),
+                    ],
+                  );
+
+                  // Link column builder helper
+                  Widget linkColumn(String title, List<String> links) {
+                    return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Help column
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Help',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text('Shipping', style: TextStyle(color: Colors.blue)),
-                              SizedBox(height: 6),
-                              Text('Returns', style: TextStyle(color: Colors.blue)),
-                              SizedBox(height: 6),
-                              Text('Contact Us', style: TextStyle(color: Colors.blue)),
-                            ],
-                          ),
-                        ),
-                        // Company column
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Company',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text('About Us', style: TextStyle(color: Colors.blue)),
-                              SizedBox(height: 6),
-                              Text('Careers', style: TextStyle(color: Colors.blue)),
-                              SizedBox(height: 6),
-                              Text('Press', style: TextStyle(color: Colors.blue)),
-                            ],
-                          ),
-                        ),
-                        // Legal column
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Legal',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                              SizedBox(height: 8),
-                              Text('Terms & Conditions', style: TextStyle(color: Colors.blue)),
-                              SizedBox(height: 6),
-                              Text('Privacy Policy', style: TextStyle(color: Colors.blue)),
-                              SizedBox(height: 6),
-                              Text('Cookies', style: TextStyle(color: Colors.blue)),
-                            ],
+                        Text(title, style: headingStyle),
+                        const SizedBox(height: 8),
+                        for (var i = 0; i < links.length; i++) ...[
+                          Text(links[i], style: linkStyle),
+                          if (i != links.length - 1) const SizedBox(height: 6),
+                        ],
+                      ],
+                    );
+                  }
+
+                  if (isNarrow) {
+                    // Vertical stacking for small screens
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        branding,
+                        const SizedBox(height: 16),
+                        const Divider(),
+                        const SizedBox(height: 12),
+                        linkColumn('Help', ['Shipping', 'Returns', 'Contact Us']),
+                        const SizedBox(height: 12),
+                        linkColumn('Company', ['About Us', 'Careers', 'Press']),
+                        const SizedBox(height: 12),
+                        linkColumn('Legal', ['Terms & Conditions', 'Privacy Policy', 'Cookies']),
+                        const SizedBox(height: 18),
+                        Center(
+                          child: Text(
+                            '© 2025 Union Shop — All rights reserved',
+                            style: TextStyle(color: Colors.grey[600], fontSize: 13),
                           ),
                         ),
                       ],
-                    ),
-                    const SizedBox(height: 16),
-                    Center(
-                      child: Text(
-                        '© 2025 Union Shop — All rights reserved',
-                        style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                    );
+                  }
+
+                  // Wide layout: branding on left, three evenly spaced columns on right
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(flex: 2, child: branding),
+                          const SizedBox(width: 32),
+                          Expanded(
+                            flex: 4,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(child: linkColumn('Help', ['Shipping', 'Returns', 'Contact Us'])),
+                                const SizedBox(width: 24),
+                                Expanded(child: linkColumn('Company', ['About Us', 'Careers', 'Press'])),
+                                const SizedBox(width: 24),
+                                Expanded(child: linkColumn('Legal', ['Terms & Conditions', 'Privacy Policy', 'Cookies'])),
+                              ],
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                  ],
-                ),
+                      const SizedBox(height: 20),
+                      const Divider(),
+                      const SizedBox(height: 12),
+                      Center(
+                        child: Text(
+                          '© 2025 Union Shop — All rights reserved',
+                          style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                        ),
+                      ),
+                    ],
+                  );
+                }),
               ),
             ),
           ],
