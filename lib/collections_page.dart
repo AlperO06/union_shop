@@ -16,6 +16,8 @@ class CollectionsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Collections'),
+        centerTitle: true,
+        elevation: 1,
         backgroundColor: const Color(0xFF4d2963),
       ),
       body: Padding(
