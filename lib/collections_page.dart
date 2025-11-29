@@ -159,18 +159,41 @@ class CollectionsPage extends StatelessWidget {
   }
 }
 
-// add placeholder detail page
-class CollectionDetailPage extends StatelessWidget {
+// convert CollectionDetailPage to a StatefulWidget to track dropdown selection
+class CollectionDetailPage extends StatefulWidget {
   final String title;
   final String subtitle;
 
   const CollectionDetailPage({super.key, required this.title, required this.subtitle});
 
   @override
+  State<CollectionDetailPage> createState() => _CollectionDetailPageState();
+}
+
+class _CollectionDetailPageState extends State<CollectionDetailPage> {
+  final List<String> _categories = ['All', 'Tops', 'Accessories', 'Home', 'Gifts'];
+  String _selectedCategory = 'All';
+  late final List<Map<String, String>> _allProducts;
+
+  @override
+  void initState() {
+    super.initState();
+    // generate dummy products with assigned categories (cycle through categories excluding 'All')
+    final assignCats = _categories.where((c) => c != 'All').toList();
+    _allProducts = List.generate(8, (i) {
+      return {
+        'name': '${widget.title} Product ${i + 1}',
+        'price': '£${(i + 1) * 5}.00',
+        'category': assignCats[i % assignCats.length],
+      };
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(title),
+        title: Text(widget.title),
         backgroundColor: const Color(0xFF4d2963),
       ),
       body: Padding(
@@ -186,18 +209,39 @@ class CollectionDetailPage extends StatelessWidget {
             columns = 2;
           }
 
-          // Dummy products for this collection
-          final products = List.generate(8, (i) {
-            return {
-              'name': '$title Product ${i + 1}',
-              'price': '£${(i + 1) * 5}.00',
-            };
-          });
+          // apply category filter
+          final products = _selectedCategory == 'All'
+              ? _allProducts
+              : _allProducts.where((p) => p['category'] == _selectedCategory).toList();
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(subtitle, style: const TextStyle(fontSize: 16, color: Colors.black54)),
+              Text(widget.subtitle, style: const TextStyle(fontSize: 16, color: Colors.black54)),
+              const SizedBox(height: 12),
+
+              // Dropdown to filter by category
+              Row(
+                children: [
+                  const Text('Category: ', style: TextStyle(fontSize: 14)),
+                  const SizedBox(width: 8),
+                  DropdownButton<String>(
+                    value: _selectedCategory,
+                    items: _categories
+                        .map((c) => DropdownMenuItem(value: c, child: Text(c)))
+                        .toList(),
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        _selectedCategory = v;
+                      });
+                    },
+                  ),
+                  const Spacer(),
+                  Text('${products.length} item(s)', style: const TextStyle(color: Colors.black54)),
+                ],
+              ),
+
               const SizedBox(height: 12),
               Expanded(
                 child: GridView.builder(
@@ -245,6 +289,11 @@ class CollectionDetailPage extends StatelessWidget {
                               Text(
                                 p['price']!,
                                 style: const TextStyle(fontSize: 13, color: Colors.grey),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                p['category']!,
+                                style: const TextStyle(fontSize: 12, color: Colors.black54),
                               ),
                             ],
                           ),
