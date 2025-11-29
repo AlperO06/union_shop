@@ -54,8 +54,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        // increased header height slightly
-        preferredSize: const Size.fromHeight(kToolbarHeight + 36),
+        preferredSize: const Size.fromHeight(kToolbarHeight + 28),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -79,8 +78,7 @@ class HomeScreen extends StatelessWidget {
               backgroundColor: Colors.white,
               elevation: 0,
               automaticallyImplyLeading: false,
-              // make room for a larger logo so it appears larger than the text links
-              leadingWidth: 140,
+              leadingWidth: 120,
               leading: GestureDetector(
                 onTap: () {
                   navigateToHome(context);
@@ -89,8 +87,7 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 12.0),
                   child: Image.network(
                     'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                    // larger logo height to stand out relative to the text links
-                    height: 40,
+                    height: 28,
                     fit: BoxFit.contain,
                     errorBuilder: (context, error, stackTrace) {
                       return Container(
@@ -129,13 +126,12 @@ class HomeScreen extends StatelessWidget {
                     child: const Text('Shop'),
                   ),
                   const SizedBox(width: 8),
-                  // make SALE visually bolder
                   TextButton(
                     onPressed: () => Navigator.pushNamed(context, '/sale'),
                     style: TextButton.styleFrom(
                       foregroundColor: Colors.black,
                       padding: const EdgeInsets.symmetric(horizontal: 8),
-                      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                     ),
                     child: const Text('SALE'),
                   ),
@@ -151,34 +147,8 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              // add icons on the right: Search, Account, Cart, Menu (aligned horizontally)
-              actions: [
-                IconButton(
-                  icon: const Icon(Icons.search, size: 20, color: Colors.grey),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
-                  onPressed: placeholderCallbackForButtons,
-                ),
-                IconButton(
-                  icon: const Icon(Icons.person_outline, size: 20, color: Colors.grey),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
-                  onPressed: placeholderCallbackForButtons,
-                ),
-                IconButton(
-                  icon: const Icon(Icons.shopping_bag_outlined, size: 20, color: Colors.grey),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
-                  onPressed: placeholderCallbackForButtons,
-                ),
-                IconButton(
-                  icon: const Icon(Icons.menu, size: 20, color: Colors.grey),
-                  padding: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
-                  onPressed: placeholderCallbackForButtons,
-                ),
-                const SizedBox(width: 8),
-              ],
+              // remove the previous actions (Shop/SALE) to avoid duplication
+              actions: const [],
             ),
           ],
         ),
@@ -187,9 +157,8 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           children: [
             // Header
-            // slightly increased header height to match AppBar adjustments
             Container(
-              height: 110,
+              height: 100,
               color: Colors.white,
               child: Column(
                 children: [
@@ -537,20 +506,20 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              );
-                            },
-                          );
-                        }),
-                        const SizedBox(height: 12),
-                        const Align(
-                          alignment: Alignment.center,
-                          child: TextButton(
-                            onPressed: placeholderCallbackForButtons,
-                            child: Text('View all products'),
-                          ),
+                              ),
+                            );
+                          },
+                        );
+                      }),
+                      const SizedBox(height: 12),
+                      const Align(
+                        alignment: Alignment.center,
+                        child: TextButton(
+                          onPressed: placeholderCallbackForButtons,
+                          child: Text('View all products'),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                 ),
               ),
