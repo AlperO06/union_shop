@@ -53,18 +53,42 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Your App Title'),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pushNamed(context, '/collections'),
-            child: const Text('Shop', style: TextStyle(color: Colors.white)),
-          ),
-          TextButton(
-            onPressed: () => Navigator.pushNamed(context, '/sale'),
-            child: const Text('SALE', style: TextStyle(color: Colors.white)),
-          ),
-        ],
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(kToolbarHeight + 28),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // thin top banner above the AppBar
+            Container(
+              height: 28,
+              width: double.infinity,
+              color: const Color(0xFF4d2963), // dark purple
+              alignment: Alignment.center,
+              child: const Text(
+                'BIG SALE! OVER 20% OFF ESSENTIALS',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w700,
+                  fontSize: 13,
+                ),
+              ),
+            ),
+            // actual AppBar
+            AppBar(
+              title: const Text('Your App Title'),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.pushNamed(context, '/collections'),
+                  child: const Text('Shop', style: TextStyle(color: Colors.white)),
+                ),
+                TextButton(
+                  onPressed: () => Navigator.pushNamed(context, '/sale'),
+                  child: const Text('SALE', style: TextStyle(color: Colors.white)),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
