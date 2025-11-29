@@ -438,7 +438,7 @@ class _ProductPageState extends State<ProductPage> {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(flex: 2, child: branding),
+                          const Expanded(flex: 2, child: branding),
                           const SizedBox(width: 32),
                           Expanded(
                             flex: 4,

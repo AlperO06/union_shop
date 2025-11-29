@@ -153,9 +153,9 @@ class HomeScreen extends StatelessWidget {
                           ),
                         ),
                         // action icons
-                        Row(
+                        const Row(
                           mainAxisSize: MainAxisSize.min,
-                          children: const [
+                          children: [
                             IconButton(
                               icon: Icon(Icons.search, size: 18, color: Colors.grey),
                               padding: EdgeInsets.all(8),
@@ -474,7 +474,7 @@ class HomeScreen extends StatelessWidget {
                   // Branding column used in both layouts
                   const branding = Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: const [
+                    children: [
                       Text(
                         'Union Shop',
                         style: TextStyle(
@@ -549,7 +549,7 @@ class HomeScreen extends StatelessWidget {
                       Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Expanded(flex: 2, child: branding),
+                          const Expanded(flex: 2, child: branding),
                           const SizedBox(width: 32),
                           Expanded(
                             flex: 4,
