@@ -9,8 +9,29 @@ class SalePage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Sale'),
       ),
-      body: const Center(
-        child: Text('Sale page'),
+      body: Column(
+        mainAxisSize: MainAxisSize.max,
+        children: [
+          Container(
+            width: double.infinity,
+            color: Colors.deepOrangeAccent,
+            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+            child: const Text(
+              'BIG SALE – LIMITED TIME',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+          ),
+          const Expanded(
+            child: Center(
+              child: Text('Sale page'),
+            ),
+          ),
+        ],
       ),
     );
   }
