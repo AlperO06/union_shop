@@ -173,6 +173,13 @@ class CollectionDetailPage extends StatefulWidget {
 class _CollectionDetailPageState extends State<CollectionDetailPage> {
   final List<String> _categories = ['All', 'Tops', 'Accessories', 'Home', 'Gifts'];
   String _selectedCategory = 'All';
+  final List<String> _sortOptions = [
+    'Name (A-Z)',
+    'Name (Z-A)',
+    'Price (Low-High)',
+    'Price (High-Low)'
+  ];
+  String _selectedSort = 'Name (A-Z)';
   late final List<Map<String, String>> _allProducts;
 
   @override
@@ -187,6 +194,36 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
         'category': assignCats[i % assignCats.length],
       };
     });
+  }
+
+  double _priceValue(String priceText) {
+    final m = RegExp(r'[\d\.]+').firstMatch(priceText);
+    return m != null ? double.tryParse(m.group(0)!) ?? 0.0 : 0.0;
+  }
+
+  List<Map<String, String>> _applyFilterAndSort() {
+    final filtered = _selectedCategory == 'All'
+        ? _allProducts.toList()
+        : _allProducts.where((p) => p['category'] == _selectedCategory).toList();
+
+    final sorted = filtered.toList();
+    switch (_selectedSort) {
+      case 'Name (A-Z)':
+        sorted.sort((a, b) => a['name']!.compareTo(b['name']!));
+        break;
+      case 'Name (Z-A)':
+        sorted.sort((a, b) => b['name']!.compareTo(a['name']!));
+        break;
+      case 'Price (Low-High)':
+        sorted.sort((a, b) => _priceValue(a['price']!).compareTo(_priceValue(b['price']!)));
+        break;
+      case 'Price (High-Low)':
+        sorted.sort((a, b) => _priceValue(b['price']!).compareTo(_priceValue(a['price']!)));
+        break;
+      default:
+        break;
+    }
+    return sorted;
   }
 
   @override
@@ -209,10 +246,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
             columns = 2;
           }
 
-          // apply category filter
-          final products = _selectedCategory == 'All'
-              ? _allProducts
-              : _allProducts.where((p) => p['category'] == _selectedCategory).toList();
+          // get filtered & sorted products
+          final sortedProducts = _applyFilterAndSort();
 
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -220,7 +255,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
               Text(widget.subtitle, style: const TextStyle(fontSize: 16, color: Colors.black54)),
               const SizedBox(height: 12),
 
-              // Dropdown to filter by category
+              // Dropdowns: Category + Sort
               Row(
                 children: [
                   const Text('Category: ', style: TextStyle(fontSize: 14)),
@@ -237,8 +272,26 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                       });
                     },
                   ),
+
+                  const SizedBox(width: 20),
+
+                  const Text('Sort: ', style: TextStyle(fontSize: 14)),
+                  const SizedBox(width: 8),
+                  DropdownButton<String>(
+                    value: _selectedSort,
+                    items: _sortOptions
+                        .map((s) => DropdownMenuItem(value: s, child: Text(s)))
+                        .toList(),
+                    onChanged: (v) {
+                      if (v == null) return;
+                      setState(() {
+                        _selectedSort = v;
+                      });
+                    },
+                  ),
+
                   const Spacer(),
-                  Text('${products.length} item(s)', style: const TextStyle(color: Colors.black54)),
+                  Text('${sortedProducts.length} item(s)', style: const TextStyle(color: Colors.black54)),
                 ],
               ),
 
@@ -251,9 +304,9 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                     mainAxisSpacing: 12,
                     childAspectRatio: 0.75,
                   ),
-                  itemCount: products.length,
+                  itemCount: sortedProducts.length,
                   itemBuilder: (context, index) {
-                    final p = products[index];
+                    final p = sortedProducts[index];
                     return Card(
                       clipBehavior: Clip.hardEdge,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
