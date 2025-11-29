@@ -35,33 +35,59 @@ class AboutPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Headings are centered visually; paragraphs are left-aligned.
-                  Center(
-                    child: Text(
-                      'Our Mission',
-                      style: textTheme.titleLarge,
-                      textAlign: TextAlign.center,
+                  // Mission card
+                  Card(
+                    elevation: 2,
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Text(
+                              'Our Mission',
+                              style: textTheme.titleLarge,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          SizedBox(height: smallSpacing),
+                          Text(
+                            'Union Shop is a community-focused marketplace offering handmade goods, vintage finds, and locally sourced products. We connect small makers with customers, supporting sustainable shopping and neighborhood entrepreneurship.',
+                            style: textTheme.bodyMedium,
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: smallSpacing),
-                  Text(
-                    'Union Shop is a community-focused marketplace offering handmade goods, vintage finds, and locally sourced products. We connect small makers with customers, supporting sustainable shopping and neighborhood entrepreneurship.',
-                    style: textTheme.bodyMedium,
-                    textAlign: TextAlign.left,
                   ),
                   const SizedBox(height: sectionSpacing),
-                  Center(
-                    child: Text(
-                      'Student Union Involvement',
-                      style: textTheme.titleMedium,
-                      textAlign: TextAlign.center,
+
+                  // Student Union card
+                  Card(
+                    elevation: 2,
+                    margin: const EdgeInsets.symmetric(vertical: 8),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Center(
+                            child: Text(
+                              'Student Union Involvement',
+                              style: textTheme.titleMedium,
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          SizedBox(height: smallSpacing),
+                          Text(
+                            'We partner with the Student Union to host student vendor markets, provide resources and workshops for student entrepreneurs, and create opportunities for students to showcase their work on campus.',
+                            style: textTheme.bodyMedium,
+                            textAlign: TextAlign.left,
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: smallSpacing),
-                  Text(
-                    'We partner with the Student Union to host student vendor markets, provide resources and workshops for student entrepreneurs, and create opportunities for students to showcase their work on campus.',
-                    style: textTheme.bodyMedium,
-                    textAlign: TextAlign.left,
                   ),
                   const SizedBox(height: sectionSpacing),
                 ],
