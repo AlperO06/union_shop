@@ -147,8 +147,34 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              // remove the previous actions (Shop/SALE) to avoid duplication
-              actions: const [],
+              // add icons on the right: Search, Account, Cart, Menu (aligned horizontally)
+              actions: [
+                IconButton(
+                  icon: const Icon(Icons.search, size: 20, color: Colors.grey),
+                  padding: const EdgeInsets.all(8),
+                  constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                  onPressed: placeholderCallbackForButtons,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.person_outline, size: 20, color: Colors.grey),
+                  padding: const EdgeInsets.all(8),
+                  constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                  onPressed: placeholderCallbackForButtons,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.shopping_bag_outlined, size: 20, color: Colors.grey),
+                  padding: const EdgeInsets.all(8),
+                  constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                  onPressed: placeholderCallbackForButtons,
+                ),
+                IconButton(
+                  icon: const Icon(Icons.menu, size: 20, color: Colors.grey),
+                  padding: const EdgeInsets.all(8),
+                  constraints: const BoxConstraints(minWidth: 40, minHeight: 40),
+                  onPressed: placeholderCallbackForButtons,
+                ),
+                const SizedBox(width: 8),
+              ],
             ),
           ],
         ),
@@ -506,20 +532,20 @@ class HomeScreen extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                              ),
-                            );
-                          },
-                        );
-                      }),
-                      const SizedBox(height: 12),
-                      const Align(
-                        alignment: Alignment.center,
-                        child: TextButton(
-                          onPressed: placeholderCallbackForButtons,
-                          child: Text('View all products'),
+                              );
+                            },
+                          );
+                        }),
+                        const SizedBox(height: 12),
+                        const Align(
+                          alignment: Alignment.center,
+                          child: TextButton(
+                            onPressed: placeholderCallbackForButtons,
+                            child: Text('View all products'),
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
