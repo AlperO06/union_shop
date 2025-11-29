@@ -448,7 +448,8 @@ class HomeScreen extends StatelessWidget {
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 1100),
                 child: LayoutBuilder(builder: (context, inner) {
-                  final isNarrow = inner.maxWidth < 700;
+                  // Slightly higher threshold so columns stack earlier on tablets/phones
+                  final isNarrow = inner.maxWidth < 800;
                   final headingStyle = const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w700,
@@ -503,7 +504,7 @@ class HomeScreen extends StatelessWidget {
                   }
 
                   if (isNarrow) {
-                    // Vertical stacking for small screens
+                    // Vertical stacking for small screens using Wrap so each column becomes full-width
                     return Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -511,11 +512,14 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(height: 16),
                         const Divider(),
                         const SizedBox(height: 12),
-                        linkColumn('Help', ['Shipping', 'Returns', 'Contact Us']),
-                        const SizedBox(height: 12),
-                        linkColumn('Company', ['About Us', 'Careers', 'Press']),
-                        const SizedBox(height: 12),
-                        linkColumn('Legal', ['Terms & Conditions', 'Privacy Policy', 'Cookies']),
+                        Wrap(
+                          runSpacing: 12,
+                          children: [
+                            SizedBox(width: inner.maxWidth, child: linkColumn('Help', ['Shipping', 'Returns', 'Contact Us'])),
+                            SizedBox(width: inner.maxWidth, child: linkColumn('Company', ['About Us', 'Careers', 'Press'])),
+                            SizedBox(width: inner.maxWidth, child: linkColumn('Legal', ['Terms & Conditions', 'Privacy Policy', 'Cookies'])),
+                          ],
+                        ),
                         const SizedBox(height: 18),
                         Center(
                           child: Text(
