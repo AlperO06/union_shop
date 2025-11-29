@@ -73,17 +73,44 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-            // actual AppBar
+            // actual AppBar (modified: white background, no centered title, left-aligned logo)
             AppBar(
-              title: const Text('Your App Title'),
+              backgroundColor: Colors.white,
+              elevation: 0,
+              automaticallyImplyLeading: false,
+              leadingWidth: 120,
+              leading: GestureDetector(
+                onTap: () {
+                  navigateToHome(context);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 12.0),
+                  child: Image.network(
+                    'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                    height: 28,
+                    fit: BoxFit.contain,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Container(
+                        color: Colors.grey[300],
+                        width: 28,
+                        height: 28,
+                        child: const Center(
+                          child: Icon(Icons.image_not_supported, color: Colors.grey),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+              // remove centered title by not providing title
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pushNamed(context, '/collections'),
-                  child: const Text('Shop', style: TextStyle(color: Colors.white)),
+                  child: const Text('Shop', style: TextStyle(color: Colors.black)),
                 ),
                 TextButton(
                   onPressed: () => Navigator.pushNamed(context, '/sale'),
-                  child: const Text('SALE', style: TextStyle(color: Colors.white)),
+                  child: const Text('SALE', style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),
@@ -116,32 +143,13 @@ class HomeScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Row(
                         children: [
-                          GestureDetector(
-                            onTap: () {
-                              navigateToHome(context);
-                            },
-                            child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                              height: 18,
-                              fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey[300],
-                                  width: 18,
-                                  height: 18,
-                                  child: const Center(
-                                    child: Icon(Icons.image_not_supported,
-                                        color: Colors.grey),
-                                  ),
-                                );
-                              },
-                            ),
-                          ),
+                          // removed duplicate logo here (now in AppBar leading)
                           const Spacer(),
                           ConstrainedBox(
                             constraints: const BoxConstraints(maxWidth: 600),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.end, // ensure icons stay right-aligned
                               children: [
                                 const IconButton(
                                   icon: Icon(
