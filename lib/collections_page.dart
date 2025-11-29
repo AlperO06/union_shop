@@ -14,7 +14,17 @@ class CollectionsPage extends StatelessWidget {
       {'title': 'Seasonal Picks', 'subtitle': 'Limited time items'},
     ];
 
-    final isWide = MediaQuery.of(context).size.width > 600;
+    final width = MediaQuery.of(context).size.width;
+    final useGrid = width >= 600;
+    // choose columns based on breakpoints: 2 for >=600, 3 for >=900, 4 for >=1200
+    int columns = 2;
+    if (width >= 1200) {
+      columns = 4;
+    } else if (width >= 900) {
+      columns = 3;
+    } else if (width >= 600) {
+      columns = 2;
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -25,10 +35,10 @@ class CollectionsPage extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: isWide
+        child: useGrid
             ? GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 3,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: columns,
                   crossAxisSpacing: 12,
                   mainAxisSpacing: 12,
                   childAspectRatio: 1.2,
