@@ -102,17 +102,53 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              // remove centered title by not providing title
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pushNamed(context, '/collections'),
-                  child: const Text('Shop', style: TextStyle(color: Colors.black)),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.pushNamed(context, '/sale'),
-                  child: const Text('SALE', style: TextStyle(color: Colors.black)),
-                ),
-              ],
+              // title now contains the navigation links next to the logo
+              title: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextButton(
+                    onPressed: () => navigateToHome(context),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      textStyle: const TextStyle(fontSize: 16),
+                    ),
+                    child: const Text('Home'),
+                  ),
+                  const SizedBox(width: 8),
+                  TextButton(
+                    onPressed: () => Navigator.pushNamed(context, '/collections'),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      textStyle: const TextStyle(fontSize: 16),
+                    ),
+                    child: const Text('Shop'),
+                  ),
+                  const SizedBox(width: 8),
+                  TextButton(
+                    onPressed: () => Navigator.pushNamed(context, '/sale'),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                    ),
+                    child: const Text('SALE'),
+                  ),
+                  const SizedBox(width: 8),
+                  TextButton(
+                    onPressed: () => navigateToAbout(context),
+                    style: TextButton.styleFrom(
+                      foregroundColor: Colors.black,
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      textStyle: const TextStyle(fontSize: 16),
+                    ),
+                    child: const Text('About'),
+                  ),
+                ],
+              ),
+              // remove the previous actions (Shop/SALE) to avoid duplication
+              actions: const [],
             ),
           ],
         ),
