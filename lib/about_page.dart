@@ -9,6 +9,17 @@ class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
+    // Stronger heading styles for clear separation of sections
+    final TextStyle headingLarge = textTheme.titleLarge?.copyWith(
+          fontSize: 24,
+          fontWeight: FontWeight.w800,
+        ) ??
+        const TextStyle(fontSize: 24, fontWeight: FontWeight.w800);
+    final TextStyle headingMedium = textTheme.titleMedium?.copyWith(
+          fontSize: 20,
+          fontWeight: FontWeight.w700,
+        ) ??
+        const TextStyle(fontSize: 20, fontWeight: FontWeight.w700);
     const double horizontalPadding = 20.0;
     const double verticalPadding = 24.0;
     // Slightly narrower max width improves readability on large screens.
@@ -47,7 +58,7 @@ class AboutPage extends StatelessWidget {
                           Center(
                             child: Text(
                               'Our Mission',
-                              style: textTheme.titleLarge,
+                              style: headingLarge,
                               textAlign: TextAlign.center,
                             ),
                           ),
@@ -75,7 +86,7 @@ class AboutPage extends StatelessWidget {
                           Center(
                             child: Text(
                               'Student Union Involvement',
-                              style: textTheme.titleMedium,
+                              style: headingMedium,
                               textAlign: TextAlign.center,
                             ),
                           ),
