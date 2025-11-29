@@ -17,7 +17,7 @@ class UnionShopApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
       ),
-      home: const HomeScreen(),
+      initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
         '/product': (context) => const ProductPage(),
@@ -382,7 +382,10 @@ class HomeScreen extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Expanded(
+                                    // Use AspectRatio instead of Expanded so the image
+                                    // has a defined size even inside scrolling parents.
+                                    AspectRatio(
+                                      aspectRatio: 1.6,
                                       child: Image.network(
                                         p['image']!,
                                         width: double.infinity,
@@ -480,7 +483,9 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
+          // Avoid Expanded here as ProductCard may be used in unbounded contexts.
+          AspectRatio(
+            aspectRatio: 1.6,
             child: Image.network(
               imageUrl,
               fit: BoxFit.cover,
