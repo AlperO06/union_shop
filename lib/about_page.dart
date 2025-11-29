@@ -8,38 +8,57 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = Theme.of(context).textTheme;
+    const double horizontalPadding = 20.0;
+    const double verticalPadding = 24.0;
+    const double maxContentWidth = 700.0;
+    const double sectionSpacing = 16.0;
+    const double smallSpacing = 8.0;
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('About Us'),
       ),
-      body: Center(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Our Mission',
-                style: Theme.of(context).textTheme.headline6,
-                textAlign: TextAlign.center,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(
+            horizontal: horizontalPadding,
+            vertical: verticalPadding,
+          ),
+          child: Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: maxContentWidth),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Our Mission',
+                    style: textTheme.headline6,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: smallSpacing),
+                  Text(
+                    'Union Shop is a community-focused marketplace offering handmade goods, vintage finds, and locally sourced products. We connect small makers with customers, supporting sustainable shopping and neighborhood entrepreneurship.',
+                    style: textTheme.bodyText2,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: sectionSpacing),
+                  Text(
+                    'Student Union Involvement',
+                    style: textTheme.subtitle1,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: smallSpacing),
+                  Text(
+                    'We partner with the Student Union to host student vendor markets, provide resources and workshops for student entrepreneurs, and create opportunities for students to showcase their work on campus.',
+                    style: textTheme.bodyText2,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: sectionSpacing),
+                ],
               ),
-              const SizedBox(height: 8),
-              Text(
-                'Union Shop is a community-focused marketplace offering handmade goods, vintage finds, and locally sourced products. We connect small makers with customers, supporting sustainable shopping and neighborhood entrepreneurship.',
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 16),
-              Text(
-                'Student Union Involvement',
-                style: Theme.of(context).textTheme.subtitle1,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                'We partner with the Student Union to host student vendor markets, provide resources and workshops for student entrepreneurs, and create opportunities for students to showcase their work on campus.',
-                textAlign: TextAlign.center,
-              ),
-            ],
+            ),
           ),
         ),
       ),
