@@ -13,7 +13,7 @@ class AboutPage extends StatelessWidget {
         title: const Text('About Us'),
       ),
       body: const Center(
-        child: Text('About page'),
+        child: Text('About page coming soon'),
       ),
     );
   }
