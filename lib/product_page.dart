@@ -344,18 +344,129 @@ class _ProductPageState extends State<ProductPage> {
               ),
             ),
 
-            // Footer
+            // Footer: same layout as HomeScreen (branding + Help / Company / Legal columns)
             Container(
               width: double.infinity,
               color: Colors.grey[50],
-              padding: const EdgeInsets.all(24),
-              child: const Text(
-                'Placeholder Footer',
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
+              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1100),
+                child: LayoutBuilder(builder: (context, inner) {
+                  final isNarrow = inner.maxWidth < 800;
+                  const headingStyle = TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  );
+                  const linkStyle = TextStyle(
+                    color: Colors.blue,
+                    fontSize: 14,
+                    height: 1.3,
+                  );
+
+                  const branding = Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Union Shop',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(height: 6),
+                      Text(
+                        'Official merchandise, campus essentials and local gifts — supporting local makers and student ventures.',
+                        style: TextStyle(fontSize: 13, color: Colors.black54),
+                      ),
+                    ],
+                  );
+
+                  Widget linkColumn(String title, List<String> links) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(title, style: headingStyle),
+                        const SizedBox(height: 8),
+                        for (var i = 0; i < links.length; i++) ...[
+                          TextButton(
+                            onPressed: () {}, // no-op placeholder
+                            style: TextButton.styleFrom(
+                              padding: EdgeInsets.zero,
+                              minimumSize: Size.zero,
+                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              alignment: Alignment.centerLeft,
+                            ),
+                            child: Text(links[i], style: linkStyle),
+                          ),
+                          if (i != links.length - 1) const SizedBox(height: 6),
+                        ],
+                      ],
+                    );
+                  }
+
+                  if (isNarrow) {
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        branding,
+                        const SizedBox(height: 16),
+                        const Divider(),
+                        const SizedBox(height: 12),
+                        Wrap(
+                          runSpacing: 12,
+                          children: [
+                            SizedBox(width: inner.maxWidth, child: linkColumn('Help', ['Shipping', 'Returns', 'Contact Us'])),
+                            SizedBox(width: inner.maxWidth, child: linkColumn('Company', ['About Us', 'Careers', 'Press'])),
+                            SizedBox(width: inner.maxWidth, child: linkColumn('Legal', ['Terms & Conditions', 'Privacy Policy', 'Cookies'])),
+                          ],
+                        ),
+                        const SizedBox(height: 18),
+                        Center(
+                          child: Text(
+                            '© 2025 Union Shop — All rights reserved',
+                            style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                          ),
+                        ),
+                      ],
+                    );
+                  }
+
+                  // Wide layout
+                  return Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(flex: 2, child: branding),
+                          const SizedBox(width: 32),
+                          Expanded(
+                            flex: 4,
+                            child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Expanded(child: linkColumn('Help', ['Shipping', 'Returns', 'Contact Us'])),
+                                const SizedBox(width: 24),
+                                Expanded(child: linkColumn('Company', ['About Us', 'Careers', 'Press'])),
+                                const SizedBox(width: 24),
+                                Expanded(child: linkColumn('Legal', ['Terms & Conditions', 'Privacy Policy', 'Cookies'])),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 20),
+                      const Divider(),
+                      const SizedBox(height: 12),
+                      Center(
+                        child: Text(
+                          '© 2025 Union Shop — All rights reserved',
+                          style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                        ),
+                      ),
+                    ],
+                  );
+                }),
               ),
             ),
           ],
