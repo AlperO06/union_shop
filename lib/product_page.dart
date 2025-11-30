@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'union_header.dart'; // <-- add this import
+import 'widgets/union_header.dart'; // <-- add this import
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
