@@ -25,6 +25,9 @@ class _ProductPageState extends State<ProductPage> {
       body: SingleChildScrollView(
         child: LayoutBuilder(
           builder: (context, constraints) {
+            // detect screen width for future responsive layout
+            final bool isWideScreen = constraints.maxWidth > 800;
+
             return Column(
               children: [
                 // --- REPLACED: legacy header (PLACEHOLDER HEADER TEXT) ---
