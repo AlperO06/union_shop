@@ -11,6 +11,10 @@ class _ProductPageState extends State<ProductPage> {
   String _selectedSize = 'Medium';
   final List<String> _sizes = ['Small', 'Medium', 'Large'];
 
+  // Quantity state (default 1)
+  int _selectedQuantity = 1;
+  final List<int> _quantities = [1, 2, 3, 4, 5];
+
   // Colour state
   String _selectedColor = 'Black';
   final List<String> _colors = ['Black', 'White', 'Grey'];
@@ -187,6 +191,48 @@ class _ProductPageState extends State<ProductPage> {
                   if (val != null) {
                     setState(() {
                       _selectedSize = val;
+                    });
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        // Quantity selector (new, default 1)
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              'Quantity:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(6),
+                color: Colors.white,
+              ),
+              child: DropdownButton<int>(
+                value: _selectedQuantity,
+                underline: const SizedBox(),
+                items: _quantities
+                    .map((q) => DropdownMenuItem<int>(
+                          value: q,
+                          child: Text(q.toString()),
+                        ))
+                    .toList(),
+                onChanged: (val) {
+                  if (val != null) {
+                    setState(() {
+                      _selectedQuantity = val;
                     });
                   }
                 },
