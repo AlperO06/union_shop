@@ -262,6 +262,25 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
+  // Product details for narrow screens: image first, then product info
+  Widget _buildProductDetailsColumn() {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Product image (narrow layout uses the same helper)
+          _buildMainImage(),
+
+          const SizedBox(height: 24),
+          // Product info (title/price/size/description)
+          _buildProductInfo(),
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -480,22 +499,8 @@ class _ProductPageState extends State<ProductPage> {
                 ),
                 // --- END REPLACED HEADER ---
 
-                // Product details
-                Container(
-                  color: Colors.white,
-                  padding: const EdgeInsets.all(24),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // Product image (narrow layout uses the same helper)
-                      _buildMainImage(),
-
-                      const SizedBox(height: 24),
-                      // Product info (title/price/size/description)
-                      _buildProductInfo(),
-                    ],
-                  ),
-                ),
+                // Product details (narrow: column layout — image first, then details)
+                _buildProductDetailsColumn(),
 
                 // Footer: same layout as HomeScreen (branding + Help / Company / Legal columns)
                 Container(
