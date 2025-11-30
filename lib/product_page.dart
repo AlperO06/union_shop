@@ -11,6 +11,10 @@ class _ProductPageState extends State<ProductPage> {
   String _selectedSize = 'Medium';
   final List<String> _sizes = ['Small', 'Medium', 'Large'];
 
+  // Colour state
+  String _selectedColor = 'Black';
+  final List<String> _colors = ['Black', 'White', 'Grey'];
+
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
@@ -108,6 +112,48 @@ class _ProductPageState extends State<ProductPage> {
           ),
         ),
         const SizedBox(height: 16),
+        // Colour selector (new) — placed above Size
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              'Colour:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(6),
+                color: Colors.white,
+              ),
+              child: DropdownButton<String>(
+                value: _selectedColor,
+                underline: const SizedBox(),
+                items: _colors
+                    .map((c) => DropdownMenuItem<String>(
+                          value: c,
+                          child: Text(c),
+                        ))
+                    .toList(),
+                onChanged: (val) {
+                  if (val != null) {
+                    setState(() {
+                      _selectedColor = val;
+                    });
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 12),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
