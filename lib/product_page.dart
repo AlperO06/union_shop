@@ -146,13 +146,28 @@ class _ProductPageState extends State<ProductPage> {
         ),
         // increased gap for better separation from controls
         const SizedBox(height: 16),
-        const Text(
-          '£15.00',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Color(0xFF4d2963),
-          ),
+        // old price + current price (same line)
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: const [
+            Text(
+              '£20.00',
+              style: TextStyle(
+                fontSize: 18,
+                color: Colors.grey,
+                decoration: TextDecoration.lineThrough,
+              ),
+            ),
+            SizedBox(width: 12),
+            Text(
+              '£15.00',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF4d2963),
+              ),
+            ),
+          ],
         ),
         const SizedBox(height: 20),
         // Colour selector (new) — placed above Size
