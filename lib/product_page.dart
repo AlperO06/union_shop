@@ -240,6 +240,23 @@ class _ProductPageState extends State<ProductPage> {
             ),
           ],
         ),
+        const SizedBox(height: 16),
+        // Add to cart — full width, branded
+        SizedBox(
+          width: double.infinity,
+          height: 48,
+          child: ElevatedButton(
+            onPressed: placeholderCallbackForButtons,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF4d2963),
+              foregroundColor: Colors.white,
+              shape: const RoundedRectangleBorder(
+                borderRadius: BorderRadius.zero,
+              ),
+            ),
+            child: const Text('Add to cart'),
+          ),
+        ),
         const SizedBox(height: 24),
         const Text(
           'Description',
