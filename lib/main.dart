@@ -4,6 +4,7 @@ import 'about_page.dart';
 import 'collections_page.dart';
 import 'sale_page.dart';
 import 'widgets/union_header.dart';
+import 'widgets/union_page_scaffold.dart'; // added import
 
 void main() {
   runApp(const UnionShopApp());
@@ -55,11 +56,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return UnionPageScaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const UnionHeader(),
             // Hero Section (updated)
             SizedBox(
               height: 420,
