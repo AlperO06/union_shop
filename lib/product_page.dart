@@ -299,16 +299,18 @@ class _ProductPageState extends State<ProductPage> {
                     flex: 2,
                     child: Container(
                       color: Colors.white,
-                      padding: const EdgeInsets.all(24),
+                      // slightly more horizontal padding for breathing room
+                      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
                       child: _buildMainImage(),
                     ),
                   ),
-                  const SizedBox(width: 28),
+                  // increased gap between columns for clearer separation
+                  const SizedBox(width: 40),
                   Expanded(
                     flex: 3,
                     child: Container(
                       color: Colors.white,
-                      padding: const EdgeInsets.all(24),
+                      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
                       child: _buildProductInfo(),
                     ),
                   ),
@@ -627,8 +629,7 @@ class _ProductPageState extends State<ProductPage> {
                     }),
                   ),
                 ),
-              ],
-            );
+              ];
           },
         ),
       ),
