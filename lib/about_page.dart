@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'widgets/union_page_scaffold.dart';
 
 /// A simple About page scaffold.
 ///
@@ -29,10 +30,7 @@ class AboutPage extends StatelessWidget {
     const double sectionSpacing = 24.0;
     const double smallSpacing = 12.0;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('About Us'),
-      ),
+    return UnionPageScaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(
@@ -141,5 +139,7 @@ class AboutPage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
   }
 }
