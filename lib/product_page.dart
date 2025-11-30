@@ -85,6 +85,91 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
+  // Product info column (title, price, size selector, description)
+  Widget _buildProductInfo() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        const Text(
+          'Placeholder Product Name',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+        const SizedBox(height: 12),
+        const Text(
+          '£15.00',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Color(0xFF4d2963),
+          ),
+        ),
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const Text(
+              'Size:',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(width: 12),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.grey.shade300),
+                borderRadius: BorderRadius.circular(6),
+                color: Colors.white,
+              ),
+              child: DropdownButton<String>(
+                value: _selectedSize,
+                underline: const SizedBox(),
+                items: _sizes
+                    .map((s) => DropdownMenuItem<String>(
+                          value: s,
+                          child: Text(s),
+                        ))
+                    .toList(),
+                onChanged: (val) {
+                  if (val != null) {
+                    setState(() {
+                      _selectedSize = val;
+                    });
+                  }
+                },
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        const Text(
+          'Description',
+          style: TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w600,
+            color: Colors.black,
+          ),
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
+          style: TextStyle(
+            fontSize: 16,
+            color: Colors.grey,
+            height: 1.5,
+          ),
+        ),
+      ],
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -95,13 +180,27 @@ class _ProductPageState extends State<ProductPage> {
             final bool isWideScreen = constraints.maxWidth > 800;
 
             if (isWideScreen) {
-              // wide layout placeholder: left column now contains the main image
+              // wide layout: left = image, right = product info (both keep original padding/background)
               return Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(child: _buildMainImage()), // left column: main image
+                  Expanded(
+                    flex: 2,
+                    child: Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(24),
+                      child: _buildMainImage(),
+                    ),
+                  ),
                   const SizedBox(width: 28),
-                  Expanded(child: Container()), // right column placeholder
+                  Expanded(
+                    flex: 3,
+                    child: Container(
+                      color: Colors.white,
+                      padding: const EdgeInsets.all(24),
+                      child: _buildProductInfo(),
+                    ),
+                  ),
                 ],
               );
             }
@@ -300,93 +399,8 @@ class _ProductPageState extends State<ProductPage> {
                       _buildMainImage(),
 
                       const SizedBox(height: 24),
-
-                      // Product name
-                      const Text(
-                        'Placeholder Product Name',
-                        style: TextStyle(
-                          fontSize: 28,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
-
-                      const SizedBox(height: 12),
-
-                      // Product price
-                      const Text(
-                        '£15.00',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          color: Color(0xFF4d2963),
-                        ),
-                      ),
-
-                      const SizedBox(height: 16),
-
-                      // Size selector (new)
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          const Text(
-                            'Size:',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.black,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 12),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.grey.shade300),
-                              borderRadius: BorderRadius.circular(6),
-                              color: Colors.white,
-                            ),
-                            child: DropdownButton<String>(
-                              value: _selectedSize,
-                              underline: const SizedBox(),
-                              items: _sizes
-                                  .map((s) => DropdownMenuItem<String>(
-                                        value: s,
-                                        child: Text(s),
-                                      ))
-                                  .toList(),
-                              onChanged: (val) {
-                                if (val != null) {
-                                  setState(() {
-                                    _selectedSize = val;
-                                  });
-                                }
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 24),
-
-                      // Product description
-                      const Text(
-                        'Description',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      const Text(
-                        'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Colors.grey,
-                          height: 1.5,
-                        ),
-                      ),
+                      // Product info (title/price/size/description)
+                      _buildProductInfo(),
                     ],
                   ),
                 ),
