@@ -147,9 +147,9 @@ class _ProductPageState extends State<ProductPage> {
         // increased gap for better separation from controls
         const SizedBox(height: 16),
         // old price + current price (same line)
-        Row(
+        const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: const [
+          children: [
             Text(
               '£20.00',
               style: TextStyle(
@@ -708,7 +708,8 @@ class _ProductPageState extends State<ProductPage> {
                     }),
                   ),
                 ),
-              ];
+              ],
+            );
           },
         ),
       ),
