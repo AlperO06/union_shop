@@ -312,30 +312,35 @@ class _ProductPageState extends State<ProductPage> {
             final bool isWideScreen = constraints.maxWidth > 800;
 
             if (isWideScreen) {
-              // wide layout: left = image, right = product info (both keep original padding/background)
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      color: Colors.white,
-                      // slightly more horizontal padding for breathing room
-                      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-                      child: _buildMainImage(),
-                    ),
+              // wide layout: constrained & centered content (keeps the existing two-column Row)
+              return Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1100),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          color: Colors.white,
+                          // slightly more horizontal padding for breathing room
+                          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                          child: _buildMainImage(),
+                        ),
+                      ),
+                      // increased gap between columns for clearer separation
+                      const SizedBox(width: 40),
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          color: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                          child: _buildProductInfo(),
+                        ),
+                      ),
+                    ],
                   ),
-                  // increased gap between columns for clearer separation
-                  const SizedBox(width: 40),
-                  Expanded(
-                    flex: 3,
-                    child: Container(
-                      color: Colors.white,
-                      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-                      child: _buildProductInfo(),
-                    ),
-                  ),
-                ],
+                ),
               );
             }
 
@@ -650,8 +655,7 @@ class _ProductPageState extends State<ProductPage> {
                     }),
                   ),
                 ),
-              ],
-            );
+              ];
           },
         ),
       ),
