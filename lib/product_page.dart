@@ -28,6 +28,18 @@ class _ProductPageState extends State<ProductPage> {
             // detect screen width for future responsive layout
             final bool isWideScreen = constraints.maxWidth > 800;
 
+            if (isWideScreen) {
+              // wide layout placeholder: two columns for future content
+              return Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(child: Container()), // left column placeholder
+                  const SizedBox(width: 28),
+                  Expanded(child: Container()), // right column placeholder
+                ],
+              );
+            }
+
             return Column(
               children: [
                 // --- REPLACED: legacy header (PLACEHOLDER HEADER TEXT) ---
