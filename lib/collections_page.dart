@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'widgets/union_page_scaffold.dart'; // added import
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
@@ -26,13 +27,8 @@ class CollectionsPage extends StatelessWidget {
       columns = 2;
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Collections'),
-        centerTitle: true,
-        elevation: 1,
-        backgroundColor: const Color(0xFF4d2963),
-      ),
+    // Replaced Scaffold with UnionPageScaffold; AppBar removed so header comes from UnionPageScaffold.
+    return UnionPageScaffold(
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: useGrid
@@ -404,3 +400,4 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
     );
   }
 }
+
