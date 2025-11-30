@@ -106,7 +106,8 @@ class _ProductPageState extends State<ProductPage> {
             color: Colors.black,
           ),
         ),
-        const SizedBox(height: 12),
+        // increased gap for better separation from controls
+        const SizedBox(height: 16),
         const Text(
           '£15.00',
           style: TextStyle(
@@ -115,7 +116,7 @@ class _ProductPageState extends State<ProductPage> {
             color: Color(0xFF4d2963),
           ),
         ),
-        const SizedBox(height: 16),
+        const SizedBox(height: 20),
         // Colour selector (new) — placed above Size
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -157,7 +158,7 @@ class _ProductPageState extends State<ProductPage> {
             ),
           ],
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -198,7 +199,7 @@ class _ProductPageState extends State<ProductPage> {
             ),
           ],
         ),
-        const SizedBox(height: 12),
+        const SizedBox(height: 16),
         // Quantity selector (new, default 1)
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -257,7 +258,10 @@ class _ProductPageState extends State<ProductPage> {
             child: const Text('Add to cart'),
           ),
         ),
-        const SizedBox(height: 24),
+        // subtle divider for visual separation
+        const SizedBox(height: 20),
+        Divider(color: Colors.grey.shade200, thickness: 1),
+        const SizedBox(height: 20),
         const Text(
           'Description',
           style: TextStyle(
