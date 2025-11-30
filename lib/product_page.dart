@@ -11,6 +11,17 @@ class _ProductPageState extends State<ProductPage> {
   String _selectedSize = 'Medium';
   final List<String> _sizes = ['Small', 'Medium', 'Large'];
 
+  // image + thumbnails state
+  String _mainImageUrl =
+      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282';
+  final List<String> _thumbnails = [
+    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet2_1024x1024@2x.jpg?v=1752230282',
+    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet3_1024x1024@2x.jpg?v=1752230282',
+    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+  ];
+  int _selectedThumbnail = 0;
+
   // Quantity state (default 1)
   int _selectedQuantity = 1;
   final List<int> _quantities = [1, 2, 3, 4, 5];
@@ -30,6 +41,7 @@ class _ProductPageState extends State<ProductPage> {
   // Reusable main image widget so it can be placed in wide/narrow layouts
   Widget _buildMainImage() {
     // Use AspectRatio (4/3) so the image scales responsively and fills the left column.
+    // Thumbnails are small squares underneath; selected thumbnail shows a purple border.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -40,12 +52,12 @@ class _ProductPageState extends State<ProductPage> {
             decoration: BoxDecoration(
               color: Colors.grey[200],
               borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.grey.shade300, width: 1), // thin grey border
+              border: Border.all(color: Colors.grey.shade300, width: 1),
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Image.network(
-                'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                _mainImageUrl,
                 fit: BoxFit.cover,
                 errorBuilder: (context, error, stackTrace) {
                   return Container(
@@ -75,18 +87,41 @@ class _ProductPageState extends State<ProductPage> {
         ),
 
         const SizedBox(height: 12),
-        // Thumbnails row (placeholders)
+        // Thumbnails row (selectable)
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
-            children: List.generate(4, (index) {
-              return Container(
-                width: 64,
-                height: 64,
-                margin: const EdgeInsets.only(right: 8),
-                decoration: BoxDecoration(
-                  color: Colors.grey[300],
-                  borderRadius: BorderRadius.circular(6),
+            children: List.generate(_thumbnails.length, (index) {
+              final thumb = _thumbnails[index];
+              final isActive = index == _selectedThumbnail;
+              return GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _selectedThumbnail = index;
+                    _mainImageUrl = thumb;
+                  });
+                },
+                child: Container(
+                  width: 64,
+                  height: 64,
+                  margin: const EdgeInsets.only(right: 12),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(
+                      color: isActive ? const Color(0xFF4d2963) : Colors.grey.shade300,
+                      width: isActive ? 2 : 1,
+                    ),
+                  ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(4),
+                    child: Image.network(
+                      thumb,
+                      width: 64,
+                      height: 64,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(color: Colors.grey[300]),
+                    ),
+                  ),
                 ),
               );
             }),
