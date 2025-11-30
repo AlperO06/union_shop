@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'widgets/union_page_scaffold.dart'; // added import
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -357,190 +358,189 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return UnionPageScaffold(
       body: SingleChildScrollView(
-        child: LayoutBuilder(
-          builder: (context, constraints) {
-            // detect screen width for future responsive layout
-            final bool isWideScreen = constraints.maxWidth > 800;
+        child: Column(
+          children: [
+            LayoutBuilder(
+              builder: (context, constraints) {
+                // detect screen width for future responsive layout
+                final bool isWideScreen = constraints.maxWidth > 800;
 
-            if (isWideScreen) {
-              // wide layout: constrained & centered content (keeps the existing two-column Row)
-              return Center(
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 1100),
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: Container(
-                          color: Colors.white,
-                          // slightly more horizontal padding for breathing room
-                          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-                          child: _buildMainImage(),
-                        ),
-                      ),
-                      // increased gap between columns for clearer separation
-                      const SizedBox(width: 40),
-                      Expanded(
-                        flex: 3,
-                        child: Container(
-                          color: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-                          child: _buildProductInfo(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              );
-            }
-
-            return Column(
-              children: [
-                // --- REPLACED: legacy header (PLACEHOLDER HEADER TEXT) ---
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // thin top purple SALE banner
-                    Container(
-                      height: 28,
-                      width: double.infinity,
-                      color: const Color(0xFF4d2963), // dark purple
-                      alignment: Alignment.center,
-                      child: const Text(
-                        'BIG SALE! OVER 20% OFF ESSENTIALS',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 13,
-                        ),
+                if (isWideScreen) {
+                  // wide layout: constrained & centered content (keeps the existing two-column Row)
+                  return Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 1100),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              color: Colors.white,
+                              // slightly more horizontal padding for breathing room
+                              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                              child: _buildMainImage(),
+                            ),
+                          ),
+                          // increased gap between columns for clearer separation
+                          const SizedBox(width: 40),
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              color: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                              child: _buildProductInfo(),
+                            ),
+                          ),
+                        ],
                       ),
                     ),
+                  );
+                }
 
-                    // AppBar-like row (logo, nav buttons, action icons)
-                    Material(
-                      color: Colors.white,
-                      elevation: 0,
-                      child: SizedBox(
-                        height: kToolbarHeight,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: GestureDetector(
-                                onTap: () => Navigator.popUntil(context, (route) => route.isFirst),
-                                child: Image.network(
-                                  'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                                  height: 28,
-                                  fit: BoxFit.contain,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Container(
-                                      color: Colors.grey[300],
-                                      width: 28,
-                                      height: 28,
-                                      child: const Center(
-                                        child: Icon(Icons.image_not_supported, color: Colors.grey),
-                                      ),
-                                    );
-                                  },
+                // Narrow layout: keep product content and footer but REMOVE the duplicated header
+                return Column(
+                  children: [
+                    // Product details (narrow: column layout — image first, then details)
+                    _buildProductDetailsColumn(),
+
+                    // Footer: same layout as HomeScreen (branding + Help / Company / Legal columns)
+                    Container(
+                      width: double.infinity,
+                      color: Colors.grey[50],
+                      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 1100),
+                        child: LayoutBuilder(builder: (context, inner) {
+                          final isNarrow = inner.maxWidth < 800;
+                          const headingStyle = TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w700,
+                          );
+                          const linkStyle = TextStyle(
+                            color: Colors.blue,
+                            fontSize: 14,
+                            height: 1.3,
+                          );
+
+                          const branding = Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Union Shop',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
                                 ),
                               ),
-                            ),
-                            const SizedBox(width: 12),
-                            // navigation buttons
-                            Expanded(
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
+                              SizedBox(height: 6),
+                              Text(
+                                'Official merchandise, campus essentials and local gifts — supporting local makers and student ventures.',
+                                style: TextStyle(fontSize: 13, color: Colors.black54),
+                              ),
+                            ],
+                          );
+
+                          Widget linkColumn(String title, List<String> links) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(title, style: headingStyle),
+                                const SizedBox(height: 8),
+                                for (var i = 0; i < links.length; i++) ...[
+                                  TextButton(
+                                    onPressed: () {}, // no-op placeholder
+                                    style: TextButton.styleFrom(
+                                      padding: EdgeInsets.zero,
+                                      minimumSize: Size.zero,
+                                      tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                      alignment: Alignment.centerLeft,
+                                    ),
+                                    child: Text(links[i], style: linkStyle),
+                                  ),
+                                  if (i != links.length - 1) const SizedBox(height: 6),
+                                ],
+                              ],
+                            );
+                          }
+
+                          if (isNarrow) {
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                branding,
+                                const SizedBox(height: 16),
+                                const Divider(),
+                                const SizedBox(height: 12),
+                                Wrap(
+                                  runSpacing: 12,
+                                  children: [
+                                    SizedBox(width: inner.maxWidth, child: linkColumn('Help', ['Shipping', 'Returns', 'Contact Us'])),
+                                    SizedBox(width: inner.maxWidth, child: linkColumn('Company', ['About Us', 'Careers', 'Press'])),
+                                    SizedBox(width: inner.maxWidth, child: linkColumn('Legal', ['Terms & Conditions', 'Privacy Policy', 'Cookies'])),
+                                  ],
+                                ),
+                                const SizedBox(height: 18),
+                                Center(
+                                  child: Text(
+                                    '© 2025 Union Shop — All rights reserved',
+                                    style: TextStyle(color: Colors.grey[600], fontSize: 13),
+                                  ),
+                                ),
+                              ],
+                            );
+                          }
+
+                          // Wide layout
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  TextButton(
-                                    onPressed: () => Navigator.popUntil(context, (route) => route.isFirst),
-                                    style: TextButton.styleFrom(
-                                      foregroundColor: Colors.black,
-                                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                                      textStyle: const TextStyle(fontSize: 16),
+                                  const Expanded(flex: 2, child: branding),
+                                  const SizedBox(width: 32),
+                                  Expanded(
+                                    flex: 4,
+                                    child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Expanded(child: linkColumn('Help', ['Shipping', 'Returns', 'Contact Us'])),
+                                        const SizedBox(width: 24),
+                                        Expanded(child: linkColumn('Company', ['About Us', 'Careers', 'Press'])),
+                                        const SizedBox(width: 24),
+                                        Expanded(child: linkColumn('Legal', ['Terms & Conditions', 'Privacy Policy', 'Cookies'])),
+                                      ],
                                     ),
-                                    child: const Text('Home'),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  TextButton(
-                                    onPressed: () => Navigator.pushNamed(context, '/collections'),
-                                    style: TextButton.styleFrom(
-                                      foregroundColor: Colors.black,
-                                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                                      textStyle: const TextStyle(fontSize: 16),
-                                    ),
-                                    child: const Text('Shop'),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  TextButton(
-                                    onPressed: () => Navigator.pushNamed(context, '/sale'),
-                                    style: TextButton.styleFrom(
-                                      foregroundColor: Colors.black,
-                                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                                      textStyle: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                                    ),
-                                    child: const Text('SALE'),
-                                  ),
-                                  const SizedBox(width: 8),
-                                  TextButton(
-                                    onPressed: () => Navigator.pushNamed(context, '/about'),
-                                    style: TextButton.styleFrom(
-                                      foregroundColor: Colors.black,
-                                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                                      textStyle: const TextStyle(fontSize: 16),
-                                    ),
-                                    child: const Text('About'),
                                   ),
                                 ],
                               ),
-                            ),
-                            // action icons
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                IconButton(
-                                  icon: const Icon(Icons.search, size: 18, color: Colors.grey),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                                  onPressed: placeholderCallbackForButtons,
+                              const SizedBox(height: 20),
+                              const Divider(),
+                              const SizedBox(height: 12),
+                              Center(
+                                child: Text(
+                                  '© 2025 Union Shop — All rights reserved',
+                                  style: TextStyle(color: Colors.grey[600], fontSize: 13),
                                 ),
-                                IconButton(
-                                  icon: const Icon(Icons.person_outline, size: 18, color: Colors.grey),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                                IconButton(
-                                  icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
-                                  padding: const EdgeInsets.all(8),
-                                  constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                                  onPressed: placeholderCallbackForButtons,
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
+                              ),
+                            ],
+                          );
+                        }),
                       ),
                     ),
-
-                    // FREE UK DELIVERY / promotions banner (uses same layout as HomeScreen promotions)
-                    Container(
-                      width: double.infinity,
-                      color: const Color(0xFFF6F0FB),
-                      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 1100),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
                             const Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
