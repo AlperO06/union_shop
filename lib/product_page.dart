@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'widgets/union_page_scaffold.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'widgets/union_header.dart'; // <-- add this import
+import 'package:url_launcher/url_launcher.dart'; // NEW: open external link
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -359,17 +359,18 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return UnionPageScaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const UnionHeader(), // <-- add header here
             LayoutBuilder(
               builder: (context, constraints) {
-                // detect screen width for responsive layout
+                // detect screen width for future responsive layout
                 final bool isWideScreen = constraints.maxWidth > 800;
 
                 if (isWideScreen) {
-                  // wide layout: constrained & centered content (two-column Row)
+                  // wide layout: constrained & centered content (keeps the existing two-column Row)
                   return Center(
                     child: ConstrainedBox(
                       constraints: const BoxConstraints(maxWidth: 1100),
@@ -380,10 +381,12 @@ class _ProductPageState extends State<ProductPage> {
                             flex: 2,
                             child: Container(
                               color: Colors.white,
+                              // slightly more horizontal padding for breathing room
                               padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
                               child: _buildMainImage(),
                             ),
                           ),
+                          // increased gap between columns for clearer separation
                           const SizedBox(width: 40),
                           Expanded(
                             flex: 3,
@@ -399,16 +402,13 @@ class _ProductPageState extends State<ProductPage> {
                   );
                 }
 
-                // Narrow layout: only product details (image then info). Header/footer handled globally.
-                return _buildProductDetailsColumn();
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+                return Column(
+                  children: [
+                    // --- REPLACED: legacy header (PLACEHOLDER HEADER TEXT) ---
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // thin top purple SALE banner
                         Container(
                           height: 28,
                           width: double.infinity,
