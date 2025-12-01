@@ -39,16 +39,33 @@ void navigateToHome(BuildContext context) {
 class UnionHeader extends StatelessWidget {
   const UnionHeader({super.key});
 
-  // New: extracted Shop button builder (returns the same button as before)
+  // Replace the Shop button with a PopupMenuButton that shows "Shop" and prints selection.
   Widget buildShopButton(BuildContext context) {
-    return TextButton(
-      onPressed: () => Navigator.pushNamed(context, '/collections'),
-      style: TextButton.styleFrom(
-        foregroundColor: Colors.black,
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        textStyle: const TextStyle(fontSize: 16),
+    return PopupMenuButton<ShopMenuItem>(
+      // keep a simple visible label that reads "Shop"
+      child: const Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8),
+        child: Text(
+          'Shop',
+          style: TextStyle(fontSize: 16, color: Colors.black),
+        ),
       ),
-      child: const Text('Shop'),
+      onSelected: (item) {
+        // debug print the selected label for now
+        debugPrint('Shop menu selected: ${item.label}');
+        // optional: navigate if routeName is provided
+        if (item.routeName != null) {
+          Navigator.pushNamed(context, item.routeName!);
+        }
+      },
+      itemBuilder: (context) {
+        return kShopMenuItems.map((item) {
+          return PopupMenuItem<ShopMenuItem>(
+            value: item,
+            child: Text(item.label),
+          );
+        }).toList();
+      },
     );
   }
 
