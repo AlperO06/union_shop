@@ -426,7 +426,7 @@ class _ProductCardState extends State<ProductCard> {
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Container(
-                height: 180, // consistent height for all product images
+                height: 400, // increased height so images stretch down more
                 width: double.infinity,
                 color: Colors.grey[200],
                 child: Image.network(
