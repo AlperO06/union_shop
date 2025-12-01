@@ -349,58 +349,59 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                     childAspectRatio: 0.75,
                   ),
                   itemCount: sortedProducts.length,
-                  itemBuilder: (context, index) {
-                    final p = sortedProducts[index];
-                    return Card(
-                      clipBehavior: Clip.hardEdge,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-                      child: InkWell(
-                        onTap: () {
-                          // placeholder: navigate to product detail if needed
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // replaced static icon container with network image using the new 'image' field
-                              Expanded(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(4),
-                                  child: Image.network(
-                                    p['image'] ?? '',
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Container(
-                                        color: Colors.grey[200],
-                                        child: const Center(
-                                          child: Icon(Icons.image, size: 48, color: Colors.grey),
-                                        ),
-                                      );
-                                    },
+                    itemBuilder: (context, index) {
+                      final p = sortedProducts[index];
+                      return Card(
+                        clipBehavior: Clip.hardEdge,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                        child: InkWell(
+                          onTap: () {
+                            // placeholder: navigate to product detail if needed
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // replaced static icon container with network image using the new 'image' field
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(4),
+                                    child: Image.network(
+                                      p['image'] ?? '',
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return Container(
+                                          color: Colors.grey[200],
+                                          child: const Center(
+                                            child: Icon(Icons.image, size: 48, color: Colors.grey),
+                                          ),
+                                        );
+                                      },
+                                    ),
                                   ),
                                 ),
-                              ),
-                              const SizedBox(height: 8),
-                              Text(
-                                p['name']!,
-                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(height: 6),
-                              Text(
-                                p['price']!,
-                                style: const TextStyle(fontSize: 13, color: Colors.grey),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                p['category']!,
-                                style: const TextStyle(fontSize: 12, color: Colors.black54),
-                              ),
-                            ],
+                                const SizedBox(height: 8),
+                                Text(
+                                  p['name']!,
+                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  p['price']!,
+                                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  p['category']!,
+                                  style: const TextStyle(fontSize: 12, color: Colors.black54),
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );
