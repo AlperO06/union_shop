@@ -219,26 +219,23 @@ class HomeScreen extends StatelessWidget {
                           {
                             'title': 'Portsmouth Magnet',
                             'price': '£6.00',
-                            'image':
-                                'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282'
+                            // replaced with a stable placeholder image
+                            'image': 'https://picsum.photos/id/1011/800/600'
                           },
                           {
                             'title': 'Union Hoodie',
                             'price': '£30.00',
-                            'image':
-                                'https://shop.upsu.net/cdn/shop/files/upsu_hoodie.jpg?v=1752230000'
+                            'image': 'https://picsum.photos/id/1015/800/600'
                           },
                           {
                             'title': 'Campus Mug',
                             'price': '£8.50',
-                            'image':
-                                'https://shop.upsu.net/cdn/shop/files/campus_mug.jpg?v=1752230001'
+                            'image': 'https://picsum.photos/id/1025/800/600'
                           },
                           {
                             'title': 'Sticker Pack',
                             'price': '£3.00',
-                            'image':
-                                'https://shop.upsu.net/cdn/shop/files/sticker_pack.jpg?v=1752230002'
+                            'image': 'https://picsum.photos/id/1035/800/600'
                           },
                         ];
                         return GridView.builder(
