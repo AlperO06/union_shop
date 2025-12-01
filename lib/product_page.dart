@@ -360,59 +360,58 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return UnionPageScaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          // detect screen width for responsive layout
-          final bool isWideScreen = constraints.maxWidth > 800;
+      body: SingleChildScrollView(
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            // detect screen width for responsive layout
+            final bool isWideScreen = constraints.maxWidth > 800;
 
-          Widget productContent;
-          if (isWideScreen) {
-            // wide layout: constrained & centered content (keeps the existing two-column Row)
-            productContent = Center(
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1100),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Container(
-                        color: Colors.white,
-                        // slightly more horizontal padding for breathing room
-                        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-                        child: _buildMainImage(),
+            Widget productContent;
+            if (isWideScreen) {
+              // wide layout: constrained & centered content (keeps the existing two-column Row)
+              productContent = Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1100),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          color: Colors.white,
+                          // slightly more horizontal padding for breathing room
+                          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                          child: _buildMainImage(),
+                        ),
                       ),
-                    ),
-                    // increased gap between columns for clearer separation
-                    const SizedBox(width: 40),
-                    Expanded(
-                      flex: 3,
-                      child: Container(
-                        color: Colors.white,
-                        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-                        child: _buildProductInfo(),
+                      // increased gap between columns for clearer separation
+                      const SizedBox(width: 40),
+                      Expanded(
+                        flex: 3,
+                        child: Container(
+                          color: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                          child: _buildProductInfo(),
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
+              );
+            } else {
+              // Narrow layout: only include product details (header/footer provided by UnionPageScaffold)
+              productContent = _buildProductDetailsColumn();
+            }
+
+            // SingleChildScrollView is the outer scroll; return non-flex container here.
+            return Column(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                productContent,
+              ],
             );
-          } else {
-            // Narrow layout: only include product details (header/footer provided by UnionPageScaffold)
-            productContent = _buildProductDetailsColumn();
-          }
-
-          return Column(
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: productContent,
-                ),
-              ),
-            ],
-          );
-        },
+          },
+        ),
       ),
     );
   }
