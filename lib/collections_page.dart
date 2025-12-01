@@ -40,6 +40,8 @@ class CollectionsPage extends StatelessWidget {
                   childAspectRatio: 1.2,
                 ),
                 itemCount: collections.length,
+                shrinkWrap: true, // allow embedding in outer scroll view
+                physics: const NeverScrollableScrollPhysics(), // outer scroll handles scrolling
                 itemBuilder: (context, index) {
                   final c = collections[index];
                   return Card(
@@ -95,6 +97,8 @@ class CollectionsPage extends StatelessWidget {
               )
             : ListView.builder(
                 itemCount: collections.length,
+                shrinkWrap: true, // allow embedding in outer scroll view
+                physics: const NeverScrollableScrollPhysics(), // outer scroll handles scrolling
                 itemBuilder: (context, index) {
                   final c = collections[index];
                   return Card(
@@ -228,11 +232,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-        backgroundColor: const Color(0xFF4d2963),
-      ),
+    return UnionPageScaffold(
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: LayoutBuilder(builder: (context, constraints) {
@@ -252,6 +252,10 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // page title (AppBar removed; keep title inside body)
+              Text(widget.title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
+              const SizedBox(height: 8),
+
               Text(widget.subtitle, style: const TextStyle(fontSize: 16, color: Colors.black54)),
               const SizedBox(height: 12),
 
@@ -325,73 +329,74 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
               ),
 
               const SizedBox(height: 12),
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: columns,
-                    crossAxisSpacing: 12,
-                    mainAxisSpacing: 12,
-                    childAspectRatio: 0.75,
-                  ),
-                  itemCount: sortedProducts.length,
-                  itemBuilder: (context, index) {
-                    final p = sortedProducts[index];
-                    return Card(
-                      clipBehavior: Clip.hardEdge,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-                      child: InkWell(
-                        onTap: () {
-                          // placeholder: navigate to product detail if needed
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              // replaced static icon container with network image using the new 'image' field
-                              Expanded(
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(4),
-                                  child: Image.network(
-                                    p['image'] ?? '',
-                                    width: double.infinity,
-                                    height: double.infinity,
-                                    fit: BoxFit.cover,
-                                    errorBuilder: (context, error, stackTrace) {
-                                      return Container(
-                                        color: Colors.grey[200],
-                                        child: const Center(
-                                          child: Icon(Icons.image, size: 48, color: Colors.grey),
-                                        ),
-                                      );
-                                    },
-                                  ),
+              GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: columns,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 0.75,
+                ),
+                itemCount: sortedProducts.length,
+                // allow embedding in outer scroll view
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemBuilder: (context, index) {
+                  final p = sortedProducts[index];
+                  return Card(
+                    clipBehavior: Clip.hardEdge,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                    child: InkWell(
+                      onTap: () {
+                        // placeholder: navigate to product detail if needed
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // replaced static icon container with network image using the new 'image' field
+                            Expanded(
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(4),
+                                child: Image.network(
+                                  p['image'] ?? '',
+                                  width: double.infinity,
+                                  height: double.infinity,
+                                  fit: BoxFit.cover,
+                                  errorBuilder: (context, error, stackTrace) {
+                                    return Container(
+                                      color: Colors.grey[200],
+                                      child: const Center(
+                                        child: Icon(Icons.image, size: 48, color: Colors.grey),
+                                      ),
+                                    );
+                                  },
                                 ),
                               ),
-                              const SizedBox(height: 8),
-                              Text(
-                                p['name']!,
-                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              const SizedBox(height: 6),
-                              Text(
-                                p['price']!,
-                                style: const TextStyle(fontSize: 13, color: Colors.grey),
-                              ),
-                              const SizedBox(height: 4),
-                              Text(
-                                p['category']!,
-                                style: const TextStyle(fontSize: 12, color: Colors.black54),
-                              ),
-                            ],
-                          ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              p['name']!,
+                              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              p['price']!,
+                              style: const TextStyle(fontSize: 13, color: Colors.grey),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              p['category']!,
+                              style: const TextStyle(fontSize: 12, color: Colors.black54),
+                            ),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
             ],
           );
