@@ -211,65 +211,66 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 18),
-                    LayoutBuilder(builder: (context, constraints) {
-                    final isWide = constraints.maxWidth > 600;
-                    final products = [
-                      {
-                        'title': 'Portsmouth Magnet',
-                        'price': '£6.00',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282'
-                      },
-                      {
-                        'title': 'Union Hoodie',
-                        'price': '£30.00',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/upsu_hoodie.jpg?v=1752230000'
-                      },
-                      {
-                        'title': 'Campus Mug',
-                        'price': '£8.50',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/campus_mug.jpg?v=1752230001'
-                      },
-                      {
-                        'title': 'Sticker Pack',
-                        'price': '£3.00',
-                        'image':
-                            'https://shop.upsu.net/cdn/shop/files/sticker_pack.jpg?v=1752230002'
-                      },
-                    ];
-                    return GridView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: isWide ? 2 : 1,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20,
-                        childAspectRatio: 1.1,
-                      ),
-                      itemCount: products.length,
-                      itemBuilder: (context, index) {
-                        final p = products[index];
-                        return ProductCard(
-                          title: p['title']!,
-                          price: p['price']!,
-                          imageUrl: p['image']!,
+                    // replace the LayoutBuilder block with a correctly closed version
+                    LayoutBuilder(
+                      builder: (context, constraints) {
+                        final isWide = constraints.maxWidth > 600;
+                        final products = [
+                          {
+                            'title': 'Portsmouth Magnet',
+                            'price': '£6.00',
+                            'image':
+                                'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282'
+                          },
+                          {
+                            'title': 'Union Hoodie',
+                            'price': '£30.00',
+                            'image':
+                                'https://shop.upsu.net/cdn/shop/files/upsu_hoodie.jpg?v=1752230000'
+                          },
+                          {
+                            'title': 'Campus Mug',
+                            'price': '£8.50',
+                            'image':
+                                'https://shop.upsu.net/cdn/shop/files/campus_mug.jpg?v=1752230001'
+                          },
+                          {
+                            'title': 'Sticker Pack',
+                            'price': '£3.00',
+                            'image':
+                                'https://shop.upsu.net/cdn/shop/files/sticker_pack.jpg?v=1752230002'
+                          },
+                        ];
+                        return GridView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: isWide ? 2 : 1,
+                            crossAxisSpacing: 20,
+                            mainAxisSpacing: 20,
+                            childAspectRatio: 1.1,
+                          ),
+                          itemCount: products.length,
+                          itemBuilder: (context, index) {
+                            final p = products[index];
+                            return ProductCard(
+                              title: p['title']!,
+                              price: p['price']!,
+                              imageUrl: p['image']!,
+                            );
+                          },
                         );
                       },
-                    );
-                    }),
-                      const SizedBox(height: 12),
-                      const Align(
-                        alignment: Alignment.center,
-                        child: TextButton(
-                          onPressed: placeholderCallbackForButtons,
-                          child: Text('View all products'),
-                        ),
+                    ),
+                    const SizedBox(height: 12),
+                    const Align(
+                      alignment: Alignment.center,
+                      child: TextButton(
+                        onPressed: placeholderCallbackForButtons,
+                        child: Text('View all products'),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
             ),
