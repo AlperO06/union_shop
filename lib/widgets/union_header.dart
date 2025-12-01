@@ -39,33 +39,46 @@ void navigateToHome(BuildContext context) {
 class UnionHeader extends StatelessWidget {
   const UnionHeader({super.key});
 
-  // Build the Shop popup populated from kShopMenuItems
-  Widget buildShopButton(BuildContext context) {
-    return PopupMenuButton<ShopMenuItem>(
-      // visible label that reads "Shop"
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 8),
-        child: Text(
-          'Shop',
-          style: TextStyle(fontSize: 16, color: Colors.black),
+  // Changed: accept isWideScreen flag. Show PopupMenu on wide screens,
+  // otherwise show a simple TextButton that navigates to '/collections'.
+  Widget buildShopButton(BuildContext context, bool isWideScreen) {
+    if (isWideScreen) {
+      return PopupMenuButton<ShopMenuItem>(
+        // visible label that reads "Shop"
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Text(
+            'Shop',
+            style: TextStyle(fontSize: 16, color: Colors.black),
+          ),
         ),
+        onSelected: (item) {
+          if (item.routeName != null && item.routeName!.isNotEmpty) {
+            Navigator.pushNamed(context, item.routeName!);
+          } else {
+            debugPrint('Shop menu selected: ${item.label}');
+          }
+        },
+        itemBuilder: (context) {
+          return kShopMenuItems.map((item) {
+            return PopupMenuItem<ShopMenuItem>(
+              value: item,
+              child: Text(item.label),
+            );
+          }).toList();
+        },
+      );
+    }
+
+    // Narrow screens: simple button that navigates to the collections route.
+    return TextButton(
+      onPressed: () => Navigator.pushNamed(context, '/collections'),
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.black,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        textStyle: const TextStyle(fontSize: 16),
       ),
-      onSelected: (item) {
-        // Navigate if a routeName exists, otherwise log the label
-        if (item.routeName != null && item.routeName!.isNotEmpty) {
-          Navigator.pushNamed(context, item.routeName!);
-        } else {
-          debugPrint('Shop menu selected: ${item.label}');
-        }
-      },
-      itemBuilder: (context) {
-        return kShopMenuItems.map((item) {
-          return PopupMenuItem<ShopMenuItem>(
-            value: item,
-            child: Text(item.label),
-          );
-        }).toList();
-      },
+      child: const Text('Shop'),
     );
   }
 
@@ -141,8 +154,8 @@ class UnionHeader extends StatelessWidget {
                                   child: const Text('Home'),
                                 ),
                                 const SizedBox(width: 8),
-                                // Replaced inline 'Shop' TextButton with helper:
-                                buildShopButton(context),
+                                // pass the local isWide flag so narrow screens get a TextButton
+                                buildShopButton(context, isWide),
                                 const SizedBox(width: 8),
                                 TextButton(
                                   onPressed: () => Navigator.pushNamed(context, '/sale'),
