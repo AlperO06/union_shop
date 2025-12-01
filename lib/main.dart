@@ -323,7 +323,7 @@ class HomeScreen extends StatelessWidget {
                             // PLACEHOLDER header (temporary)
                             const Center(
                               child: Text(
-                                'PLACEHOLDER FOR NOW',
+                                'PORTSMOUTH CITY COLLECTION',
                                 textAlign: TextAlign.center,
                                 style: TextStyle(
                                   fontSize: 18,
