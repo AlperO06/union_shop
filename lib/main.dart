@@ -245,12 +245,18 @@ class HomeScreen extends StatelessWidget {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
-                              'ESSENTIAL RANGE',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black87,
+                            // ESSENTIAL RANGE header — centered, uppercase, larger, spaced
+                            const SizedBox(height: 8),
+                            const Center(
+                              child: Text(
+                                'ESSENTIAL RANGE - OVER 20% OFF!',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 1,
+                                  color: Colors.black87,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 12),
@@ -273,13 +279,18 @@ class HomeScreen extends StatelessWidget {
                                 );
                               },
                             ),
-                            const SizedBox(height: 20),
-                            const Text(
-                              'SIGNATURE RANGE',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black87,
+                            const SizedBox(height: 28),
+                            // SIGNATURE RANGE header — centered, uppercase, larger, spaced
+                            const Center(
+                              child: Text(
+                                'SIGNATURE RANGE',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 1,
+                                  color: Colors.black87,
+                                ),
                               ),
                             ),
                             const SizedBox(height: 12),
@@ -301,14 +312,6 @@ class HomeScreen extends StatelessWidget {
                                   imageUrl: p['image']!,
                                 );
                               },
-                            ),
-                            const SizedBox(height: 12),
-                            const Align(
-                              alignment: Alignment.center,
-                              child: TextButton(
-                                onPressed: placeholderCallbackForButtons,
-                                child: Text('View all products'),
-                              ),
                             ),
                           ],
                         );
