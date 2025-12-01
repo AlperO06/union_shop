@@ -146,6 +146,4 @@ class SalePage extends StatelessWidget {
     );
   }
 }
-  }
-}
 
