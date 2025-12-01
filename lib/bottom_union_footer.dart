@@ -163,3 +163,13 @@ class BottomUnionFooter extends StatelessWidget {
     );
   }
 }
+
+class UnionFooter extends StatelessWidget {
+  const UnionFooter({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    // Reuse the existing footer implementation so the layout/styling remain identical.
+    return const BottomUnionFooter();
+  }
+}
