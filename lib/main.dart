@@ -36,7 +36,6 @@ class UnionShopApp extends StatelessWidget {
 
 // helper navigation / placeholder functions
 void placeholderCallbackForButtons() {
-  // lightweight placeholder - replace with real logic
   debugPrint('placeholder button pressed');
 }
 
@@ -45,7 +44,6 @@ void navigateToAbout(BuildContext context) {
 }
 
 void navigateToHome(BuildContext context) {
-  // return to the root route (home)
   Navigator.popUntil(context, (route) => route.isFirst);
 }
 
@@ -55,6 +53,20 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Footer link handler reused inside linkColumn below
+    Future<void> _handleLinkPress(String label) async {
+      if (label == 'Shipping') {
+        final uri = Uri.parse('https://shop.upsu.net');
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri, mode: LaunchMode.externalApplication);
+        } else {
+          debugPrint('Could not launch $uri');
+        }
+      } else {
+        placeholderCallbackForButtons();
+      }
+    }
+
     return UnionPageScaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -262,8 +274,7 @@ class HomeScreen extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4)),
                               child: InkWell(
-                                onTap: () => Navigator.pushNamed(
-                                    context, '/product'),
+                                onTap: () => Navigator.pushNamed(context, '/product'),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
@@ -278,8 +289,7 @@ class HomeScreen extends StatelessWidget {
                                           return Container(
                                             color: Colors.grey[300],
                                             child: const Center(
-                                              child: Icon(
-                                                  Icons.image_not_supported,
+                                              child: Icon(Icons.image_not_supported,
                                                   color: Colors.grey),
                                             ),
                                           );
@@ -338,7 +348,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// ProductCard (cleaned, no duplicated trailing code)
+// ProductCard (cleaned, kept single)
 class ProductCard extends StatelessWidget {
   final String title;
   final String price;
@@ -369,8 +379,7 @@ class ProductCard extends StatelessWidget {
                 return Container(
                   color: Colors.grey[300],
                   child: const Center(
-                    child:
-                        Icon(Icons.image_not_supported, color: Colors.grey),
+                    child: Icon(Icons.image_not_supported, color: Colors.grey),
                   ),
                 );
               },
@@ -397,7 +406,5 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
-
-// Footer implemented in bottom_union_footer.dart; duplicate inline footer removed.
 
 

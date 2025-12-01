@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'widgets/union_page_scaffold.dart'; // added import
-import 'bottom_union_footer.dart'; // NEW: footer import
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
@@ -28,65 +27,110 @@ class CollectionsPage extends StatelessWidget {
       columns = 2;
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Collections'),
-        centerTitle: true,
-        elevation: 1,
-        backgroundColor: const Color(0xFF4d2963),
-      ),
-      body: Column(
-        children: [
-          // make the existing scrolling content take available space
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: useGrid
-                  ? GridView.builder(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: columns,
-                        crossAxisSpacing: 12,
-                        mainAxisSpacing: 12,
-                        childAspectRatio: 1.2,
-                      ),
-                      itemCount: collections.length,
-                      itemBuilder: (context, index) {
-                        final c = collections[index];
-                        return Card(
-                          clipBehavior: Clip.hardEdge,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6),
+    // Replaced Scaffold with UnionPageScaffold; AppBar removed so header comes from UnionPageScaffold.
+    return UnionPageScaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: useGrid
+            ? GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: columns,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 1.2,
+                ),
+                itemCount: collections.length,
+                itemBuilder: (context, index) {
+                  final c = collections[index];
+                  return Card(
+                    clipBehavior: Clip.hardEdge,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(6),
+                    ),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => CollectionDetailPage(
+                              title: c['title']!,
+                              subtitle: c['subtitle']!,
+                            ),
                           ),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => CollectionDetailPage(
-                                    title: c['title']!,
-                                    subtitle: c['subtitle']!,
-                                  ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Container(
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(4),
                                 ),
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
+                                child: const Center(
+                                  child: Icon(Icons.image, size: 48, color: Colors.grey),
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            Text(
+                              c['title']!,
+                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                            ),
+                            const SizedBox(height: 6),
+                            Text(
+                              c['subtitle']!,
+                              style: const TextStyle(fontSize: 13, color: Colors.black54),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              )
+            : ListView.builder(
+                itemCount: collections.length,
+                itemBuilder: (context, index) {
+                  final c = collections[index];
+                  return Card(
+                    margin: const EdgeInsets.only(bottom: 12),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => CollectionDetailPage(
+                              title: c['title']!,
+                              subtitle: c['subtitle']!,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 80,
+                              height: 80,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: const Center(
+                                child: Icon(Icons.image, size: 36, color: Colors.grey),
+                              ),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(
-                                    child: Container(
-                                      width: double.infinity,
-                                      decoration: BoxDecoration(
-                                        color: Colors.grey[200],
-                                        borderRadius: BorderRadius.circular(4),
-                                      ),
-                                      child: const Center(
-                                        child: Icon(Icons.image, size: 48, color: Colors.grey),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 12),
                                   Text(
                                     c['title']!,
                                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
@@ -99,72 +143,13 @@ class CollectionsPage extends StatelessWidget {
                                 ],
                               ),
                             ),
-                          ),
-                        );
-                      },
-                    )
-                  : ListView.builder(
-                      itemCount: collections.length,
-                      itemBuilder: (context, index) {
-                        final c = collections[index];
-                        return Card(
-                          margin: const EdgeInsets.only(bottom: 12),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => CollectionDetailPage(
-                                    title: c['title']!,
-                                    subtitle: c['subtitle']!,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 80,
-                                    height: 80,
-                                    decoration: BoxDecoration(
-                                      color: Colors.grey[200],
-                                      borderRadius: BorderRadius.circular(6),
-                                    ),
-                                    child: const Center(
-                                      child: Icon(Icons.image, size: 36, color: Colors.grey),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          c['title']!,
-                                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                                        ),
-                                        const SizedBox(height: 6),
-                                        Text(
-                                          c['subtitle']!,
-                                          style: const TextStyle(fontSize: 13, color: Colors.black54),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+                          ],
+                        ),
+                      ),
                     ),
-            ),
-          ),
-          // footer always visible below the scrollable content
-          const UnionFooter(),
-        ],
+                  );
+                },
+              ),
       ),
     );
   }
@@ -349,64 +334,63 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                     childAspectRatio: 0.75,
                   ),
                   itemCount: sortedProducts.length,
-                    itemBuilder: (context, index) {
-                      final p = sortedProducts[index];
-                      return Card(
-                        clipBehavior: Clip.hardEdge,
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-                        child: InkWell(
-                          onTap: () {
-                            // placeholder: navigate to product detail if needed
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                // replaced static icon container with network image using the new 'image' field
-                                Expanded(
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(4),
-                                    child: Image.network(
-                                      p['image'] ?? '',
-                                      width: double.infinity,
-                                      height: double.infinity,
-                                      fit: BoxFit.cover,
-                                      errorBuilder: (context, error, stackTrace) {
-                                        return Container(
-                                          color: Colors.grey[200],
-                                          child: const Center(
-                                            child: Icon(Icons.image, size: 48, color: Colors.grey),
-                                          ),
-                                        );
-                                      },
-                                    ),
+                  itemBuilder: (context, index) {
+                    final p = sortedProducts[index];
+                    return Card(
+                      clipBehavior: Clip.hardEdge,
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                      child: InkWell(
+                        onTap: () {
+                          // placeholder: navigate to product detail if needed
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // replaced static icon container with network image using the new 'image' field
+                              Expanded(
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(4),
+                                  child: Image.network(
+                                    p['image'] ?? '',
+                                    width: double.infinity,
+                                    height: double.infinity,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (context, error, stackTrace) {
+                                      return Container(
+                                        color: Colors.grey[200],
+                                        child: const Center(
+                                          child: Icon(Icons.image, size: 48, color: Colors.grey),
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
-                                const SizedBox(height: 8),
-                                Text(
-                                  p['name']!,
-                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                                const SizedBox(height: 6),
-                                Text(
-                                  p['price']!,
-                                  style: const TextStyle(fontSize: 13, color: Colors.grey),
-                                ),
-                                const SizedBox(height: 4),
-                                Text(
-                                  p['category']!,
-                                  style: const TextStyle(fontSize: 12, color: Colors.black54),
-                                ),
-                              ],
-                            ),
+                              ),
+                              const SizedBox(height: 8),
+                              Text(
+                                p['name']!,
+                                style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 6),
+                              Text(
+                                p['price']!,
+                                style: const TextStyle(fontSize: 13, color: Colors.grey),
+                              ),
+                              const SizedBox(height: 4),
+                              Text(
+                                p['category']!,
+                                style: const TextStyle(fontSize: 12, color: Colors.black54),
+                              ),
+                            ],
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ],

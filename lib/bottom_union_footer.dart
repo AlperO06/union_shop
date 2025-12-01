@@ -45,7 +45,7 @@ class BottomUnionFooter extends StatelessWidget {
             TextButton(
               onPressed: () async {
                 final handler = onLinkPressed ?? _defaultHandler;
-                await handler(links[i]);
+                handler(links[i]);
               },
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,

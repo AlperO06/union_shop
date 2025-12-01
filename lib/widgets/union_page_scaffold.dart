@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'union_header.dart';
+import '../bottom_union_footer.dart';
+
 
 class UnionPageScaffold extends StatelessWidget {
   final Widget body;
@@ -14,6 +16,7 @@ class UnionPageScaffold extends StatelessWidget {
         children: [
           const UnionHeader(),
           Expanded(child: body),
+          const UnionFooter(), // mounted globally after the page body
         ],
       ),
     );
