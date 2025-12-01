@@ -39,11 +39,11 @@ void navigateToHome(BuildContext context) {
 class UnionHeader extends StatelessWidget {
   const UnionHeader({super.key});
 
-  // Changed: show "Shop" text next to a down-arrow for the popup trigger on wide screens.
+  // Updated: popup trigger now uses the same padding & text style as the other nav buttons
   Widget buildShopButton(BuildContext context, bool isWideScreen) {
     if (isWideScreen) {
       return PopupMenuButton<ShopMenuItem>(
-        // visible label that reads "Shop" with a drop-down arrow
+        // match padding and text style used by other navigation TextButtons
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
@@ -76,7 +76,7 @@ class UnionHeader extends StatelessWidget {
       );
     }
 
-    // Narrow screens: simple button that navigates to the collections route.
+    // Narrow screens: unchanged simple TextButton (already matches style)
     return TextButton(
       onPressed: () => Navigator.pushNamed(context, '/collections'),
       style: TextButton.styleFrom(
