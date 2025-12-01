@@ -43,7 +43,9 @@ class UnionHeader extends StatelessWidget {
   Widget buildShopButton(BuildContext context, bool isWideScreen) {
     if (isWideScreen) {
       return PopupMenuButton<ShopMenuItem>(
-        // match padding and text style used by other navigation TextButtons
+        // ensure the popup opens below and aligned to the left of the button
+        offset: Offset(0, kToolbarHeight),
+        // visible label that reads "Shop" with a drop-down arrow
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Row(
