@@ -5,7 +5,6 @@ import 'collections_page.dart';
 import 'sale_page.dart';
 import 'widgets/union_page_scaffold.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'bottom_union_footer.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -338,9 +337,6 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
             ),
-
-            // Footer
-            const UnionFooter(),
           ],
         ),
       ),
@@ -402,6 +398,10 @@ class ProductCard extends StatelessWidget {
             ],
           ),
         ],
+      ),
+    );
+  }
+}
       ),
     );
   }
