@@ -402,16 +402,16 @@ class _ProductPageState extends State<ProductPage> {
                   );
                 }
 
-                return Column(
-                  children: [
-                    // --- REPLACED: legacy header (PLACEHOLDER HEADER TEXT) ---
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        // thin top purple SALE banner
-                        Container(
-                          height: 28,
-                          width: double.infinity,
+                // Narrow layout: only product details (image then info). Header/footer handled globally.
+                return _buildProductDetailsColumn();
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
                           color: const Color(0xFF4d2963), // dark purple
                           alignment: Alignment.center,
                           child: const Text(
