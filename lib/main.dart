@@ -5,6 +5,7 @@ import 'collections_page.dart';
 import 'sale_page.dart';
 import 'widgets/union_page_scaffold.dart'; // added import
 import 'package:url_launcher/url_launcher.dart'; // NEW: open external link
+import 'bottom_union_footer.dart'; // NEW: import the reusable footer
 
 void main() {
   runApp(const UnionShopApp());
@@ -325,74 +326,73 @@ class HomeScreen extends StatelessWidget {
             ),
 
             // Footer
-            Container(
-              width: double.infinity,
-              color: Colors.grey[50],
-              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1100),
-                child: LayoutBuilder(builder: (context, inner) {
-                  // Slightly higher threshold so columns stack earlier on tablets/phones
-                  final isNarrow = inner.maxWidth < 800;
-                  const headingStyle = TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w700,
-                  );
-                  const linkStyle = TextStyle(
-                    color: Colors.blue,
-                    fontSize: 14,
-                    height: 1.3,
-                  );
+            const UnionFooter(),
+          ],
+        ),
+      ),
+    );
+  }
+}
 
-                  // Branding column used in both layouts
-                  const branding = Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Union Shop',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      SizedBox(height: 6),
-                      Text(
-                        'Official merchandise, campus essentials and local gifts — supporting local makers and student ventures.',
-                        style: TextStyle(fontSize: 13, color: Colors.black54),
-                      ),
-                    ],
-                  );
+// ProductCard (cleaned, no duplicated trailing code)
+class ProductCard extends StatelessWidget {
+  final String title;
+  final String price;
+  final String imageUrl;
 
-                  // Link column builder helper -> convert each link into a TextButton
-                  Widget linkColumn(String title, List<String> links) {
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(title, style: headingStyle),
-                        const SizedBox(height: 8),
-                        for (var i = 0; i < links.length; i++) ...[
-                          TextButton(
-                            onPressed: () async {
-                              if (links[i] == 'Shipping') {
-                                final uri = Uri.parse('https://shop.upsu.net');
-                                if (await canLaunchUrl(uri)) {
-                                  await launchUrl(uri);
-                                } else {
-                                  debugPrint('Could not launch $uri');
-                                }
-                              } else {
-                                placeholderCallbackForButtons();
-                              }
-                            },
-                            style: TextButton.styleFrom(
-                              padding: EdgeInsets.zero,
-                              minimumSize: Size.zero,
-                              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                              alignment: Alignment.centerLeft,
-                            ),
-                            child: Text(links[i], style: linkStyle),
-                          ),
-                          if (i != links.length - 1) const SizedBox(height: 6),
+  const ProductCard({
+    super.key,
+    required this.title,
+    required this.price,
+    required this.imageUrl,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, '/product');
+      },
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // Avoid Expanded here as ProductCard may be used in unbounded contexts.
+          AspectRatio(
+            aspectRatio: 1.6,
+            child: Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  color: Colors.grey[300],
+                  child: const Center(
+                    child: Icon(Icons.image_not_supported, color: Colors.grey),
+                  ),
+                );
+              },
+            ),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 4),
+              Text(
+                title,
+                style: const TextStyle(fontSize: 14, color: Colors.black),
+                maxLines: 2,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                price,
+                style: const TextStyle(fontSize: 13, color: Colors.grey),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
                         ],
                       ],
                     );
