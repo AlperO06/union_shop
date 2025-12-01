@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'widgets/union_page_scaffold.dart';
-import 'bottom_union_footer.dart';
 
 /// A simple About page scaffold.
 ///
@@ -134,7 +133,6 @@ class AboutPage extends StatelessWidget {
                   ),
                   const SizedBox(height: sectionSpacing),
                   const SizedBox(height: 24),
-                  const UnionFooter(),
                 ],
               ),
             ),
