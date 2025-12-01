@@ -53,19 +53,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Footer link handler reused inside linkColumn below
-    Future<void> _handleLinkPress(String label) async {
-      if (label == 'Shipping') {
-        final uri = Uri.parse('https://shop.upsu.net');
-        if (await canLaunchUrl(uri)) {
-          await launchUrl(uri, mode: LaunchMode.externalApplication);
-        } else {
-          debugPrint('Could not launch $uri');
-        }
-      } else {
-        placeholderCallbackForButtons();
-      }
-    }
-
     return UnionPageScaffold(
       body: SingleChildScrollView(
         child: Column(
