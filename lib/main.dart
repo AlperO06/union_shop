@@ -220,12 +220,12 @@ class HomeScreen extends StatelessWidget {
                           {
                             'title': 'Limited Edition Essential Zip Hoodies',
                             'price': '£45.00',
-                            'image': 'https://picsum.photos/id/1005/800/600'
+                            'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAVv3UIwHiQv6gWuE2l9800PQbPjISoUfKJA&s'
                           },
                           {
                             'title': 'Essential T-Shirt',
                             'price': '£15.00',
-                            'image': 'https://picsum.photos/id/1001/800/600'
+                            'image': 'https://i.ebayimg.com/images/g/3H4AAOSwG6lmjUqu/s-l1200.jpg'
                           },
                         ];
 
