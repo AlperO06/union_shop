@@ -252,7 +252,7 @@ class HomeScreen extends StatelessWidget {
                           {
                             'title': 'Portsmouth Magnet',
                             'price': '£4.50',
-                            'image': 'https://picsum.photos/id/1012/800/600'
+                            'image': 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_720x.jpg?v=1752230282'
                           },
                         ];
 
