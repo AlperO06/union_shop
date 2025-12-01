@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'widgets/union_header.dart'; // <-- add this import
+// import 'widgets/union_header.dart'; // removed: header provided globally by UnionPageScaffold
+import 'widgets/union_page_scaffold.dart'; // added: use global scaffold with header/footer
 import 'package:url_launcher/url_launcher.dart'; // NEW: open external link
 
 class ProductPage extends StatefulWidget {
@@ -359,11 +360,10 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return UnionPageScaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const UnionHeader(), // <-- add header here
             LayoutBuilder(
               builder: (context, constraints) {
                 // detect screen width for future responsive layout
@@ -587,16 +587,16 @@ class _ProductPageState extends State<ProductPage> {
 
                     // Product details (narrow: column layout — image first, then details)
                     _buildProductDetailsColumn(),
-
-                    // Footer: same layout as HomeScreen (branding + Help / Company / Legal columns)
-                    Container(
-                      width: double.infinity,
-                      color: Colors.grey[50],
-                      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 1100),
-                        child: LayoutBuilder(builder: (context, inner) {
-                          final isNarrow = inner.maxWidth < 800;
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
                           const headingStyle = TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
