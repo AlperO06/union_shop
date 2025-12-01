@@ -39,6 +39,19 @@ void navigateToHome(BuildContext context) {
 class UnionHeader extends StatelessWidget {
   const UnionHeader({super.key});
 
+  // New: extracted Shop button builder (returns the same button as before)
+  Widget buildShopButton(BuildContext context) {
+    return TextButton(
+      onPressed: () => Navigator.pushNamed(context, '/collections'),
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.black,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        textStyle: const TextStyle(fontSize: 16),
+      ),
+      child: const Text('Shop'),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -111,15 +124,8 @@ class UnionHeader extends StatelessWidget {
                                   child: const Text('Home'),
                                 ),
                                 const SizedBox(width: 8),
-                                TextButton(
-                                  onPressed: () => Navigator.pushNamed(context, '/collections'),
-                                  style: TextButton.styleFrom(
-                                    foregroundColor: Colors.black,
-                                    padding: const EdgeInsets.symmetric(horizontal: 8),
-                                    textStyle: const TextStyle(fontSize: 16),
-                                  ),
-                                  child: const Text('Shop'),
-                                ),
+                                // Replaced inline 'Shop' TextButton with helper:
+                                buildShopButton(context),
                                 const SizedBox(width: 8),
                                 TextButton(
                                   onPressed: () => Navigator.pushNamed(context, '/sale'),
