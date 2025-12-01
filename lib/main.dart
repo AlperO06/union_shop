@@ -245,8 +245,8 @@ class HomeScreen extends StatelessWidget {
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // ESSENTIAL RANGE header — centered, uppercase, larger, spaced
-                            const SizedBox(height: 8),
+                            // ESSENTIAL RANGE header — increased top spacing and larger gap to grid
+                            const SizedBox(height: 16),
                             const Center(
                               child: Text(
                                 'ESSENTIAL RANGE - OVER 20% OFF!',
@@ -259,7 +259,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 20),
                             GridView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -279,7 +279,13 @@ class HomeScreen extends StatelessWidget {
                                 );
                               },
                             ),
-                            const SizedBox(height: 28),
+                            // spacing and subtle divider between sections
+                            const SizedBox(height: 24),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(vertical: 8.0),
+                              child: Divider(color: Colors.grey, thickness: 0.5),
+                            ),
+                            const SizedBox(height: 12),
                             // SIGNATURE RANGE header — centered, uppercase, larger, spaced
                             const Center(
                               child: Text(
@@ -293,7 +299,7 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 12),
+                            const SizedBox(height: 20),
                             GridView.builder(
                               shrinkWrap: true,
                               physics: const NeverScrollableScrollPhysics(),
@@ -313,6 +319,8 @@ class HomeScreen extends StatelessWidget {
                                 );
                               },
                             ),
+                            // final spacing to make the section readable and separated from following content
+                            const SizedBox(height: 32),
                           ],
                         );
                       },
