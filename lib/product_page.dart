@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/union_header.dart'; // <-- add this import
-import 'package:url_launcher/url_launcher.dart'; // NEW: open external link
+import 'widgets/union_page_scaffold.dart'; // use scaffold that provides header/footer
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -359,51 +358,52 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            LayoutBuilder(
-              builder: (context, constraints) {
-                // detect screen width for future responsive layout
-                final bool isWideScreen = constraints.maxWidth > 800;
+    return UnionPageScaffold(
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          // detect screen width for responsive layout
+          final bool isWideScreen = constraints.maxWidth > 800;
 
-                if (isWideScreen) {
-                  // wide layout: constrained & centered content (keeps the existing two-column Row)
-                  return Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(maxWidth: 1100),
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Container(
-                              color: Colors.white,
-                              // slightly more horizontal padding for breathing room
-                              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-                              child: _buildMainImage(),
-                            ),
-                          ),
-                          // increased gap between columns for clearer separation
-                          const SizedBox(width: 40),
-                          Expanded(
-                            flex: 3,
-                            child: Container(
-                              color: Colors.white,
-                              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
-                              child: _buildProductInfo(),
-                            ),
-                          ),
-                        ],
+          if (isWideScreen) {
+            // wide layout: constrained & centered content (keeps the existing two-column Row)
+            return Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1100),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(
+                      flex: 2,
+                      child: Container(
+                        color: Colors.white,
+                        // slightly more horizontal padding for breathing room
+                        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                        child: _buildMainImage(),
                       ),
                     ),
-                  );
-                }
+                    // increased gap between columns for clearer separation
+                    const SizedBox(width: 40),
+                    Expanded(
+                      flex: 3,
+                      child: Container(
+                        color: Colors.white,
+                        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                        child: _buildProductInfo(),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          }
 
-                return Column(
-                  children: [
-                    // --- REPLACED: legacy header (PLACEHOLDER HEADER TEXT) ---
+          // Narrow layout: only include product details (header/footer provided by UnionPageScaffold)
+          return _buildProductDetailsColumn();
+        },
+      ),
+    );
+  }
+}
                     Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
