@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   Positioned.fill(
                     child: Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         image: DecorationImage(
                           image: NetworkImage(
                             'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
