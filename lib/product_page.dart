@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/union_header.dart'; // <-- add this import
-import 'package:url_launcher/url_launcher.dart'; // NEW: open external link
+import 'widgets/union_page_scaffold.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -37,13 +36,11 @@ class _ProductPageState extends State<ProductPage> {
   }
 
   void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
+    // placeholder for non-implemented actions
   }
 
-  // Reusable main image widget so it can be placed in wide/narrow layouts
+  // Main image + thumbnails
   Widget _buildMainImage() {
-    // Use AspectRatio (4/3) so the image scales responsively and fills the left column.
-    // Thumbnails are small squares underneath; selected thumbnail shows a purple border.
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -68,16 +65,9 @@ class _ProductPageState extends State<ProductPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(
-                            Icons.image_not_supported,
-                            size: 64,
-                            color: Colors.grey,
-                          ),
+                          Icon(Icons.image_not_supported, size: 64, color: Colors.grey),
                           SizedBox(height: 8),
-                          Text(
-                            'Image unavailable',
-                            style: TextStyle(color: Colors.grey),
-                          ),
+                          Text('Image unavailable', style: TextStyle(color: Colors.grey)),
                         ],
                       ),
                     ),
@@ -87,9 +77,7 @@ class _ProductPageState extends State<ProductPage> {
             ),
           ),
         ),
-
         const SizedBox(height: 12),
-        // Thumbnails row (selectable)
         SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
@@ -133,58 +121,34 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
-  // Product info column (title, price, size selector, description)
+  // Product info: title, prices, selectors, add to cart, description
   Widget _buildProductInfo() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
           'Placeholder Product Name',
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
+          style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.black),
         ),
-        // increased gap for better separation from controls
         const SizedBox(height: 16),
-        // old price + current price (same line)
         const Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
               '£20.00',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.grey,
-                decoration: TextDecoration.lineThrough,
-              ),
+              style: TextStyle(fontSize: 18, color: Colors.grey, decoration: TextDecoration.lineThrough),
             ),
             SizedBox(width: 12),
             Text(
               '£15.00',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFF4d2963),
-              ),
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xFF4d2963)),
             ),
           ],
         ),
         const SizedBox(height: 20),
-        // Colour selector (new) — placed above Size
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'Colour:',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
+            const Text('Colour:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             const SizedBox(width: 12),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -197,17 +161,10 @@ class _ProductPageState extends State<ProductPage> {
                 value: _selectedColor,
                 underline: const SizedBox(),
                 items: _colors
-                    .map((c) => DropdownMenuItem<String>(
-                          value: c,
-                          child: Text(c),
-                        ))
+                    .map((c) => DropdownMenuItem<String>(value: c, child: Text(c)))
                     .toList(),
                 onChanged: (val) {
-                  if (val != null) {
-                    setState(() {
-                      _selectedColor = val;
-                    });
-                  }
+                  if (val != null) setState(() => _selectedColor = val);
                 },
               ),
             ),
@@ -215,17 +172,8 @@ class _ProductPageState extends State<ProductPage> {
         ),
         const SizedBox(height: 16),
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'Size:',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
+            const Text('Size:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             const SizedBox(width: 12),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -237,37 +185,18 @@ class _ProductPageState extends State<ProductPage> {
               child: DropdownButton<String>(
                 value: _selectedSize,
                 underline: const SizedBox(),
-                items: _sizes
-                    .map((s) => DropdownMenuItem<String>(
-                          value: s,
-                          child: Text(s),
-                        ))
-                    .toList(),
+                items: _sizes.map((s) => DropdownMenuItem<String>(value: s, child: Text(s))).toList(),
                 onChanged: (val) {
-                  if (val != null) {
-                    setState(() {
-                      _selectedSize = val;
-                    });
-                  }
+                  if (val != null) setState(() => _selectedSize = val);
                 },
               ),
             ),
           ],
         ),
         const SizedBox(height: 16),
-        // Quantity selector (new, default 1)
         Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const Text(
-              'Quantity:',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: Colors.black,
-              ),
-            ),
+            const Text('Quantity:', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
             const SizedBox(width: 12),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -280,24 +209,16 @@ class _ProductPageState extends State<ProductPage> {
                 value: _selectedQuantity,
                 underline: const SizedBox(),
                 items: _quantities
-                    .map((q) => DropdownMenuItem<int>(
-                          value: q,
-                          child: Text(q.toString()),
-                        ))
+                    .map((q) => DropdownMenuItem<int>(value: q, child: Text(q.toString())))
                     .toList(),
                 onChanged: (val) {
-                  if (val != null) {
-                    setState(() {
-                      _selectedQuantity = val;
-                    });
-                  }
+                  if (val != null) setState(() => _selectedQuantity = val);
                 },
               ),
             ),
           ],
         ),
         const SizedBox(height: 16),
-        // Add to cart — full width, branded
         SizedBox(
           width: double.infinity,
           height: 48,
@@ -306,11 +227,90 @@ class _ProductPageState extends State<ProductPage> {
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF4d2963),
               foregroundColor: Colors.white,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.zero,
-              ),
+              shape: const RoundedRectangleBorder(borderRadius: BorderRadius.zero),
             ),
             child: const Text('Add to cart'),
+          ),
+        ),
+        const SizedBox(height: 20),
+        Divider(color: Colors.grey.shade200, thickness: 1),
+        const SizedBox(height: 20),
+        const Text(
+          'Description',
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
+          style: TextStyle(fontSize: 16, color: Colors.grey, height: 1.5),
+        ),
+      ],
+    );
+  }
+
+  // Narrow stacked layout content
+  Widget _buildProductDetailsColumn() {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.all(24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _buildMainImage(),
+          const SizedBox(height: 24),
+          _buildProductInfo(),
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return UnionPageScaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            LayoutBuilder(
+              builder: (context, constraints) {
+                final bool isWideScreen = constraints.maxWidth >= 800;
+                if (isWideScreen) {
+                  return Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 1100),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(
+                            flex: 2,
+                            child: Container(
+                              color: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                              child: _buildMainImage(),
+                            ),
+                          ),
+                          const SizedBox(width: 40),
+                          Expanded(
+                            flex: 3,
+                            child: Container(
+                              color: Colors.white,
+                              padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32),
+                              child: _buildProductInfo(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                }
+                return _buildProductDetailsColumn();
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
           ),
         ),
         // subtle divider for visual separation
