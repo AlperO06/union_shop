@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'widgets/union_page_scaffold.dart'; // added: use global scaffold with header/footer
-import 'package:url_launcher/url_launcher.dart'; // NEW: open external link
+import 'widgets/union_page_scaffold.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
