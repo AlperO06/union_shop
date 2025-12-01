@@ -51,9 +51,11 @@ class UnionHeader extends StatelessWidget {
         ),
       ),
       onSelected: (item) {
-        debugPrint('Shop menu selected: ${item.label}');
-        if (item.routeName != null) {
+        // Navigate if a routeName exists, otherwise log the label
+        if (item.routeName != null && item.routeName!.isNotEmpty) {
           Navigator.pushNamed(context, item.routeName!);
+        } else {
+          debugPrint('Shop menu selected: ${item.label}');
         }
       },
       itemBuilder: (context) {
@@ -218,7 +220,5 @@ class UnionHeader extends StatelessWidget {
         ],
       );
     });
-  }
-}
   }
 }
