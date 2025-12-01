@@ -8,6 +8,17 @@ class ShopMenuItem {
   const ShopMenuItem({required this.label, this.routeName});
 }
 
+// New: canonical list of menu items used across the app
+const List<ShopMenuItem> kShopMenuItems = [
+  ShopMenuItem(label: 'Clothing', routeName: '/collections'),
+  ShopMenuItem(label: 'Merchandise', routeName: '/collections'),
+  ShopMenuItem(label: 'Halloween', routeName: '/collections'),
+  ShopMenuItem(label: 'Signature & Essential Range', routeName: '/collections'),
+  ShopMenuItem(label: 'Portsmouth City Collection', routeName: '/collections'),
+  ShopMenuItem(label: 'Pride Collection', routeName: '/collections'),
+  ShopMenuItem(label: 'Graduation', routeName: '/collections'),
+];
+
 // The helper functions are duplicated here so the widget remains self-contained
 // and behaves identically when moved out of `main.dart`.
 void placeholderCallbackForButtons() {
