@@ -252,17 +252,17 @@ class HomeScreen extends StatelessWidget {
                           {
                             'title': 'Portsmouth City Magnet',
                             'price': '£5.00',
-                            'image': 'https://picsum.photos/id/1014/800/600'
+                            'image': 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_720x.jpg?v=1752230282'
                           },
                           {
                             'title': 'Portsmouth City Bookmark',
                             'price': '£2.00',
-                            'image': 'https://picsum.photos/id/1013/800/600'
+                            'image': 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_720x.jpg?v=1752230004'
                           },
                           {
                             'title': 'Portsmouth Notebook',
                             'price': '£4.50',
-                            'image': 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_720x.jpg?v=1752230282'
+                            'image': 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_720x.jpg?v=1757419215'
                           },
                         ];
 
