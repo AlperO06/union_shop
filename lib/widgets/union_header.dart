@@ -1,5 +1,13 @@
 import 'package:flutter/material.dart';
 
+// Small model used for menu items (label + optional route name)
+class ShopMenuItem {
+  final String label;
+  final String? routeName;
+
+  const ShopMenuItem({required this.label, this.routeName});
+}
+
 // The helper functions are duplicated here so the widget remains self-contained
 // and behaves identically when moved out of `main.dart`.
 void placeholderCallbackForButtons() {
