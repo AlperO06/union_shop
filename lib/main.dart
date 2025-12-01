@@ -250,7 +250,7 @@ class HomeScreen extends StatelessWidget {
                             'image': 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_720x.jpg?v=1752232561'
                           },
                           {
-                            'title': 'Portsmouth City Notebook',
+                            'title': 'Portsmouth City Magnet',
                             'price': '£5.00',
                             'image': 'https://picsum.photos/id/1014/800/600'
                           },
@@ -260,7 +260,7 @@ class HomeScreen extends StatelessWidget {
                             'image': 'https://picsum.photos/id/1013/800/600'
                           },
                           {
-                            'title': 'Portsmouth Magnet',
+                            'title': 'Portsmouth Notebook',
                             'price': '£4.50',
                             'image': 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_720x.jpg?v=1752230282'
                           },
