@@ -218,27 +218,27 @@ class HomeScreen extends StatelessWidget {
                         // split into two groups
                         final essentialProducts = [
                           {
-                            'title': 'Portsmouth Magnet',
-                            'price': '£6.00',
-                            'image': 'https://picsum.photos/id/1011/800/600'
+                            'title': 'Limited Edition Essential Zip Hoodies',
+                            'price': '£45.00',
+                            'image': 'https://picsum.photos/id/1005/800/600'
                           },
                           {
-                            'title': 'Union Hoodie',
-                            'price': '£30.00',
-                            'image': 'https://picsum.photos/id/1015/800/600'
+                            'title': 'Essential T-Shirt',
+                            'price': '£15.00',
+                            'image': 'https://picsum.photos/id/1001/800/600'
                           },
                         ];
 
                         final signatureProducts = [
                           {
-                            'title': 'Campus Mug',
-                            'price': '£8.50',
-                            'image': 'https://picsum.photos/id/1025/800/600'
+                            'title': 'Signature Hoodie',
+                            'price': '£60.00',
+                            'image': 'https://picsum.photos/id/1003/800/600'
                           },
                           {
-                            'title': 'Sticker Pack',
-                            'price': '£3.00',
-                            'image': 'https://picsum.photos/id/1035/800/600'
+                            'title': 'Signature T-Shirt',
+                            'price': '£25.00',
+                            'image': 'https://picsum.photos/id/1002/800/600'
                           },
                         ];
 
