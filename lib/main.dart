@@ -3,9 +3,9 @@ import 'package:union_shop/product_page.dart';
 import 'about_page.dart';
 import 'collections_page.dart';
 import 'sale_page.dart';
-import 'widgets/union_page_scaffold.dart'; // added import
-import 'package:url_launcher/url_launcher.dart'; // NEW: open external link
-import 'bottom_union_footer.dart'; // NEW: import the reusable footer
+import 'widgets/union_page_scaffold.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'bottom_union_footer.dart';
 
 void main() {
   runApp(const UnionShopApp());
@@ -48,8 +48,6 @@ void navigateToHome(BuildContext context) {
   // return to the root route (home)
   Navigator.popUntil(context, (route) => route.isFirst);
 }
-
-// UnionHeader moved to lib/widgets/union_header.dart
 
 // HomeScreen extracted from the original inline Scaffold
 class HomeScreen extends StatelessWidget {
@@ -129,8 +127,8 @@ class HomeScreen extends StatelessWidget {
                               ),
                               child: const Text(
                                 'SHOP NOW',
-                                style: TextStyle(
-                                    fontSize: 14, letterSpacing: 1),
+                                style:
+                                    TextStyle(fontSize: 14, letterSpacing: 1),
                               ),
                             ),
                             const SizedBox(width: 12),
@@ -200,7 +198,8 @@ class HomeScreen extends StatelessWidget {
             Container(
               color: Colors.white,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 36, horizontal: 20),
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 1100),
                   child: Column(
@@ -247,7 +246,8 @@ class HomeScreen extends StatelessWidget {
                         return GridView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: isWide ? 2 : 1,
                             crossAxisSpacing: 20,
                             mainAxisSpacing: 20,
@@ -262,23 +262,24 @@ class HomeScreen extends StatelessWidget {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(4)),
                               child: InkWell(
-                                onTap: () => Navigator.pushNamed(context, '/product'),
+                                onTap: () => Navigator.pushNamed(
+                                    context, '/product'),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    // Use AspectRatio instead of Expanded so the image
-                                    // has a defined size even inside scrolling parents.
                                     AspectRatio(
                                       aspectRatio: 1.6,
                                       child: Image.network(
                                         p['image']!,
                                         width: double.infinity,
                                         fit: BoxFit.cover,
-                                        errorBuilder: (context, error, stackTrace) {
+                                        errorBuilder:
+                                            (context, error, stackTrace) {
                                           return Container(
                                             color: Colors.grey[300],
                                             child: const Center(
-                                              child: Icon(Icons.image_not_supported,
+                                              child: Icon(
+                                                  Icons.image_not_supported,
                                                   color: Colors.grey),
                                             ),
                                           );
@@ -288,18 +289,21 @@ class HomeScreen extends StatelessWidget {
                                     Padding(
                                       padding: const EdgeInsets.all(12.0),
                                       child: Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           Text(
                                             p['title']!,
                                             style: const TextStyle(
-                                                fontSize: 14, fontWeight: FontWeight.w600),
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600),
                                           ),
                                           const SizedBox(height: 6),
                                           Text(
                                             p['price']!,
                                             style: const TextStyle(
-                                                fontSize: 13, color: Colors.grey),
+                                                fontSize: 13,
+                                                color: Colors.grey),
                                           ),
                                         ],
                                       ),
@@ -356,7 +360,6 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // Avoid Expanded here as ProductCard may be used in unbounded contexts.
           AspectRatio(
             aspectRatio: 1.6,
             child: Image.network(
@@ -366,7 +369,8 @@ class ProductCard extends StatelessWidget {
                 return Container(
                   color: Colors.grey[300],
                   child: const Center(
-                    child: Icon(Icons.image_not_supported, color: Colors.grey),
+                    child:
+                        Icon(Icons.image_not_supported, color: Colors.grey),
                   ),
                 );
               },
@@ -393,10 +397,6 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
-                        ],
-                      ],
-                    );
-                  }
 
                   if (isNarrow) {
                     // Vertical stacking for small screens using Wrap so each column becomes full-width
