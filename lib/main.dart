@@ -249,6 +249,11 @@ class HomeScreen extends StatelessWidget {
                             'price': '£6.00',
                             'image': 'https://picsum.photos/id/1011/800/600'
                           },
+                          {
+                            'title': 'Portsmouth City Postcard',
+                            'price': '£2.50',
+                            'image': 'https://picsum.photos/id/1012/800/600'
+                          },
                         ];
 
                         return Column(
