@@ -242,12 +242,17 @@ class HomeScreen extends StatelessWidget {
                           },
                         ];
 
-                        // Portsmouth City Collection products (brought back)
+                        // Portsmouth City Collection products
                         final portsmouthProducts = [
                           {
                             'title': 'Portsmouth City Postcard',
                             'price': '£1.00',
                             'image': 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_720x.jpg?v=1752232561'
+                          },
+                          {
+                            'title': 'Portsmouth City Notebook',
+                            'price': '£5.00',
+                            'image': 'https://picsum.photos/id/1014/800/600'
                           },
                           {
                             'title': 'Portsmouth City Bookmark',
