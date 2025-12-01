@@ -211,15 +211,15 @@ class HomeScreen extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 18),
-                    // replace the LayoutBuilder block with a correctly closed version
+                    // replace the LayoutBuilder block with two separate groups
                     LayoutBuilder(
                       builder: (context, constraints) {
                         final isWide = constraints.maxWidth > 600;
-                        final products = [
+                        // split into two groups
+                        final essentialProducts = [
                           {
                             'title': 'Portsmouth Magnet',
                             'price': '£6.00',
-                            // replaced with a stable placeholder image
                             'image': 'https://picsum.photos/id/1011/800/600'
                           },
                           {
@@ -227,6 +227,9 @@ class HomeScreen extends StatelessWidget {
                             'price': '£30.00',
                             'image': 'https://picsum.photos/id/1015/800/600'
                           },
+                        ];
+
+                        final signatureProducts = [
                           {
                             'title': 'Campus Mug',
                             'price': '£8.50',
@@ -238,34 +241,78 @@ class HomeScreen extends StatelessWidget {
                             'image': 'https://picsum.photos/id/1035/800/600'
                           },
                         ];
-                        return GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: isWide ? 2 : 1,
-                            crossAxisSpacing: 20,
-                            mainAxisSpacing: 20,
-                            childAspectRatio: 1.1,
-                          ),
-                          itemCount: products.length,
-                          itemBuilder: (context, index) {
-                            final p = products[index];
-                            return ProductCard(
-                              title: p['title']!,
-                              price: p['price']!,
-                              imageUrl: p['image']!,
-                            );
-                          },
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'ESSENTIAL RANGE',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: isWide ? 2 : 1,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20,
+                                childAspectRatio: 1.1,
+                              ),
+                              itemCount: essentialProducts.length,
+                              itemBuilder: (context, index) {
+                                final p = essentialProducts[index];
+                                return ProductCard(
+                                  title: p['title']!,
+                                  price: p['price']!,
+                                  imageUrl: p['image']!,
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 20),
+                            const Text(
+                              'SIGNATURE RANGE',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w700,
+                                color: Colors.black87,
+                              ),
+                            ),
+                            const SizedBox(height: 12),
+                            GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: isWide ? 2 : 1,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20,
+                                childAspectRatio: 1.1,
+                              ),
+                              itemCount: signatureProducts.length,
+                              itemBuilder: (context, index) {
+                                final p = signatureProducts[index];
+                                return ProductCard(
+                                  title: p['title']!,
+                                  price: p['price']!,
+                                  imageUrl: p['image']!,
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 12),
+                            const Align(
+                              alignment: Alignment.center,
+                              child: TextButton(
+                                onPressed: placeholderCallbackForButtons,
+                                child: Text('View all products'),
+                              ),
+                            ),
+                          ],
                         );
                       },
-                    ),
-                    const SizedBox(height: 12),
-                    const Align(
-                      alignment: Alignment.center,
-                      child: TextButton(
-                        onPressed: placeholderCallbackForButtons,
-                        child: Text('View all products'),
-                      ),
                     ),
                   ],
                 ),
