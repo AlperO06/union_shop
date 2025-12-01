@@ -242,6 +242,15 @@ class HomeScreen extends StatelessWidget {
                           },
                         ];
 
+                        // Portsmouth City Collection products (brought back)
+                        final portsmouthProducts = [
+                          {
+                            'title': 'Portsmouth Magnet',
+                            'price': '£6.00',
+                            'image': 'https://picsum.photos/id/1011/800/600'
+                          },
+                        ];
+
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -320,7 +329,7 @@ class HomeScreen extends StatelessWidget {
                               },
                             ),
                             const SizedBox(height: 20),
-                            // PLACEHOLDER header (temporary)
+                            // PORTSMOUTH CITY COLLECTION header
                             const Center(
                               child: Text(
                                 'PORTSMOUTH CITY COLLECTION',
@@ -333,8 +342,27 @@ class HomeScreen extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            const SizedBox(height: 16),
-                            // final spacing to make the section readable and separated from following content
+                            const SizedBox(height: 12),
+                            // grid for Portsmouth City Collection (single item for now)
+                            GridView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: isWide ? 2 : 1,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20,
+                                childAspectRatio: 1.1,
+                              ),
+                              itemCount: portsmouthProducts.length,
+                              itemBuilder: (context, index) {
+                                final p = portsmouthProducts[index];
+                                return ProductCard(
+                                  title: p['title']!,
+                                  price: p['price']!,
+                                  imageUrl: p['image']!,
+                                );
+                              },
+                            ),
                             const SizedBox(height: 32),
                           ],
                         );
