@@ -11,13 +11,15 @@ class UnionPageScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisSize: MainAxisSize.max,
-        children: [
-          const UnionHeader(),
-          Expanded(child: body),
-          const UnionFooter(), // mounted globally after the page body
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const UnionHeader(),
+            body,
+            const UnionFooter(), // positioned after the body; scrolls together with body
+          ],
+        ),
       ),
     );
   }
