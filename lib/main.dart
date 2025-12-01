@@ -4,6 +4,7 @@ import 'about_page.dart';
 import 'collections_page.dart';
 import 'sale_page.dart';
 import 'widgets/union_page_scaffold.dart'; // added import
+import 'package:url_launcher/url_launcher.dart'; // NEW: open external link
 
 void main() {
   runApp(const UnionShopApp());
@@ -371,7 +372,18 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(height: 8),
                         for (var i = 0; i < links.length; i++) ...[
                           TextButton(
-                            onPressed: placeholderCallbackForButtons,
+                            onPressed: () async {
+                              if (links[i] == 'Shipping') {
+                                final uri = Uri.parse('https://shop.upsu.net');
+                                if (await canLaunchUrl(uri)) {
+                                  await launchUrl(uri);
+                                } else {
+                                  debugPrint('Could not launch $uri');
+                                }
+                              } else {
+                                placeholderCallbackForButtons();
+                              }
+                            },
                             style: TextButton.styleFrom(
                               padding: EdgeInsets.zero,
                               minimumSize: Size.zero,

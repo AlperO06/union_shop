@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'widgets/union_header.dart'; // <-- add this import
+import 'package:url_launcher/url_launcher.dart'; // NEW: open external link
 
 class ProductPage extends StatefulWidget {
   const ProductPage({super.key});
@@ -632,7 +633,18 @@ class _ProductPageState extends State<ProductPage> {
                                 const SizedBox(height: 8),
                                 for (var i = 0; i < links.length; i++) ...[
                                   TextButton(
-                                    onPressed: () {}, // no-op placeholder
+                                    onPressed: () async {
+                                      if (links[i] == 'Shipping') {
+                                        final uri = Uri.parse('https://shop.upsu.net');
+                                        if (await canLaunchUrl(uri)) {
+                                          await launchUrl(uri);
+                                        } else {
+                                          debugPrint('Could not launch $uri');
+                                        }
+                                      } else {
+                                        // existing no-op / placeholder behavior
+                                      }
+                                    },
                                     style: TextButton.styleFrom(
                                       padding: EdgeInsets.zero,
                                       minimumSize: Size.zero,
