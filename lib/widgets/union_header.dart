@@ -44,13 +44,13 @@ class UnionHeader extends StatelessWidget {
     if (isWideScreen) {
       return PopupMenuButton<ShopMenuItem>(
         // ensure the popup opens below and aligned to the left of the button
-        offset: Offset(0, kToolbarHeight),
+        offset: const Offset(0, kToolbarHeight),
         // visible label that reads "Shop" with a drop-down arrow
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
           child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: const [
+            children: [
               Text(
                 'Shop',
                 style: TextStyle(fontSize: 16, color: Colors.black),
@@ -94,7 +94,6 @@ class UnionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       // new: indicates wide screens (>= 700)
-      final bool isWideScreen = constraints.maxWidth >= 700;
 
       return Column(
         mainAxisSize: MainAxisSize.min,
