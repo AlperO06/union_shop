@@ -359,27 +359,19 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          // fixed-height image area so all product images share the same height,
-          // center-cropped using BoxFit.cover to preserve aspect ratio
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8),
-            child: Container(
-              height: 180, // consistent height for all product images
-              width: double.infinity,
-              color: Colors.grey[200],
-              child: Image.network(
-                imageUrl,
-                fit: BoxFit.cover,
-                alignment: Alignment.center,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.grey[300],
-                    child: const Center(
-                      child: Icon(Icons.image_not_supported, color: Colors.grey),
-                    ),
-                  );
-                },
-              ),
+          AspectRatio(
+            aspectRatio: 1.6,
+            child: Image.network(
+              imageUrl,
+              fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  color: Colors.grey[300],
+                  child: const Center(
+                    child: Icon(Icons.image_not_supported, color: Colors.grey),
+                  ),
+                );
+              },
             ),
           ),
           Column(
