@@ -245,13 +245,13 @@ class HomeScreen extends StatelessWidget {
                         // Portsmouth City Collection products (brought back)
                         final portsmouthProducts = [
                           {
-                            'title': 'Portsmouth Magnet',
-                            'price': '£6.00',
-                            'image': 'https://picsum.photos/id/1011/800/600'
+                            'title': 'Portsmouth City Postcard',
+                            'price': '£1.00',
+                            'image': 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_720x.jpg?v=1752232561'
                           },
                           {
-                            'title': 'Portsmouth City Postcard',
-                            'price': '£2.50',
+                            'title': 'Portsmouth Magnet',
+                            'price': '£4.50',
                             'image': 'https://picsum.photos/id/1012/800/600'
                           },
                         ];
