@@ -637,12 +637,12 @@ class _ProductPageState extends State<ProductPage> {
                                       if (links[i] == 'Shipping') {
                                         final uri = Uri.parse('https://shop.upsu.net');
                                         if (await canLaunchUrl(uri)) {
-                                          await launchUrl(uri);
+                                          await launchUrl(uri, mode: LaunchMode.externalApplication);
                                         } else {
                                           debugPrint('Could not launch $uri');
                                         }
                                       } else {
-                                        // existing no-op / placeholder behavior
+                                        // preserve existing behavior for other links
                                       }
                                     },
                                     style: TextButton.styleFrom(
