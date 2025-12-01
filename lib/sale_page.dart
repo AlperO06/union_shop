@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'widgets/union_page_scaffold.dart'; // added import
-import 'bottom_union_footer.dart'; // added import
 
 // Model for a sale product and a hardcoded list
 class SaleProduct {
@@ -144,7 +143,6 @@ class SalePage extends StatelessWidget {
           ),
 
           // footer below the sale grid
-          const UnionFooter(),
         ],
       ),
     );
