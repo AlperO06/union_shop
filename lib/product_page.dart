@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-// import 'widgets/union_header.dart'; // removed: header provided globally by UnionPageScaffold
-import 'widgets/union_page_scaffold.dart'; // added: use global scaffold with header/footer
+import 'widgets/union_header.dart'; // <-- add this import
 import 'package:url_launcher/url_launcher.dart'; // NEW: open external link
 
 class ProductPage extends StatefulWidget {
@@ -360,10 +359,11 @@ class _ProductPageState extends State<ProductPage> {
 
   @override
   Widget build(BuildContext context) {
-    return UnionPageScaffold(
+    return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
+            const UnionHeader(), // <-- add header here
             LayoutBuilder(
               builder: (context, constraints) {
                 // detect screen width for future responsive layout
@@ -402,16 +402,16 @@ class _ProductPageState extends State<ProductPage> {
                   );
                 }
 
-                // Narrow layout: only product details (image then info). Header/footer handled globally.
-                return _buildProductDetailsColumn();
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+                return Column(
+                  children: [
+                    // --- REPLACED: legacy header (PLACEHOLDER HEADER TEXT) ---
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        // thin top purple SALE banner
+                        Container(
+                          height: 28,
+                          width: double.infinity,
                           color: const Color(0xFF4d2963), // dark purple
                           alignment: Alignment.center,
                           child: const Text(
@@ -587,16 +587,16 @@ class _ProductPageState extends State<ProductPage> {
 
                     // Product details (narrow: column layout — image first, then details)
                     _buildProductDetailsColumn(),
-                  ],
-                );
-              },
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
+
+                    // Footer: same layout as HomeScreen (branding + Help / Company / Legal columns)
+                    Container(
+                      width: double.infinity,
+                      color: Colors.grey[50],
+                      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(maxWidth: 1100),
+                        child: LayoutBuilder(builder: (context, inner) {
+                          final isNarrow = inner.maxWidth < 800;
                           const headingStyle = TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.w700,
