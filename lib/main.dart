@@ -175,7 +175,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                   const SizedBox(width: 12),
                   ElevatedButton(
-                    onPressed: placeholderCallbackForButtons,
+                    onPressed: () => Navigator.pushNamed(context, '/sale'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF4d2963),
                       foregroundColor: Colors.white,
