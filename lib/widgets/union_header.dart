@@ -39,10 +39,10 @@ void navigateToHome(BuildContext context) {
 class UnionHeader extends StatelessWidget {
   const UnionHeader({super.key});
 
-  // Replace the Shop button with a PopupMenuButton that shows "Shop" and prints selection.
+  // Build the Shop popup populated from kShopMenuItems
   Widget buildShopButton(BuildContext context) {
     return PopupMenuButton<ShopMenuItem>(
-      // keep a simple visible label that reads "Shop"
+      // visible label that reads "Shop"
       child: const Padding(
         padding: EdgeInsets.symmetric(horizontal: 8),
         child: Text(
@@ -51,9 +51,7 @@ class UnionHeader extends StatelessWidget {
         ),
       ),
       onSelected: (item) {
-        // debug print the selected label for now
         debugPrint('Shop menu selected: ${item.label}');
-        // optional: navigate if routeName is provided
         if (item.routeName != null) {
           Navigator.pushNamed(context, item.routeName!);
         }
@@ -220,5 +218,7 @@ class UnionHeader extends StatelessWidget {
         ],
       );
     });
+  }
+}
   }
 }
