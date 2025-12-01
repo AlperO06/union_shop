@@ -363,7 +363,6 @@ class _ProductPageState extends State<ProductPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const UnionHeader(), // <-- add header here
             LayoutBuilder(
               builder: (context, constraints) {
                 // detect screen width for future responsive layout
