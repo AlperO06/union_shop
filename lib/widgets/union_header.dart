@@ -39,17 +39,23 @@ void navigateToHome(BuildContext context) {
 class UnionHeader extends StatelessWidget {
   const UnionHeader({super.key});
 
-  // Changed: accept isWideScreen flag. Show PopupMenu on wide screens,
-  // otherwise show a simple TextButton that navigates to '/collections'.
+  // Changed: show "Shop" text next to a down-arrow for the popup trigger on wide screens.
   Widget buildShopButton(BuildContext context, bool isWideScreen) {
     if (isWideScreen) {
       return PopupMenuButton<ShopMenuItem>(
-        // visible label that reads "Shop"
-        child: const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
-          child: Text(
-            'Shop',
-            style: TextStyle(fontSize: 16, color: Colors.black),
+        // visible label that reads "Shop" with a drop-down arrow
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              Text(
+                'Shop',
+                style: TextStyle(fontSize: 16, color: Colors.black),
+              ),
+              SizedBox(width: 6),
+              Icon(Icons.arrow_drop_down, size: 20, color: Colors.black),
+            ],
           ),
         ),
         onSelected: (item) {
