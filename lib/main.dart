@@ -319,6 +319,21 @@ class HomeScreen extends StatelessWidget {
                                 );
                               },
                             ),
+                            const SizedBox(height: 20),
+                            // PLACEHOLDER header (temporary)
+                            const Center(
+                              child: Text(
+                                'PLACEHOLDER FOR NOW',
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                  letterSpacing: 1,
+                                  color: Colors.black87,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 16),
                             // final spacing to make the section readable and separated from following content
                             const SizedBox(height: 32),
                           ],
