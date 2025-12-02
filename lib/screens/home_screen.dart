@@ -274,11 +274,7 @@ class HomeScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final p = essentialProducts[index];
                                 return ProductCard(
-                                  product: Product(
-                                    title: p['title']!,
-                                    price: p['price']!,
-                                    imageUrl: p['image']!,
-                                  ),
+                                  product: throw UnimplementedError('Create Product from map `p` here'),
                                 );
                               },
                             ),
@@ -317,11 +313,7 @@ class HomeScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final p = signatureProducts[index];
                                 return ProductCard(
-                                  product: Product(
-                                    title: p['title']!,
-                                    price: p['price']!,
-                                    imageUrl: p['image']!,
-                                  ),
+                                  product: throw UnimplementedError('Create Product from map `p` here'),
                                 );
                               },
                             ),
@@ -355,11 +347,7 @@ class HomeScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final p = portsmouthProducts[index];
                                 return ProductCard(
-                                  product: Product(
-                                    title: p['title']!,
-                                    price: p['price']!,
-                                    imageUrl: p['image']!,
-                                  ),
+                                  product: throw UnimplementedError('Create Product from map `p` here'),
                                 );
                               },
                             ),
@@ -449,6 +437,18 @@ class ProductCard extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 13,
                       color: Colors.black87,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
                       fontWeight: FontWeight.w500,
                     ),
                   ),
