@@ -33,6 +33,12 @@ const List<Product> products = [
     image: 'assets/images/limited_hoodie.png',
     description:
         'A premium limited edition zip hoodie with soft brushed interior, metal zipper, and a tailored fit.',
+    images: [
+      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg',
+      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_1024x1024@2x.jpg',
+    ],
+    sizes: ['S', 'M', 'L', 'XL'],
+    colors: ['Black', 'Grey', 'Purple'],
   ),
   Product(
     id: 2,
