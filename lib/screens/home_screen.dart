@@ -3,9 +3,6 @@ import '../widgets/union_page_scaffold.dart';
 import '../data/products.dart';
 import '../product_page.dart';
 
-
-
-
 void placeholderCallbackForButtons() {
   debugPrint('placeholder button pressed');
 }
@@ -277,9 +274,11 @@ class HomeScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final p = essentialProducts[index];
                                 return ProductCard(
-                                  title: p['title']!,
-                                  price: p['price']!,
-                                  imageUrl: p['image']!,
+                                  product: Product(
+                                    title: p['title']!,
+                                    price: p['price']!,
+                                    imageUrl: p['image']!,
+                                  ),
                                 );
                               },
                             ),
@@ -318,9 +317,11 @@ class HomeScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final p = signatureProducts[index];
                                 return ProductCard(
-                                  title: p['title']!,
-                                  price: p['price']!,
-                                  imageUrl: p['image']!,
+                                  product: Product(
+                                    title: p['title']!,
+                                    price: p['price']!,
+                                    imageUrl: p['image']!,
+                                  ),
                                 );
                               },
                             ),
@@ -354,9 +355,11 @@ class HomeScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final p = portsmouthProducts[index];
                                 return ProductCard(
-                                  title: p['title']!,
-                                  price: p['price']!,
-                                  imageUrl: p['image']!,
+                                  product: Product(
+                                    title: p['title']!,
+                                    price: p['price']!,
+                                    imageUrl: p['image']!,
+                                  ),
                                 );
                               },
                             ),
@@ -393,15 +396,11 @@ class HomeScreen extends StatelessWidget {
 
 // Inserted ProductCard widget copied from main.dart below HomeScreen class
 class ProductCard extends StatelessWidget {
-  final String title;
-  final String price;
-  final String imageUrl;
+  final Product product;
 
   const ProductCard({
     Key? key,
-    required this.title,
-    required this.price,
-    required this.imageUrl,
+    required this.product,
   }) : super(key: key);
 
   @override
@@ -421,7 +420,7 @@ class ProductCard extends StatelessWidget {
             AspectRatio(
               aspectRatio: 4 / 3,
               child: Image.network(
-                imageUrl,
+                product.imageUrl,
                 fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => Container(
                   color: Colors.grey[200],
@@ -436,7 +435,7 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    product.title,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -446,7 +445,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    price,
+                    product.price,
                     style: const TextStyle(
                       fontSize: 13,
                       color: Colors.black87,
@@ -461,4 +460,5 @@ class ProductCard extends StatelessWidget {
       ),
     );
   }
+}
 }
