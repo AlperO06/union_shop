@@ -275,6 +275,7 @@ class HomeScreen extends StatelessWidget {
                                 final p = essentialProducts[index];
                                 final product = products.firstWhere(
                                   (prod) => prod.name == p['title'],
+                                  orElse: () => products.first,
                                 );
 
                                 return ProductCard(product: product);
@@ -316,6 +317,7 @@ class HomeScreen extends StatelessWidget {
                                 final p = signatureProducts[index];
                                 final product = products.firstWhere(
                                   (prod) => prod.name == p['title'],
+                                  orElse: () => products.first,
                                 );
 
                                 return ProductCard(product: product);
@@ -352,6 +354,7 @@ class HomeScreen extends StatelessWidget {
                                 final p = portsmouthProducts[index];
                                 final product = products.firstWhere(
                                   (prod) => prod.name == p['title'],
+                                  orElse: () => products.first,
                                 );
 
                                 return ProductCard(product: product);
