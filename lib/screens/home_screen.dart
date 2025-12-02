@@ -418,14 +418,23 @@ class ProductCard extends StatelessWidget {
             // Image area
             AspectRatio(
               aspectRatio: 4 / 3,
-              child: Image.asset(
-                product.image, // changed from product.imageUrl
-                fit: BoxFit.cover,
-                errorBuilder: (_, __, ___) => Container(
-                  color: Colors.grey[200],
-                  child: const Center(child: Icon(Icons.broken_image)),
-                ),
-              ),
+              child: product.image.startsWith('http')
+                  ? Image.network(
+                      product.image,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Colors.grey[200],
+                        child: const Center(child: Icon(Icons.broken_image)),
+                      ),
+                    )
+                  : Image.asset(
+                      product.image,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Colors.grey[200],
+                        child: const Center(child: Icon(Icons.broken_image)),
+                      ),
+                    ),
             ),
             // Textual info
             Padding(
