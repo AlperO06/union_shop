@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../main.dart'; // provides ProductCard and helper functions used by HomeScreen
 import '../widgets/union_page_scaffold.dart';
 
 class HomeScreen extends StatelessWidget {
