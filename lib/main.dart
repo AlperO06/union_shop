@@ -88,7 +88,8 @@ class HomeScreen extends StatelessWidget {
                   Positioned(
                     left: 24,
                     right: 24,
-                    top: 72,
+                    // place inner content slightly higher on mobile to avoid pushing past the bottom
+                    top: isMobile ? 56 : 72,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -220,6 +221,10 @@ class HomeScreen extends StatelessWidget {
                       LayoutBuilder(
                         builder: (context, constraints) {
                           final isWide = constraints.maxWidth > 600;
+                          // compute columns and a safer childAspectRatio
+                          final crossAxisCount = isWide ? 2 : 1;
+                          // on mobile use a square tile (1.0) to avoid very tall tiles that overflow
+                          final childAspectRatioGrid = isWide ? 1.1 : 1.0;
                           // split into two groups
                           final essentialProducts = [
                             {
@@ -292,11 +297,12 @@ class HomeScreen extends StatelessWidget {
                               GridView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: isWide ? 2 : 1,
+                                  crossAxisCount: crossAxisCount,
                                   crossAxisSpacing: 20,
                                   mainAxisSpacing: 20,
-                                  childAspectRatio: 1.1,
+                                  childAspectRatio: childAspectRatioGrid,
                                 ),
                                 itemCount: essentialProducts.length,
                                 itemBuilder: (context, index) {
@@ -332,11 +338,12 @@ class HomeScreen extends StatelessWidget {
                               GridView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: isWide ? 2 : 1,
+                                  crossAxisCount: crossAxisCount,
                                   crossAxisSpacing: 20,
                                   mainAxisSpacing: 20,
-                                  childAspectRatio: 1.1,
+                                  childAspectRatio: childAspectRatioGrid,
                                 ),
                                 itemCount: signatureProducts.length,
                                 itemBuilder: (context, index) {
@@ -367,11 +374,12 @@ class HomeScreen extends StatelessWidget {
                               GridView.builder(
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
+                                padding: EdgeInsets.zero,
                                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                                  crossAxisCount: isWide ? 2 : 1,
+                                  crossAxisCount: crossAxisCount,
                                   crossAxisSpacing: 20,
                                   mainAxisSpacing: 20,
-                                  childAspectRatio: 1.1,
+                                  childAspectRatio: childAspectRatioGrid,
                                 ),
                                 itemCount: portsmouthProducts.length,
                                 itemBuilder: (context, index) {
@@ -398,7 +406,12 @@ class HomeScreen extends StatelessWidget {
 
         if (isMobile) {
           // mobile: allow vertical scrolling to avoid RenderFlex overflow
-          return SingleChildScrollView(child: mainColumn);
+          // add bottom padding using safe area to prevent bottom inset overflow
+          final bottomPad = MediaQuery.of(context).padding.bottom + 20.0;
+          return SingleChildScrollView(
+            padding: EdgeInsets.only(bottom: bottomPad),
+            child: mainColumn,
+          );
         }
 
         // desktop: original behavior (no scrolling wrapper)
@@ -450,6 +463,7 @@ class _ProductCardState extends State<ProductCard> {
                 final screenW = MediaQuery.of(context).size.width;
                 final isMobile = screenW < 700;
                 if (isMobile) {
+                  // constrain mobile image to a square area (width determines height)
                   return AspectRatio(
                     aspectRatio: 1.0,
                     child: Container(
@@ -458,6 +472,8 @@ class _ProductCardState extends State<ProductCard> {
                       child: Image.network(
                         widget.imageUrl,
                         fit: BoxFit.cover,
+                        width: double.infinity,
+                        height: double.infinity,
                         alignment: Alignment.center,
                         errorBuilder: (context, error, stackTrace) {
                           return Container(
