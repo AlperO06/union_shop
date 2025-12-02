@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'data/products.dart';
 import 'product_page.dart';
 import 'about_page.dart';
 import 'collections_page.dart';
