@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'data/products.dart';
 import 'product_page.dart';
 import 'about_page.dart';
 import 'collections_page.dart';
@@ -315,11 +314,9 @@ class HomeScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final p = essentialProducts[index];
                                 return ProductCard(
-                                  product: Product(
-                                    title: p['title']!,
-                                    price: p['price']!,
-                                    imageUrl: p['image']!,
-                                  ),
+                                  title: p['title']!,
+                                  price: p['price']!,
+                                  imageUrl: p['image']!,
                                 );
                               },
                             ),
@@ -358,11 +355,9 @@ class HomeScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final p = signatureProducts[index];
                                 return ProductCard(
-                                  product: Product(
-                                    title: p['title']!,
-                                    price: p['price']!,
-                                    imageUrl: p['image']!,
-                                  ),
+                                  title: p['title']!,
+                                  price: p['price']!,
+                                  imageUrl: p['image']!,
                                 );
                               },
                             ),
@@ -396,11 +391,9 @@ class HomeScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final p = portsmouthProducts[index];
                                 return ProductCard(
-                                  product: Product(
-                                    title: p['title']!,
-                                    price: p['price']!,
-                                    imageUrl: p['image']!,
-                                  ),
+                                  title: p['title']!,
+                                  price: p['price']!,
+                                  imageUrl: p['image']!,
                                 );
                               },
                             ),
@@ -437,11 +430,15 @@ class HomeScreen extends StatelessWidget {
 
 // ProductCard: make image responsive so mobile uses AspectRatio (no fixed height)
 class ProductCard extends StatefulWidget {
-  final Product product;
+  final String title;
+  final String price;
+  final String imageUrl;
 
   const ProductCard({
     super.key,
-    required this.product,
+    required this.title,
+    required this.price,
+    required this.imageUrl,
   });
 
   @override
@@ -481,7 +478,7 @@ class _ProductCardState extends State<ProductCard> {
                       width: double.infinity,
                       color: Colors.grey[200],
                       child: Image.network(
-                        widget.product.image,
+                        widget.imageUrl,
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,
@@ -506,7 +503,7 @@ class _ProductCardState extends State<ProductCard> {
                   width: double.infinity,
                   color: Colors.grey[200],
                   child: Image.network(
-                    widget.product.image,
+                    widget.imageUrl,
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
                     errorBuilder: (context, error, stackTrace) {
@@ -527,7 +524,7 @@ class _ProductCardState extends State<ProductCard> {
               children: [
                 const SizedBox(height: 4),
                 Text(
-                  widget.product.name,
+                  widget.title,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.black,
@@ -538,7 +535,7 @@ class _ProductCardState extends State<ProductCard> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  widget.product.newPrice.toString(),
+                  widget.price,
                   style: const TextStyle(fontSize: 13, color: Colors.grey),
                 ),
               ],
