@@ -7,6 +7,9 @@ class Product {
   final double oldPrice;
   final double newPrice;
   final String description;
+  final List<String>? images;
+  final List<String>? sizes;
+  final List<String>? colors;
 
   const Product({
     required this.id,
@@ -15,6 +18,9 @@ class Product {
     required this.oldPrice,
     required this.newPrice,
     required this.description,
+    this.images,
+    this.sizes,
+    this.colors,
   });
 }
 
@@ -54,12 +60,6 @@ const List<Product> products = [
     description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
   ),
 ];
-  Product(
-    id: 4,
-    name: 'Signature T-Shirt',
-    oldPrice: 34.99,
-    newPrice: 29.99,
-    image: 'assets/images/signature_tshirt.png',
     description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
   ),
 ];
