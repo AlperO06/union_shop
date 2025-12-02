@@ -1,4 +1,3 @@
-
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
 class Product {
@@ -17,14 +16,6 @@ class Product {
     required this.newPrice,
     required this.description,
   });
-
-  get images => null;
-
-  get sizes => null;
-
-  get colors => null;
-
-  get price => null;
 }
 
 const List<Product> products = [
@@ -54,6 +45,15 @@ const List<Product> products = [
     description:
         'Premium heavyweight fleece hoodie featuring embroidered logo and reinforced seams for lasting comfort.',
   ),
+  Product(
+    id: 4,
+    name: 'Signature T-Shirt',
+    oldPrice: 34.99,
+    newPrice: 29.99,
+    image: 'assets/images/signature_tshirt.png',
+    description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
+  ),
+];
   Product(
     id: 4,
     name: 'Signature T-Shirt',
