@@ -32,7 +32,6 @@ class UnionShopApp extends StatelessWidget {
   }
 }
 
-// Helper navigation + placeholder actions (shared globally)
 void placeholderCallbackForButtons() {
   debugPrint('placeholder button pressed');
 }
