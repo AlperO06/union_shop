@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import '../widgets/union_page_scaffold.dart';
 
+
+void placeholderCallbackForButtons() {
+  debugPrint('placeholder button pressed');
+}
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
