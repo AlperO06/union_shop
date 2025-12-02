@@ -1,26 +1,23 @@
 import 'package:flutter/material.dart';
 import 'widgets/union_page_scaffold.dart'; // use scaffold that provides header/footer
+import 'data/products.dart'; // added import for Product model
 
 class ProductPage extends StatefulWidget {
-  const ProductPage({super.key});
+  final Product product; // added product property
+
+  const ProductPage({Key? key, required this.product}) : super(key: key); // updated ctor
 
   @override
   State<ProductPage> createState() => _ProductPageState();
 }
 
 class _ProductPageState extends State<ProductPage> {
-  String _selectedSize = 'Medium';
-  final List<String> _sizes = ['Small', 'Medium', 'Large'];
+  late String _selectedSize;
+  List<String> _sizes = [];
 
   // image + thumbnails state
-  String _mainImageUrl =
-      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282';
-  final List<String> _thumbnails = [
-    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet2_1024x1024@2x.jpg?v=1752230282',
-    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet3_1024x1024@2x.jpg?v=1752230282',
-    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-  ];
+  String _mainImageUrl = '';
+  List<String> _thumbnails = [];
   int _selectedThumbnail = 0;
 
   // Quantity state (default 1)
@@ -28,8 +25,27 @@ class _ProductPageState extends State<ProductPage> {
   final List<int> _quantities = [1, 2, 3, 4, 5];
 
   // Colour state
-  String _selectedColor = 'Black';
-  final List<String> _colors = ['Black', 'White', 'Grey'];
+  late String _selectedColor;
+  List<String> _colors = [];
+
+  @override
+  void initState() {
+    super.initState();
+    // initialize images/thumbnails from product (fallback to a single placeholder image)
+    _thumbnails = (widget.product.images ?? []).isNotEmpty
+        ? widget.product.images!
+        : [
+            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282'
+          ];
+    _mainImageUrl = _thumbnails[_selectedThumbnail];
+
+    // sizes & colors from product (fallbacks)
+    _sizes = (widget.product.sizes ?? []).isNotEmpty ? widget.product.sizes! : ['Medium'];
+    _selectedSize = _sizes.isNotEmpty ? _sizes[0] : 'Medium';
+
+    _colors = (widget.product.colors ?? []).isNotEmpty ? widget.product.colors! : ['Black'];
+    _selectedColor = _colors.isNotEmpty ? _colors[0] : 'Black';
+  }
 
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -137,9 +153,9 @@ class _ProductPageState extends State<ProductPage> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Placeholder Product Name',
-          style: TextStyle(
+        Text(
+          widget.product.title ?? 'Product',
+          style: const TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
             color: Colors.black,
@@ -148,21 +164,22 @@ class _ProductPageState extends State<ProductPage> {
         // increased gap for better separation from controls
         const SizedBox(height: 16),
         // old price + current price (same line)
-        const Row(
+        Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              '£20.00',
-              style: TextStyle(
-                fontSize: 18,
-                color: Colors.grey,
-                decoration: TextDecoration.lineThrough,
+            if (widget.product.oldPrice != null)
+              Text(
+                '£${widget.product.oldPrice}',
+                style: const TextStyle(
+                  fontSize: 18,
+                  color: Colors.grey,
+                  decoration: TextDecoration.lineThrough,
+                ),
               ),
-            ),
-            SizedBox(width: 12),
+            if (widget.product.oldPrice != null) const SizedBox(width: 12),
             Text(
-              '£15.00',
-              style: TextStyle(
+              '£${widget.product.price}',
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: Color(0xFF4d2963),
@@ -325,9 +342,9 @@ class _ProductPageState extends State<ProductPage> {
           ),
         ),
         const SizedBox(height: 8),
-        const Text(
-          'This is a placeholder description for the product. Students should replace this with real product information and implement proper data management.',
-          style: TextStyle(
+        Text(
+          widget.product.description ?? 'No description available.',
+          style: const TextStyle(
             fontSize: 16,
             color: Colors.grey,
             height: 1.5,
