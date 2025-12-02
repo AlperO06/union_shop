@@ -18,6 +18,8 @@ class Product {
     required this.newPrice,
     required this.description,
   });
+
+  get images => null;
 }
 
 const List<Product> products = [
