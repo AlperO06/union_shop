@@ -4,6 +4,8 @@ import 'about_page.dart';
 import 'collections_page.dart';
 import 'sale_page.dart';
 import 'widgets/union_page_scaffold.dart';
+import 'data/products.dart';
+
 
 void main() {
   runApp(const UnionShopApp());
@@ -226,11 +228,10 @@ class HomeScreen extends StatelessWidget {
                     LayoutBuilder(
                       builder: (context, constraints) {
                         final isWide = constraints.maxWidth > 600;
-                        // compute columns and a safer childAspectRatio
                         final crossAxisCount = isWide ? 2 : 1;
-                        // on mobile reduce tile height so image + title fit without overflow
                         final childAspectRatioGrid = isWide ? 1.1 : 0.8;
-                        // split into two groups
+
+                        // keep maps for simple inline data, but convert to Product when building cards
                         final essentialProducts = [
                           {
                             'title': 'Limited Edition Essential Zip Hoodies',
@@ -257,7 +258,6 @@ class HomeScreen extends StatelessWidget {
                           },
                         ];
 
-                        // Portsmouth City Collection products
                         final portsmouthProducts = [
                           {
                             'title': 'Portsmouth City Postcard',
@@ -312,11 +312,13 @@ class HomeScreen extends StatelessWidget {
                               itemCount: essentialProducts.length,
                               itemBuilder: (context, index) {
                                 final p = essentialProducts[index];
-                                return ProductCard(
+                                // convert map -> Product for ProductCard
+                                final product = Product(
                                   title: p['title']!,
                                   price: p['price']!,
                                   imageUrl: p['image']!,
                                 );
+                                return ProductCard(product: product);
                               },
                             ),
                             // spacing and subtle divider between sections
@@ -353,11 +355,12 @@ class HomeScreen extends StatelessWidget {
                               itemCount: signatureProducts.length,
                               itemBuilder: (context, index) {
                                 final p = signatureProducts[index];
-                                return ProductCard(
+                                final product = Product(
                                   title: p['title']!,
                                   price: p['price']!,
                                   imageUrl: p['image']!,
                                 );
+                                return ProductCard(product: product);
                               },
                             ),
                             const SizedBox(height: 20),
@@ -389,11 +392,12 @@ class HomeScreen extends StatelessWidget {
                               itemCount: portsmouthProducts.length,
                               itemBuilder: (context, index) {
                                 final p = portsmouthProducts[index];
-                                return ProductCard(
+                                final product = Product(
                                   title: p['title']!,
                                   price: p['price']!,
                                   imageUrl: p['image']!,
                                 );
+                                return ProductCard(product: product);
                               },
                             ),
                             const SizedBox(height: 32),
@@ -427,17 +431,13 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// ProductCard: make image responsive so mobile uses AspectRatio (no fixed height)
+// ProductCard: accept Product instead of separate fields
 class ProductCard extends StatefulWidget {
-  final String title;
-  final String price;
-  final String imageUrl;
+  final Product product;
 
   const ProductCard({
     super.key,
-    required this.title,
-    required this.price,
-    required this.imageUrl,
+    required this.product,
   });
 
   @override
@@ -463,21 +463,19 @@ class _ProductCardState extends State<ProductCard> {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            // REPLACED: responsive image area (AspectRatio on mobile, fixed height on desktop)
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: Builder(builder: (context) {
                 final screenW = MediaQuery.of(context).size.width;
                 final isMobile = screenW < 700;
                 if (isMobile) {
-                  // constrain mobile image to a square area (width determines height)
                   return AspectRatio(
                     aspectRatio: 1.0,
                     child: Container(
                       width: double.infinity,
                       color: Colors.grey[200],
                       child: Image.network(
-                        widget.imageUrl,
+                        widget.product.imageUrl,
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,
@@ -496,13 +494,12 @@ class _ProductCardState extends State<ProductCard> {
                   );
                 }
 
-                // Desktop: keep previous fixed-height image
                 return Container(
                   height: 353.32,
                   width: double.infinity,
                   color: Colors.grey[200],
                   child: Image.network(
-                    widget.imageUrl,
+                    widget.product.imageUrl,
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
                     errorBuilder: (context, error, stackTrace) {
@@ -523,7 +520,7 @@ class _ProductCardState extends State<ProductCard> {
               children: [
                 const SizedBox(height: 4),
                 Text(
-                  widget.title,
+                  widget.product.title,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.black,
@@ -534,12 +531,17 @@ class _ProductCardState extends State<ProductCard> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  widget.price,
+                  widget.product.price,
                   style: const TextStyle(fontSize: 13, color: Colors.grey),
                 ),
               ],
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
         ),
       ),
     );
