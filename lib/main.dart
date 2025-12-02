@@ -52,14 +52,17 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Footer link handler reused inside linkColumn below
-    // Make page scrollable on small screens to avoid vertical overflow.
     return UnionPageScaffold(
-      body: SingleChildScrollView(
-        child: Column(
+      body: LayoutBuilder(builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 700;
+        final heroHeight = isMobile ? 300.0 : 420.0;
+
+        // Build the main Column once and reuse for both mobile and desktop.
+        final mainColumn = Column(
           children: [
-            // Hero Section (updated)
+            // Hero Section (height switches based on isMobile)
             SizedBox(
-              height: 420,
+              height: heroHeight,
               width: double.infinity,
               child: Stack(
                 children: [
@@ -146,7 +149,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Promotions banner (responsive)
+            // Promotions banner (unchanged)
             Container(
               width: double.infinity,
               color: const Color(0xFFF6F0FB),
@@ -192,7 +195,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
 
-            // Featured Products Section (updated and responsive)
+            // Featured Products Section (unchanged)
             Container(
               color: Colors.white,
               child: Padding(
@@ -227,7 +230,7 @@ class HomeScreen extends StatelessWidget {
                             {
                               'title': 'Essential T-Shirt',
                               'price': '£15.00',
-                              'image': 'https://i.ebayimg.com/images/g/3H4AAOSwG6lmjUqu/s-l1200.jpg'
+                              'image': 'https://picsum.photos/id/1001/800/600'
                             },
                           ];
 
@@ -293,8 +296,7 @@ class HomeScreen extends StatelessWidget {
                                   crossAxisCount: isWide ? 2 : 1,
                                   crossAxisSpacing: 20,
                                   mainAxisSpacing: 20,
-                                  // use a slightly different aspect ratio on narrow screens to avoid overflow
-                                  childAspectRatio: isWide ? 1.1 : 0.85,
+                                  childAspectRatio: 1.1,
                                 ),
                                 itemCount: essentialProducts.length,
                                 itemBuilder: (context, index) {
@@ -334,7 +336,7 @@ class HomeScreen extends StatelessWidget {
                                   crossAxisCount: isWide ? 2 : 1,
                                   crossAxisSpacing: 20,
                                   mainAxisSpacing: 20,
-                                  childAspectRatio: isWide ? 1.1 : 0.85,
+                                  childAspectRatio: 1.1,
                                 ),
                                 itemCount: signatureProducts.length,
                                 itemBuilder: (context, index) {
@@ -369,7 +371,7 @@ class HomeScreen extends StatelessWidget {
                                   crossAxisCount: isWide ? 2 : 1,
                                   crossAxisSpacing: 20,
                                   mainAxisSpacing: 20,
-                                  childAspectRatio: isWide ? 1.1 : 0.85,
+                                  childAspectRatio: 1.1,
                                 ),
                                 itemCount: portsmouthProducts.length,
                                 itemBuilder: (context, index) {
@@ -392,13 +394,21 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ],
-        ),
-      ),
+        );
+
+        if (isMobile) {
+          // mobile: allow vertical scrolling to avoid RenderFlex overflow
+          return SingleChildScrollView(child: mainColumn);
+        }
+
+        // desktop: original behavior (no scrolling wrapper)
+        return mainColumn;
+      }),
     );
   }
 }
 
-// ProductCard (cleaned, kept single)
+// ProductCard: make image responsive so mobile uses AspectRatio (no fixed height)
 class ProductCard extends StatefulWidget {
   final String title;
   final String price;
@@ -429,20 +439,43 @@ class _ProductCardState extends State<ProductCard> {
       onExit: _onExit,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
-        onTap: () {
-          Navigator.pushNamed(context, '/product');
-        },
+        onTap: () => Navigator.pushNamed(context, '/product'),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // fixed-height image area so all product images share the same height,
-            // center-cropped using BoxFit.cover to preserve aspect ratio
+            // REPLACED: responsive image area (AspectRatio on mobile, fixed height on desktop)
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: AspectRatio(
-                // aspect ratio controls height relative to width; keeps images scalable
-                aspectRatio: 1.2,
-                child: Container(
+              child: Builder(builder: (context) {
+                final screenW = MediaQuery.of(context).size.width;
+                final isMobile = screenW < 700;
+                if (isMobile) {
+                  return AspectRatio(
+                    aspectRatio: 1.0,
+                    child: Container(
+                      width: double.infinity,
+                      color: Colors.grey[200],
+                      child: Image.network(
+                        widget.imageUrl,
+                        fit: BoxFit.cover,
+                        alignment: Alignment.center,
+                        errorBuilder: (context, error, stackTrace) {
+                          return Container(
+                            color: Colors.grey[300],
+                            child: const Center(
+                              child: Icon(Icons.image_not_supported,
+                                  color: Colors.grey),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  );
+                }
+
+                // Desktop: keep previous fixed-height image
+                return Container(
+                  height: 353.32,
                   width: double.infinity,
                   color: Colors.grey[200],
                   child: Image.network(
@@ -453,13 +486,14 @@ class _ProductCardState extends State<ProductCard> {
                       return Container(
                         color: Colors.grey[300],
                         child: const Center(
-                          child: Icon(Icons.image_not_supported, color: Colors.grey),
+                          child: Icon(Icons.image_not_supported,
+                              color: Colors.grey),
                         ),
                       );
                     },
                   ),
-                ),
-              ),
+                );
+              }),
             ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
