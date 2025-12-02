@@ -41,5 +41,4 @@ void navigateToAbout(BuildContext context) {
 void navigateToHome(BuildContext context) {
   Navigator.popUntil(context, (route) => route.isFirst);
 }
-  Navigator.popUntil(context, (route) => route.isFirst);
-}
+
