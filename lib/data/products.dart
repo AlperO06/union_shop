@@ -60,6 +60,3 @@ const List<Product> products = [
     description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
   ),
 ];
-    description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
-  ),
-];
