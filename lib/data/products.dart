@@ -65,4 +65,37 @@ const List<Product> products = [
     image: 'https://picsum.photos/id/1035/800/600',
     description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
   ),
+  // appended Portsmouth items
+  Product(
+    id: 5,
+    name: 'Portsmouth City Postcard',
+    oldPrice: 2.00,
+    newPrice: 1.00,
+    image: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_720x.jpg',
+    description: 'A postcard featuring iconic Portsmouth landmarks.',
+  ),
+  Product(
+    id: 6,
+    name: 'Portsmouth City Magnet',
+    oldPrice: 7.00,
+    newPrice: 5.00,
+    image: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_720x.jpg',
+    description: 'A collectible magnet showcasing Portsmouth.',
+  ),
+  Product(
+    id: 7,
+    name: 'Portsmouth City Bookmark',
+    oldPrice: 3.00,
+    newPrice: 2.00,
+    image: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_720x.jpg',
+    description: 'A decorative Portsmouth bookmark.',
+  ),
+  Product(
+    id: 8,
+    name: 'Portsmouth Notebook',
+    oldPrice: 6.00,
+    newPrice: 4.50,
+    image: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_720x.jpg',
+    description: 'A Portsmouth themed notebook for notes and sketches.',
+  ),
 ];
