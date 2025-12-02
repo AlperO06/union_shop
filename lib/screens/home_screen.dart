@@ -273,9 +273,11 @@ class HomeScreen extends StatelessWidget {
                               itemCount: essentialProducts.length,
                               itemBuilder: (context, index) {
                                 final p = essentialProducts[index];
-                                return ProductCard(
-                                  product: throw UnimplementedError('Create Product from map `p` here'),
+                                final product = products.firstWhere(
+                                  (prod) => prod.name == p['title'],
                                 );
+
+                                return ProductCard(product: product);
                               },
                             ),
                             // spacing and subtle divider between sections
@@ -312,9 +314,11 @@ class HomeScreen extends StatelessWidget {
                               itemCount: signatureProducts.length,
                               itemBuilder: (context, index) {
                                 final p = signatureProducts[index];
-                                return ProductCard(
-                                  product: throw UnimplementedError('Create Product from map `p` here'),
+                                final product = products.firstWhere(
+                                  (prod) => prod.name == p['title'],
                                 );
+
+                                return ProductCard(product: product);
                               },
                             ),
                             const SizedBox(height: 20),
@@ -346,9 +350,11 @@ class HomeScreen extends StatelessWidget {
                               itemCount: portsmouthProducts.length,
                               itemBuilder: (context, index) {
                                 final p = portsmouthProducts[index];
-                                return ProductCard(
-                                  product: throw UnimplementedError('Create Product from map `p` here'),
+                                final product = products.firstWhere(
+                                  (prod) => prod.name == p['title'],
                                 );
+
+                                return ProductCard(product: product);
                               },
                             ),
                             const SizedBox(height: 32),
@@ -449,16 +455,4 @@ class ProductCard extends StatelessWidget {
     );
   }
 }
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-}
+
