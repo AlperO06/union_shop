@@ -4,7 +4,6 @@ import 'about_page.dart';
 import 'collections_page.dart';
 import 'sale_page.dart';
 import 'widgets/union_page_scaffold.dart';
-import 'data/products.dart';
 
 
 void main() {

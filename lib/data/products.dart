@@ -21,7 +21,7 @@ class Product {
 }
 
 const List<Product> products = [
-  const Product(
+  Product(
     id: 1,
     name: 'Limited Edition Essential Zip Hoodie',
     oldPrice: 79.99,
@@ -30,7 +30,7 @@ const List<Product> products = [
     description:
         'A premium limited edition zip hoodie with soft brushed interior, metal zipper, and a tailored fit.',
   ),
-  const Product(
+  Product(
     id: 2,
     name: 'Essential T-Shirt',
     oldPrice: 29.99,
@@ -38,7 +38,7 @@ const List<Product> products = [
     image: 'assets/images/essential_tshirt.png',
     description: 'A soft, breathable cotton tee with a classic fit—perfect for everyday wear.',
   ),
-  const Product(
+  Product(
     id: 3,
     name: 'Signature Hoodie',
     oldPrice: 89.99,
@@ -47,7 +47,7 @@ const List<Product> products = [
     description:
         'Premium heavyweight fleece hoodie featuring embroidered logo and reinforced seams for lasting comfort.',
   ),
-  const Product(
+  Product(
     id: 4,
     name: 'Signature T-Shirt',
     oldPrice: 34.99,

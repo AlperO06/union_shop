@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'widgets/union_page_scaffold.dart'; // use scaffold that provides header/footer
 
 class ProductPage extends StatefulWidget {
