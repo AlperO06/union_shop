@@ -55,6 +55,33 @@ class _ProductPageState extends State<ProductPage> {
     // This is the event handler for buttons that don't work yet
   }
 
+  // add helper to choose between network and asset images
+  Widget _buildResponsiveImage(
+    String src, {
+    double? width,
+    double? height,
+    BoxFit fit = BoxFit.cover,
+  }) {
+    if (src.startsWith('http')) {
+      return Image.network(
+        src,
+        width: width,
+        height: height,
+        fit: fit,
+        errorBuilder: (context, error, stackTrace) =>
+            Container(color: Colors.grey[300]),
+      );
+    }
+    return Image.asset(
+      src,
+      width: width,
+      height: height,
+      fit: fit,
+      errorBuilder: (context, error, stackTrace) =>
+          Container(color: Colors.grey[300]),
+    );
+  }
+
   // Reusable main image widget so it can be placed in wide/narrow layouts
   Widget _buildMainImage() {
     // Use AspectRatio (4/3) so the image scales responsively and fills the left column.
@@ -73,31 +100,9 @@ class _ProductPageState extends State<ProductPage> {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.network(
+              child: _buildResponsiveImage(
                 _mainImageUrl,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
-                  return Container(
-                    color: Colors.grey[300],
-                    child: const Center(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.image_not_supported,
-                            size: 64,
-                            color: Colors.grey,
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            'Image unavailable',
-                            style: TextStyle(color: Colors.grey),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                },
               ),
             ),
           ),
@@ -131,12 +136,11 @@ class _ProductPageState extends State<ProductPage> {
                   ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(4),
-                    child: Image.network(
+                    child: _buildResponsiveImage(
                       thumb,
                       width: 64,
                       height: 64,
                       fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(color: Colors.grey[300]),
                     ),
                   ),
                 ),
