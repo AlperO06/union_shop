@@ -408,7 +408,7 @@ class ProductCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       child: InkWell(
         onTap: () {
-          // placeholder for product tap — behavior retained from main.dart
+          Navigator.pushNamed(context, '/product');
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
