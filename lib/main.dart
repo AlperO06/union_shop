@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'screens/home_screen.dart';
-import 'product_page.dart';
 import 'about_page.dart';
 import 'collections_page.dart';
 import 'sale_page.dart';
@@ -23,7 +22,6 @@ class UnionShopApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
-        '/product': (context) => const ProductPage(),
         '/about': (context) => const AboutPage(),
         '/collections': (context) => const CollectionsPage(),
         '/sale': (context) => const SalePage(),
@@ -41,5 +39,7 @@ void navigateToAbout(BuildContext context) {
 }
 
 void navigateToHome(BuildContext context) {
+  Navigator.popUntil(context, (route) => route.isFirst);
+}
   Navigator.popUntil(context, (route) => route.isFirst);
 }
