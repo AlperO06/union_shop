@@ -30,7 +30,7 @@ const List<Product> products = [
     name: 'Limited Edition Essential Zip Hoodie',
     oldPrice: 79.99,
     newPrice: 59.99,
-    image: 'assets/images/limited_hoodie.png',
+    image: 'https://picsum.photos/id/1011/800/600',
     description:
         'A premium limited edition zip hoodie with soft brushed interior, metal zipper, and a tailored fit.',
     images: [
@@ -45,7 +45,7 @@ const List<Product> products = [
     name: 'Essential T-Shirt',
     oldPrice: 29.99,
     newPrice: 24.99,
-    image: 'assets/images/essential_tshirt.png',
+    image: 'https://picsum.photos/id/1015/800/600',
     description: 'A soft, breathable cotton tee with a classic fit—perfect for everyday wear.',
   ),
   Product(
@@ -53,7 +53,7 @@ const List<Product> products = [
     name: 'Signature Hoodie',
     oldPrice: 89.99,
     newPrice: 69.99,
-    image: 'assets/images/signature_hoodie.png',
+    image: 'https://picsum.photos/id/1025/800/600',
     description:
         'Premium heavyweight fleece hoodie featuring embroidered logo and reinforced seams for lasting comfort.',
   ),
@@ -62,7 +62,7 @@ const List<Product> products = [
     name: 'Signature T-Shirt',
     oldPrice: 34.99,
     newPrice: 29.99,
-    image: 'assets/images/signature_tshirt.png',
+    image: 'https://picsum.photos/id/1035/800/600',
     description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
   ),
 ];
