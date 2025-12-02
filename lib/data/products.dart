@@ -1,4 +1,3 @@
-// Auto-generated products list
 
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
@@ -20,6 +19,10 @@ class Product {
   });
 
   get images => null;
+
+  get sizes => null;
+
+  get colors => null;
 }
 
 const List<Product> products = [

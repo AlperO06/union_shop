@@ -32,7 +32,7 @@ class _ProductPageState extends State<ProductPage> {
   void initState() {
     super.initState();
     // initialize images/thumbnails from product (fallback to a single placeholder image)
-    _thumbnails = (widget.product.image).isNotEmpty
+    _thumbnails = (widget.product.images ?? []).isNotEmpty
         ? widget.product.images!
         : [
             'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282'
