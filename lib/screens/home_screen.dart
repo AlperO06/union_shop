@@ -414,7 +414,7 @@ class ProductCard extends StatelessWidget {
             AspectRatio(
               aspectRatio: 4 / 3,
               child: Image.network(
-                product.imageUrl,
+                product.image, // changed from product.imageUrl
                 fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => Container(
                   color: Colors.grey[200],
@@ -429,7 +429,7 @@ class ProductCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    product.title,
+                    product.name, // changed from product.title
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
@@ -439,7 +439,7 @@ class ProductCard extends StatelessWidget {
                   ),
                   const SizedBox(height: 6),
                   Text(
-                    product.price,
+                    '£${product.newPrice}', // changed from product.price
                     style: const TextStyle(
                       fontSize: 13,
                       color: Colors.black87,
