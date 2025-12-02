@@ -312,11 +312,11 @@ class HomeScreen extends StatelessWidget {
                               itemCount: essentialProducts.length,
                               itemBuilder: (context, index) {
                                 final p = essentialProducts[index];
-                                // convert map -> Product for ProductCard
+                                // convert map -> Product for ProductCard (use new field names)
                                 final product = Product(
-                                  title: p['title']!,
-                                  price: p['price']!,
-                                  imageUrl: p['image']!,
+                                  name: p['title']!,
+                                  newPrice: p['price']!,
+                                  image: p['image']!,
                                 );
                                 return ProductCard(product: product);
                               },
@@ -356,9 +356,9 @@ class HomeScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final p = signatureProducts[index];
                                 final product = Product(
-                                  title: p['title']!,
-                                  price: p['price']!,
-                                  imageUrl: p['image']!,
+                                  name: p['title']!,
+                                  newPrice: p['price']!,
+                                  image: p['image']!,
                                 );
                                 return ProductCard(product: product);
                               },
@@ -393,9 +393,9 @@ class HomeScreen extends StatelessWidget {
                               itemBuilder: (context, index) {
                                 final p = portsmouthProducts[index];
                                 final product = Product(
-                                  title: p['title']!,
-                                  price: p['price']!,
-                                  imageUrl: p['image']!,
+                                  name: p['title']!,
+                                  newPrice: p['price']!,
+                                  image: p['image']!,
                                 );
                                 return ProductCard(product: product);
                               },
@@ -431,7 +431,7 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-// ProductCard: accept Product instead of separate fields
+// ProductCard: accept Product and use product.name / product.image / product.newPrice
 class ProductCard extends StatefulWidget {
   final Product product;
 
@@ -475,7 +475,7 @@ class _ProductCardState extends State<ProductCard> {
                       width: double.infinity,
                       color: Colors.grey[200],
                       child: Image.network(
-                        widget.product.imageUrl,
+                        widget.product.image,
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,
@@ -499,7 +499,7 @@ class _ProductCardState extends State<ProductCard> {
                   width: double.infinity,
                   color: Colors.grey[200],
                   child: Image.network(
-                    widget.product.imageUrl,
+                    widget.product.image,
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
                     errorBuilder: (context, error, stackTrace) {
@@ -520,7 +520,7 @@ class _ProductCardState extends State<ProductCard> {
               children: [
                 const SizedBox(height: 4),
                 Text(
-                  widget.product.title,
+                  widget.product.name,
                   style: TextStyle(
                     fontSize: 14,
                     color: Colors.black,
@@ -531,7 +531,7 @@ class _ProductCardState extends State<ProductCard> {
                 ),
                 const SizedBox(height: 4),
                 Text(
-                  widget.product.price,
+                  widget.product.newPrice,
                   style: const TextStyle(fontSize: 13, color: Colors.grey),
                 ),
               ],
