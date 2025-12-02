@@ -23,6 +23,8 @@ class Product {
   get sizes => null;
 
   get colors => null;
+
+  get price => null;
 }
 
 const List<Product> products = [

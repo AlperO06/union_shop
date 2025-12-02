@@ -154,7 +154,7 @@ class _ProductPageState extends State<ProductPage> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          widget.product.title ?? 'Product',
+          widget.product.name,
           style: const TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
@@ -167,16 +167,15 @@ class _ProductPageState extends State<ProductPage> {
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            if (widget.product.oldPrice != null)
-              Text(
-                '£${widget.product.oldPrice}',
-                style: const TextStyle(
-                  fontSize: 18,
-                  color: Colors.grey,
-                  decoration: TextDecoration.lineThrough,
-                ),
+            Text(
+              '£${widget.product.oldPrice}',
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.grey,
+                decoration: TextDecoration.lineThrough,
               ),
-            if (widget.product.oldPrice != null) const SizedBox(width: 12),
+            ),
+            const SizedBox(width: 12),
             Text(
               '£${widget.product.price}',
               style: const TextStyle(
@@ -343,7 +342,7 @@ class _ProductPageState extends State<ProductPage> {
         ),
         const SizedBox(height: 8),
         Text(
-          widget.product.description ?? 'No description available.',
+          widget.product.description,
           style: const TextStyle(
             fontSize: 16,
             color: Colors.grey,
