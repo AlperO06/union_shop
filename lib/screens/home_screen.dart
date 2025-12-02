@@ -194,7 +194,7 @@ class HomeScreen extends StatelessWidget {
                         // split into two groups
                         final essentialProducts = [
                           {
-                            'title': 'Limited Edition Essential Zip Hoodies',
+                            'title': 'Limited Edition Essential Zip Hoodie',
                             'price': '£14.99',
                             'image': 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAVv3UIwHiQv6gWuE2l9800PQbPjISoUfKJA&s'
                           },
