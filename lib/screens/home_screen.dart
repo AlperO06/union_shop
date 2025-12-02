@@ -405,7 +405,12 @@ class ProductCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
       child: InkWell(
         onTap: () {
-          Navigator.pushNamed(context, '/product');
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (_) => ProductPage(product: product),
+            ),
+          );
         },
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
