@@ -174,13 +174,17 @@ class _CartPageState extends State<CartPage> {
                                       ),
                                     ],
                                   ),
+                                  const SizedBox(height: 8),
+                                  // Move price below the name/controls so it doesn't overflow on small screens
+                                  Align(
+                                    alignment: Alignment.centerRight,
+                                    child: Text(
+                                      '£${(item.price * item.quantity).toStringAsFixed(2)}',
+                                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                                    ),
+                                  ),
                                 ],
                               ),
-                            ),
-                            const SizedBox(width: 12),
-                            Text(
-                              '£${(item.price * item.quantity).toStringAsFixed(2)}',
-                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                             ),
                           ],
                         ),
