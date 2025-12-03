@@ -16,3 +16,9 @@ class CartItem {
     this.quantity = 1,
     this.image = '',
   });
+
+  @override
+  String toString() {
+    return 'CartItem(id: $id, name: $name, size: $size, colour: $colour, qty: $quantity)';
+  }
+}
