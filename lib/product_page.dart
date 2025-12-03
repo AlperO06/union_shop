@@ -322,7 +322,29 @@ class _ProductPageState extends State<ProductPage> {
           width: double.infinity,
           height: 48,
           child: ElevatedButton(
-            onPressed: placeholderCallbackForButtons,
+            onPressed: () {
+              final image = _mainImageUrl.isNotEmpty
+                  ? _mainImageUrl
+                  : (widget.product.images != null && widget.product.images!.isNotEmpty
+                      ? widget.product.images!.first
+                      : '');
+
+              final item = CartItem(
+                id: widget.product.id,
+                name: widget.product.name,
+                price: widget.product.newPrice,
+                size: _selectedSize,
+                colour: _selectedColor,
+                quantity: _selectedQuantity,
+                image: image,
+              );
+
+              addToCart(item);
+
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text('${item.name} added to cart')),
+              );
+            },
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF4d2963),
               foregroundColor: Colors.white,
