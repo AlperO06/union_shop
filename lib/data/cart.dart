@@ -6,13 +6,22 @@ class CartItem {
   final String name;
   int quantity;
 
-  CartItem({required this.id, required this.name, this.quantity = 1, required double price, required String size, required String colour, required String image});
+  // Added proper final fields for price, size, colour and image
+  final double price;
+  final String size;
+  final String colour;
+  final String image;
 
-  get price => null;
-
-  get size => null;
-
-  String? get image => null;
+  // Updated constructor to initialize the new final fields
+  CartItem({
+    required this.id,
+    required this.name,
+    this.quantity = 1,
+    required this.price,
+    required this.size,
+    required this.colour,
+    required this.image,
+  });
 }
 
 // Reactive list of cart items: listen to this to update UI immediately
@@ -24,7 +33,14 @@ List<CartItem> get cartItems => cartItemsNotifier.value;
 // Helpers to modify the cart - these update the notifier's value so listeners rebuild
 void addToCart(CartItem item) {
   final updated = List<CartItem>.from(cartItemsNotifier.value);
-  updated.add(item);
+  // Find existing item with same id, size and colour and merge quantities
+  final index = updated.indexWhere((i) =>
+      i.id == item.id && i.size == item.size && i.colour == item.colour);
+  if (index >= 0) {
+    updated[index].quantity += item.quantity;
+  } else {
+    updated.add(item);
+  }
   cartItemsNotifier.value = updated;
 }
 
