@@ -54,13 +54,13 @@ class UnionHeader extends StatelessWidget {
           constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
           onPressed: () => Navigator.pushNamed(context, '/cart'),
         ),
-        if (cartItemCount > 0)
-          // position badge slightly outside the top-right of the icon
+        // show badge only when there are items in the cart
+        if (cartItems.isNotEmpty)
           Positioned(
             right: -6,
             top: -6,
             child: Semantics(
-              label: 'Cart, $cartItemCount items',
+              label: 'Cart, ${cartItems.length} items',
               child: Container(
                 padding: const EdgeInsets.all(2),
                 decoration: const BoxDecoration(
@@ -70,7 +70,7 @@ class UnionHeader extends StatelessWidget {
                 constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
                 child: Center(
                   child: Text(
-                    cartItemCount > 9 ? '9+' : '$cartItemCount',
+                    cartItems.length > 9 ? '9+' : '${cartItems.length}',
                     style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
                     textAlign: TextAlign.center,
                   ),
