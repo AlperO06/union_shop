@@ -171,10 +171,14 @@ void addToCart(CartItem item) {
 }
 
 void removeFromCart(String id) {
-  // produce a new List (no in-place mutation)
+
   final updated = cartItemsNotifier.value.where((i) => i.id != id).toList();
-  cartItemsNotifier.value = updated;
-  // persist immediately
+
+  cartItemsNotifier.value = List<CartItem>.from(updated);
+
+  cartItemsNotifier.notifyListeners();
+
+
   _saveCartToPrefs();
 }
 
