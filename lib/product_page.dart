@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'widgets/union_page_scaffold.dart'; // use scaffold that provides header/footer
 import 'data/products.dart'; // added import for Product model
+import 'data/cart.dart';
 
 class ProductPage extends StatefulWidget {
   final Product product; // added product property
