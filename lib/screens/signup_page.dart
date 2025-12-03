@@ -30,3 +30,11 @@ class _SignupPageState extends State<SignupPage> {
     if (!_formKey.currentState!.validate()) return;
     setState(() => _loading = true);
 
+    // Placeholder for sign up logic
+    Future.delayed(const Duration(seconds: 1), () {
+      setState(() => _loading = false);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Sign up pressed (placeholder)')),
+      );
+    });
+  }
