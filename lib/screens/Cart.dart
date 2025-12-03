@@ -133,10 +133,12 @@ class _CartPageState extends State<CartPage> {
                                   ),
                                   const SizedBox(height: 6),
                                   // Replace static size/qty text with interactive controls
-                                  Row(
+                                  Wrap(
+                                    spacing: 12,
+                                    runSpacing: 8,
+                                    crossAxisAlignment: WrapCrossAlignment.center,
                                     children: [
                                       Text('Size: ${item.size}', style: TextStyle(color: Colors.grey[700])),
-                                      const SizedBox(width: 12),
                                       // quantity controls
                                       Container(
                                         decoration: BoxDecoration(
@@ -165,7 +167,6 @@ class _CartPageState extends State<CartPage> {
                                           ],
                                         ),
                                       ),
-                                      const SizedBox(width: 8),
                                       // remove button
                                       IconButton(
                                         icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
