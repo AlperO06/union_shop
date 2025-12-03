@@ -94,3 +94,15 @@ class CartPage extends StatelessWidget {
                   );
                 }).toList(),
               ),
+
+              const SizedBox(height: 20),
+
+              // Summary box
+              Card(
+                elevation: 2,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 18.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
