@@ -30,24 +30,7 @@ class CartPage extends StatelessWidget {
 
               // When cart is empty show a centered message; otherwise show items + summary
               if (items.isEmpty) ...[
-                Expanded(
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          'Your cart is empty',
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.grey[900]),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          'Start shopping to add items',
-                          style: TextStyle(fontSize: 14, color: Colors.grey[600]),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+
               ] else ...[
                 Column(
                   children: items.map((item) {
