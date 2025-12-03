@@ -132,3 +132,13 @@ class _SignupPageState extends State<SignupPage> {
                           return null;
                         },
                       ),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                        controller: _confirmCtrl,
+                        obscureText: _obscurePassword,
+                        textInputAction: TextInputAction.done,
+                        decoration: InputDecoration(
+                          labelText: 'Confirm password',
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                        ),
