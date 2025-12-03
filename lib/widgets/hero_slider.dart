@@ -183,3 +183,27 @@ class _HeroSliderState extends State<HeroSlider> {
                                 ),
                                 child: Text(slide.primaryLabel),
                               ),
+                              if (slide.secondaryLabel != null && slide.onSecondary != null) ...[
+                                const SizedBox(width: 8),
+                                OutlinedButton(
+                                  onPressed: slide.onSecondary,
+                                  style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(color: Colors.white70),
+                                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                  ),
+                                  child: Text(
+                                    slide.secondaryLabel!,
+                                    style: const TextStyle(color: Colors.white70),
+                                  ),
+                                ),
+                              ],
+                            ],
+                          )
+                        ],
+                      ),
+                    ),
+                  ],
+                );
+              },
+            ),
