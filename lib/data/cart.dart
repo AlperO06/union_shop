@@ -43,3 +43,7 @@ void addToCart(CartItem item) {
     ));
   }
 }
+
+void removeFromCart(CartItem item) {
+  cartItems.remove(item);
+}
