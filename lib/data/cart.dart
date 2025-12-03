@@ -128,13 +128,6 @@ void _attachPersistenceListener() {
 
 bool _persistenceListenerAttached = false;
 
-void _startCartPersistence() {
-  _attachPersistenceListener();
-  loadCartFromPrefs();
-}
-
-_startCartPersistence();
-
 void addToCart(CartItem item) {
   final updated = List<CartItem>.from(cartItemsNotifier.value);
   final index = updated.indexWhere((i) =>
