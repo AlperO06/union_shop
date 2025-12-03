@@ -136,6 +136,11 @@ Future<void> loadCartFromPrefs() async {
     }
   } catch (_) {
     // ignore parse errors
+  } finally {
+    // Ensure persistence listener is attached after attempting to load the cart.
+    // This guarantees subsequent cart mutations are saved even if the caller
+    // only invoked loadCartFromPrefs() (e.g. from main.dart).
+    _attachPersistenceListener();
   }
 }
 
