@@ -106,3 +106,25 @@ class CartPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      Row(
+                        children: [
+                          const Text(
+                            'Subtotal',
+                            style: TextStyle(fontSize: 16, color: Colors.black87),
+                          ),
+                          const Spacer(),
+                          Text(
+                            '£${subtotal.toStringAsFixed(2)}',
+                            style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      SizedBox(
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Checkout pressed (UI demo only)')),
+                            );
+                          },
