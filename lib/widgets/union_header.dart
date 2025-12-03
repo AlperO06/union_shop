@@ -49,35 +49,46 @@ class UnionHeader extends StatelessWidget {
     return ValueListenableBuilder<List<CartItem>>(
       valueListenable: cartItemsNotifier,
       builder: (context, items, _) {
-        // changed: sum quantities instead of counting distinct items
-        final count = items.fold<int>(0, (sum, item) => sum + (item.quantity));
+        // sum quantities
+        final totalQuantity = items.fold<int>(0, (sum, item) => sum + item.quantity);
+        // only show badge when the underlying list has entries
+        final showBadge = items.isNotEmpty;
+
         return Stack(
           clipBehavior: Clip.none,
           children: [
+            // larger touch target for mobile friendliness
             IconButton(
-              icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-              padding: const EdgeInsets.all(8),
-              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+              icon: const Icon(Icons.shopping_bag_outlined, size: 20, color: Colors.grey),
+              padding: const EdgeInsets.all(12),
+              constraints: const BoxConstraints(minWidth: 44, minHeight: 44),
               onPressed: () => Navigator.pushNamed(context, '/cart'),
+              tooltip: 'Open cart',
             ),
-            // show badge only when the cart list has entries (even if quantities sum = 0)
-            if (items.isNotEmpty)
+
+            // show badge only when there are items in the cart (list not empty)
+            if (showBadge)
               Positioned(
-                right: -6,
-                top: -6,
+                // slightly closer on small screens and larger so it's tappable/readable
+                right: -4,
+                top: -4,
                 child: Semantics(
-                  label: 'Cart, $count items',
+                  label: 'Cart, $totalQuantity items',
                   child: Container(
-                    padding: const EdgeInsets.all(2),
-                    decoration: const BoxDecoration(
+                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    decoration: BoxDecoration(
                       color: Colors.redAccent,
-                      shape: BoxShape.circle,
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(color: Colors.black.withOpacity(0.12), blurRadius: 2, offset: const Offset(0, 1))
+                      ],
                     ),
-                    constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                    constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
                     child: Center(
                       child: Text(
-                        count > 9 ? '9+' : '$count',
-                        style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                        // cap display for large numbers
+                        totalQuantity > 99 ? '99+' : (totalQuantity > 9 ? '9+' : '$totalQuantity'),
+                        style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
                     ),
