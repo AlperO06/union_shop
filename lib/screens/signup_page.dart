@@ -95,3 +95,20 @@ class _SignupPageState extends State<SignupPage> {
                           return null;
                         },
                       ),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                        controller: _emailCtrl,
+                        keyboardType: TextInputType.emailAddress,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          hintText: 'you@example.com',
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                        ),
+                        validator: (v) {
+                          if (v == null || v.trim().isEmpty) return 'Please enter your email';
+                          if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v.trim())) return 'Enter a valid email';
+                          return null;
+                        },
+                      ),
