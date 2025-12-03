@@ -455,13 +455,29 @@ class ProductCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 6),
-                  Text(
-                    '£${product.newPrice}', // changed from product.price
-                    style: const TextStyle(
-                      fontSize: 13,
-                      color: Colors.black87,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  Row(
+                    children: [
+                      // OLD PRICE (strike-through)
+                      Text(
+                        '£${product.oldPrice}',
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.grey,
+                          decoration: TextDecoration.lineThrough,
+                        ),
+                      ),
+                      const SizedBox(width: 6),
+
+                      // NEW PRICE (highlighted)
+                      Text(
+                        '£${product.newPrice}',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Color(0xFF4d2963),
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
