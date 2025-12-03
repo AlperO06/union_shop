@@ -110,11 +110,11 @@ class _CartPageState extends State<CartPage> {
                                 color: Colors.grey[200],
                                 borderRadius: BorderRadius.circular(6),
                               ),
-                              child: (item.image ?? '').isNotEmpty
+                              child: (item.image).isNotEmpty
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(6),
                                       child: Image.network(
-                                        item.image ?? '',
+                                        item.image,
                                         width: 84,
                                         height: 64,
                                         fit: BoxFit.cover,
