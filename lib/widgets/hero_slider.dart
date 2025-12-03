@@ -164,4 +164,22 @@ class _HeroSliderState extends State<HeroSlider> {
                               shadows: [Shadow(blurRadius: 4, color: Colors.black45, offset: Offset(0, 1))],
                             ),
                           ),
-                         
+                          if (slide.subtitle != null) ...[
+                            const SizedBox(height: 6),
+                            Text(
+                              slide.subtitle!,
+                              style: const TextStyle(color: Colors.white70, fontSize: 14),
+                            ),
+                          ],
+                          const SizedBox(height: 12),
+                          Row(
+                            children: [
+                              ElevatedButton(
+                                onPressed: slide.onPrimary,
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color(0xFF4d2963),
+                                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                                ),
+                                child: Text(slide.primaryLabel),
+                              ),
