@@ -123,9 +123,15 @@ class _CartPageState extends State<CartPage> {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    item.name,
-                                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                  // Wrap product name in Expanded so it wraps instead of overflowing
+                                  Expanded(
+                                    child: Text(
+                                      item.name,
+                                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                      softWrap: true,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                   const SizedBox(height: 6),
                                   // Replace static size/qty text with interactive controls
