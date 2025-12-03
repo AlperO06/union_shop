@@ -88,3 +88,19 @@ class _HeroSliderState extends State<HeroSlider> {
         ),
       );
     }
+
+    return SizedBox(
+      height: widget.height,
+      child: GestureDetector(
+        onPanDown: (_) {
+          _userInteracting = true;
+          _stopAutoPlay();
+        },
+        onPanCancel: () {
+          _userInteracting = false;
+          if (widget.autoPlay && widget.slides.length > 1) _startAutoPlay();
+        },
+        onPanEnd: (_) {
+          _userInteracting = false;
+          if (widget.autoPlay && widget.slides.length > 1) _startAutoPlay();
+        },
