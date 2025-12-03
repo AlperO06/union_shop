@@ -43,6 +43,44 @@ void navigateToHome(BuildContext context) {
 class UnionHeader extends StatelessWidget {
   const UnionHeader({super.key, required Future<Object?> Function() onProfilePressed, required Future<Object?> Function() onCartPressed});
 
+  // builds the cart icon with a red circular badge showing the item count
+  Widget _buildCartButton(BuildContext context) {
+    return Stack(
+      clipBehavior: Clip.none,
+      children: [
+        IconButton(
+          icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+          padding: const EdgeInsets.all(8),
+          constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+          onPressed: () => Navigator.pushNamed(context, '/cart'),
+        ),
+        if (cartItemCount > 0)
+          Positioned(
+            right: 2,
+            top: 2,
+            child: Semantics(
+              label: 'Cart, $cartItemCount items',
+              child: Container(
+                padding: const EdgeInsets.all(2),
+                decoration: const BoxDecoration(
+                  color: Colors.redAccent,
+                  shape: BoxShape.circle,
+                ),
+                constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                child: Center(
+                  child: Text(
+                    cartItemCount > 9 ? '9+' : '$cartItemCount',
+                    style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ),
+          ),
+      ],
+    );
+  }
+
   // Updated: popup trigger now uses the same padding & text style as the other nav buttons
   Widget buildShopButton(BuildContext context, bool isWideScreen) {
     if (isWideScreen) {
@@ -208,38 +246,7 @@ class UnionHeader extends StatelessWidget {
                                 constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                                 onPressed: () => Navigator.pushNamed(context, '/login'),
                               ),
-                              // Cart icon with badge
-                              Stack(
-                                clipBehavior: Clip.none,
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-                                    padding: const EdgeInsets.all(8),
-                                    constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                                    onPressed: () => Navigator.pushNamed(context, '/cart'),
-                                  ),
-                                  if (cartItemCount > 0)
-                                    Positioned(
-                                      right: 2,
-                                      top: 2,
-                                      child: Container(
-                                        padding: const EdgeInsets.all(2),
-                                        decoration: const BoxDecoration(
-                                          color: Colors.redAccent,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
-                                        child: Center(
-                                          child: Text(
-                                            cartItemCount > 9 ? '9+' : '$cartItemCount',
-                                            style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              ),
+                              _buildCartButton(context),
                               const IconButton(
                                 icon: Icon(Icons.menu, size: 18, color: Colors.grey),
                                 padding: EdgeInsets.all(8),
@@ -248,38 +255,7 @@ class UnionHeader extends StatelessWidget {
                               ),
                             ]
                           : [
-                              // Cart icon with badge (narrow)
-                              Stack(
-                                clipBehavior: Clip.none,
-                                children: [
-                                  IconButton(
-                                    icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-                                    padding: const EdgeInsets.all(8),
-                                    constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                                    onPressed: () => Navigator.pushNamed(context, '/cart'),
-                                  ),
-                                  if (cartItemCount > 0)
-                                    Positioned(
-                                      right: 2,
-                                      top: 2,
-                                      child: Container(
-                                        padding: const EdgeInsets.all(2),
-                                        decoration: const BoxDecoration(
-                                          color: Colors.redAccent,
-                                          shape: BoxShape.circle,
-                                        ),
-                                        constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
-                                        child: Center(
-                                          child: Text(
-                                            cartItemCount > 9 ? '9+' : '$cartItemCount',
-                                            style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
-                                            textAlign: TextAlign.center,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                ],
-                              ),
+                              _buildCartButton(context),
                               const IconButton(
                                 icon: Icon(Icons.menu, size: 18, color: Colors.grey),
                                 padding: EdgeInsets.all(8),
