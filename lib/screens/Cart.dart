@@ -32,3 +32,16 @@ class CartPage extends StatelessWidget {
       (prev, item) => prev + (item['price'] as double) * (item['quantity'] as int),
     );
 
+    return UnionPageScaffold(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 24.0, horizontal: 20.0),
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1100),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Your Cart',
+                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 18),
