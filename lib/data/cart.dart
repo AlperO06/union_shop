@@ -59,6 +59,24 @@ class CartItem {
       image: map['image']?.toString() ?? '',
     );
   }
+
+  // Added: JSON helpers using existing map (defensive on parse errors)
+  String toJson() => jsonEncode(toMap());
+
+  factory CartItem.fromJson(String source) {
+    try {
+      final decoded = jsonDecode(source);
+      if (decoded is Map<String, dynamic>) {
+        return CartItem.fromMap(decoded);
+      }
+      if (decoded is Map) {
+        return CartItem.fromMap(Map<String, dynamic>.from(decoded));
+      }
+    } catch (_) {
+      // fall through to return a safe default below
+    }
+    return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '');
+  }
 }
 
 // Reactive list of cart items: listen to this to update UI immediately
