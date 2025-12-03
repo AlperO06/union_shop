@@ -100,6 +100,48 @@ class _CartPageState extends State<CartPage> {
                   ),
                 ),
               ] else ...[
+                // Header row for the table layout
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        flex: 4,
+                        child: Text(
+                          'Product',
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          'Price',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          'Quantity',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          'Total',
+                          textAlign: TextAlign.right,
+                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Divider(height: 1),
+
+                // Items as rows
                 Column(
                   children: items.asMap().entries.map((entry) {
                     final index = entry.key;
@@ -112,94 +154,113 @@ class _CartPageState extends State<CartPage> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            // placeholder thumbnail
-                            Container(
-                              width: 84,
-                              height: 64,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[200],
-                                borderRadius: BorderRadius.circular(6),
-                              ),
-                              child: (item.image).isNotEmpty
-                                  ? ClipRRect(
-                                      borderRadius: BorderRadius.circular(6),
-                                      child: Image.network(
-                                        item.image,
-                                        width: 84,
-                                        height: 64,
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (context, error, stackTrace) =>
-                                            const Icon(Icons.broken_image, color: Colors.grey, size: 32),
-                                      ),
-                                    )
-                                  : const Icon(Icons.image, color: Colors.grey, size: 32),
-                            ),
-                            const SizedBox(width: 12),
+                            // Product column: thumbnail + name + size + remove icon
                             Expanded(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                              flex: 4,
+                              child: Row(
                                 children: [
-                                  // Wrap product name in Expanded so it wraps instead of overflowing
-                                  Text(
-                                    item.name,
-                                    style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
-                                    softWrap: true,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
+                                  Container(
+                                    width: 84,
+                                    height: 64,
+                                    decoration: BoxDecoration(
+                                      color: Colors.grey[200],
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                    child: (item.image).isNotEmpty
+                                        ? ClipRRect(
+                                            borderRadius: BorderRadius.circular(6),
+                                            child: Image.network(
+                                              item.image,
+                                              width: 84,
+                                              height: 64,
+                                              fit: BoxFit.cover,
+                                              errorBuilder: (context, error, stackTrace) =>
+                                                  const Icon(Icons.broken_image, color: Colors.grey, size: 32),
+                                            ),
+                                          )
+                                        : const Icon(Icons.image, color: Colors.grey, size: 32),
                                   ),
-                                  const SizedBox(height: 6),
-                                  // Replace static size/qty text with interactive controls
-                                  Wrap(
-                                    spacing: 12,
-                                    runSpacing: 8,
-                                    crossAxisAlignment: WrapCrossAlignment.center,
+                                  const SizedBox(width: 12),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          item.name,
+                                          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                          softWrap: true,
+                                          maxLines: 2,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        const SizedBox(height: 6),
+                                        Text('Size: ${item.size}', style: TextStyle(color: Colors.grey[700])),
+                                      ],
+                                    ),
+                                  ),
+                                  IconButton(
+                                    icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
+                                    onPressed: () => _removeItem(index),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            // Price column (unit price)
+                            Expanded(
+                              flex: 2,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  '£${item.price.toStringAsFixed(2)}',
+                                  style: const TextStyle(fontSize: 14),
+                                ),
+                              ),
+                            ),
+
+                            // Quantity column (controls)
+                            Expanded(
+                              flex: 2,
+                              child: Align(
+                                alignment: Alignment.center,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.grey.shade300),
+                                    borderRadius: BorderRadius.circular(6),
+                                  ),
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Text('Size: ${item.size}', style: TextStyle(color: Colors.grey[700])),
-                                      // quantity controls
-                                      Container(
-                                        decoration: BoxDecoration(
-                                          border: Border.all(color: Colors.grey.shade300),
-                                          borderRadius: BorderRadius.circular(6),
-                                        ),
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            IconButton(
-                                              padding: const EdgeInsets.symmetric(horizontal: 6),
-                                              constraints: const BoxConstraints(),
-                                              icon: const Icon(Icons.remove, size: 18),
-                                              onPressed: () => _decrementQuantity(index),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                              child: Text('${item.quantity}', style: const TextStyle(fontWeight: FontWeight.w600)),
-                                            ),
-                                            IconButton(
-                                              padding: const EdgeInsets.symmetric(horizontal: 6),
-                                              constraints: const BoxConstraints(),
-                                              icon: const Icon(Icons.add, size: 18),
-                                              onPressed: () => _incrementQuantity(index),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      // remove button
                                       IconButton(
-                                        icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
-                                        onPressed: () => _removeItem(index),
+                                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                                        constraints: const BoxConstraints(),
+                                        icon: const Icon(Icons.remove, size: 18),
+                                        onPressed: () => _decrementQuantity(index),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                        child: Text('${item.quantity}', style: const TextStyle(fontWeight: FontWeight.w600)),
+                                      ),
+                                      IconButton(
+                                        padding: const EdgeInsets.symmetric(horizontal: 6),
+                                        constraints: const BoxConstraints(),
+                                        icon: const Icon(Icons.add, size: 18),
+                                        onPressed: () => _incrementQuantity(index),
                                       ),
                                     ],
                                   ),
-                                  const SizedBox(height: 8),
-                                  // Move price below the name/controls so it doesn't overflow on small screens
-                                  Align(
-                                    alignment: Alignment.centerRight,
-                                    child: Text(
-                                      '£${(item.price * item.quantity).toStringAsFixed(2)}',
-                                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
-                                    ),
-                                  ),
-                                ],
+                                ),
+                              ),
+                            ),
+
+                            // Total column (line total)
+                            Expanded(
+                              flex: 2,
+                              child: Align(
+                                alignment: Alignment.centerRight,
+                                child: Text(
+                                  '£${(item.price * item.quantity).toStringAsFixed(2)}',
+                                  style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                                ),
                               ),
                             ),
                           ],
