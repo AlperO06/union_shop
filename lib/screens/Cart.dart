@@ -13,17 +13,21 @@ class _CartPageState extends State<CartPage> {
   // helper to increment quantity for item at index
   void _incrementQuantity(int index) {
     setState(() {
-      cartItems[index].quantity += 1;
+      final items = cartItems;
+      if (index < 0 || index >= items.length) return;
+      items[index].quantity += 1;
     });
   }
 
   // helper to decrement quantity; remove item if quantity reaches zero
   void _decrementQuantity(int index) {
     setState(() {
-      if (cartItems[index].quantity > 1) {
-        cartItems[index].quantity -= 1;
+      final items = cartItems;
+      if (index < 0 || index >= items.length) return;
+      if (items[index].quantity > 1) {
+        items[index].quantity -= 1;
       } else {
-        cartItems.removeAt(index);
+        items.removeAt(index);
       }
     });
   }
@@ -31,7 +35,9 @@ class _CartPageState extends State<CartPage> {
   // helper to remove item completely
   void _removeItem(int index) {
     setState(() {
-      cartItems.removeAt(index);
+      final items = cartItems;
+      if (index < 0 || index >= items.length) return;
+      items.removeAt(index);
     });
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Item removed from cart')),
@@ -104,11 +110,11 @@ class _CartPageState extends State<CartPage> {
                                 color: Colors.grey[200],
                                 borderRadius: BorderRadius.circular(6),
                               ),
-                              child: item.image!.isNotEmpty
+                              child: (item.image ?? '').isNotEmpty
                                   ? ClipRRect(
                                       borderRadius: BorderRadius.circular(6),
                                       child: Image.network(
-                                        item.image!,
+                                        item.image ?? '',
                                         width: 84,
                                         height: 64,
                                         fit: BoxFit.cover,
