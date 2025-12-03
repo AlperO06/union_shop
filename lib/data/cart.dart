@@ -100,9 +100,7 @@ Future<void> loadCartFromPrefs() async {
   }
 }
 
-// Ensure we save whenever cart changes.
 void _attachPersistenceListener() {
-  // Avoid attaching multiple times
   if (_persistenceListenerAttached) return;
   cartItemsNotifier.addListener(() {
     _saveCartToPrefs();
@@ -111,3 +109,10 @@ void _attachPersistenceListener() {
 }
 
 bool _persistenceListenerAttached = false;
+
+void _startCartPersistence() {
+  _attachPersistenceListener();
+  loadCartFromPrefs();
+}
+
+_startCartPersistence();
