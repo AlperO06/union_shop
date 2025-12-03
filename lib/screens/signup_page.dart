@@ -169,7 +169,7 @@ class _SignupPageState extends State<SignupPage> {
                         children: [
                           const Text('Already have an account?'),
                           TextButton(
-                            onPressed: _onSignInNavigate,
+                            onPressed: () => Navigator.pop(context),
                             child: const Text('Sign in'),
                           ),
                         ],
