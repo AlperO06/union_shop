@@ -330,7 +330,7 @@ class _ProductPageState extends State<ProductPage> {
                       : '');
 
               final item = CartItem(
-                id: widget.product.id,
+                id: widget.product.id.toString(),
                 name: widget.product.name,
                 price: widget.product.newPrice,
                 size: _selectedSize,

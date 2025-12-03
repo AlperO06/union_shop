@@ -6,7 +6,7 @@ class CartItem {
   final String name;
   int quantity;
 
-  CartItem({required this.id, required this.name, this.quantity = 1});
+  CartItem({required this.id, required this.name, this.quantity = 1, required double price, required String size, required String colour, required String image});
 
   get price => null;
 
