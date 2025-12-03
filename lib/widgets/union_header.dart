@@ -204,11 +204,11 @@ class UnionHeader extends StatelessWidget {
                                 constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                                 onPressed: () => Navigator.pushNamed(context, '/login'),
                               ),
-                              const IconButton(
-                                icon: Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-                                padding: EdgeInsets.all(8),
-                                constraints: BoxConstraints(minWidth: 32, minHeight: 32),
-                                onPressed: placeholderCallbackForButtons,
+                              IconButton(
+                                icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+                                padding: const EdgeInsets.all(8),
+                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                onPressed: () => Navigator.pushNamed(context, '/cart'),
                               ),
                               const IconButton(
                                 icon: Icon(Icons.menu, size: 18, color: Colors.grey),
@@ -218,11 +218,11 @@ class UnionHeader extends StatelessWidget {
                               ),
                             ]
                           : [
-                              const IconButton(
-                                icon: Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-                                padding: EdgeInsets.all(8),
-                                constraints: BoxConstraints(minWidth: 32, minHeight: 32),
-                                onPressed: placeholderCallbackForButtons,
+                              IconButton(
+                                icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+                                padding: const EdgeInsets.all(8),
+                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                onPressed: () => Navigator.pushNamed(context, '/cart'),
                               ),
                               const IconButton(
                                 icon: Icon(Icons.menu, size: 18, color: Colors.grey),

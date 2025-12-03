@@ -5,7 +5,7 @@ import 'collections_page.dart';
 import 'sale_page.dart';
 import 'screens/signup_page.dart';
 import 'screens/login_page.dart';
-import 'screens/Cart.dart';
+import 'screens/cart.dart';
 
 void main() {
   runApp(const UnionShopApp());
