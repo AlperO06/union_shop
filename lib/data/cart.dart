@@ -6,22 +6,31 @@ class CartItem {
   final String name;
   int quantity;
 
-  // Added proper final fields for price, size, colour and image
-  final double price;
-  final String size;
-  final String colour;
-  final String image;
+  // Use private backing fields and expose non-nullable getters.
+  final double _price;
+  final String _size;
+  final String _colour;
+  final String _image;
 
-  // Updated constructor to initialize the new final fields
+  // Constructor accepts nullable inputs but converts them to safe defaults.
   CartItem({
     required this.id,
     required this.name,
     this.quantity = 1,
-    required this.price,
-    required this.size,
-    required this.colour,
-    required this.image,
-  });
+    double? price,
+    String? size,
+    String? colour,
+    String? image,
+  })  : _price = price ?? 0.0,
+        _size = size ?? '',
+        _colour = colour ?? '',
+        _image = image ?? '';
+
+  // Public non-nullable accessors (never return null).
+  double get price => _price;
+  String get size => _size;
+  String get colour => _colour;
+  String get image => _image;
 }
 
 // Reactive list of cart items: listen to this to update UI immediately
