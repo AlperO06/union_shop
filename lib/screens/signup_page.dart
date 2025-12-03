@@ -25,3 +25,8 @@ class _SignupPageState extends State<SignupPage> {
     _confirmCtrl.dispose();
     super.dispose();
   }
+
+  void _onSignUp() {
+    if (!_formKey.currentState!.validate()) return;
+    setState(() => _loading = true);
+
