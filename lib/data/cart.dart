@@ -147,6 +147,9 @@ void _attachPersistenceListener() {
   _persistenceListenerAttached = true;
 }
 
+// Public wrapper so callers (e.g. main.dart) can enable the listener.
+void enableCartPersistence() => _attachPersistenceListener();
+
 bool _persistenceListenerAttached = false;
 
 void addToCart(CartItem item) {
@@ -163,14 +166,20 @@ void addToCart(CartItem item) {
     updated.add(item);
   }
   cartItemsNotifier.value = updated;
+  // persist immediately
+  _saveCartToPrefs();
 }
 
 void removeFromCart(String id) {
   // produce a new List (no in-place mutation)
   final updated = cartItemsNotifier.value.where((i) => i.id != id).toList();
   cartItemsNotifier.value = updated;
+  // persist immediately
+  _saveCartToPrefs();
 }
 
 void clearCart() {
   cartItemsNotifier.value = [];
+  // persist immediately
+  _saveCartToPrefs();
 }
