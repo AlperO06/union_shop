@@ -158,8 +158,8 @@ class CartItem {
 }
 
 // Reactive list of cart items: listen to this to update UI immediately
-// Replace plain ValueNotifier with PersistentCartNotifier to ensure every change is persisted.
-final PersistentCartNotifier cartItemsNotifier = PersistentCartNotifier();
+// Use a plain ValueNotifier instead of the removed PersistentCartNotifier.
+final ValueNotifier<List<CartItem>> cartItemsNotifier = ValueNotifier<List<CartItem>>([]);
 
 // Backwards-compatible getter used in existing code
 List<CartItem> get cartItems => cartItemsNotifier.value;
@@ -319,74 +319,6 @@ void removeFromCart(String id) {
 void clearCart() {
   cartItemsNotifier.value = [];
   // Persistence handled by the listener; no direct _saveCartToPrefs() call.
-}
-
-// New: notifier that auto-persists whenever .value is set and loads saved state on init.
-class PersistentCartNotifier extends ValueNotifier<List<CartItem>> {
-  bool _initialized = false;
-  // Completer to allow external code to await one-time initialization.
-  final Completer<void> _readyCompleter = Completer<void>();
-
-  PersistentCartNotifier() : super([]) {
-    _init();
-  }
-
-  // Public future callers can await to know when initial load/attach finished.
-  Future<void> get ready => _readyCompleter.future;
-
-  Future<void> _init() async {
-    if (_initialized) return;
-    _initialized = true;
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final encoded = prefs.getString(_kCartPrefsKey);
-      if (encoded != null && encoded.isNotEmpty) {
-        final decoded = jsonDecode(encoded);
-        if (decoded is List) {
-          final restored = decoded
-              .whereType<Map<String, dynamic>>()
-              .map((m) => CartItem.fromMap(Map<String, dynamic>.from(m)))
-              .toList();
-          super.value = restored;
-          debugPrint('PersistentCartNotifier loaded ${restored.length} items from prefs.');
-        }
-      } else {
-        debugPrint('PersistentCartNotifier found no saved cart.');
-      }
-    } catch (e, st) {
-      debugPrint('PersistentCartNotifier failed to load cart: $e\n$st');
-    } finally {
-      _attachPersistenceListener();
-      _saveCartToPrefs();
-      // Complete the ready future exactly once to signal initialization finished.
-      if (!_readyCompleter.isCompleted) {
-        _readyCompleter.complete();
-      }
-    }
-  }
-
-  @override
-  set value(List<CartItem> newValue) {
-    final copy = List<CartItem>.from(newValue);
-    super.value = copy;
-    _saveCartToPrefs();
-  }
-
-  // New: ensure any manual notifyListeners() (after in-place mutations)
-  // will replace the list reference so ValueListenableBuilder always rebuilds.
-  @override
-  void notifyListeners() {
-    try {
-      // Replace underlying list reference with a shallow copy without invoking our setter.
-      final current = super.value;
-      super.value = List<CartItem>.from(current);
-    } catch (_) {
-      // ignore copy failures
-    }
-    // Notify subscribers and persist the new reference/state.
-    super.notifyListeners();
-    _saveCartToPrefs();
-  }
 }
 
 // Public wrapper so callers can explicitly await a save operation.

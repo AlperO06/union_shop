@@ -12,8 +12,9 @@ import 'data/cart.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Wait for the cart notifier's single async initialization to finish.
-  await cartItemsNotifier.ready;
+  // Perform a one-time load from SharedPreferences before starting the app.
+  // loadCartFromPrefs() will attach the persistence listener in its finally block.
+  await loadCartFromPrefs();
 
   if (kIsWeb) {
     debugPrint('Web build: cart persistence enabled — saved cart loaded before app start.');
