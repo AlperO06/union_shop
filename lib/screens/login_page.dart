@@ -111,3 +111,40 @@ class _LoginPageState extends State<LoginPage> {
                           if (v.length < 5) return 'Password must be at least 5 characters';
                           return null;
                         },
+                      ),
+                      const SizedBox(height: 20),
+                      SizedBox(
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: _loading ? null : _onLogin,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4d2963),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          ),
+                          child: _loading
+                              ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5)
+                              : const Text('Login', style: TextStyle(fontSize: 16)),
+                        ),
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text("Don't have an account?"),
+                          TextButton(
+                            onPressed: _onCreateAccount,
+                            child: const Text('Create one'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
