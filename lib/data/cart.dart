@@ -116,3 +116,24 @@ void _startCartPersistence() {
 }
 
 _startCartPersistence();
+
+void addToCart(CartItem item) {
+  final updated = List<CartItem>.from(cartItemsNotifier.value);
+  final index = updated.indexWhere((i) =>
+      i.id == item.id && i.size == item.size && i.colour == item.colour);
+  if (index >= 0) {
+    updated[index].quantity += item.quantity;
+  } else {
+    updated.add(item);
+  }
+  cartItemsNotifier.value = updated;
+}
+
+void removeFromCart(String id) {
+  final updated = cartItemsNotifier.value.where((i) => i.id != id).toList();
+  cartItemsNotifier.value = updated;
+}
+
+void clearCart() {
+  cartItemsNotifier.value = [];
+}
