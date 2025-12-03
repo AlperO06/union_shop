@@ -34,13 +34,6 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  void _onCreateAccount() {
-    // placeholder for navigation to sign-up
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Create account pressed (placeholder)')),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -132,7 +125,7 @@ class _LoginPageState extends State<LoginPage> {
                         children: [
                           const Text("Don't have an account?"),
                           TextButton(
-                            onPressed: _onCreateAccount,
+                            onPressed: () => Navigator.pushNamed(context, '/signup'),
                             child: const Text('Create one'),
                           ),
                         ],
@@ -148,3 +141,4 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 }
+
