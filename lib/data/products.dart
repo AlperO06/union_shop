@@ -46,7 +46,7 @@ const List<Product> products = [
     name: 'Essential T-Shirt',
     oldPrice: 29.99,
     newPrice: 24.99,
-    image: 'https://picsum.photos/id/1015/800/600',
+    image: 'https://imagin-badges.co.uk/cdn/shop/files/bratt-shirt_3.png?v=1729085364',
     description: 'A soft, breathable cotton tee with a classic fit—perfect for everyday wear.',
     images: [
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3QUYOKhTntE-L4eVmc4ME9UD6tKDiXoIW1w&s',
