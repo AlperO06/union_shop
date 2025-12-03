@@ -275,4 +275,37 @@ class PersistentCartNotifier extends ValueNotifier<List<CartItem>> {
     _init();
   }
 
+  Future<void> _init() async {
+    if (_initialized) return;
+    _initialized = true;
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final encoded = prefs.getString(_kCartPrefsKey);
+      if (encoded != null && encoded.isNotEmpty) {
+        final decoded = jsonDecode(encoded);
+        if (decoded is List) {
+          final restored = decoded
+              .whereType<Map<String, dynamic>>()
+              .map((m) => CartItem.fromMap(Map<String, dynamic>.from(m)))
+              .toList();
+          super.value = restored;
+          debugPrint('PersistentCartNotifier loaded ${restored.length} items from prefs.');
+        }
+      } else {
+        debugPrint('PersistentCartNotifier found no saved cart.');
+      }
+    } catch (e, st) {
+      debugPrint('PersistentCartNotifier failed to load cart: $e\n$st');
+    } finally {
+      _attachPersistenceListener();
+      _saveCartToPrefs();
+    }
+  }
 
+  @override
+  set value(List<CartItem> newValue) {
+    final copy = List<CartItem>.from(newValue);
+    super.value = copy;
+    _saveCartToPrefs();
+  }
+}
