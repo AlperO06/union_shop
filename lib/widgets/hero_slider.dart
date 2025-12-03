@@ -75,3 +75,16 @@ class _HeroSliderState extends State<HeroSlider> {
     _controller.dispose();
     super.dispose();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    if (widget.slides.isEmpty) {
+      return SizedBox(
+        height: widget.height,
+        child: Container(
+          color: Colors.grey[200],
+          alignment: Alignment.center,
+          child: const Text('No slides available'),
+        ),
+      );
+    }
