@@ -31,7 +31,7 @@ class HeroSlider extends StatefulWidget {
     Key? key,
     required this.slides,
     this.height = 320,
-    this.autoPlayInterval = const Duration(seconds: 5),
+    this.autoPlayInterval = const Duration(seconds: 8),
     this.autoPlay = true,
   }) : super(key: key);
 
