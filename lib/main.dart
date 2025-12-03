@@ -6,8 +6,11 @@ import 'sale_page.dart';
 import 'screens/signup_page.dart';
 import 'screens/login_page.dart';
 import 'screens/cart.dart';
+import 'data/cart.dart'; // added: loadCartFromPrefs()
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await loadCartFromPrefs(); // restore cart before building UI
   runApp(const UnionShopApp());
 }
 
