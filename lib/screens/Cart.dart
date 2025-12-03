@@ -85,7 +85,47 @@ class _CartPageState extends State<CartPage> {
                     padding: const EdgeInsets.only(top: 80),
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
-
+                      children: [
+                        Text(
+                          'Your cart is empty',
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600, color: Colors.grey[900]),
+                        ),
+                        const SizedBox(height: 8),
+                        Text(
+                          'Start shopping to add items',
+                          style: TextStyle(fontSize: 14, color: Colors.grey[600]),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ] else ...[
+                Column(
+                  children: items.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final item = entry.value;
+                    return Card(
+                      margin: const EdgeInsets.symmetric(vertical: 8),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            // placeholder thumbnail
+                            Container(
+                              width: 84,
+                              height: 64,
+                              decoration: BoxDecoration(
+                                color: Colors.grey[200],
+                                borderRadius: BorderRadius.circular(6),
+                              ),
+                              child: (item.image).isNotEmpty
+  
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Wrap product name in Expanded so it wraps instead of overflowing
                                   Text(
                                     item.name,
                                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
