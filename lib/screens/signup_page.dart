@@ -81,3 +81,12 @@ class _SignupPageState extends State<SignupPage> {
                         'Create an account to access the Union Shop',
                         style: TextStyle(fontSize: 14, color: Colors.black54),
                       ),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: _nameCtrl,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          labelText: 'Full name',
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                        ),
