@@ -71,3 +71,19 @@ class _LoginPageState extends State<LoginPage> {
                         'Welcome back',
                         style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
                         textAlign: TextAlign.left,
+                      ),
+                      const SizedBox(height: 4),
+                      const Text(
+                        'Sign in to continue to Union Shop',
+                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                      ),
+                      const SizedBox(height: 20),
+                      TextFormField(
+                        controller: _emailCtrl,
+                        keyboardType: TextInputType.emailAddress,
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          hintText: 'you@example.com',
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+ 
