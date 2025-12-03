@@ -155,4 +155,13 @@ class _HeroSliderState extends State<HeroSlider> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          
+                          Text(
+                            slide.title,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                              shadows: [Shadow(blurRadius: 4, color: Colors.black45, offset: Offset(0, 1))],
+                            ),
+                          ),
+                         
