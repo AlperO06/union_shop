@@ -183,31 +183,77 @@ Future<void> _saveCartToPrefs() async {
 }
 
 Future<void> loadCartFromPrefs() async {
+  bool resetToEmpty = false;
   try {
     final prefs = await SharedPreferences.getInstance();
     final encoded = prefs.getString(_kCartPrefsKey);
     if (encoded == null || encoded.isEmpty) {
       debugPrint('No saved cart found in SharedPreferences ($_kCartPrefsKey).');
+      // nothing to restore, will attach listener in finally
       return;
     }
     debugPrint('Found saved cart payload: $encoded');
-    final decoded = jsonDecode(encoded);
-    if (decoded is List) {
-      final restored = decoded
-          .whereType<Map<String, dynamic>>()
-          .map((m) => CartItem.fromMap(Map<String, dynamic>.from(m)))
-          .toList();
-      // Replace notifier value once with restored list
-      cartItemsNotifier.value = restored;
-      // Debug: print restored cart contents
-      debugPrint('Loaded ${restored.length} cart items from prefs: ${restored.map((c) => c.toMap()).toList()}');
+
+    dynamic decoded;
+    try {
+      decoded = jsonDecode(encoded);
+    } catch (e, st) {
+      debugPrint('Warning: failed to decode cart JSON; resetting cart to empty. Error: $e\n$st');
+      resetToEmpty = true;
+      decoded = null;
+    }
+
+    if (!resetToEmpty) {
+      if (decoded is List) {
+        final restored = <CartItem>[];
+        for (final item in decoded) {
+          try {
+            CartItem ci;
+            if (item is Map<String, dynamic>) {
+              ci = CartItem.fromMap(item);
+            } else if (item is Map) {
+              ci = CartItem.fromMap(Map<String, dynamic>.from(item));
+            } else if (item is String) {
+              ci = CartItem.fromJson(item);
+            } else {
+              debugPrint('Warning: unexpected cart item type (${item.runtimeType}); will reset cart to empty.');
+              resetToEmpty = true;
+              break;
+            }
+            // Validate essential fields — if missing, treat payload as invalid.
+            if (ci.id.isEmpty || ci.name.isEmpty) {
+              debugPrint('Warning: cart item missing required fields (id/name); will reset cart to empty.');
+              resetToEmpty = true;
+              break;
+            }
+            restored.add(ci);
+          } catch (e, st) {
+            debugPrint('Warning: failed to parse a cart item; resetting cart to empty. Error: $e\n$st');
+            resetToEmpty = true;
+            break;
+          }
+        }
+
+        if (!resetToEmpty) {
+          cartItemsNotifier.value = restored;
+          debugPrint('Loaded ${restored.length} cart items from prefs.');
+        } else {
+          cartItemsNotifier.value = [];
+        }
+      } else {
+        debugPrint('Warning: Saved cart payload had unexpected shape: ${decoded.runtimeType}. Resetting cart to empty.');
+        cartItemsNotifier.value = [];
+      }
     } else {
-      debugPrint('Saved cart payload had unexpected shape: ${decoded.runtimeType}');
+      cartItemsNotifier.value = [];
     }
   } catch (e, st) {
-    debugPrint('Failed to load cart from prefs: $e\n$st');
+    debugPrint('Failed to load cart from prefs: $e\n$st. Resetting cart to empty.');
+    try {
+      cartItemsNotifier.value = [];
+    } catch (_) {}
   } finally {
-    // Ensure persistence listener is attached after attempting to load the cart.
+    // Always attach the persistence listener so future changes are persisted.
     _attachPersistenceListener();
   }
 }
@@ -222,9 +268,7 @@ void _cartPersistenceListener() {
 bool _persistenceListenerAttached = false;
 
 void _attachPersistenceListener() {
-  // Always remove the listener first (safe no-op if it wasn't attached),
-  // then add it. This prevents duplicate listeners on hot reload and avoids
-  // returning early which could leave listener in an inconsistent state.
+
   try {
     cartItemsNotifier.removeListener(_cartPersistenceListener);
   } catch (_) {
@@ -274,38 +318,3 @@ class PersistentCartNotifier extends ValueNotifier<List<CartItem>> {
   PersistentCartNotifier() : super([]) {
     _init();
   }
-
-  Future<void> _init() async {
-    if (_initialized) return;
-    _initialized = true;
-    try {
-      final prefs = await SharedPreferences.getInstance();
-      final encoded = prefs.getString(_kCartPrefsKey);
-      if (encoded != null && encoded.isNotEmpty) {
-        final decoded = jsonDecode(encoded);
-        if (decoded is List) {
-          final restored = decoded
-              .whereType<Map<String, dynamic>>()
-              .map((m) => CartItem.fromMap(Map<String, dynamic>.from(m)))
-              .toList();
-          super.value = restored;
-          debugPrint('PersistentCartNotifier loaded ${restored.length} items from prefs.');
-        }
-      } else {
-        debugPrint('PersistentCartNotifier found no saved cart.');
-      }
-    } catch (e, st) {
-      debugPrint('PersistentCartNotifier failed to load cart: $e\n$st');
-    } finally {
-      _attachPersistenceListener();
-      _saveCartToPrefs();
-    }
-  }
-
-  @override
-  set value(List<CartItem> newValue) {
-    final copy = List<CartItem>.from(newValue);
-    super.value = copy;
-    _saveCartToPrefs();
-  }
-}
