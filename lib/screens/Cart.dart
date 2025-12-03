@@ -11,7 +11,7 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   // helper to increment quantity for item at index
-  void _incrementQuantity(int index) {
+  Future<void> _incrementQuantity(int index) async {
     final current = cartItems; // snapshot
     if (index < 0 || index >= current.length) return;
 
@@ -19,13 +19,15 @@ class _CartPageState extends State<CartPage> {
     final existing = updated[index];
     updated[index] = existing.copyWith(quantity: existing.quantity + 1);
 
-    // replace the notifier value with a new list and rebuild
+    // replace the notifier value with a new list and persist immediately
     cartItemsNotifier.value = updated;
+    await saveCartToPrefs();
+
     setState(() {});
   }
 
   // helper to decrement quantity; remove item if quantity reaches zero
-  void _decrementQuantity(int index) {
+  Future<void> _decrementQuantity(int index) async {
     final current = cartItems;
     if (index < 0 || index >= current.length) return;
 
@@ -38,16 +40,20 @@ class _CartPageState extends State<CartPage> {
     }
 
     cartItemsNotifier.value = updated;
+    await saveCartToPrefs();
+
     setState(() {});
   }
 
   // helper to remove item completely
-  void _removeItem(int index) {
+  Future<void> _removeItem(int index) async {
     final current = cartItems;
     if (index < 0 || index >= current.length) return;
 
     final updated = List<CartItem>.from(current)..removeAt(index);
     cartItemsNotifier.value = updated;
+    await saveCartToPrefs();
+
     setState(() {});
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Item removed from cart')),
@@ -215,7 +221,7 @@ class _CartPageState extends State<CartPage> {
                                         const SizedBox(height: 6),
                                         // Remove as a text link
                                         TextButton(
-                                          onPressed: () => _removeItem(index),
+                                          onPressed: () async => await _removeItem(index),
                                           style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: const Size(48, 24)),
                                           child: const Text('Remove', style: TextStyle(color: Colors.redAccent)),
                                         ),
@@ -259,7 +265,7 @@ class _CartPageState extends State<CartPage> {
                                           child: InkWell(
                                             borderRadius: const BorderRadius.only(
                                                 topLeft: Radius.circular(6), bottomLeft: Radius.circular(6)),
-                                            onTap: () => _decrementQuantity(index),
+                                            onTap: () async => await _decrementQuantity(index),
                                             child: const Center(
                                               child: Icon(Icons.remove, size: 16, color: Colors.black54),
                                             ),
@@ -286,7 +292,7 @@ class _CartPageState extends State<CartPage> {
                                           child: InkWell(
                                             borderRadius: const BorderRadius.only(
                                                 topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
-                                            onTap: () => _incrementQuantity(index),
+                                            onTap: () async => await _incrementQuantity(index),
                                             child: const Center(
                                               child: Icon(Icons.add, size: 16, color: Colors.black54),
                                             ),
