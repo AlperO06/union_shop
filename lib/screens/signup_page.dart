@@ -90,3 +90,8 @@ class _SignupPageState extends State<SignupPage> {
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                           contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                         ),
+                        validator: (v) {
+                          if (v == null || v.trim().isEmpty) return 'Please enter your name';
+                          return null;
+                        },
+                      ),
