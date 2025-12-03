@@ -26,3 +26,9 @@ class CartPage extends StatelessWidget {
         'price': 1.00,
       },
     ];
+
+    final subtotal = items.fold<double>(
+      0,
+      (prev, item) => prev + (item['price'] as double) * (item['quantity'] as int),
+    );
+
