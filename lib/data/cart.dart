@@ -99,3 +99,15 @@ Future<void> loadCartFromPrefs() async {
     // ignore parse errors
   }
 }
+
+// Ensure we save whenever cart changes.
+void _attachPersistenceListener() {
+  // Avoid attaching multiple times
+  if (_persistenceListenerAttached) return;
+  cartItemsNotifier.addListener(() {
+    _saveCartToPrefs();
+  });
+  _persistenceListenerAttached = true;
+}
+
+bool _persistenceListenerAttached = false;
