@@ -12,33 +12,43 @@ class CartPage extends StatefulWidget {
 class _CartPageState extends State<CartPage> {
   // helper to increment quantity for item at index
   void _incrementQuantity(int index) {
-    setState(() {
-      final items = cartItems;
-      if (index < 0 || index >= items.length) return;
-      items[index].quantity += 1;
-    });
+    final current = cartItems; // snapshot
+    if (index < 0 || index >= current.length) return;
+
+    final updated = List<CartItem>.from(current);
+    final existing = updated[index];
+    updated[index] = existing.copyWith(quantity: existing.quantity + 1);
+
+    // replace the notifier value with a new list and rebuild
+    cartItemsNotifier.value = updated;
+    setState(() {});
   }
 
   // helper to decrement quantity; remove item if quantity reaches zero
   void _decrementQuantity(int index) {
-    setState(() {
-      final items = cartItems;
-      if (index < 0 || index >= items.length) return;
-      if (items[index].quantity > 1) {
-        items[index].quantity -= 1;
-      } else {
-        items.removeAt(index);
-      }
-    });
+    final current = cartItems;
+    if (index < 0 || index >= current.length) return;
+
+    final updated = List<CartItem>.from(current);
+    final existing = updated[index];
+    if (existing.quantity > 1) {
+      updated[index] = existing.copyWith(quantity: existing.quantity - 1);
+    } else {
+      updated.removeAt(index);
+    }
+
+    cartItemsNotifier.value = updated;
+    setState(() {});
   }
 
   // helper to remove item completely
   void _removeItem(int index) {
-    setState(() {
-      final items = cartItems;
-      if (index < 0 || index >= items.length) return;
-      items.removeAt(index);
-    });
+    final current = cartItems;
+    if (index < 0 || index >= current.length) return;
+
+    final updated = List<CartItem>.from(current)..removeAt(index);
+    cartItemsNotifier.value = updated;
+    setState(() {});
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Item removed from cart')),
     );
