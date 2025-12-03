@@ -157,7 +157,8 @@ class CartItem {
 }
 
 // Reactive list of cart items: listen to this to update UI immediately
-final ValueNotifier<List<CartItem>> cartItemsNotifier = ValueNotifier<List<CartItem>>([]);
+// Replace plain ValueNotifier with PersistentCartNotifier to ensure every change is persisted.
+final PersistentCartNotifier cartItemsNotifier = PersistentCartNotifier();
 
 // Backwards-compatible getter used in existing code
 List<CartItem> get cartItems => cartItemsNotifier.value;
@@ -265,3 +266,13 @@ void clearCart() {
   cartItemsNotifier.value = [];
   // Persistence handled by the listener; no direct _saveCartToPrefs() call.
 }
+
+// New: notifier that auto-persists whenever .value is set and loads saved state on init.
+class PersistentCartNotifier extends ValueNotifier<List<CartItem>> {
+  bool _initialized = false;
+
+  PersistentCartNotifier() : super([]) {
+    _init();
+  }
+
+
