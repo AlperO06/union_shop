@@ -56,3 +56,13 @@ class CartPage extends StatelessWidget {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
+                          // placeholder thumbnail
+                          Container(
+                            width: 84,
+                            height: 64,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[200],
+                              borderRadius: BorderRadius.circular(6),
+                            ),
+                            child: const Icon(Icons.image, color: Colors.grey, size: 32),
+                          ),
