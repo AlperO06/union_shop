@@ -147,3 +147,5 @@ class _SignupPageState extends State<SignupPage> {
                           if (v != _passwordCtrl.text) return 'Passwords do not match';
                           return null;
                         },
+                        onFieldSubmitted: (_) => _onSignUp(),
+                      ),
