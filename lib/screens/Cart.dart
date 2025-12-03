@@ -226,28 +226,57 @@ class _CartPageState extends State<CartPage> {
                               child: Align(
                                 alignment: Alignment.center,
                                 child: Container(
+                                  height: 34,
                                   decoration: BoxDecoration(
+                                    color: Colors.white,
                                     border: Border.all(color: Colors.grey.shade300),
                                     borderRadius: BorderRadius.circular(6),
                                   ),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      IconButton(
-                                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                                        constraints: const BoxConstraints(),
-                                        icon: const Icon(Icons.remove, size: 18),
-                                        onPressed: () => _decrementQuantity(index),
+                                      // minus button
+                                      SizedBox(
+                                        width: 34,
+                                        height: 34,
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            borderRadius: const BorderRadius.only(
+                                                topLeft: Radius.circular(6), bottomLeft: Radius.circular(6)),
+                                            onTap: () => _decrementQuantity(index),
+                                            child: const Center(
+                                              child: Icon(Icons.remove, size: 16, color: Colors.black54),
+                                            ),
+                                          ),
+                                        ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                                        child: Text('${item.quantity}', style: const TextStyle(fontWeight: FontWeight.w600)),
+
+                                      // quantity display
+                                      Container(
+                                        width: 44,
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          '${item.quantity}',
+                                          style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                                        ),
                                       ),
-                                      IconButton(
-                                        padding: const EdgeInsets.symmetric(horizontal: 6),
-                                        constraints: const BoxConstraints(),
-                                        icon: const Icon(Icons.add, size: 18),
-                                        onPressed: () => _incrementQuantity(index),
+
+                                      // plus button
+                                      SizedBox(
+                                        width: 34,
+                                        height: 34,
+                                        child: Material(
+                                          color: Colors.transparent,
+                                          child: InkWell(
+                                            borderRadius: const BorderRadius.only(
+                                                topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
+                                            onTap: () => _incrementQuantity(index),
+                                            child: const Center(
+                                              child: Icon(Icons.add, size: 16, color: Colors.black54),
+                                            ),
+                                          ),
+                                        ),
                                       ),
                                     ],
                                   ),
