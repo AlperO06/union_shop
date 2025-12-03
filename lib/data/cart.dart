@@ -352,4 +352,20 @@ class PersistentCartNotifier extends ValueNotifier<List<CartItem>> {
     super.value = copy;
     _saveCartToPrefs();
   }
+
+  // New: ensure any manual notifyListeners() (after in-place mutations)
+  // will replace the list reference so ValueListenableBuilder always rebuilds.
+  @override
+  void notifyListeners() {
+    try {
+      // Replace underlying list reference with a shallow copy without invoking our setter.
+      final current = super.value;
+      super.value = List<CartItem>.from(current);
+    } catch (_) {
+      // ignore copy failures
+    }
+    // Notify subscribers and persist the new reference/state.
+    super.notifyListeners();
+    _saveCartToPrefs();
+  }
 }
