@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:union_shop/product_page.dart';
+import 'package:union_shop/data/products.dart';
 
 void main() {
   group('Product Page Tests', () {
     Widget createTestWidget() {
-      return const MaterialApp(home: ProductPage());
+      // use an existing product from products.dart as the required argument
+      return MaterialApp(home: ProductPage(product: products.first));
     }
 
     testWidgets('should display product page with basic elements', (
