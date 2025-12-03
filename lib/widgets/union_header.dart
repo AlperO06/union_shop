@@ -37,7 +37,7 @@ void navigateToHome(BuildContext context) {
 
 // New: reusable header widget containing the purple sale banner and white nav row
 class UnionHeader extends StatelessWidget {
-  const UnionHeader({super.key});
+  const UnionHeader({super.key, required Future<Object?> Function() onProfilePressed});
 
   // Updated: popup trigger now uses the same padding & text style as the other nav buttons
   Widget buildShopButton(BuildContext context, bool isWideScreen) {
