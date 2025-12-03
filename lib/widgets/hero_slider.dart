@@ -54,3 +54,24 @@ class _HeroSliderState extends State<HeroSlider> {
       _startAutoPlay();
     }
   }
+
+  void _startAutoPlay() {
+    _timer?.cancel();
+    _timer = Timer.periodic(widget.autoPlayInterval, (t) {
+      if (_userInteracting) return;
+      final next = (_currentIndex + 1) % widget.slides.length;
+      _controller.animateToPage(next, duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
+    });
+  }
+
+  void _stopAutoPlay() {
+    _timer?.cancel();
+    _timer = null;
+  }
+
+  @override
+  void dispose() {
+    _stopAutoPlay();
+    _controller.dispose();
+    super.dispose();
+  }
