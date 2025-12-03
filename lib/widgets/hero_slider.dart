@@ -104,3 +104,14 @@ class _HeroSliderState extends State<HeroSlider> {
           _userInteracting = false;
           if (widget.autoPlay && widget.slides.length > 1) _startAutoPlay();
         },
+        child: Stack(
+          fit: StackFit.expand,
+          children: [
+            PageView.builder(
+              controller: _controller,
+              itemCount: widget.slides.length,
+              onPageChanged: (index) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
