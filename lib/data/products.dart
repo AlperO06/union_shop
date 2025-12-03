@@ -100,6 +100,9 @@ const List<Product> products = [
     newPrice: 5.00,
     image: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_720x.jpg',
     description: 'A collectible magnet showcasing Portsmouth.',
+    images: [
+      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_720x.jpg',
+    ]
   ),
   Product(
     id: 7,
@@ -108,6 +111,9 @@ const List<Product> products = [
     newPrice: 2.00,
     image: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_720x.jpg',
     description: 'A decorative Portsmouth bookmark.',
+    images: [
+      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_720x.jpg',
+    ]
   ),
   Product(
     id: 8,
@@ -116,5 +122,8 @@ const List<Product> products = [
     newPrice: 4.50,
     image: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_720x.jpg',
     description: 'A Portsmouth themed notebook for notes and sketches.',
+    images: [
+      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityNotebook_720x.jpg',
+    ]
   ),
 ];
