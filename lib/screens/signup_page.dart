@@ -142,3 +142,8 @@ class _SignupPageState extends State<SignupPage> {
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                           contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                         ),
+                        validator: (v) {
+                          if (v == null || v.isEmpty) return 'Please confirm your password';
+                          if (v != _passwordCtrl.text) return 'Passwords do not match';
+                          return null;
+                        },
