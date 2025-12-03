@@ -3,6 +3,7 @@ import 'screens/home_screen.dart';
 import 'about_page.dart';
 import 'collections_page.dart';
 import 'sale_page.dart';
+import 'screens/signup_page.dart';
 
 void main() {
   runApp(const UnionShopApp());
