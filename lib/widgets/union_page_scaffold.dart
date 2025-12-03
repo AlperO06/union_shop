@@ -15,7 +15,9 @@ class UnionPageScaffold extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const UnionHeader(),
+            UnionHeader(
+              onProfilePressed: () => Navigator.pushNamed(context, '/login'),
+            ),
             body,
             const UnionFooter(), // positioned after the body; scrolls together with body
           ],
