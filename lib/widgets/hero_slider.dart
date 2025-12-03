@@ -213,4 +213,38 @@ class _HeroSliderState extends State<HeroSlider> {
               right: 16,
               child: Row(
                 children: [
-                  
+                  ElevatedButton(
+                    onPressed: (widget.slides.isNotEmpty && widget.slides[_currentIndex].onPrimary != null)
+                        ? widget.slides[_currentIndex].onPrimary
+                        : null,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF4d2963),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                      elevation: 2,
+                    ),
+                    child: const Text(
+                      'SHOP NOW',
+                      style: TextStyle(fontSize: 13),
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  // LEARN MORE (secondary)
+                  OutlinedButton(
+                    onPressed: (widget.slides.isNotEmpty && widget.slides[_currentIndex].onSecondary != null)
+                        ? widget.slides[_currentIndex].onSecondary
+                        : null,
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: Colors.white70),
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                    ),
+                    child: const Text(
+                      'LEARN MORE',
+                      style: TextStyle(color: Colors.white70, fontSize: 13),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            
