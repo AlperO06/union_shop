@@ -163,3 +163,25 @@ class _SignupPageState extends State<SignupPage> {
                               : const Text('Sign Up', style: TextStyle(fontSize: 16)),
                         ),
                       ),
+                      const SizedBox(height: 12),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Text('Already have an account?'),
+                          TextButton(
+                            onPressed: _onSignInNavigate,
+                            child: const Text('Sign in'),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
