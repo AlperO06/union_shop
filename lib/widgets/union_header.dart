@@ -45,40 +45,47 @@ class UnionHeader extends StatelessWidget {
 
   // builds the cart icon with a red circular badge showing the item count
   Widget _buildCartButton(BuildContext context) {
-    return Stack(
-      clipBehavior: Clip.none,
-      children: [
-        IconButton(
-          icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-          padding: const EdgeInsets.all(8),
-          constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-          onPressed: () => Navigator.pushNamed(context, '/cart'),
-        ),
-        // show badge only when there are items in the cart
-        if (cartItems.isNotEmpty)
-          Positioned(
-            right: -6,
-            top: -6,
-            child: Semantics(
-              label: 'Cart, ${cartItems.length} items',
-              child: Container(
-                padding: const EdgeInsets.all(2),
-                decoration: const BoxDecoration(
-                  color: Colors.redAccent,
-                  shape: BoxShape.circle,
-                ),
-                constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
-                child: Center(
-                  child: Text(
-                    cartItems.length > 9 ? '9+' : '${cartItems.length}',
-                    style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
-                    textAlign: TextAlign.center,
+    // Listen to cartItemsNotifier so the badge updates instantly when items change
+    return ValueListenableBuilder<List<CartItem>>(
+      valueListenable: cartItemsNotifier,
+      builder: (context, items, _) {
+        final count = items.length;
+        return Stack(
+          clipBehavior: Clip.none,
+          children: [
+            IconButton(
+              icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+              padding: const EdgeInsets.all(8),
+              constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+              onPressed: () => Navigator.pushNamed(context, '/cart'),
+            ),
+            // show badge only when there are items in the cart
+            if (count > 0)
+              Positioned(
+                right: -6,
+                top: -6,
+                child: Semantics(
+                  label: 'Cart, $count items',
+                  child: Container(
+                    padding: const EdgeInsets.all(2),
+                    decoration: const BoxDecoration(
+                      color: Colors.redAccent,
+                      shape: BoxShape.circle,
+                    ),
+                    constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                    child: Center(
+                      child: Text(
+                        count > 9 ? '9+' : '$count',
+                        style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
-      ],
+          ],
+        );
+      },
     );
   }
 
