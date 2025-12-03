@@ -72,9 +72,24 @@ class _CartPageState extends State<CartPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
-                'Your Cart',
-                style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+              // Title row with "Continue shopping" button aligned to the right
+              Row(
+                children: [
+                  const Expanded(
+                    child: Text(
+                      'Your Cart',
+                      style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // return to the root route (home)
+                      Navigator.popUntil(context, (route) => route.isFirst);
+                    },
+                    style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: const Size(44, 32)),
+                    child: const Text('Continue shopping', style: TextStyle(fontSize: 14)),
+                  ),
+                ],
               ),
               const SizedBox(height: 18),
 
