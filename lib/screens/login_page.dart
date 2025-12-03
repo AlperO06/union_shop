@@ -43,100 +43,105 @@ class _LoginPageState extends State<LoginPage> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black87,
       ),
-      backgroundColor: const Color(0xFFF7F7FB),
+      backgroundColor: const Color(0xFFF3F4F6), // subtle gray background (slightly adjusted)
       body: Center(
         child: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
           child: ConstrainedBox(
-            constraints: const BoxConstraints(maxWidth: 440),
-            child: Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
-                child: Form(
-                  key: _formKey,
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      const Text(
-                        'Welcome back',
-                        style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
-                        textAlign: TextAlign.left,
-                      ),
-                      const SizedBox(height: 4),
-                      const Text(
-                        'Sign in to continue to Union Shop',
-                        style: TextStyle(fontSize: 14, color: Colors.black54),
-                      ),
-                      const SizedBox(height: 20),
-                      TextFormField(
-                        controller: _emailCtrl,
-                        keyboardType: TextInputType.emailAddress,
-                        decoration: InputDecoration(
-                          labelText: 'Email',
-                          hintText: 'you@example.com',
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+            constraints: const BoxConstraints(maxWidth: 480),
+            child: Container(
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              child: Card(
+                elevation: 6,
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(14)),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 28),
+                  child: Form(
+                    key: _formKey,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Text(
+                          'Welcome back',
+                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                          textAlign: TextAlign.left,
                         ),
-                        validator: (v) {
-                          if (v == null || v.trim().isEmpty) return 'Please enter your email';
-                          if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v.trim())) return 'Enter a valid email';
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 16),
-                      TextFormField(
-                        controller: _passwordCtrl,
-                        obscureText: _obscure,
-                        decoration: InputDecoration(
-                          labelText: 'Password',
-                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
-                          suffixIcon: IconButton(
-                            icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
-                            onPressed: () => setState(() => _obscure = !_obscure),
+                        const SizedBox(height: 4),
+                        const Text(
+                          'Sign in to continue to Union Shop',
+                          style: TextStyle(fontSize: 14, color: Colors.black54),
+                        ),
+                        const SizedBox(height: 20),
+                        TextFormField(
+                          controller: _emailCtrl,
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            hintText: 'you@example.com',
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                          ),
+                          validator: (v) {
+                            if (v == null || v.trim().isEmpty) return 'Please enter your email';
+                            if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v.trim())) return 'Enter a valid email';
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 16),
+                        TextFormField(
+                          controller: _passwordCtrl,
+                          obscureText: _obscure,
+                          decoration: InputDecoration(
+                            labelText: 'Password',
+                            border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                            suffixIcon: IconButton(
+                              icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
+                              onPressed: () => setState(() => _obscure = !_obscure),
+                            ),
+                          ),
+                          validator: (v) {
+                            if (v == null || v.isEmpty) return 'Please enter your password';
+                            if (v.length < 5) return 'Password must be at least 5 characters';
+                            return null;
+                          },
+                        ),
+                        const SizedBox(height: 20),
+                        SizedBox(
+                          height: 48,
+                          child: ElevatedButton(
+                            onPressed: _loading
+                                ? null
+                                : () {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(content: Text('Logged in (demo only)')),
+                                    );
+                                  },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color(0xFF4d2963),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                              padding: const EdgeInsets.symmetric(vertical: 14),
+                              elevation: 2,
+                            ),
+                            child: _loading
+                                ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5)
+                                : const Text('Login', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
                           ),
                         ),
-                        validator: (v) {
-                          if (v == null || v.isEmpty) return 'Please enter your password';
-                          if (v.length < 5) return 'Password must be at least 5 characters';
-                          return null;
-                        },
-                      ),
-                      const SizedBox(height: 20),
-                      SizedBox(
-                        height: 48,
-                        child: ElevatedButton(
-                          onPressed: _loading
-                              ? null
-                              : () {
-                                  ScaffoldMessenger.of(context).showSnackBar(
-                                    const SnackBar(content: Text('Logged in (demo only)')),
-                                  );
-                                },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4d2963),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                          ),
-                          child: _loading
-                              ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5)
-                              : const Text('Login', style: TextStyle(fontSize: 16)),
+                        const SizedBox(height: 12),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text("Don't have an account?"),
+                            TextButton(
+                              onPressed: () => Navigator.pushNamed(context, '/signup'),
+                              child: const Text('Create one'),
+                            ),
+                          ],
                         ),
-                      ),
-                      const SizedBox(height: 12),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          const Text("Don't have an account?"),
-                          TextButton(
-                            onPressed: () => Navigator.pushNamed(context, '/signup'),
-                            child: const Text('Create one'),
-                          ),
-                        ],
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
