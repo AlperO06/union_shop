@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import '../widgets/union_page_scaffold.dart';
+import '../data/cart.dart';
 
 class CartPage extends StatelessWidget {
   const CartPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Empty, typed cart list (to be populated by app state)
-    final List<Map<String, dynamic>> items = [];
+    // Use the app's cart system
+    final List<CartItem> items = cartItems;
 
     final subtotal = items.fold<double>(
       0,
-      (prev, item) => prev + (item['price'] as double) * (item['quantity'] as int),
+      (prev, item) => prev + item.price * item.quantity,
     );
 
     return UnionPageScaffold(
@@ -76,12 +77,12 @@ class CartPage extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    item['name'] as String,
+                                    item.name,
                                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                                   ),
                                   const SizedBox(height: 6),
                                   Text(
-                                    'Size: ${item['size']}  •  Qty: ${item['quantity']}',
+                                    'Size: ${item.size}  •  Qty: ${item.quantity}',
                                     style: TextStyle(color: Colors.grey[700]),
                                   ),
                                 ],
@@ -89,7 +90,7 @@ class CartPage extends StatelessWidget {
                             ),
                             const SizedBox(width: 12),
                             Text(
-                              '£${((item['price'] as double) * (item['quantity'] as int)).toStringAsFixed(2)}',
+                              '£${(item.price * item.quantity).toStringAsFixed(2)}',
                               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
                             ),
                           ],
