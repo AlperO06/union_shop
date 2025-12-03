@@ -7,7 +7,7 @@ import 'sale_page.dart';
 import 'screens/signup_page.dart';
 import 'screens/login_page.dart';
 import 'screens/cart.dart';
-import 'data/cart.dart'; // loadCartFromPrefs() is used inside the app
+import 'data/cart.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

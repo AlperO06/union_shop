@@ -155,19 +155,24 @@ Future<void> loadCartFromPrefs() async {
   }
 }
 
-// Add a single top-level listener so we can remove/add the exact same callback.
-// This prevents duplicate listeners on hot reload and ensures we can safely
-// remove it before adding (removeListener is a safe no-op if not attached).
-final VoidCallback _cartPersistenceListener = () {
+// Add a named top-level listener function to avoid potential initialization-order issues
+// and to ensure a stable identity for removeListener/addListener.
+void _cartPersistenceListener() {
+  // call the async saver but don't await here (listener must be a void callback).
   _saveCartToPrefs();
-};
+}
 
 bool _persistenceListenerAttached = false;
 
 void _attachPersistenceListener() {
-  if (_persistenceListenerAttached) return;
-  // Ensure no duplicate: remove before adding (safe if not present).
-  cartItemsNotifier.removeListener(_cartPersistenceListener);
+  // Always remove the listener first (safe no-op if it wasn't attached),
+  // then add it. This prevents duplicate listeners on hot reload and avoids
+  // returning early which could leave listener in an inconsistent state.
+  try {
+    cartItemsNotifier.removeListener(_cartPersistenceListener);
+  } catch (_) {
+    // ignore removal errors
+  }
   cartItemsNotifier.addListener(_cartPersistenceListener);
   _persistenceListenerAttached = true;
 }
