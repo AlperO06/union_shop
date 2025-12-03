@@ -80,3 +80,22 @@ Future<void> _saveCartToPrefs() async {
     // ignore persistence errors silently; do not crash the app
   }
 }
+
+Future<void> loadCartFromPrefs() async {
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final encoded = prefs.getString(_kCartPrefsKey);
+    if (encoded == null || encoded.isEmpty) return;
+    final decoded = jsonDecode(encoded);
+    if (decoded is List) {
+      final restored = decoded
+          .whereType<Map<String, dynamic>>()
+          .map((m) => CartItem.fromMap(Map<String, dynamic>.from(m)))
+          .toList();
+      // Replace notifier value once with restored list
+      cartItemsNotifier.value = restored;
+    }
+  } catch (_) {
+    // ignore parse errors
+  }
+}
