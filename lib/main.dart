@@ -9,14 +9,14 @@ import 'screens/login_page.dart';
 import 'screens/cart.dart';
 import 'data/cart.dart';
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-
-  enableCartPersistence();
+  // Wait for the cart notifier's single async initialization to finish.
+  await cartItemsNotifier.ready;
 
   if (kIsWeb) {
-    debugPrint('Web build: cart persistence enabled — saved cart will be loaded on app init.');
+    debugPrint('Web build: cart persistence enabled — saved cart loaded before app start.');
   }
 
   runApp(const UnionShopApp());
@@ -30,52 +30,24 @@ class UnionShopApp extends StatefulWidget {
 }
 
 class _UnionShopAppState extends State<UnionShopApp> {
-  late final Future<void> _cartLoadFuture;
-
-  @override
-  void initState() {
-    super.initState();
-    // start loading prefs; loadCartFromPrefs() attaches persistence listener in its finally block.
-    _cartLoadFuture = loadCartFromPrefs();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<void>(
-      future: _cartLoadFuture,
-      builder: (context, snapshot) {
-        // While loading, show a minimal app + loading screen so the app is responsive immediately.
-        if (snapshot.connectionState != ConnectionState.done) {
-          return MaterialApp(
-            title: 'Union Shop',
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
-            ),
-            home: const Scaffold(
-              body: Center(child: CircularProgressIndicator()),
-            ),
-          );
-        }
-
-        // Once loaded, show the full app with routes.
-        return MaterialApp(
-          title: 'Union Shop',
-          debugShowCheckedModeBanner: false,
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
-          ),
-          initialRoute: '/',
-          routes: {
-            '/': (context) => const HomeScreen(),
-            '/about': (context) => const AboutPage(),
-            '/collections': (context) => const CollectionsPage(),
-            '/sale': (context) => const SalePage(),
-            '/cart': (context) => const CartPage(),
-            '/login': (context) => const LoginPage(),
-            '/signup': (context) => const SignupPage(),
-          },
-        );
+    // Cart is guaranteed to be initialized (main awaited cartItemsNotifier.ready).
+    return MaterialApp(
+      title: 'Union Shop',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
+      ),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomeScreen(),
+        '/about': (context) => const AboutPage(),
+        '/collections': (context) => const CollectionsPage(),
+        '/sale': (context) => const SalePage(),
+        '/cart': (context) => const CartPage(),
+        '/login': (context) => const LoginPage(),
+        '/signup': (context) => const SignupPage(),
       },
     );
   }

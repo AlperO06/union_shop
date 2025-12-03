@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:async';
 import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -323,10 +324,15 @@ void clearCart() {
 // New: notifier that auto-persists whenever .value is set and loads saved state on init.
 class PersistentCartNotifier extends ValueNotifier<List<CartItem>> {
   bool _initialized = false;
+  // Completer to allow external code to await one-time initialization.
+  final Completer<void> _readyCompleter = Completer<void>();
 
   PersistentCartNotifier() : super([]) {
     _init();
   }
+
+  // Public future callers can await to know when initial load/attach finished.
+  Future<void> get ready => _readyCompleter.future;
 
   Future<void> _init() async {
     if (_initialized) return;
@@ -352,6 +358,10 @@ class PersistentCartNotifier extends ValueNotifier<List<CartItem>> {
     } finally {
       _attachPersistenceListener();
       _saveCartToPrefs();
+      // Complete the ready future exactly once to signal initialization finished.
+      if (!_readyCompleter.isCompleted) {
+        _readyCompleter.complete();
+      }
     }
   }
 
