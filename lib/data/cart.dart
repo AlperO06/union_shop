@@ -114,9 +114,14 @@ Future<void> _saveCartToPrefs() async {
     final prefs = await SharedPreferences.getInstance();
     final list = cartItemsNotifier.value.map((i) => i.toMap()).toList();
     final encoded = jsonEncode(list);
+    // Debug: log save operation and payload size (safe for development)
+    debugPrint('Saving cart to SharedPreferences ($_kCartPrefsKey) with ${list.length} items.');
+    debugPrint('Cart payload: $encoded');
     await prefs.setString(_kCartPrefsKey, encoded);
-  } catch (_) {
-    // ignore persistence errors silently; do not crash the app
+    debugPrint('Cart successfully saved.');
+  } catch (e, st) {
+    // log error for diagnostics but don't crash the app
+    debugPrint('Failed to save cart to prefs: $e\n$st');
   }
 }
 
@@ -124,7 +129,11 @@ Future<void> loadCartFromPrefs() async {
   try {
     final prefs = await SharedPreferences.getInstance();
     final encoded = prefs.getString(_kCartPrefsKey);
-    if (encoded == null || encoded.isEmpty) return;
+    if (encoded == null || encoded.isEmpty) {
+      debugPrint('No saved cart found in SharedPreferences ($_kCartPrefsKey).');
+      return;
+    }
+    debugPrint('Found saved cart payload: $encoded');
     final decoded = jsonDecode(encoded);
     if (decoded is List) {
       final restored = decoded
@@ -133,13 +142,15 @@ Future<void> loadCartFromPrefs() async {
           .toList();
       // Replace notifier value once with restored list
       cartItemsNotifier.value = restored;
+      // Debug: print restored cart contents
+      debugPrint('Loaded ${restored.length} cart items from prefs: ${restored.map((c) => c.toMap()).toList()}');
+    } else {
+      debugPrint('Saved cart payload had unexpected shape: ${decoded.runtimeType}');
     }
-  } catch (_) {
-    // ignore parse errors
+  } catch (e, st) {
+    debugPrint('Failed to load cart from prefs: $e\n$st');
   } finally {
     // Ensure persistence listener is attached after attempting to load the cart.
-    // This guarantees subsequent cart mutations are saved even if the caller
-    // only invoked loadCartFromPrefs() (e.g. from main.dart).
     _attachPersistenceListener();
   }
 }
