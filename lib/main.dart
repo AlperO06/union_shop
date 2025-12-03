@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'screens/home_screen.dart';
 import 'about_page.dart';
 import 'collections_page.dart';
@@ -10,6 +11,14 @@ import 'data/cart.dart'; // loadCartFromPrefs() is used inside the app
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
+
+  enableCartPersistence();
+
+  if (kIsWeb) {
+    debugPrint('Web build: cart persistence enabled — saved cart will be loaded on app init.');
+  }
+
   runApp(const UnionShopApp());
 }
 
