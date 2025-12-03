@@ -22,3 +22,12 @@ class CartItem {
     return 'CartItem(id: $id, name: $name, size: $size, colour: $colour, qty: $quantity)';
   }
 }
+
+// Global cart list
+final List<CartItem> cartItems = [];
+
+// Add item to cart: merge when same id + size + colour, otherwise push new
+void addToCart(CartItem item) {
+  final index = cartItems.indexWhere((c) =>
+      c.id == item.id && c.size == item.size && c.colour == item.colour);
+
