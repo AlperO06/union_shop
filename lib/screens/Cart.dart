@@ -154,7 +154,7 @@ class _CartPageState extends State<CartPage> {
                         child: Row(
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            // Product column: thumbnail + name + size + remove icon
+                            // Product column: image + name + colour/size + remove link
                             Expanded(
                               flex: 4,
                               child: Row(
@@ -193,27 +193,30 @@ class _CartPageState extends State<CartPage> {
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                         const SizedBox(height: 6),
-                                        Text('Size: ${item.size}', style: TextStyle(color: Colors.grey[700])),
+                                        Text(
+                                          '${item.colour} • Size: ${item.size}',
+                                          style: TextStyle(color: Colors.grey[700], fontSize: 13),
+                                        ),
+                                        const SizedBox(height: 6),
+                                        // Remove as a text link
+                                        TextButton(
+                                          onPressed: () => _removeItem(index),
+                                          style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: const Size(48, 24)),
+                                          child: const Text('Remove', style: TextStyle(color: Colors.redAccent)),
+                                        ),
                                       ],
                                     ),
-                                  ),
-                                  IconButton(
-                                    icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
-                                    onPressed: () => _removeItem(index),
                                   ),
                                 ],
                               ),
                             ),
 
-                            // Price column (unit price)
+                            // Price column (unit)
                             Expanded(
                               flex: 2,
                               child: Align(
                                 alignment: Alignment.centerRight,
-                                child: Text(
-                                  '£${item.price.toStringAsFixed(2)}',
-                                  style: const TextStyle(fontSize: 14),
-                                ),
+                                child: Text('£${item.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 14)),
                               ),
                             ),
 
