@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../data/cart.dart';
 
 // Small model used for menu items (label + optional route name)
 class ShopMenuItem {
@@ -18,6 +19,9 @@ const List<ShopMenuItem> kShopMenuItems = [
   ShopMenuItem(label: 'Pride Collection', routeName: '/collections'),
   ShopMenuItem(label: 'Graduation', routeName: '/collections'),
 ];
+
+// New: simple getter exposing current cart item count
+int get cartItemCount => cartItems.length;
 
 // The helper functions are duplicated here so the widget remains self-contained
 // and behaves identically when moved out of `main.dart`.
