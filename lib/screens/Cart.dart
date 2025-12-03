@@ -2,8 +2,41 @@ import 'package:flutter/material.dart';
 import '../widgets/union_page_scaffold.dart';
 import '../data/cart.dart';
 
-class CartPage extends StatelessWidget {
+class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
+
+  @override
+  _CartPageState createState() => _CartPageState();
+}
+
+class _CartPageState extends State<CartPage> {
+  // helper to increment quantity for item at index
+  void _incrementQuantity(int index) {
+    setState(() {
+      cartItems[index].quantity += 1;
+    });
+  }
+
+  // helper to decrement quantity; remove item if quantity reaches zero
+  void _decrementQuantity(int index) {
+    setState(() {
+      if (cartItems[index].quantity > 1) {
+        cartItems[index].quantity -= 1;
+      } else {
+        cartItems.removeAt(index);
+      }
+    });
+  }
+
+  // helper to remove item completely
+  void _removeItem(int index) {
+    setState(() {
+      cartItems.removeAt(index);
+    });
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Item removed from cart')),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +85,9 @@ class CartPage extends StatelessWidget {
                 ),
               ] else ...[
                 Column(
-                  children: items.map((item) {
+                  children: items.asMap().entries.map((entry) {
+                    final index = entry.key;
+                    final item = entry.value;
                     return Card(
                       margin: const EdgeInsets.symmetric(vertical: 8),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -93,9 +128,46 @@ class CartPage extends StatelessWidget {
                                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                                   ),
                                   const SizedBox(height: 6),
-                                  Text(
-                                    'Size: ${item.size}  •  Qty: ${item.quantity}',
-                                    style: TextStyle(color: Colors.grey[700]),
+                                  // Replace static size/qty text with interactive controls
+                                  Row(
+                                    children: [
+                                      Text('Size: ${item.size}', style: TextStyle(color: Colors.grey[700])),
+                                      const SizedBox(width: 12),
+                                      // quantity controls
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          border: Border.all(color: Colors.grey.shade300),
+                                          borderRadius: BorderRadius.circular(6),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            IconButton(
+                                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                                              constraints: const BoxConstraints(),
+                                              icon: const Icon(Icons.remove, size: 18),
+                                              onPressed: () => _decrementQuantity(index),
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                              child: Text('${item.quantity}', style: const TextStyle(fontWeight: FontWeight.w600)),
+                                            ),
+                                            IconButton(
+                                              padding: const EdgeInsets.symmetric(horizontal: 6),
+                                              constraints: const BoxConstraints(),
+                                              icon: const Icon(Icons.add, size: 18),
+                                              onPressed: () => _incrementQuantity(index),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      const SizedBox(width: 8),
+                                      // remove button
+                                      IconButton(
+                                        icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
+                                        onPressed: () => _removeItem(index),
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),
