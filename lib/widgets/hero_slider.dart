@@ -115,3 +115,15 @@ class _HeroSliderState extends State<HeroSlider> {
                   _currentIndex = index;
                 });
               },
+              itemBuilder: (context, index) {
+                final slide = widget.slides[index];
+                return Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.network(
+                      slide.imageUrl,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Colors.grey[300],
+                        child: const Center(child: Icon(Icons.broken_image, size: 48, color: Colors.grey)),
+                      ),
