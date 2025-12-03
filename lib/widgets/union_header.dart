@@ -55,9 +55,10 @@ class UnionHeader extends StatelessWidget {
           onPressed: () => Navigator.pushNamed(context, '/cart'),
         ),
         if (cartItemCount > 0)
+          // position badge slightly outside the top-right of the icon
           Positioned(
-            right: 2,
-            top: 2,
+            right: -6,
+            top: -6,
             child: Semantics(
               label: 'Cart, $cartItemCount items',
               child: Container(
