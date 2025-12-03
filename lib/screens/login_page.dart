@@ -109,7 +109,13 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(
                         height: 48,
                         child: ElevatedButton(
-                          onPressed: _loading ? null : _onLogin,
+                          onPressed: _loading
+                              ? null
+                              : () {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Logged in (demo only)')),
+                                  );
+                                },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color(0xFF4d2963),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
