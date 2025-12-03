@@ -17,3 +17,11 @@ class _SignupPageState extends State<SignupPage> {
   bool _obscurePassword = true;
   bool _loading = false;
 
+  @override
+  void dispose() {
+    _nameCtrl.dispose();
+    _emailCtrl.dispose();
+    _passwordCtrl.dispose();
+    _confirmCtrl.dispose();
+    super.dispose();
+  }
