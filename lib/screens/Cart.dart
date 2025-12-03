@@ -167,6 +167,8 @@ class _CartPageState extends State<CartPage> {
                   children: items.asMap().entries.map((entry) {
                     final index = entry.key;
                     final item = entry.value;
+                    // Null-safe image URL: consider empty or whitespace-only strings as "no image".
+                    final String? imageUrl = item.image.trim().isEmpty ? null : item.image;
                     return Card(
                       margin: const EdgeInsets.symmetric(vertical: 8),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -187,11 +189,12 @@ class _CartPageState extends State<CartPage> {
                                       color: Colors.grey[200],
                                       borderRadius: BorderRadius.circular(6),
                                     ),
-                                    child: (item.image).isNotEmpty
+                                    // Use the nullable imageUrl to decide rendering without calling isNotEmpty on a nullable.
+                                    child: imageUrl != null
                                         ? ClipRRect(
                                             borderRadius: BorderRadius.circular(6),
                                             child: Image.network(
-                                              item.image,
+                                              imageUrl,
                                               width: 84,
                                               height: 64,
                                               fit: BoxFit.cover,
