@@ -17,6 +17,7 @@ class UnionPageScaffold extends StatelessWidget {
           children: [
             UnionHeader(
               onProfilePressed: () => Navigator.pushNamed(context, '/login'),
+              onCartPressed: () => Navigator.pushNamed(context, '/cart'),
             ),
             body,
             const UnionFooter(), // positioned after the body; scrolls together with body
