@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 // Simple cart item model (expand as needed)
 class CartItem {
@@ -31,6 +33,32 @@ class CartItem {
   String get size => _size;
   String get colour => _colour;
   String get image => _image;
+
+  // Serialize to a Map for saving.
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'name': name,
+      'quantity': quantity,
+      'price': _price,
+      'size': _size,
+      'colour': _colour,
+      'image': _image,
+    };
+  }
+
+  // Create from a Map (defensive: provide defaults).
+  factory CartItem.fromMap(Map<String, dynamic> map) {
+    return CartItem(
+      id: map['id']?.toString() ?? '',
+      name: map['name']?.toString() ?? '',
+      quantity: (map['quantity'] is int) ? map['quantity'] as int : int.tryParse(map['quantity']?.toString() ?? '') ?? 1,
+      price: (map['price'] is num) ? (map['price'] as num).toDouble() : double.tryParse(map['price']?.toString() ?? '') ?? 0.0,
+      size: map['size']?.toString() ?? '',
+      colour: map['colour']?.toString() ?? '',
+      image: map['image']?.toString() ?? '',
+    );
+  }
 }
 
 // Reactive list of cart items: listen to this to update UI immediately
@@ -39,25 +67,16 @@ final ValueNotifier<List<CartItem>> cartItemsNotifier = ValueNotifier<List<CartI
 // Backwards-compatible getter used in existing code
 List<CartItem> get cartItems => cartItemsNotifier.value;
 
-// Helpers to modify the cart - these update the notifier's value so listeners rebuild
-void addToCart(CartItem item) {
-  final updated = List<CartItem>.from(cartItemsNotifier.value);
-  // Find existing item with same id, size and colour and merge quantities
-  final index = updated.indexWhere((i) =>
-      i.id == item.id && i.size == item.size && i.colour == item.colour);
-  if (index >= 0) {
-    updated[index].quantity += item.quantity;
-  } else {
-    updated.add(item);
+// Persistence helpers
+const String _kCartPrefsKey = 'cart_items_v1';
+
+Future<void> _saveCartToPrefs() async {
+  try {
+    final prefs = await SharedPreferences.getInstance();
+    final list = cartItemsNotifier.value.map((i) => i.toMap()).toList();
+    final encoded = jsonEncode(list);
+    await prefs.setString(_kCartPrefsKey, encoded);
+  } catch (_) {
+    // ignore persistence errors silently; do not crash the app
   }
-  cartItemsNotifier.value = updated;
-}
-
-void removeFromCart(String id) {
-  final updated = cartItemsNotifier.value.where((i) => i.id != id).toList();
-  cartItemsNotifier.value = updated;
-}
-
-void clearCart() {
-  cartItemsNotifier.value = [];
 }
