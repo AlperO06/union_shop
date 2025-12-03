@@ -208,11 +208,37 @@ class UnionHeader extends StatelessWidget {
                                 constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                                 onPressed: () => Navigator.pushNamed(context, '/login'),
                               ),
-                              IconButton(
-                                icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-                                padding: const EdgeInsets.all(8),
-                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                                onPressed: () => Navigator.pushNamed(context, '/cart'),
+                              // Cart icon with badge
+                              Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+                                    padding: const EdgeInsets.all(8),
+                                    constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                    onPressed: () => Navigator.pushNamed(context, '/cart'),
+                                  ),
+                                  if (cartItemCount > 0)
+                                    Positioned(
+                                      right: 2,
+                                      top: 2,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(2),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.redAccent,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                                        child: Center(
+                                          child: Text(
+                                            cartItemCount > 9 ? '9+' : '$cartItemCount',
+                                            style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
                               ),
                               const IconButton(
                                 icon: Icon(Icons.menu, size: 18, color: Colors.grey),
@@ -222,11 +248,37 @@ class UnionHeader extends StatelessWidget {
                               ),
                             ]
                           : [
-                              IconButton(
-                                icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
-                                padding: const EdgeInsets.all(8),
-                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                                onPressed: () => Navigator.pushNamed(context, '/cart'),
+                              // Cart icon with badge (narrow)
+                              Stack(
+                                clipBehavior: Clip.none,
+                                children: [
+                                  IconButton(
+                                    icon: const Icon(Icons.shopping_bag_outlined, size: 18, color: Colors.grey),
+                                    padding: const EdgeInsets.all(8),
+                                    constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                    onPressed: () => Navigator.pushNamed(context, '/cart'),
+                                  ),
+                                  if (cartItemCount > 0)
+                                    Positioned(
+                                      right: 2,
+                                      top: 2,
+                                      child: Container(
+                                        padding: const EdgeInsets.all(2),
+                                        decoration: const BoxDecoration(
+                                          color: Colors.redAccent,
+                                          shape: BoxShape.circle,
+                                        ),
+                                        constraints: const BoxConstraints(minWidth: 16, minHeight: 16),
+                                        child: Center(
+                                          child: Text(
+                                            cartItemCount > 9 ? '9+' : '$cartItemCount',
+                                            style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                ],
                               ),
                               const IconButton(
                                 icon: Icon(Icons.menu, size: 18, color: Colors.grey),
