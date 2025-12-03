@@ -6,3 +6,13 @@ class CartItem {
   final String colour;
   int quantity;
   final String image;
+
+  CartItem({
+    required this.id,
+    required this.name,
+    required this.price,
+    this.size = '',
+    this.colour = '',
+    this.quantity = 1,
+    this.image = '',
+  });
