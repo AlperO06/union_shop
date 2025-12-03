@@ -30,12 +30,12 @@ const List<Product> products = [
     name: 'Limited Edition Essential Zip Hoodie',
     oldPrice: 79.99,
     newPrice: 59.99,
-    image: 'https://picsum.photos/id/1011/800/600',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYyTmj7qHlTsja1Wdpzv7lSqr3OtL7W0m0ObLH7WMXevg3wHr6JAjmsVH29JWnEmbwbvM&usqp=CAU',
     description:
         'A premium limited edition zip hoodie with soft brushed interior, metal zipper, and a tailored fit.',
     images: [
-      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg',
-      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityBookmark1_1024x1024@2x.jpg',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3QUYOKhTntE-L4eVmc4ME9UD6tKDiXoIW1w&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU',
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Black', 'Grey', 'Purple'],
