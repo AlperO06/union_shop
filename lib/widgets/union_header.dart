@@ -49,7 +49,8 @@ class UnionHeader extends StatelessWidget {
     return ValueListenableBuilder<List<CartItem>>(
       valueListenable: cartItemsNotifier,
       builder: (context, items, _) {
-        final count = items.length;
+        // changed: sum quantities instead of counting distinct items
+        final count = items.fold<int>(0, (sum, item) => sum + (item.quantity));
         return Stack(
           clipBehavior: Clip.none,
           children: [
