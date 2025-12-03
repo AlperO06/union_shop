@@ -149,3 +149,17 @@ class _SignupPageState extends State<SignupPage> {
                         },
                         onFieldSubmitted: (_) => _onSignUp(),
                       ),
+                      const SizedBox(height: 18),
+                      SizedBox(
+                        height: 48,
+                        child: ElevatedButton(
+                          onPressed: _loading ? null : _onSignUp,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4d2963),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                          ),
+                          child: _loading
+                              ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5)
+                              : const Text('Sign Up', style: TextStyle(fontSize: 16)),
+                        ),
+                      ),
