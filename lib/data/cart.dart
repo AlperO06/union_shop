@@ -34,6 +34,27 @@ class CartItem {
   String get colour => _colour;
   String get image => _image;
 
+  // Add: copyWith to create new instances instead of mutating existing ones
+  CartItem copyWith({
+    String? id,
+    String? name,
+    int? quantity,
+    double? price,
+    String? size,
+    String? colour,
+    String? image,
+  }) {
+    return CartItem(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      quantity: quantity ?? this.quantity,
+      price: price ?? this._price,
+      size: size ?? this._size,
+      colour: colour ?? this._colour,
+      image: image ?? this._image,
+    );
+  }
+
   // Serialize to a Map for saving.
   Map<String, dynamic> toMap() {
     return {
@@ -129,18 +150,23 @@ void _attachPersistenceListener() {
 bool _persistenceListenerAttached = false;
 
 void addToCart(CartItem item) {
+  // create a new list instance and replace the element with a new CartItem when merging
   final updated = List<CartItem>.from(cartItemsNotifier.value);
   final index = updated.indexWhere((i) =>
       i.id == item.id && i.size == item.size && i.colour == item.colour);
   if (index >= 0) {
-    updated[index].quantity += item.quantity;
+    final existing = updated[index];
+    // create a new CartItem instead of mutating existing.quantity
+    updated[index] = existing.copyWith(quantity: existing.quantity + item.quantity);
   } else {
+    // add the provided item (it's already a separate instance)
     updated.add(item);
   }
   cartItemsNotifier.value = updated;
 }
 
 void removeFromCart(String id) {
+  // produce a new List (no in-place mutation)
   final updated = cartItemsNotifier.value.where((i) => i.id != id).toList();
   cartItemsNotifier.value = updated;
 }
