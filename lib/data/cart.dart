@@ -69,21 +69,58 @@ class CartItem {
   }
 
   // Create from a Map (defensive: provide defaults).
+  // Reworked to guarantee non-null fields and robust parsing.
   factory CartItem.fromMap(Map<String, dynamic> map) {
+    // Local helper parsers to ensure non-null values and safe defaults.
+    String parseString(dynamic v) {
+      if (v == null) return '';
+      try {
+        return v.toString();
+      } catch (_) {
+        return '';
+      }
+    }
+
+    int parseInt(dynamic v, [int fallback = 1]) {
+      if (v == null) return fallback;
+      if (v is int) return v;
+      if (v is double) return v.toInt();
+      final s = v.toString();
+      return int.tryParse(s) ?? fallback;
+    }
+
+    double parseDouble(dynamic v, [double fallback = 0.0]) {
+      if (v == null) return fallback;
+      if (v is double) return v;
+      if (v is int) return v.toDouble();
+      final s = v.toString();
+      return double.tryParse(s) ?? fallback;
+    }
+
+    final id = parseString(map['id']);
+    final name = parseString(map['name']);
+    final quantity = parseInt(map['quantity'], 1);
+    final price = parseDouble(map['price'], 0.0);
+    final size = parseString(map['size']);
+    final colour = parseString(map['colour']);
+    final image = parseString(map['image']);
+
     return CartItem(
-      id: map['id']?.toString() ?? '',
-      name: map['name']?.toString() ?? '',
-      quantity: (map['quantity'] is int) ? map['quantity'] as int : int.tryParse(map['quantity']?.toString() ?? '') ?? 1,
-      price: (map['price'] is num) ? (map['price'] as num).toDouble() : double.tryParse(map['price']?.toString() ?? '') ?? 0.0,
-      size: map['size']?.toString() ?? '',
-      colour: map['colour']?.toString() ?? '',
-      image: map['image']?.toString() ?? '',
+      id: id,
+      name: name,
+      quantity: quantity,
+      price: price,
+      size: size,
+      colour: colour,
+      image: image,
     );
   }
 
   // Added: JSON helpers using existing map (defensive on parse errors)
   String toJson() => jsonEncode(toMap());
 
+  // Hardened fromJson: accepts JSON string or Map-like values and always
+  // returns a CartItem with non-null fields (defaults applied).
   factory CartItem.fromJson(String source) {
     try {
       final decoded = jsonDecode(source);
@@ -96,6 +133,25 @@ class CartItem {
     } catch (_) {
       // fall through to return a safe default below
     }
+    // Return safe default instance (no nulls).
+    return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '');
+  }
+
+  // Convenience factory: accept null / String / Map and always return a non-null instance.
+  factory CartItem.safeFrom(dynamic source) {
+    if (source == null) {
+      return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '');
+    }
+    if (source is String) {
+      return CartItem.fromJson(source);
+    }
+    if (source is Map<String, dynamic>) {
+      return CartItem.fromMap(source);
+    }
+    if (source is Map) {
+      return CartItem.fromMap(Map<String, dynamic>.from(source));
+    }
+    // Fallback safe default.
     return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '');
   }
 }
