@@ -23,11 +23,23 @@ class CartItem {
   }
 }
 
-// Global cart list
 final List<CartItem> cartItems = [];
 
-// Add item to cart: merge when same id + size + colour, otherwise push new
 void addToCart(CartItem item) {
   final index = cartItems.indexWhere((c) =>
       c.id == item.id && c.size == item.size && c.colour == item.colour);
 
+  if (index >= 0) {
+    cartItems[index].quantity += item.quantity;
+  } else {
+    cartItems.add(CartItem(
+      id: item.id,
+      name: item.name,
+      price: item.price,
+      size: item.size,
+      colour: item.colour,
+      quantity: item.quantity,
+      image: item.image,
+    ));
+  }
+}
