@@ -55,3 +55,24 @@ class _SignupPageState extends State<SignupPage> {
         backgroundColor: Colors.white,
         foregroundColor: Colors.black87,
       ),
+      backgroundColor: const Color(0xFFF7F7FB),
+      body: Center(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 520),
+            child: Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 28),
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      const Text(
+                        'Create Account',
+                        style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
+                      ),
