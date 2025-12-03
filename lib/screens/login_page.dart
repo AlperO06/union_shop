@@ -87,4 +87,28 @@ class _LoginPageState extends State<LoginPage> {
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                           contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
                         ),
- 
+                        validator: (v) {
+                          if (v == null || v.trim().isEmpty) return 'Please enter your email';
+                          if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(v.trim())) return 'Enter a valid email';
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 16),
+                      TextFormField(
+                        controller: _passwordCtrl,
+                        obscureText: _obscure,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                          suffixIcon: IconButton(
+                            icon: Icon(_obscure ? Icons.visibility_off : Icons.visibility),
+                            onPressed: () => setState(() => _obscure = !_obscure),
+                          ),
+                        ),
+                        validator: (v) {
+                          if (v == null || v.isEmpty) return 'Please enter your password';
+                          if (v.length < 6) return 'Password must be at least 6 characters';
+                          return null;
+                        },
+                      ),
