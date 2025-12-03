@@ -112,3 +112,17 @@ class _SignupPageState extends State<SignupPage> {
                           return null;
                         },
                       ),
+                      const SizedBox(height: 12),
+                      TextFormField(
+                        controller: _passwordCtrl,
+                        obscureText: _obscurePassword,
+                        textInputAction: TextInputAction.next,
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                          suffixIcon: IconButton(
+                            icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
+                            onPressed: () => setState(() => _obscurePassword = !_obscurePassword),
+                          ),
+                        ),
