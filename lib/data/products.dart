@@ -62,6 +62,11 @@ const List<Product> products = [
     image: 'https://picsum.photos/id/1025/800/600',
     description:
         'Premium heavyweight fleece hoodie featuring embroidered logo and reinforced seams for lasting comfort.',
+    images: [
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3QUYOKhTntE-L4eVmc4ME9UD6tKDiXoIW1w&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoMLAbZ0xqNNMFPtScF47Ctxs712cDdp0mfAGaDWd4mbWjycHf8rRgs6PULRr44ebkeSY&usqp=CAU',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU'
+    ],
   ),
   Product(
     id: 4,
@@ -70,6 +75,11 @@ const List<Product> products = [
     newPrice: 29.99,
     image: 'https://picsum.photos/id/1035/800/600',
     description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
+    images: [
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3QUYOKhTntE-L4eVmc4ME9UD6tKDiXoIW1w&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoMLAbZ0xqNNMFPtScF47Ctxs712cDdp0mfAGaDWd4mbWjycHf8rRgs6PULRr44ebkeSY&usqp=CAU',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU'
+    ],
   ),
   // appended Portsmouth items
   Product(
@@ -79,6 +89,9 @@ const List<Product> products = [
     newPrice: 1.00,
     image: 'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_720x.jpg',
     description: 'A postcard featuring iconic Portsmouth landmarks.',
+    images: [
+      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_720x.jpg',
+    ]
   ),
   Product(
     id: 6,
