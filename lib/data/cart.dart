@@ -183,72 +183,81 @@ Future<void> _saveCartToPrefs() async {
 }
 
 Future<void> loadCartFromPrefs() async {
-  bool resetToEmpty = false;
   try {
     final prefs = await SharedPreferences.getInstance();
     final encoded = prefs.getString(_kCartPrefsKey);
     if (encoded == null || encoded.isEmpty) {
       debugPrint('No saved cart found in SharedPreferences ($_kCartPrefsKey).');
-      // nothing to restore, will attach listener in finally
       return;
     }
+
     debugPrint('Found saved cart payload: $encoded');
 
     dynamic decoded;
     try {
       decoded = jsonDecode(encoded);
     } catch (e, st) {
-      debugPrint('Warning: failed to decode cart JSON; resetting cart to empty. Error: $e\n$st');
-      resetToEmpty = true;
-      decoded = null;
-    }
-
-    if (!resetToEmpty) {
-      if (decoded is List) {
-        final restored = <CartItem>[];
-        for (final item in decoded) {
-          try {
-            CartItem ci;
-            if (item is Map<String, dynamic>) {
-              ci = CartItem.fromMap(item);
-            } else if (item is Map) {
-              ci = CartItem.fromMap(Map<String, dynamic>.from(item));
-            } else if (item is String) {
-              ci = CartItem.fromJson(item);
-            } else {
-              debugPrint('Warning: unexpected cart item type (${item.runtimeType}); will reset cart to empty.');
-              resetToEmpty = true;
-              break;
-            }
-            // Validate essential fields — if missing, treat payload as invalid.
-            if (ci.id.isEmpty || ci.name.isEmpty) {
-              debugPrint('Warning: cart item missing required fields (id/name); will reset cart to empty.');
-              resetToEmpty = true;
-              break;
-            }
-            restored.add(ci);
-          } catch (e, st) {
-            debugPrint('Warning: failed to parse a cart item; resetting cart to empty. Error: $e\n$st');
-            resetToEmpty = true;
-            break;
-          }
-        }
-
-        if (!resetToEmpty) {
-          cartItemsNotifier.value = restored;
-          debugPrint('Loaded ${restored.length} cart items from prefs.');
-        } else {
-          cartItemsNotifier.value = [];
-        }
-      } else {
-        debugPrint('Warning: Saved cart payload had unexpected shape: ${decoded.runtimeType}. Resetting cart to empty.');
-        cartItemsNotifier.value = [];
+      debugPrint('Warning: corrupt cart JSON detected; clearing saved cart. Error: $e\n$st');
+      // Remove corrupted value to avoid repeated failures.
+      try {
+        await prefs.remove(_kCartPrefsKey);
+      } catch (removeErr) {
+        debugPrint('Failed to remove corrupted cart key: $removeErr');
       }
-    } else {
       cartItemsNotifier.value = [];
+      return;
     }
+
+    if (decoded is! List) {
+      debugPrint('Warning: saved cart payload has unexpected type ${decoded.runtimeType}; clearing saved cart.');
+      try {
+        await prefs.remove(_kCartPrefsKey);
+      } catch (removeErr) {
+        debugPrint('Failed to remove unexpected cart payload: $removeErr');
+      }
+      cartItemsNotifier.value = [];
+      return;
+    }
+
+    final restored = <CartItem>[];
+    var invalidFound = false;
+
+    for (final item in decoded) {
+      try {
+        final ci = CartItem.safeFrom(item);
+        // validate essential fields
+        if (ci.id.isEmpty || ci.name.isEmpty) {
+          debugPrint('Warning: cart item missing required id/name; abandoning restore.');
+          invalidFound = true;
+          break;
+        }
+        restored.add(ci);
+      } catch (e, st) {
+        debugPrint('Warning: failed to parse a cart item; abandoning restore. Error: $e\n$st');
+        invalidFound = true;
+        break;
+      }
+    }
+
+    if (invalidFound) {
+      try {
+        await prefs.remove(_kCartPrefsKey);
+      } catch (removeErr) {
+        debugPrint('Failed to remove invalid cart payload: $removeErr');
+      }
+      cartItemsNotifier.value = [];
+      return;
+    }
+
+    // Successful restore
+    cartItemsNotifier.value = restored;
+    debugPrint('Loaded ${restored.length} cart items from prefs.');
   } catch (e, st) {
-    debugPrint('Failed to load cart from prefs: $e\n$st. Resetting cart to empty.');
+    debugPrint('Failed to load cart from prefs: $e\n$st. Clearing in-memory cart to be safe.');
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.remove(_kCartPrefsKey);
+    } catch (_) {}
     try {
       cartItemsNotifier.value = [];
     } catch (_) {}
