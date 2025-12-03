@@ -76,3 +76,8 @@ class _SignupPageState extends State<SignupPage> {
                         'Create Account',
                         style: TextStyle(fontSize: 22, fontWeight: FontWeight.w700),
                       ),
+                      const SizedBox(height: 8),
+                      const Text(
+                        'Create an account to access the Union Shop',
+                        style: TextStyle(fontSize: 14, color: Colors.black54),
+                      ),
