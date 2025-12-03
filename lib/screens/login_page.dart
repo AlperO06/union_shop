@@ -86,4 +86,5 @@ class _LoginPageState extends State<LoginPage> {
                           hintText: 'you@example.com',
                           border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
                           contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 14),
+                        ),
  
