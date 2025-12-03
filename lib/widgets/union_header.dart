@@ -60,8 +60,8 @@ class UnionHeader extends StatelessWidget {
               constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
               onPressed: () => Navigator.pushNamed(context, '/cart'),
             ),
-            // show badge only when there are items in the cart
-            if (count > 0)
+            // show badge only when the cart list has entries (even if quantities sum = 0)
+            if (items.isNotEmpty)
               Positioned(
                 right: -6,
                 top: -6,
