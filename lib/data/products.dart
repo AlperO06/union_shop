@@ -35,7 +35,8 @@ const List<Product> products = [
         'A premium limited edition zip hoodie with soft brushed interior, metal zipper, and a tailored fit.',
     images: [
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3QUYOKhTntE-L4eVmc4ME9UD6tKDiXoIW1w&s',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoMLAbZ0xqNNMFPtScF47Ctxs712cDdp0mfAGaDWd4mbWjycHf8rRgs6PULRr44ebkeSY&usqp=CAU',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU'
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Black', 'Grey', 'Purple'],
@@ -47,6 +48,11 @@ const List<Product> products = [
     newPrice: 24.99,
     image: 'https://picsum.photos/id/1015/800/600',
     description: 'A soft, breathable cotton tee with a classic fit—perfect for everyday wear.',
+    images: [
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3QUYOKhTntE-L4eVmc4ME9UD6tKDiXoIW1w&s',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoMLAbZ0xqNNMFPtScF47Ctxs712cDdp0mfAGaDWd4mbWjycHf8rRgs6PULRr44ebkeSY&usqp=CAU',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU'
+    ],
   ),
   Product(
     id: 3,
