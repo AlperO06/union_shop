@@ -144,18 +144,25 @@ Future<void> loadCartFromPrefs() async {
   }
 }
 
+// Add a single top-level listener so we can remove/add the exact same callback.
+// This prevents duplicate listeners on hot reload and ensures we can safely
+// remove it before adding (removeListener is a safe no-op if not attached).
+final VoidCallback _cartPersistenceListener = () {
+  _saveCartToPrefs();
+};
+
+bool _persistenceListenerAttached = false;
+
 void _attachPersistenceListener() {
   if (_persistenceListenerAttached) return;
-  cartItemsNotifier.addListener(() {
-    _saveCartToPrefs();
-  });
+  // Ensure no duplicate: remove before adding (safe if not present).
+  cartItemsNotifier.removeListener(_cartPersistenceListener);
+  cartItemsNotifier.addListener(_cartPersistenceListener);
   _persistenceListenerAttached = true;
 }
 
 // Public wrapper so callers (e.g. main.dart) can enable the listener.
 void enableCartPersistence() => _attachPersistenceListener();
-
-bool _persistenceListenerAttached = false;
 
 void addToCart(CartItem item) {
   // create a new list instance and replace the element with a new CartItem when merging
@@ -170,25 +177,19 @@ void addToCart(CartItem item) {
     // add the provided item (it's already a separate instance)
     updated.add(item);
   }
+  // Setting .value will notify listeners (including the persistence listener).
   cartItemsNotifier.value = updated;
-  // persist immediately
-  _saveCartToPrefs();
+  // No direct call to _saveCartToPrefs() here — persistence is handled by the listener.
 }
 
 void removeFromCart(String id) {
-
   final updated = cartItemsNotifier.value.where((i) => i.id != id).toList();
-
+  // Setting .value will notify listeners (including the persistence listener).
   cartItemsNotifier.value = List<CartItem>.from(updated);
-
-  cartItemsNotifier.notifyListeners();
-
-
-  _saveCartToPrefs();
+  // Removed explicit notifyListeners() and direct _saveCartToPrefs() call.
 }
 
 void clearCart() {
   cartItemsNotifier.value = [];
-  // persist immediately
-  _saveCartToPrefs();
+  // Persistence handled by the listener; no direct _saveCartToPrefs() call.
 }
