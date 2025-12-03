@@ -20,9 +20,6 @@ const List<ShopMenuItem> kShopMenuItems = [
   ShopMenuItem(label: 'Graduation', routeName: '/collections'),
 ];
 
-// New: simple getter exposing current cart item count
-int get cartItemCount => cartItems.length;
-
 // The helper functions are duplicated here so the widget remains self-contained
 // and behaves identically when moved out of `main.dart`.
 void placeholderCallbackForButtons() {
@@ -49,15 +46,15 @@ class UnionHeader extends StatelessWidget {
     return ValueListenableBuilder<List<CartItem>>(
       valueListenable: cartItemsNotifier,
       builder: (context, items, _) {
-        // sum quantities
+        // derive total quantity from the shared cart state every build
         final totalQuantity = items.fold<int>(0, (sum, item) => sum + item.quantity);
-        // only show badge when the underlying list has entries
-        final showBadge = items.isNotEmpty;
+
+        // show badge only when there is at least one item (sum of quantities > 0)
+        final showBadge = totalQuantity > 0;
 
         return Stack(
           clipBehavior: Clip.none,
           children: [
-            // larger touch target for mobile friendliness
             IconButton(
               icon: const Icon(Icons.shopping_bag_outlined, size: 20, color: Colors.grey),
               padding: const EdgeInsets.all(12),
@@ -66,10 +63,8 @@ class UnionHeader extends StatelessWidget {
               tooltip: 'Open cart',
             ),
 
-            // show badge only when there are items in the cart (list not empty)
             if (showBadge)
               Positioned(
-                // slightly closer on small screens and larger so it's tappable/readable
                 right: -4,
                 top: -4,
                 child: Semantics(
@@ -86,8 +81,8 @@ class UnionHeader extends StatelessWidget {
                     constraints: const BoxConstraints(minWidth: 20, minHeight: 20),
                     child: Center(
                       child: Text(
-                        // cap display for large numbers
-                        totalQuantity > 99 ? '99+' : (totalQuantity > 9 ? '9+' : '$totalQuantity'),
+                        // display the real totalQuantity, capped at 99+
+                        totalQuantity > 99 ? '99+' : '$totalQuantity',
                         style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
                         textAlign: TextAlign.center,
                       ),
