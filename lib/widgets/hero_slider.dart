@@ -44,3 +44,13 @@ class _HeroSliderState extends State<HeroSlider> {
   late int _currentIndex;
   Timer? _timer;
   bool _userInteracting = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = 0;
+    _controller = PageController(initialPage: 0);
+    if (widget.autoPlay && widget.slides.length > 1) {
+      _startAutoPlay();
+    }
+  }
