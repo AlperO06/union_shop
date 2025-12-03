@@ -7,6 +7,12 @@ class CartItem {
   int quantity;
 
   CartItem({required this.id, required this.name, this.quantity = 1});
+
+  get price => null;
+
+  get size => null;
+
+  String? get image => null;
 }
 
 // Reactive list of cart items: listen to this to update UI immediately
