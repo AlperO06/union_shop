@@ -34,3 +34,13 @@ class HeroSlider extends StatefulWidget {
     this.autoPlayInterval = const Duration(seconds: 5),
     this.autoPlay = true,
   }) : super(key: key);
+
+  @override
+  _HeroSliderState createState() => _HeroSliderState();
+}
+
+class _HeroSliderState extends State<HeroSlider> {
+  late final PageController _controller;
+  late int _currentIndex;
+  Timer? _timer;
+  bool _userInteracting = false;
