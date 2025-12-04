@@ -216,6 +216,14 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                 style: TextStyle(fontSize: 13, color: Colors.grey[600]),
               ),
               const SizedBox(height: 12),
+
+              // --- Personalisation section header ---
+              Text(
+                'Personalisation',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 8),
+
               // previous inline row -> now a column with label above the dropdown
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
