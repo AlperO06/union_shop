@@ -40,6 +40,9 @@ class CartItem {
   String get image => _image;
 
   // Add: copyWith to create new instances instead of mutating existing ones
+  // sentinel to detect "no change" for nullable fields in copyWith
+  static const Object _noChange = Object();
+
   CartItem copyWith({
     String? id,
     String? name,
@@ -48,8 +51,12 @@ class CartItem {
     String? size,
     String? colour,
     String? image,
-    List<String>? personalisationLines,
+    Object? personalisationLines = _noChange,
   }) {
+    // resolve personalisationLines: if caller didn't provide a value, keep existing;
+    // if caller provided null, set to null; otherwise cast provided value.
+    final List<String>? resolvedPersonalisationLines =
+        identical(personalisationLines, _noChange) ? _personalisationLines : (personalisationLines as List<String>?);
     return CartItem(
       id: id ?? this.id,
       name: name ?? this.name,
@@ -58,7 +65,7 @@ class CartItem {
       size: size ?? _size,
       colour: colour ?? _colour,
       image: image ?? _image,
-      personalisationLines: personalisationLines ?? _personalisationLines,
+      personalisationLines: resolvedPersonalisationLines,
     );
   }
 
