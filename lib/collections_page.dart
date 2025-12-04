@@ -261,11 +261,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                               p['price']!,
                               style: const TextStyle(fontSize: 13, color: Colors.grey),
                             ),
-                            const SizedBox(height: 4),
-                            Text(
-                              p['category']!,
-                              style: const TextStyle(fontSize: 12, color: Colors.black54),
-                            ),
                           ],
                         ),
                       ),
