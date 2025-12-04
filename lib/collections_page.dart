@@ -138,7 +138,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                         children: [
                           const Text(
                             'FILTER BY',
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.black54),
+                            // made label slightly smaller to be a "small label"
+                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.black54),
                           ),
                           const SizedBox(height: 8),
                           DropdownButton<String>(
@@ -168,7 +169,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                         children: [
                           const Text(
                             'SORT BY',
-                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.black54),
+                            // made label slightly smaller to be a "small label"
+                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.black54),
                           ),
                           const SizedBox(height: 8),
                           DropdownButton<String>(
@@ -190,11 +192,13 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
 
                     const SizedBox(width: 16),
 
-                    // push count to the right
-                    const Spacer(),
-
-                    // Item count (right)
-                    Text('${sortedProducts.length} item(s)', style: const TextStyle(color: Colors.black54)),
+                    // move item count to the right side, vertically centered
+                    Expanded(
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Text('${sortedProducts.length} item(s)', style: const TextStyle(color: Colors.black54)),
+                      ),
+                    ),
                   ],
                 ),
               ),
