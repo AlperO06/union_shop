@@ -218,7 +218,7 @@ class _CartPageState extends State<CartPage> {
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                         const SizedBox(height: 6),
-                                        if (item is PrintShackCartItem && (item.personalisationLines ?? <String>[]).isNotEmpty) ...[
+                                        if ((item.personalisationLines ?? <String>[]).isNotEmpty) ...[
                                           for (var i = 0; i < (item.personalisationLines ?? <String>[]).length; i++)
                                             Text(
                                               'Personalisation Line ${i + 1}: ${item.personalisationLines![i]}',
