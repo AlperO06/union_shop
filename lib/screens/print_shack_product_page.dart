@@ -144,3 +144,23 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
               style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 12),
+
+            // Number of lines dropdown
+            Row(
+              children: [
+                const Text('Number of lines:'),
+                const SizedBox(width: 12),
+                DropdownButton<int>(
+                  value: _lines,
+                  items: List.generate(4, (i) => i + 1)
+                      .map((n) => DropdownMenuItem(value: n, child: Text('$n')))
+                      .toList(),
+                  onChanged: (v) {
+                    if (v != null) _changeLines(v);
+                  },
+                ),
+                const SizedBox(width: 16),
+                Text('Max chars/line: ${widget.product.maxCharsPerLine}'),
+              ],
+            ),
+            const SizedBox(height: 12),
