@@ -70,16 +70,34 @@ class PrintShackProduct {
   }
 }
 
-// Sample Print Shack product
+// Sample Print Shack product (personalised hoodie images updated)
 const PrintShackProduct samplePersonalisedHoodie = PrintShackProduct(
   name: 'Personalised Hoodie',
   pricePerLine: 3.0,
   maxCharsPerLine: 10,
   imageUrls: [
-    // Unsplash images for hoodies (publicly served)
-    'https://images.unsplash.com/photo-1520975911068-9d9b15743f85?auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1200&q=80',
-    'https://images.unsplash.com/photo-1520975698514-0a7b8c3f1c0e?auto=format&fit=crop&w=1200&q=80',
+    // Primary personalised image
+    'https://shop.upsu.net/cdn/shop/products/Personalised_Image_1024x1024@2x.jpg?v=1562949869',
+
+    // Hero slider images (multiple sizes for responsive rendering)
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_180x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_360x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_540x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_720x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_900x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_1080x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_1296x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_1512x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_1728x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_1950x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_2100x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_2260x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_2450x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_2700x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_3000x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_3350x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_3750x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie_4100x.jpg?v=1632306034',
+    'https://shop.upsu.net/cdn/shop/files/Hoodie.jpg?v=1632306034',
   ],
 );
