@@ -25,7 +25,10 @@ final List<PrintShackCartItem> printShackCart = [];
 class PrintShackProductPage extends StatefulWidget {
   final PrintShackProduct product;
 
-  const PrintShackProductPage({Key? key, required this.product}) : super(key: key);
+  // make product optional for route compatibility; default to samplePersonalisedHoodie
+  const PrintShackProductPage({Key? key, PrintShackProduct? product})
+      : product = product ?? samplePersonalisedHoodie,
+        super(key: key);
 
   @override
   State<PrintShackProductPage> createState() => _PrintShackProductPageState();
