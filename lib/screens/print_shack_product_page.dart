@@ -280,9 +280,14 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
             );
           }
 
-          return SingleChildScrollView(
-            padding: const EdgeInsets.all(16),
-            child: content,
+          return Center(
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 1100),
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: content,
+              ),
+            ),
           );
         },
       ),
