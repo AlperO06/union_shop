@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../data/print_shack.dart';
 import '../widgets/union_page_scaffold.dart'; // use the app's shared scaffold (header/footer)
+import '../data/cart.dart'; // integrate with the app-wide cart
 
 // simple in-memory cart for Print Shack items
 class PrintShackCartItem {
@@ -107,25 +108,47 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
       }
     }
 
-    // Build payload (replace with real cart logic)
+    // Build payload (use app cart)
     final lines = List.generate(_lines, (i) => _controllers[i].text);
 
-    // store in in-memory cart
-    final item = PrintShackCartItem(
+    // keep local print-shack cart for debugging/history
+    final localItem = PrintShackCartItem(
       productName: widget.product.name,
       lines: lines,
       quantity: _quantity,
     );
-    printShackCart.add(item);
+    printShackCart.add(localItem);
 
-    debugPrint('Added to cart: $item');
-    debugPrint('Current cart: $printShackCart');
+    // Determine an image for the cart item (best-effort)
+    final images = widget.product.imageUrls;
+    final image = images.isNotEmpty ? images[_selectedImage.clamp(0, images.length - 1)] : '';
+
+    // Create a stable-ish id for this printable item (ensures non-empty id)
+    final idParts = [widget.product.name, ...lines.where((l) => l.isNotEmpty)];
+    final idBase = idParts.join('-').replaceAll(RegExp(r"\s+"), '_');
+    final id = '$idBase-${DateTime.now().millisecondsSinceEpoch}';
+
+    // Create CartItem from the app cart model and add it to the central cart
+    final cartItem = CartItem(
+      id: id,
+      name: widget.product.name,
+      quantity: _quantity,
+      price: _totalPrice,
+      size: '',
+      colour: '',
+      image: image,
+    );
+
+    try {
+      addToCart(cartItem);
+      debugPrint('Added to app cart: $cartItem');
+    } catch (e, st) {
+      debugPrint('Failed to add to app cart: $e\n$st');
+    }
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Added to cart')),
     );
-
-    // integrate with app cart/state management
   }
 
   @override
