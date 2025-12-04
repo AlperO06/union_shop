@@ -60,3 +60,14 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
         return;
       }
     }
+
+    // Build payload (replace with real cart logic)
+    final lines = List.generate(_lines, (i) => _controllers[i].text);
+    debugPrint('Add to cart: ${widget.product.name}, qty=$_quantity, lines=$lines');
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Added to cart')),
+    );
+
+    // TODO: integrate with app cart/state management
+  }
