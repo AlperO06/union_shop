@@ -2,6 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../data/print_shack.dart';
 
+// simple in-memory cart for Print Shack items
+class PrintShackCartItem {
+  final String productName;
+  final List<String> lines;
+  final int quantity;
+
+  PrintShackCartItem({
+    required this.productName,
+    required this.lines,
+    required this.quantity,
+  });
+
+  @override
+  String toString() => 'PrintShackCartItem(name: $productName, qty: $quantity, lines: $lines)';
+}
+
+// global cart list (kept in-memory for now)
+final List<PrintShackCartItem> printShackCart = [];
+
 class PrintShackProductPage extends StatefulWidget {
   final PrintShackProduct product;
 
@@ -66,7 +85,17 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
 
     // Build payload (replace with real cart logic)
     final lines = List.generate(_lines, (i) => _controllers[i].text);
-    debugPrint('Add to cart: ${widget.product.name}, qty=$_quantity, lines=$lines');
+
+    // store in in-memory cart
+    final item = PrintShackCartItem(
+      productName: widget.product.name,
+      lines: lines,
+      quantity: _quantity,
+    );
+    printShackCart.add(item);
+
+    debugPrint('Added to cart: $item');
+    debugPrint('Current cart: $printShackCart');
 
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Added to cart')),
