@@ -234,21 +234,39 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                   const Text('Quantity:', style: TextStyle(fontSize: 16)),
                   const SizedBox(width: 12),
                   Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
+                      color: Colors.grey[100], // light grey background
+                      borderRadius: BorderRadius.circular(8), // rounded border
                       border: Border.all(color: Colors.grey.shade300),
                     ),
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        IconButton(
-                          icon: const Icon(Icons.remove),
-                          onPressed: () => _changeQuantity(-1),
+                        SizedBox(
+                          width: 36,
+                          height: 36,
+                          child: IconButton(
+                            padding: EdgeInsets.zero,
+                            iconSize: 20,
+                            onPressed: () => _changeQuantity(-1),
+                            icon: const Icon(Icons.remove),
+                          ),
                         ),
-                        Text('$_quantity', style: const TextStyle(fontSize: 16)),
-                        IconButton(
-                          icon: const Icon(Icons.add),
-                          onPressed: () => _changeQuantity(1),
+                        Container(
+                          width: 44,
+                          alignment: Alignment.center,
+                          child: Text('$_quantity', style: const TextStyle(fontSize: 16)),
+                        ),
+                        SizedBox(
+                          width: 36,
+                          height: 36,
+                          child: IconButton(
+                            padding: EdgeInsets.zero,
+                            iconSize: 20,
+                            onPressed: () => _changeQuantity(1),
+                            icon: const Icon(Icons.add),
+                          ),
                         ),
                       ],
                     ),
