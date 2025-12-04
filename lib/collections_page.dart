@@ -38,6 +38,12 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
   int _currentPage = 1;
   final int _itemsPerPage = 6;
   late final List<Map<String, String>> _allProducts;
+  // total pages based on current filtered/sorted products
+  int get totalPages {
+    final totalItems = _applyFilterAndSort().length;
+    if (totalItems == 0) return 1;
+    return (totalItems / _itemsPerPage).ceil();
+  }
 
   @override
   void initState() {
