@@ -147,19 +147,6 @@ class UnionHeader extends StatelessWidget {
     );
   }
 
-  final VoidCallback onProfilePressed;
-  final VoidCallback onCartPressed;
-  final VoidCallback? onPrintShackPressed;
-  final bool isMobile;
-
-  const UnionHeader({
-    Key? key,
-    required this.onProfilePressed,
-    required this.onCartPressed,
-    this.onPrintShackPressed,
-    this.isMobile = true,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
