@@ -11,3 +11,17 @@ class PrintShackProduct {
     this.imageUrls = const [],
   })  : assert(pricePerLine >= 0),
         assert(maxCharsPerLine > 0);
+
+  PrintShackProduct copyWith({
+    String? name,
+    double? pricePerLine,
+    int? maxCharsPerLine,
+    List<String>? imageUrls,
+  }) {
+    return PrintShackProduct(
+      name: name ?? this.name,
+      pricePerLine: pricePerLine ?? this.pricePerLine,
+      maxCharsPerLine: maxCharsPerLine ?? this.maxCharsPerLine,
+      imageUrls: imageUrls ?? this.imageUrls,
+    );
+  }
