@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'widgets/union_page_scaffold.dart'; // added import
+import '../widgets/union_page_scaffold.dart'; // added import
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});

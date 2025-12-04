@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:union_shop/screens/print_shack_product_page.dart';
 import 'screens/home_screen.dart';
 import 'about_page.dart';
-import 'collections_page.dart';
+import 'screens/collections_page.dart';
 import 'sale_page.dart';
 import 'screens/signup_page.dart';
 import 'screens/login_page.dart';
