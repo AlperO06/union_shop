@@ -370,9 +370,9 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                               ],
                             ),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
                   // show pagination only when more than one page exists
                   if (displayTotalPages > 1)
