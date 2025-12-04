@@ -120,6 +120,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
           final sortedProducts = _applyFilterAndSort();
           // only display the items for the current page
           final pageProducts = _paginatedProducts();
+          final int totalPages = ((sortedProducts.length + _itemsPerPage - 1) ~/ _itemsPerPage);
+          final int displayTotalPages = totalPages > 0 ? totalPages : 1;
 
           return Center(
             child: SizedBox(
@@ -173,6 +175,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                                   if (v == null) return;
                                   setState(() {
                                     _selectedCategory = v;
+                                    // reset to first page when filter changes
+                                    _currentPage = 1;
                                   });
                                 },
                               ),
@@ -204,6 +208,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                                   if (v == null) return;
                                   setState(() {
                                     _selectedSort = v;
+                                    // reset to first page when sort changes
+                                    _currentPage = 1;
                                   });
                                 },
                               ),
@@ -292,6 +298,36 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                         ),
                       );
                     },
+                  ),
+                  const SizedBox(height: 12),
+                  // Pagination bar
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back),
+                        onPressed: _currentPage > 1
+                            ? () {
+                                setState(() {
+                                  _currentPage--;
+                                });
+                              }
+                            : null,
+                      ),
+                      const SizedBox(width: 8),
+                      Text('Page $_currentPage of $displayTotalPages', style: const TextStyle(color: Colors.black54)),
+                      const SizedBox(width: 8),
+                      IconButton(
+                        icon: const Icon(Icons.arrow_forward),
+                        onPressed: _currentPage < displayTotalPages
+                            ? () {
+                                setState(() {
+                                  _currentPage++;
+                                });
+                              }
+                            : null,
+                      ),
+                    ],
                   ),
                 ],
               ),
