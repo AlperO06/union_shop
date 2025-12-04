@@ -9,7 +9,7 @@ import 'screens/signup_page.dart';
 import 'screens/login_page.dart';
 import 'screens/cart.dart';
 import 'data/cart.dart';
-import 'data/print_shack.dart'; // <-- provide samplePersonalisedHoodie
+import 'data/print_shack.dart' show samplePersonalisedHoodie;
 
 
 Future<void> main() async {
