@@ -49,19 +49,63 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
   @override
   void initState() {
     super.initState();
-    // generate dummy products with assigned categories (cycle through categories excluding 'All')
-    final assignCats = _categories.where((c) => c != 'All').toList();
-    _allProducts = List.generate(9, (i) {
-      // use a seeded picsum URL per product so images differ
-      final seed = '${widget.title.replaceAll(' ', '')}-$i';
-      final imageUrl = 'https://picsum.photos/seed/$seed/400/400';
-      return {
-        'name': '${widget.title} Product ${i + 1}',
-        'price': '£${(i + 1) * 5}.00',
-        'category': assignCats[i % assignCats.length],
-        'image': imageUrl, // new image field
-      };
-    });
+    // realistic product list (names/prices/categories/images)
+    _allProducts = [
+      {
+        'name': 'Oxford Shirt',
+        'price': '£45.00',
+        'category': 'Tops',
+        'image': 'https://picsum.photos/seed/oxford_shirt/400/400',
+      },
+      {
+        'name': 'Classic T‑Shirt',
+        'price': '£25.00',
+        'category': 'Tops',
+        'image': 'https://picsum.photos/seed/classic_tshirt/400/400',
+      },
+      {
+        'name': 'Denim Jacket',
+        'price': '£85.00',
+        'category': 'Tops',
+        'image': 'https://picsum.photos/seed/denim_jacket/400/400',
+      },
+      {
+        'name': 'Chinos',
+        'price': '£50.00',
+        'category': 'Tops',
+        'image': 'https://picsum.photos/seed/chinos/400/400',
+      },
+      {
+        'name': 'Crewneck Sweater',
+        'price': '£60.00',
+        'category': 'Tops',
+        'image': 'https://picsum.photos/seed/crewneck_sweater/400/400',
+      },
+      {
+        'name': 'Parka Coat',
+        'price': '£120.00',
+        'category': 'Tops',
+        'image': 'https://picsum.photos/seed/parka_coat/400/400',
+      },
+      {
+        'name': 'Leather Belt',
+        'price': '£30.00',
+        'category': 'Accessories',
+        'image': 'https://picsum.photos/seed/leather_belt/400/400',
+      },
+      {
+        'name': 'Canvas Sneakers',
+        'price': '£65.00',
+        'category': 'Accessories',
+        'image': 'https://picsum.photos/seed/canvas_sneakers/400/400',
+      },
+      {
+        'name': 'Wool Scarf',
+        'price': '£25.00',
+        'category': 'Accessories',
+        'image': 'https://picsum.photos/seed/wool_scarf/400/400',
+      },
+    ];
   }
 
   double _priceValue(String priceText) {
@@ -260,7 +304,31 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                         child: InkWell(
                           onTap: () {
-                            // placeholder: navigate to product detail if needed
+                            // show a simple product dialog (keeps cards clickable)
+                            showDialog(
+                              context: context,
+                              builder: (ctx) {
+                                return AlertDialog(
+                                  title: Text(p['name'] ?? ''),
+                                  content: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      if ((p['image'] ?? '').isNotEmpty)
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(6),
+                                          child: Image.network(p['image']!, height: 140, width: double.infinity, fit: BoxFit.cover),
+                                        ),
+                                      const SizedBox(height: 12),
+                                      Text(p['price'] ?? ''),
+                                    ],
+                                  ),
+                                  actions: [
+                                    TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Close')),
+                                    // placeholder for future navigation to a real product page
+                                  ],
+                                );
+                              },
+                            );
                           },
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
@@ -302,12 +370,12 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                               ],
                             ),
                           ),
-                        ),
-                      );
+                        );
+                      },
                     },
                   ),
                   // show pagination only when more than one page exists
-                  if (displayTotalPages > 1) ...[
+                  if (displayTotalPages > 1)
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Center(
@@ -345,7 +413,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                         ),
                       ),
                     ),
-                  ],
                 ],
               ),
             ),
