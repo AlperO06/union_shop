@@ -449,3 +449,26 @@ class _CartPageState extends State<CartPage> {
                                               ),
                                             ),
 
+                                            // plus button
+                                            SizedBox(
+                                              width: 34,
+                                              height: 34,
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                child: InkWell(
+                                                  borderRadius: const BorderRadius.only(
+                                                      topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
+                                                  onTap: () async => await _incrementQuantity(index),
+                                                  child: const Center(
+                                                    child: Icon(Icons.add, size: 16, color: Colors.black54),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+ 
