@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
             heroTitleSize: heroTitleSize,
             heroSubtitleSize: heroSubtitleSize,
             heroTop: heroTop,
-            slides: [
+            slides: const [
               HeroSlide(
                 image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
                 title: 'Union Essentials Sale',
