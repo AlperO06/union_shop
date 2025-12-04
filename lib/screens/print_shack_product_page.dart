@@ -184,3 +184,39 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
             ),
 
             const SizedBox(height: 12),
+
+            // Quantity selector
+            Row(
+              children: [
+                const Text('Quantity:', style: TextStyle(fontSize: 16)),
+                const SizedBox(width: 12),
+                Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(6),
+                    border: Border.all(color: Colors.grey.shade300),
+                  ),
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.remove),
+                        onPressed: () => _changeQuantity(-1),
+                      ),
+                      Text('$_quantity', style: const TextStyle(fontSize: 16)),
+                      IconButton(
+                        icon: const Icon(Icons.add),
+                        onPressed: () => _changeQuantity(1),
+                      ),
+                    ],
+                  ),
+                ),
+                const Spacer(),
+                // Total preview
+                Text(
+                  'Total: £${((_lines * widget.product.pricePerLine) * _quantity).toStringAsFixed(2)}',
+                  style: const TextStyle(fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 20),
