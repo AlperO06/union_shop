@@ -125,7 +125,7 @@ class UnionHeader extends StatelessWidget {
           }
         },
         itemBuilder: (context) {
-          return kShopMenuItems.map((item) {
+          return shopMenuItems.map((item) {
             return PopupMenuItem<ShopMenuItem>(
               value: item,
               child: Text(item.label),
