@@ -134,7 +134,8 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                   ),
                 ),
               ),
-              const SizedBox(height: 8),
+              // increased spacing between image and thumbnails
+              const SizedBox(height: 16),
               if (images.isNotEmpty)
                 SizedBox(
                   height: 64,
@@ -251,7 +252,7 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                   ),
                 ],
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: _addToCart,
                 style: ElevatedButton.styleFrom(
@@ -280,7 +281,8 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 leftColumn,
-                const SizedBox(height: 16),
+                // increased spacing between thumbnails and price (stacked/mobile)
+                const SizedBox(height: 24),
                 rightColumn,
               ],
             );
