@@ -89,20 +89,27 @@ class _HeroSliderState extends State<HeroSlider> {
       );
     }
 
+    // Make height responsive: on small screens constrain to a fraction of screen height
+    final screenSize = MediaQuery.of(context).size;
+    final isMobile = screenSize.width < 600;
+    final maxMobileHeight = screenSize.height * 0.45;
+    final effectiveHeight = isMobile ? (widget.height < maxMobileHeight ? widget.height : maxMobileHeight) : widget.height;
+
     return SizedBox(
-      height: widget.height,
-      child: GestureDetector(
-        onPanDown: (_) {
-          _userInteracting = true;
-          _stopAutoPlay();
-        },
-        onPanCancel: () {
-          _userInteracting = false;
-          if (widget.autoPlay && widget.slides.length > 1) _startAutoPlay();
-        },
-        onPanEnd: (_) {
-          _userInteracting = false;
-          if (widget.autoPlay && widget.slides.length > 1) _startAutoPlay();
+      height: effectiveHeight,
+      // Replace GestureDetector with NotificationListener so PageView remains swipeable
+      child: NotificationListener<ScrollNotification>(
+        onNotification: (notification) {
+          if (notification is ScrollStartNotification && notification.dragDetails != null) {
+            // user started dragging
+            _userInteracting = true;
+            _stopAutoPlay();
+          } else if (notification is ScrollEndNotification) {
+            // scrolling ended
+            _userInteracting = false;
+            if (widget.autoPlay && widget.slides.length > 1) _startAutoPlay();
+          }
+          return false;
         },
         child: Stack(
           fit: StackFit.expand,
@@ -110,6 +117,8 @@ class _HeroSliderState extends State<HeroSlider> {
             PageView.builder(
               controller: _controller,
               itemCount: widget.slides.length,
+              // Allow swiping only when more than one slide exists
+              physics: widget.slides.length > 1 ? const BouncingScrollPhysics() : const NeverScrollableScrollPhysics(),
               onPageChanged: (index) {
                 setState(() {
                   _currentIndex = index;
