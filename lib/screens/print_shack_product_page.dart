@@ -137,3 +137,10 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                 ),
               ),
             const SizedBox(height: 16),
+
+            // Price info
+            Text(
+              'Price per line: £${widget.product.pricePerLine.toStringAsFixed(2)}',
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+            ),
+            const SizedBox(height: 12),
