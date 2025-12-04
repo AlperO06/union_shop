@@ -300,9 +300,7 @@ class _HeroSliderState extends State<HeroSlider> {
                   const SizedBox(width: 8),
                   // LEARN MORE (secondary)
                   OutlinedButton(
-                    onPressed: (widget.slides.isNotEmpty && widget.slides[_currentIndex].onSecondary != null)
-                        ? widget.slides[_currentIndex].onSecondary
-                        : null,
+                    onPressed: () => Navigator.pushNamed(context, '/about'),
                     style: OutlinedButton.styleFrom(
                       backgroundColor: const Color(0xFF6C4CE5).withOpacity(0.9),
                       foregroundColor: Colors.white,
