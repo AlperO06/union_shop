@@ -34,6 +34,9 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
     'Price (High-Low)'
   ];
   String _selectedSort = 'Name (A-Z)';
+  // pagination state
+  int _currentPage = 1;
+  final int _itemsPerPage = 6;
   late final List<Map<String, String>> _allProducts;
 
   @override
