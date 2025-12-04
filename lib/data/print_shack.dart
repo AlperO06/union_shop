@@ -46,3 +46,26 @@ class PrintShackProduct {
   String toString() {
     return 'PrintShackProduct(name: $name, pricePerLine: $pricePerLine, maxCharsPerLine: $maxCharsPerLine, imageUrls: $imageUrls)';
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+    if (other is! PrintShackProduct) return false;
+    return other.name == name &&
+        other.pricePerLine == pricePerLine &&
+        other.maxCharsPerLine == maxCharsPerLine &&
+        _listEquals(other.imageUrls, imageUrls);
+  }
+
+  @override
+  int get hashCode => Object.hash(name, pricePerLine, maxCharsPerLine, Object.hashAll(imageUrls));
+
+  static bool _listEquals(List<String> a, List<String> b) {
+    if (identical(a, b)) return true;
+    if (a.length != b.length) return false;
+    for (var i = 0; i < a.length; i++) {
+      if (a[i] != b[i]) return false;
+    }
+    return true;
+  }
+}
