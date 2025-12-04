@@ -218,7 +218,7 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
               const SizedBox(height: 12),
 
               // --- Personalisation section header ---
-              Text(
+              const Text(
                 'Personalisation',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
