@@ -309,7 +309,9 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                         onPressed: _currentPage > 1
                             ? () {
                                 setState(() {
-                                  _currentPage--;
+                                  // decrease but never go below 1
+                                  final nextPage = _currentPage - 1;
+                                  _currentPage = nextPage < 1 ? 1 : nextPage;
                                 });
                               }
                             : null,
@@ -322,7 +324,9 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                         onPressed: _currentPage < displayTotalPages
                             ? () {
                                 setState(() {
-                                  _currentPage++;
+                                  // increase but never exceed total pages
+                                  final nextPage = _currentPage + 1;
+                                  _currentPage = nextPage > displayTotalPages ? displayTotalPages : nextPage;
                                 });
                               }
                             : null,
