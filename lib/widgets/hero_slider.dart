@@ -2,6 +2,7 @@
 
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart'; // added import
 
 class HeroSlide {
   final String imageUrl;
@@ -138,6 +139,19 @@ class _HeroSliderState extends State<HeroSlider> {
     super.dispose();
   }
 
+  // add helper to open Domino's (tries external browser, falls back to internal route)
+  Future<void> _openDominos() async {
+    final uri = Uri.parse('https://www.dominos.com');
+    try {
+      if (await canLaunchUrl(uri)) {
+        await launchUrl(uri, mode: LaunchMode.externalApplication);
+        return;
+      }
+    } catch (_) {}
+    // fallback: navigate to an internal route if desired
+    if (mounted) Navigator.pushNamed(context, '/dominos');
+  }
+
   @override
   Widget build(BuildContext context) {
     // Create a local copy of slides and remove the 5th slide (index 4) if present
@@ -208,7 +222,14 @@ class _HeroSliderState extends State<HeroSlider> {
               itemBuilder: (context, index) {
                 final slide = displayedSlides[index];
                 // Ensure the second slide (index 1) uses the required label
-                final primaryButtonLabel = (index == 1) ? 'FIND OUT MORE' : slide.primaryLabel;
+                // use VERIFY AND SAVE + redirect for the fourth slide (index == 3)
+                final primaryButtonLabel = (index == 3)
+                    ? 'VERIFY AND SAVE'
+                    : (index == 1 ? 'FIND OUT MORE' : slide.primaryLabel);
+                final VoidCallback? primaryOnPressed = (index == 3)
+                    ? () => _openDominos()
+                    : slide.onPrimary ?? () => Navigator.pushNamed(context, '/print-shack');
+
                 return Stack(
                   fit: StackFit.expand,
                   children: [
@@ -267,7 +288,7 @@ class _HeroSliderState extends State<HeroSlider> {
                           Row(
                             children: [
                               ElevatedButton(
-                                onPressed: slide.onPrimary ?? () => Navigator.pushNamed(context, '/print-shack'),
+                                onPressed: primaryOnPressed,
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF6C4CE5), // purple
                                   foregroundColor: Colors.white,
