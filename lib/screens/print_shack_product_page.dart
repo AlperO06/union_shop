@@ -37,17 +37,37 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
   int _quantity = 1;
   late List<TextEditingController> _controllers;
 
+  // update UI when controllers change to enable/disable the add button
+  void _onControllersChanged() {
+    // minimal work — trigger rebuild to update _canAddToCart
+    setState(() {});
+  }
+
+  // whether all visible lines have non-empty text
+  bool get _canAddToCart {
+    for (var i = 0; i < _lines; i++) {
+      if (_controllers[i].text.trim().isEmpty) return false;
+    }
+    return true;
+  }
+
   double get _totalPrice => (_lines * widget.product.pricePerLine) * _quantity;
 
   @override
   void initState() {
     super.initState();
     _controllers = List.generate(4, (_) => TextEditingController()); // up to 4 lines by UI
+    // attach listeners so button state updates as user types
+    for (final c in _controllers) {
+      c.addListener(_onControllersChanged);
+    }
   }
 
   @override
   void dispose() {
+    // remove listeners then dispose
     for (final c in _controllers) {
+      c.removeListener(_onControllersChanged);
       c.dispose();
     }
     super.dispose();
@@ -279,13 +299,19 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                 ],
               ),
               const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: _addToCart,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF4d2963),
-                  padding: const EdgeInsets.symmetric(vertical: 14),
+              // full-width rounded add-to-cart button, disabled until required fields filled
+              SizedBox(
+                width: double.infinity,
+                height: 52,
+                child: ElevatedButton(
+                  onPressed: _canAddToCart ? _addToCart : null,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4d2963),
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(24)),
+                  ),
+                  child: const Text('ADD TO CART', style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
                 ),
-                child: const Text('ADD TO CART', style: TextStyle(fontSize: 16)),
               ),
             ],
           );
