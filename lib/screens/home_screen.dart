@@ -23,6 +23,18 @@ class HomeScreen extends StatelessWidget {
         final heroSubtitleSize = isMobile ? 16.0 : 18.0;
         final heroTop = isMobile ? 40.0 : 72.0;
 
+        // helper to map common button labels to routes
+        VoidCallback makeSlideCallback(String label) {
+          final lower = label.toLowerCase();
+          if (lower.contains('shop')) {
+            return () => Navigator.pushNamed(context, '/collections');
+          }
+          if (lower.contains('learn')) {
+            return () => Navigator.pushNamed(context, '/about');
+          }
+          return placeholderCallbackForButtons;
+        }
+
         // Build the main children list once and reuse for both mobile (ListView) and desktop (Column).
         final mainChildren = <Widget>[
           // Replace the previous static hero banner with the shared HeroSlider widget
@@ -32,30 +44,38 @@ class HomeScreen extends StatelessWidget {
             heroTitleSize: heroTitleSize,
             heroSubtitleSize: heroSubtitleSize,
             heroTop: heroTop,
-            slides: const [
+            slides: [
               HeroSlide(
-                image: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
+                image:
+                    'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
                 title: 'Union Essentials Sale',
-                subtitle: 'Everything you need — up to 50% off selected essentials',
+                subtitle:
+                    'Everything you need — up to 50% off selected essentials',
                 buttonText: 'SHOP ESSENTIALS',
-                onPressed: placeholderCallbackForButtons,
-                imageUrl: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
+                onPressed: makeSlideCallback('SHOP ESSENTIALS'),
+                imageUrl:
+                    'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
               ),
               HeroSlide(
-                image: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
+                image:
+                    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
                 title: 'Student Discounts',
-                subtitle: 'Verified students get exclusive savings across the store',
+                subtitle:
+                    'Verified students get exclusive savings across the store',
                 buttonText: 'VERIFY & SAVE',
-                onPressed: placeholderCallbackForButtons,
-                imageUrl: 'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
+                onPressed: makeSlideCallback('VERIFY & SAVE'),
+                imageUrl:
+                    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
               ),
               HeroSlide(
-                image: 'https://images.unsplash.com/photo-1520975912602-0efb0f4e0f4f?auto=format&fit=crop&w=1200&q=80',
+                image:
+                    'https://images.unsplash.com/photo-1520975912602-0efb0f4e0f4f?auto=format&fit=crop&w=1200&q=80',
                 title: 'New Merchandise Drop',
                 subtitle: 'Limited-run designs — shop the latest arrivals',
                 buttonText: 'SEE NEW MERCH',
-                onPressed: placeholderCallbackForButtons,
-                imageUrl: 'https://images.unsplash.com/photo-1520975912602-0efb0f4e0f4f?auto=format&fit=crop&w=1200&q=80',
+                onPressed: makeSlideCallback('SEE NEW MERCH'),
+                imageUrl:
+                    'https://images.unsplash.com/photo-1520975912602-0efb0f4e0f4f?auto=format&fit=crop&w=1200&q=80',
               ),
             ],
           ),
