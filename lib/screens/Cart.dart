@@ -328,6 +328,32 @@ class _CartPageState extends State<CartPage> {
                                         ),
                                       ),
                                     ),
+                                  ] else ...[
+                                    // Regular mobile bottom row but make quantity control constrained + scale down if needed
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          flex: 2,
+                                          child: Align(
+                                            alignment: Alignment.centerLeft,
+                                            child: Text('£${item.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 14)),
+                                          ),
+                                        ),
+                                        Expanded(
+                                          flex: 2,
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: ConstrainedBox(
+                                              constraints: const BoxConstraints(maxWidth: 140),
+                                              child: FittedBox(
+                                                fit: BoxFit.scaleDown,
+                                                child: Container(
+                                                  height: 34,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    border: Border.all(color: Colors.grey.shade300),
+                                                    borderRadius: BorderRadius.circular(6),
+                                                  ),
  
                                         Expanded(
                                           flex: 2,
