@@ -407,4 +407,34 @@ class _CartPageState extends State<CartPage> {
                                     ),
                                   ),
 
-           
+                                  // Quantity column (controls)
+                                  Expanded(
+                                    flex: 2,
+                                    child: Align(
+                                      alignment: Alignment.center,
+                                      child: Container(
+                                        height: 34,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          border: Border.all(color: Colors.grey.shade300),
+                                          borderRadius: BorderRadius.circular(6),
+                                        ),
+                                        child: Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            // minus button
+                                            SizedBox(
+                                              width: 34,
+                                              height: 34,
+                                              child: Material(
+                                                color: Colors.transparent,
+                                                child: InkWell(
+                                                  borderRadius: const BorderRadius.only(
+                                                      topLeft: Radius.circular(6), bottomLeft: Radius.circular(6)),
+                                                  onTap: () async => await _decrementQuantity(index),
+                                                  child: const Center(
+                                                    child: Icon(Icons.remove, size: 16, color: Colors.black54),
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
