@@ -46,7 +46,7 @@ class _UnionShopAppState extends State<UnionShopApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
-        '/print-shack': (context) => PrintShackProductPage(product: samplePersonalisedHoodie),
+        '/print-shack': (context) => const PrintShackProductPage(product: samplePersonalisedHoodie),
         '/about': (context) => const AboutPage(),
         '/collections': (context) => const CollectionsPage(),
         '/sale': (context) => const SalePage(),
