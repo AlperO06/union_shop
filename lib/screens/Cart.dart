@@ -172,7 +172,7 @@ class _CartPageState extends State<CartPage> {
                     final String? imageUrl = item.image.trim().isEmpty ? null : item.image;
 
                     // --- Changed: detect mobile and use Column layout on small widths ---
-                    final bool isMobile = MediaQuery.of(context).size.width < 600;
+                    final bool isMobile = MediaQuery.of(context).size.width < 700;
 
                     return Card(
                       margin: const EdgeInsets.symmetric(vertical: 8),
