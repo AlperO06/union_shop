@@ -190,6 +190,8 @@ class _HeroSliderState extends State<HeroSlider> {
               },
               itemBuilder: (context, index) {
                 final slide = widget.slides[index];
+                // Ensure the second slide (index 1) uses the required label
+                final primaryButtonLabel = (index == 1) ? 'FIND OUT MORE' : slide.primaryLabel;
                 return Stack(
                   fit: StackFit.expand,
                   children: [
@@ -255,7 +257,7 @@ class _HeroSliderState extends State<HeroSlider> {
                                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                 ),
-                                child: Text(slide.primaryLabel),
+                                child: Text(primaryButtonLabel),
                               ),
                               if (slide.secondaryLabel != null && slide.onSecondary != null) ...[
                                 const SizedBox(width: 8),
