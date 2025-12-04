@@ -16,7 +16,7 @@ class HeroSlide {
     this.subtitle,
     this.onPrimary,
     this.onSecondary,
-    this.primaryLabel = 'Shop now',
+    this.primaryLabel = 'FIND OUT MORE',
     this.secondaryLabel, 
   });
 }
@@ -248,7 +248,7 @@ class _HeroSliderState extends State<HeroSlider> {
                           Row(
                             children: [
                               ElevatedButton(
-                                onPressed: slide.onPrimary,
+                                onPressed: slide.onPrimary ?? () => Navigator.pushNamed(context, '/print-shack'),
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color(0xFF6C4CE5), // purple
                                   foregroundColor: Colors.white,
