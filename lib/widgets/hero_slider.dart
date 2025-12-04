@@ -318,44 +318,46 @@ class _HeroSliderState extends State<HeroSlider> {
               bottom: 8,
               left: 0,
               right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  // dot indicators
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: List.generate(widget.slides.length, (i) {
-                      final active = i == _currentIndex;
-                      return AnimatedContainer(
-                        duration: const Duration(milliseconds: 250),
-                        margin: const EdgeInsets.symmetric(horizontal: 4),
-                        width: active ? 20 : 8,
-                        height: 8,
-                        decoration: BoxDecoration(
-                          color: active ? Colors.white : Colors.white54,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      );
-                    }),
-                  ),
-                  const SizedBox(width: 10),
-                  // play/pause button placed beside indicators
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.black45,
-                      borderRadius: BorderRadius.circular(8),
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    // dot indicators
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: List.generate(widget.slides.length, (i) {
+                        final active = i == _currentIndex;
+                        return AnimatedContainer(
+                          duration: const Duration(milliseconds: 250),
+                          margin: const EdgeInsets.symmetric(horizontal: 4),
+                          width: active ? 20 : 8,
+                          height: 8,
+                          decoration: BoxDecoration(
+                            color: active ? Colors.white : Colors.white54,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        );
+                      }),
                     ),
-                    child: IconButton(
-                      onPressed: togglePlayPause,
-                      icon: Icon(
-                        (_timer != null && !_autoplayPaused) ? Icons.pause : Icons.play_arrow,
-                        color: Colors.white,
-                        size: 20,
+                    const SizedBox(width: 10),
+                    // play/pause button placed beside indicators
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.black45,
+                        borderRadius: BorderRadius.circular(8),
                       ),
-                      tooltip: (_timer != null && !_autoplayPaused) ? 'Pause autoplay' : 'Play autoplay',
+                      child: IconButton(
+                        onPressed: togglePlayPause,
+                        icon: Icon(
+                          (_timer != null && !_autoplayPaused) ? Icons.pause : Icons.play_arrow,
+                          color: Colors.white,
+                          size: 20,
+                        ),
+                        tooltip: (_timer != null && !_autoplayPaused) ? 'Pause autoplay' : 'Play autoplay',
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
