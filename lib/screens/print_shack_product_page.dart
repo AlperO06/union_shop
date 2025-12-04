@@ -71,3 +71,10 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
 
     // TODO: integrate with app cart/state management
   }
+
+  @override
+  Widget build(BuildContext context) {
+    final images = widget.product.imageUrls;
+    final mainImage = images.isNotEmpty
+        ? images[_selectedImage.clamp(0, images.length - 1)]
+        : 'https://picsum.photos/seed/placeholder/1200/800';
