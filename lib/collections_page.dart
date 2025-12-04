@@ -91,182 +91,177 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
         padding: const EdgeInsets.all(12.0),
         child: LayoutBuilder(builder: (context, constraints) {
           final width = constraints.maxWidth;
-          int columns = 1;
-          if (width >= 1200) {
-            columns = 4;
-          } else if (width >= 600) {
-            columns = 3; // changed so medium widths use 3 columns (was 2)
-          }
-
-          // get filtered & sorted products
-          final sortedProducts = _applyFilterAndSort();
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Big centered category heading for the products grid
-              const SizedBox(height: 8),
-              Center(
-                child: Text(
-                  widget.title,
-                  style: const TextStyle(
-                    fontSize: 28,
-                    fontWeight: FontWeight.w800,
-                    letterSpacing: 0.4,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Big centered category heading for the products grid
+                  const SizedBox(height: 8),
+                  Center(
+                    child: Text(
+                      widget.title,
+                      style: const TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.w800,
+                        letterSpacing: 0.4,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              const SizedBox(height: 12),
+                  const SizedBox(height: 12),
 
-              // Horizontal filter bar: Category + Sort, neatly spaced and padded
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                decoration: BoxDecoration(
-                  color: Colors.grey[100],
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    // FILTER BY (label above dropdown)
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'FILTER BY',
-                            // made label slightly smaller to be a "small label"
-                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.black54),
-                          ),
-                          const SizedBox(height: 8),
-                          DropdownButton<String>(
-                            isExpanded: true,
-                            value: _selectedCategory,
-                            items: _categories
-                                .map((c) => DropdownMenuItem(value: c, child: Text(c)))
-                                .toList(),
-                            onChanged: (v) {
-                              if (v == null) return;
-                              setState(() {
-                                _selectedCategory = v;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
+                  // Horizontal filter bar: Category + Sort, neatly spaced and padded
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(8),
                     ),
-
-                    const SizedBox(width: 16),
-
-                    // SORT BY (label above dropdown)
-                    Expanded(
-                      flex: 2,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'SORT BY',
-                            // made label slightly smaller to be a "small label"
-                            style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.black54),
-                          ),
-                          const SizedBox(height: 8),
-                          DropdownButton<String>(
-                            isExpanded: true,
-                            value: _selectedSort,
-                            items: _sortOptions
-                                .map((s) => DropdownMenuItem(value: s, child: Text(s)))
-                                .toList(),
-                            onChanged: (v) {
-                              if (v == null) return;
-                              setState(() {
-                                _selectedSort = v;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-
-                    const SizedBox(width: 16),
-
-                    // move item count to the right side, vertically centered
-                    Expanded(
-                      child: Align(
-                        alignment: Alignment.centerRight,
-                        child: Text('${sortedProducts.length} products', style: const TextStyle(color: Colors.black54)),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-
-              const SizedBox(height: 12),
-              GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: columns,
-                  crossAxisSpacing: 24,
-                  mainAxisSpacing: 24,
-                  childAspectRatio: 0.72,
-                ),
-                itemCount: sortedProducts.length,
-                // allow embedding in outer scroll view
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemBuilder: (context, index) {
-                  final p = sortedProducts[index];
-                  return Card(
-                    clipBehavior: Clip.hardEdge,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
-                    child: InkWell(
-                      onTap: () {
-                        // placeholder: navigate to product detail if needed
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // replaced static icon container with network image using the new 'image' field
-                            Expanded(
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(4),
-                                child: Image.network(
-                                  p['image'] ?? '',
-                                  width: double.infinity,
-                                  height: double.infinity,
-                                  fit: BoxFit.cover,
-                                  errorBuilder: (context, error, stackTrace) {
-                                    return Container(
-                                      color: Colors.grey[200],
-                                      child: const Center(
-                                        child: Icon(Icons.image, size: 48, color: Colors.grey),
-                                      ),
-                                    );
-                                  },
-                                ),
+                    child: Row(
+                      children: [
+                        // FILTER BY (label above dropdown)
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'FILTER BY',
+                                // made label slightly smaller to be a "small label"
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.black54),
                               ),
-                            ),
-                            const SizedBox(height: 8),
-                            Text(
-                              p['name']!,
-                              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 6),
-                            Text(
-                              p['price']!,
-                              style: const TextStyle(fontSize: 13, color: Colors.grey),
-                            ),
-                          ],
+                              const SizedBox(height: 8),
+                              DropdownButton<String>(
+                                isExpanded: true,
+                                value: _selectedCategory,
+                                items: _categories
+                                    .map((c) => DropdownMenuItem(value: c, child: Text(c)))
+                                    .toList(),
+                                onChanged: (v) {
+                                  if (v == null) return;
+                                  setState(() {
+                                    _selectedCategory = v;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
+
+                        const SizedBox(width: 16),
+
+                        // SORT BY (label above dropdown)
+                        Expanded(
+                          flex: 2,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'SORT BY',
+                                // made label slightly smaller to be a "small label"
+                                style: TextStyle(fontSize: 11, fontWeight: FontWeight.w600, color: Colors.black54),
+                              ),
+                              const SizedBox(height: 8),
+                              DropdownButton<String>(
+                                isExpanded: true,
+                                value: _selectedSort,
+                                items: _sortOptions
+                                    .map((s) => DropdownMenuItem(value: s, child: Text(s)))
+                                    .toList(),
+                                onChanged: (v) {
+                                  if (v == null) return;
+                                  setState(() {
+                                    _selectedSort = v;
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        const SizedBox(width: 16),
+
+                        // move item count to the right side, vertically centered
+                        Expanded(
+                          child: Align(
+                            alignment: Alignment.centerRight,
+                            child: Text('${sortedProducts.length} products', style: const TextStyle(color: Colors.black54)),
+                          ),
+                        ),
+                      ],
                     ),
-                  );
-                },
+                  ),
+
+                  const SizedBox(height: 12),
+                  GridView.builder(
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: columns,
+                      crossAxisSpacing: 24,
+                      mainAxisSpacing: 24,
+                      childAspectRatio: 0.72,
+                    ),
+                    itemCount: sortedProducts.length,
+                    // allow embedding in outer scroll view
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      final p = sortedProducts[index];
+                      return Card(
+                        // flatter card style, edge-to-edge inside grid cell
+                        margin: EdgeInsets.zero,
+                        elevation: 0,
+                        color: Colors.white,
+                        clipBehavior: Clip.hardEdge,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                        child: InkWell(
+                          onTap: () {
+                            // placeholder: navigate to product detail if needed
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                // replaced static icon container with network image using the new 'image' field
+                                Expanded(
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(4),
+                                    child: Image.network(
+                                      p['image'] ?? '',
+                                      width: double.infinity,
+                                      height: double.infinity,
+                                      fit: BoxFit.cover,
+                                      errorBuilder: (context, error, stackTrace) {
+                                        return Container(
+                                          color: Colors.grey[200],
+                                          child: const Center(
+                                            child: Icon(Icons.image, size: 48, color: Colors.grey),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  p['name']!,
+                                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                const SizedBox(height: 6),
+                                Text(
+                                  p['price']!,
+                                  style: const TextStyle(fontSize: 13, color: Colors.grey),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ],
               ),
-            ],
+            ),
           );
         }),
       ),
