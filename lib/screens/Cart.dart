@@ -380,7 +380,28 @@ class _CartPageState extends State<CartPage> {
                                                           style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
                                                         ),
                                                       ),
-                                                     
+                                                      SizedBox(
+                                                        width: 34,
+                                                        height: 34,
+                                                        child: Material(
+                                                          color: Colors.transparent,
+                                                          child: InkWell(
+                                                            borderRadius: const BorderRadius.only(
+                                                                topRight: Radius.circular(6), bottomRight: Radius.circular(6)),
+                                                            onTap: () async => await _incrementQuantity(index),
+                                                            child: const Center(
+                                                              child: Icon(Icons.add, size: 16, color: Colors.black54),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
                                         Expanded(
                                           flex: 2,
                                           child: Align(
