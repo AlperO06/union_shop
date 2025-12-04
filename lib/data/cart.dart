@@ -49,10 +49,10 @@ class CartItem {
       id: id ?? this.id,
       name: name ?? this.name,
       quantity: quantity ?? this.quantity,
-      price: price ?? this._price,
-      size: size ?? this._size,
-      colour: colour ?? this._colour,
-      image: image ?? this._image,
+      price: price ?? _price,
+      size: size ?? _size,
+      colour: colour ?? _colour,
+      image: image ?? _image,
     );
   }
 
