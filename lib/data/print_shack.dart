@@ -34,3 +34,15 @@ class PrintShackProduct {
       imageUrls: (json['imageUrls'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? const [],
     );
   }
+
+  Map<String, dynamic> toJson() => {
+        'name': name,
+        'pricePerLine': pricePerLine,
+        'maxCharsPerLine': maxCharsPerLine,
+        'imageUrls': imageUrls,
+      };
+
+  @override
+  String toString() {
+    return 'PrintShackProduct(name: $name, pricePerLine: $pricePerLine, maxCharsPerLine: $maxCharsPerLine, imageUrls: $imageUrls)';
+  }
