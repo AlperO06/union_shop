@@ -150,19 +150,27 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                         onTap: () => _setImage(i),
                         child: AnimatedContainer(
                           duration: const Duration(milliseconds: 200),
-                          padding: selected ? const EdgeInsets.all(2) : EdgeInsets.zero,
+                          padding: selected ? const EdgeInsets.all(2) : const EdgeInsets.all(1),
                           decoration: BoxDecoration(
-                            border: selected ? Border.all(color: const Color(0xFF4d2963), width: 2) : null,
-                            borderRadius: BorderRadius.circular(6),
+                            // purple border + elevation for selected, light grey border for non-selected
+                            border: Border.all(
+                              color: selected ? const Color(0xFF4d2963) : Colors.grey.shade300,
+                              width: selected ? 2 : 1,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                            boxShadow: selected
+                                ? const [BoxShadow(color: Colors.black26, blurRadius: 6, offset: Offset(0, 2))]
+                                : const [],
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(6),
-                            child: Image.network(url,
-                                width: 96,
-                                height: 64,
-                                fit: BoxFit.cover,
-                                errorBuilder: (c, e, s) =>
-                                    Container(color: Colors.grey[200], width: 96, height: 64)),
+                            child: Image.network(
+                              url,
+                              width: 96,
+                              height: 64,
+                              fit: BoxFit.cover,
+                              errorBuilder: (c, e, s) => Container(color: Colors.grey[200], width: 96, height: 64),
+                            ),
                           ),
                         ),
                       );
