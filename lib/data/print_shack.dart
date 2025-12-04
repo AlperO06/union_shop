@@ -75,5 +75,11 @@ const PrintShackProduct samplePersonalisedHoodie = PrintShackProduct(
   name: 'Personalised Hoodie',
   pricePerLine: 3.0,
   maxCharsPerLine: 10,
-  imageUrls: ['https://picsum.photos/seed/personalised_hoodie/800/600'],
+  imageUrls: [
+    // Unsplash images for hoodies (publicly served)
+    'https://images.unsplash.com/photo-1520975911068-9d9b15743f85?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1541099649105-f69ad21f3246?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1520975698514-0a7b8c3f1c0e?auto=format&fit=crop&w=1200&q=80',
+  ],
 );
