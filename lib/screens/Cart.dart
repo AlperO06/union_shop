@@ -391,3 +391,6 @@ class _CartPageState extends State<CartPage> {
     );
   }
 }
+
+class PrintShackCartItem {
+}
