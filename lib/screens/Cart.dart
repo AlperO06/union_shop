@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/screens/print_shack_product_page.dart';
 import '../widgets/union_page_scaffold.dart';
 import '../data/cart.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({Key? key}) : super(key: key);
@@ -604,10 +605,20 @@ class _CartPageState extends State<CartPage> {
                         SizedBox(
                           height: 48,
                           child: ElevatedButton(
-                            onPressed: () {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Checkout pressed')),
-                              );
+                            onPressed: () async {
+                              final uri = Uri.parse('https://shop.upsu.net/checkouts/cn/hWN5s4U11wOv1jAJoeDDYuX5/en-gb?_r=AQABdgkBP5N-GjIz9_CSTC0Nbpbbam81eq5iZJtO4Yg0Jh4&auto_redirect=false&edge_redirect=true&skip_shop_pay=true');
+                              try {
+                                final launched = await launchUrl(uri, mode: LaunchMode.externalApplication);
+                                if (!launched) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(content: Text('Could not open checkout URL')),
+                                  );
+                                }
+                              } catch (_) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Could not open checkout URL')),
+                                );
+                              }
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF4d2963),
