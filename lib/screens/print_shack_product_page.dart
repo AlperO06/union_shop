@@ -216,15 +216,17 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                 style: TextStyle(fontSize: 13, color: Colors.grey[600]),
               ),
               const SizedBox(height: 12),
-              Row(
+              // previous inline row -> now a column with label above the dropdown
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text('Number of lines:'),
-                  const SizedBox(width: 12),
-                  // replaced plain DropdownButton with a decorated container to look like a form select
+                  const SizedBox(height: 8),
+                  // decorated container to look like a form select
                   Container(
                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
                     decoration: BoxDecoration(
-                      color: Colors.grey[50], // light background
+                      color: Colors.grey[50],
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(color: Colors.grey.shade300),
                     ),
@@ -245,7 +247,7 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 16),
+                  const SizedBox(height: 8),
                   Text('Max chars/line: ${widget.product.maxCharsPerLine}'),
                 ],
               ),
