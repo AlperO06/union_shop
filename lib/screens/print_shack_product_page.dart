@@ -70,7 +70,7 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
       const SnackBar(content: Text('Added to cart')),
     );
 
-    // TODO: integrate with app cart/state management
+    // integrate with app cart/state management
   }
 
   @override
