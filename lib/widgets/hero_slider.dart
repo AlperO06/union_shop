@@ -140,7 +140,22 @@ class _HeroSliderState extends State<HeroSlider> {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.slides.isEmpty) {
+    // Create a local copy of slides and remove the 5th slide (index 4) if present
+    final displayedSlides = List<HeroSlide>.from(widget.slides);
+    if (displayedSlides.length >= 5) {
+      displayedSlides.removeAt(4);
+    }
+
+    // Ensure current index is valid for the displayed slides; jump if necessary
+    if (_currentIndex >= displayedSlides.length && displayedSlides.isNotEmpty) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) return;
+        _currentIndex = _currentIndex.clamp(0, displayedSlides.length - 1);
+        _controller.jumpToPage(_currentIndex);
+      });
+    }
+
+    if (displayedSlides.isEmpty) {
       return SizedBox(
         height: widget.height,
         child: Container(
@@ -182,16 +197,16 @@ class _HeroSliderState extends State<HeroSlider> {
           children: [
             PageView.builder(
               controller: _controller,
-              itemCount: widget.slides.length,
+              itemCount: displayedSlides.length,
               // Allow swiping only when more than one slide exists
-              physics: widget.slides.length > 1 ? const BouncingScrollPhysics() : const NeverScrollableScrollPhysics(),
+              physics: displayedSlides.length > 1 ? const BouncingScrollPhysics() : const NeverScrollableScrollPhysics(),
               onPageChanged: (index) {
                 setState(() {
                   _currentIndex = index;
                 });
               },
               itemBuilder: (context, index) {
-                final slide = widget.slides[index];
+                final slide = displayedSlides[index];
                 // Ensure the second slide (index 1) uses the required label
                 final primaryButtonLabel = (index == 1) ? 'FIND OUT MORE' : slide.primaryLabel;
                 return Stack(
@@ -326,7 +341,7 @@ class _HeroSliderState extends State<HeroSlider> {
                     // dot indicators
                     Row(
                       mainAxisSize: MainAxisSize.min,
-                      children: List.generate(widget.slides.length, (i) {
+                      children: List.generate(displayedSlides.length, (i) {
                         final active = i == _currentIndex;
                         return GestureDetector(
                           onTap: () {
@@ -389,8 +404,8 @@ class _HeroSliderState extends State<HeroSlider> {
                     tooltip: 'Previous',
                     icon: const Icon(Icons.chevron_left, color: Colors.white, size: 28),
                     onPressed: () async {
-                      if (widget.slides.isEmpty) return;
-                      final prev = (_currentIndex - 1 + widget.slides.length) % widget.slides.length;
+                      if (displayedSlides.isEmpty) return;
+                      final prev = (_currentIndex - 1 + displayedSlides.length) % displayedSlides.length;
                       // pause autoplay while animating
                       final wasAutoplay = widget.autoPlay && _timer != null;
                       _stopAutoPlay();
@@ -420,8 +435,8 @@ class _HeroSliderState extends State<HeroSlider> {
                     tooltip: 'Next',
                     icon: const Icon(Icons.chevron_right, color: Colors.white, size: 28),
                     onPressed: () async {
-                      if (widget.slides.isEmpty) return;
-                      final next = (_currentIndex + 1) % widget.slides.length;
+                      if (displayedSlides.isEmpty) return;
+                      final next = (_currentIndex + 1) % displayedSlides.length;
                       // pause autoplay while animating
                       final wasAutoplay = widget.autoPlay && _timer != null;
                       _stopAutoPlay();
