@@ -425,17 +425,35 @@ class HeroSlider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final images = [
-      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-      // add more slides here if desired
-      'https://picsum.photos/1200/600?image=1067',
+    final slides = [
+      {
+        'image':
+            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+        'title': 'Essential Range - Over 20% OFF!',
+        'subtitle':
+            'Official merchandise, campus essentials and local gifts — delivered to your door.',
+      },
+      {
+        'image': 'https://picsum.photos/1200/600?image=1067',
+        'title': 'Big Student Sale',
+        'subtitle': 'Huge savings for students across selected ranges.',
+      },
+      {
+        'image': 'https://picsum.photos/1200/600?image=1003',
+        'title': 'New Union Merch',
+        'subtitle': 'Discover the latest arrivals in our Union collection.',
+      },
     ];
 
     return SizedBox(
       height: height,
       width: double.infinity,
       child: PageView(
-        children: images.map((img) {
+        children: slides.map((slide) {
+          final img = slide['image'] ?? '';
+          final title = slide['title'] ?? 'Union Shop';
+          final subtitle = slide['subtitle'] ?? '';
+
           return Stack(
             children: [
               Positioned.fill(
@@ -459,17 +477,18 @@ class HeroSlider extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      'Union Shop',
+                      title,
                       style: TextStyle(
                         fontSize: heroTitleSize,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                         height: 1.1,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(height: isMobile ? 8 : 12),
                     Text(
-                      "Official merchandise, campus essentials and local gifts — delivered to your door.",
+                      subtitle,
                       style: TextStyle(
                         fontSize: heroSubtitleSize,
                         color: Colors.white70,
