@@ -311,8 +311,35 @@ class _HeroSliderState extends State<HeroSlider> {
                     ),
                     child: const Text('LEARN MORE', style: TextStyle(fontSize: 13, color: Colors.white)),
                   ),
-                  const SizedBox(width: 8),
-                  // Play / Pause toggle
+                ],
+              ),
+            ),
+            Positioned(
+              bottom: 8,
+              left: 0,
+              right: 0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // dot indicators
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: List.generate(widget.slides.length, (i) {
+                      final active = i == _currentIndex;
+                      return AnimatedContainer(
+                        duration: const Duration(milliseconds: 250),
+                        margin: const EdgeInsets.symmetric(horizontal: 4),
+                        width: active ? 20 : 8,
+                        height: 8,
+                        decoration: BoxDecoration(
+                          color: active ? Colors.white : Colors.white54,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      );
+                    }),
+                  ),
+                  const SizedBox(width: 10),
+                  // play/pause button placed beside indicators
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.black45,
@@ -329,27 +356,6 @@ class _HeroSliderState extends State<HeroSlider> {
                     ),
                   ),
                 ],
-              ),
-            ),
-            Positioned(
-              bottom: 8,
-              left: 0,
-              right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: List.generate(widget.slides.length, (i) {
-                  final active = i == _currentIndex;
-                  return AnimatedContainer(
-                    duration: const Duration(milliseconds: 250),
-                    margin: const EdgeInsets.symmetric(horizontal: 4),
-                    width: active ? 20 : 8,
-                    height: 8,
-                    decoration: BoxDecoration(
-                      color: active ? Colors.white : Colors.white54,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  );
-                }),
               ),
             ),
           ],
