@@ -177,7 +177,8 @@ class _HeroSliderState extends State<HeroSlider> {
                               ElevatedButton(
                                 onPressed: slide.onPrimary,
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: const Color(0xFF4d2963),
+                                  backgroundColor: const Color(0xFF6C4CE5), // purple
+                                  foregroundColor: Colors.white,
                                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                 ),
@@ -188,14 +189,12 @@ class _HeroSliderState extends State<HeroSlider> {
                                 OutlinedButton(
                                   onPressed: slide.onSecondary,
                                   style: OutlinedButton.styleFrom(
-                                    side: const BorderSide(color: Colors.white70),
+                                    backgroundColor: const Color(0xFF6C4CE5).withOpacity(0.9),
+                                    foregroundColor: Colors.white,
                                     padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                                   ),
-                                  child: Text(
-                                    slide.secondaryLabel!,
-                                    style: const TextStyle(color: Colors.white70),
-                                  ),
+                                  child: Text(slide.secondaryLabel!),
                                 ),
                               ],
                             ],
@@ -218,15 +217,13 @@ class _HeroSliderState extends State<HeroSlider> {
                         ? widget.slides[_currentIndex].onPrimary
                         : null,
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF4d2963),
+                      backgroundColor: const Color(0xFF6C4CE5), // purple
+                      foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                       elevation: 2,
                     ),
-                    child: const Text(
-                      'SHOP NOW',
-                      style: TextStyle(fontSize: 13),
-                    ),
+                    child: const Text('SHOP NOW', style: TextStyle(fontSize: 13, color: Colors.white)),
                   ),
                   const SizedBox(width: 8),
                   // LEARN MORE (secondary)
@@ -235,14 +232,12 @@ class _HeroSliderState extends State<HeroSlider> {
                         ? widget.slides[_currentIndex].onSecondary
                         : null,
                     style: OutlinedButton.styleFrom(
-                      side: const BorderSide(color: Colors.white70),
+                      backgroundColor: const Color(0xFF6C4CE5).withOpacity(0.9),
+                      foregroundColor: Colors.white,
                       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                     ),
-                    child: const Text(
-                      'LEARN MORE',
-                      style: TextStyle(color: Colors.white70, fontSize: 13),
-                    ),
+                    child: const Text('LEARN MORE', style: TextStyle(fontSize: 13, color: Colors.white)),
                   ),
                 ],
               ),
