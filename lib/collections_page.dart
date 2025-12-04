@@ -196,7 +196,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                     Expanded(
                       child: Align(
                         alignment: Alignment.centerRight,
-                        child: Text('${sortedProducts.length} item(s)', style: const TextStyle(color: Colors.black54)),
+                        child: Text('${sortedProducts.length} products', style: const TextStyle(color: Colors.black54)),
                       ),
                     ),
                   ],
