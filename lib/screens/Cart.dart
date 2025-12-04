@@ -333,3 +333,78 @@ class _CartPageState extends State<CartPage> {
                             : Row(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
+                                  // Product column: image + name + colour/size + remove link
+                                  Expanded(
+                                    flex: 4,
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: 84,
+                                          height: 64,
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[200],
+                                            borderRadius: BorderRadius.circular(6),
+                                          ),
+                                          child: imageUrl != null
+                                              ? ClipRRect(
+                                                  borderRadius: BorderRadius.circular(6),
+                                                  child: Image.network(
+                                                    imageUrl,
+                                                    width: 84,
+                                                    height: 64,
+                                                    fit: BoxFit.cover,
+                                                    errorBuilder: (context, error, stackTrace) =>
+                                                        const Icon(Icons.broken_image, color: Colors.grey, size: 32),
+                                                  ),
+                                                )
+                                              : const Icon(Icons.image, color: Colors.grey, size: 32),
+                                        ),
+                                        const SizedBox(width: 12),
+                                        Expanded(
+                                          child: Column(
+                                            crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                item.name,
+                                                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                                                softWrap: true,
+                                                maxLines: 2,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                              const SizedBox(height: 6),
+                                              if ((item.personalisationLines ?? <String>[]).isNotEmpty) ...[
+                                                for (var i = 0; i < (item.personalisationLines ?? <String>[]).length; i++)
+                                                  Text(
+                                                    'Personalisation Line ${i + 1}: ${item.personalisationLines![i]}',
+                                                    style: TextStyle(fontSize: 13, color: Colors.grey[800]),
+                                                    softWrap: true,
+                                                  ),
+                                                const SizedBox(height: 6),
+                                              ],
+                                              Text(
+                                                '${item.colour} • Size: ${item.size}',
+                                                style: TextStyle(color: Colors.grey[700], fontSize: 13),
+                                              ),
+                                              const SizedBox(height: 6),
+                                              TextButton(
+                                                onPressed: () async => await _removeItem(index),
+                                                style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: const Size(48, 24)),
+                                                child: const Text('Remove', style: TextStyle(color: Colors.redAccent)),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+
+                                  // Price column (unit)
+                                  Expanded(
+                                    flex: 2,
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text('£${item.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 14)),
+                                    ),
+                                  ),
+
+           
