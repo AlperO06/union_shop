@@ -252,6 +252,21 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Big centered category heading for the products grid
+              const SizedBox(height: 8),
+              const Center(
+                child: Text(
+                  'Clothing',
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 0.4,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              const SizedBox(height: 12),
+
               // page title (AppBar removed; keep title inside body)
               Text(widget.title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
               const SizedBox(height: 8),
