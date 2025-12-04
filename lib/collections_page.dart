@@ -306,39 +306,41 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                     },
                   ),
                   const SizedBox(height: 12),
-                  // Pagination bar
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back),
-                        onPressed: _currentPage > 1
-                            ? () {
-                                setState(() {
-                                  // decrease but never go below 1
-                                  final nextPage = _currentPage - 1;
-                                  _currentPage = nextPage < 1 ? 1 : nextPage;
-                                });
-                              }
-                            : null,
-                      ),
-                      const SizedBox(width: 8),
-                      Text('Page $_currentPage of $displayTotalPages', style: const TextStyle(color: Colors.black54)),
-                      const SizedBox(width: 8),
-                      IconButton(
-                        icon: const Icon(Icons.arrow_forward),
-                        onPressed: _currentPage < displayTotalPages
-                            ? () {
-                                setState(() {
-                                  // increase but never exceed total pages
-                                  final nextPage = _currentPage + 1;
-                                  _currentPage = nextPage > displayTotalPages ? displayTotalPages : nextPage;
-                                });
-                              }
-                            : null,
-                      ),
-                    ],
-                  ),
+                  // show pagination only when more than one page exists
+                  if (displayTotalPages > 1) ...[
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          icon: const Icon(Icons.arrow_back),
+                          onPressed: _currentPage > 1
+                              ? () {
+                                  setState(() {
+                                    // decrease but never go below 1
+                                    final nextPage = _currentPage - 1;
+                                    _currentPage = nextPage < 1 ? 1 : nextPage;
+                                  });
+                                }
+                              : null,
+                        ),
+                        const SizedBox(width: 8),
+                        Text('Page $_currentPage of $displayTotalPages', style: const TextStyle(color: Colors.black54)),
+                        const SizedBox(width: 8),
+                        IconButton(
+                          icon: const Icon(Icons.arrow_forward),
+                          onPressed: _currentPage < displayTotalPages
+                              ? () {
+                                  setState(() {
+                                    // increase but never exceed total pages
+                                    final nextPage = _currentPage + 1;
+                                    _currentPage = nextPage > displayTotalPages ? displayTotalPages : nextPage;
+                                  });
+                                }
+                              : null,
+                        ),
+                      ],
+                    ),
+                  ],
                 ],
               ),
             ),
