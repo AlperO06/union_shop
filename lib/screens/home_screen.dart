@@ -31,7 +31,30 @@ class HomeScreen extends StatelessWidget {
             isMobile: isMobile,
             heroTitleSize: heroTitleSize,
             heroSubtitleSize: heroSubtitleSize,
-            heroTop: heroTop, slides: [],
+            heroTop: heroTop,
+            slides: [
+              HeroSlide(
+                image: 'https://picsum.photos/id/1018/1200/600',
+                title: 'New Season Drop',
+                subtitle: 'Discover our limited edition collection',
+                buttonText: 'SHOP NOW',
+                onPressed: placeholderCallbackForButtons,
+              ),
+              HeroSlide(
+                image: 'https://picsum.photos/id/1025/1200/600',
+                title: 'Signature Range',
+                subtitle: 'Premium fabrics & timeless designs',
+                buttonText: 'VIEW COLLECTION',
+                onPressed: placeholderCallbackForButtons,
+              ),
+              HeroSlide(
+                image: 'https://picsum.photos/id/1005/1200/600',
+                title: 'Portsmouth City',
+                subtitle: 'Local favourites and souvenirs',
+                buttonText: 'EXPLORE',
+                onPressed: placeholderCallbackForButtons,
+              ),
+            ],
           ),
 
           // Promotions banner (unchanged)
