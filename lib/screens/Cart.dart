@@ -534,3 +534,16 @@ class _CartPageState extends State<CartPage> {
                     ),
                   ),
                 ),
+
+                const SizedBox(height: 32),
+              ],
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class PrintShackCartItem {
+}
