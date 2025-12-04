@@ -137,6 +137,7 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
       size: '',
       colour: '',
       image: image,
+      personalisationLines: lines, // <- store the personalisation lines
     );
 
     try {
