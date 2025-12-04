@@ -153,38 +153,45 @@ class CartItem {
 
   // Hardened fromJson: accepts JSON string or Map-like values and always
   // returns a CartItem with non-null fields (defaults applied).
-  factory CartItem.fromJson(String source) {
+  factory CartItem.fromJson(dynamic source) {
     try {
-      final decoded = jsonDecode(source);
-      if (decoded is Map<String, dynamic>) {
-        return CartItem.fromMap(decoded);
+      if (source == null) {
+        return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '', personalisationLines: <String>[]);
       }
-      if (decoded is Map) {
-        return CartItem.fromMap(Map<String, dynamic>.from(decoded));
+
+      if (source is String) {
+        final decoded = jsonDecode(source);
+        if (decoded is Map<String, dynamic>) {
+          return CartItem.fromMap(decoded);
+        }
+        if (decoded is Map) {
+          return CartItem.fromMap(Map<String, dynamic>.from(decoded));
+        }
+        // If decoded is not a Map, fall through to safe default
+      } else if (source is Map<String, dynamic>) {
+        return CartItem.fromMap(source);
+      } else if (source is Map) {
+        return CartItem.fromMap(Map<String, dynamic>.from(source));
       }
     } catch (_) {
       // fall through to return a safe default below
     }
     // Return safe default instance (no nulls).
-    return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '', personalisationLines: null);
+    return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '', personalisationLines: <String>[]);
   }
 
   // Convenience factory: accept null / String / Map and always return a non-null instance.
   factory CartItem.safeFrom(dynamic source) {
     if (source == null) {
-      return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '', personalisationLines: null);
+      return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '', personalisationLines: <String>[]);
     }
-    if (source is String) {
+    try {
+      // Reuse fromJson which now handles both String and Map inputs.
       return CartItem.fromJson(source);
+    } catch (_) {
+      // Fallback safe default.
+      return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '', personalisationLines: <String>[]);
     }
-    if (source is Map<String, dynamic>) {
-      return CartItem.fromMap(source);
-    }
-    if (source is Map) {
-      return CartItem.fromMap(Map<String, dynamic>.from(source));
-    }
-    // Fallback safe default.
-    return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '', personalisationLines: null);
   }
 
   // Public accessor for optional personalisation lines.
