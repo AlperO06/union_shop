@@ -41,7 +41,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
     super.initState();
     // generate dummy products with assigned categories (cycle through categories excluding 'All')
     final assignCats = _categories.where((c) => c != 'All').toList();
-    _allProducts = List.generate(8, (i) {
+    _allProducts = List.generate(9, (i) {
       // use a seeded picsum URL per product so images differ
       final seed = '${widget.title.replaceAll(' ', '')}-$i';
       final imageUrl = 'https://picsum.photos/seed/$seed/400/400';
@@ -94,10 +94,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
           int columns = 1;
           if (width >= 1200) {
             columns = 4;
-          } else if (width >= 900) {
-            columns = 3;
           } else if (width >= 600) {
-            columns = 2;
+            columns = 3; // changed so medium widths use 3 columns (was 2)
           }
 
           // get filtered & sorted products
