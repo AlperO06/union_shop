@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:union_shop/screens/print_shack_product_page.dart';
 import 'screens/home_screen.dart';
 import 'about_page.dart';
 import 'collections_page.dart';
@@ -8,6 +9,7 @@ import 'screens/signup_page.dart';
 import 'screens/login_page.dart';
 import 'screens/cart.dart';
 import 'data/cart.dart';
+import 'screens/print_shack_product_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -43,6 +45,7 @@ class _UnionShopAppState extends State<UnionShopApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
+        '/print-shack': (context) => const PrintShackProductPage(), // new route
         '/about': (context) => const AboutPage(),
         '/collections': (context) => const CollectionsPage(),
         '/sale': (context) => const SalePage(),
