@@ -207,9 +207,9 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
               GridView.builder(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: columns,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
-                  childAspectRatio: 0.75,
+                  crossAxisSpacing: 24,
+                  mainAxisSpacing: 24,
+                  childAspectRatio: 0.72,
                 ),
                 itemCount: sortedProducts.length,
                 // allow embedding in outer scroll view
