@@ -31,7 +31,7 @@ class HomeScreen extends StatelessWidget {
             isMobile: isMobile,
             heroTitleSize: heroTitleSize,
             heroSubtitleSize: heroSubtitleSize,
-            heroTop: heroTop,
+            heroTop: heroTop, slides: [],
           ),
 
           // Promotions banner (unchanged)
