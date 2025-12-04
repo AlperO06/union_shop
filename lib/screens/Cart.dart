@@ -438,3 +438,14 @@ class _CartPageState extends State<CartPage> {
                                                 ),
                                               ),
                                             ),
+
+                                            // quantity display
+                                            Container(
+                                              width: 44,
+                                              alignment: Alignment.center,
+                                              child: Text(
+                                                '${item.quantity}',
+                                                style: const TextStyle(fontWeight: FontWeight.w600, fontSize: 14),
+                                              ),
+                                            ),
+
