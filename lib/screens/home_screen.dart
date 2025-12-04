@@ -55,10 +55,10 @@ class HomeScreen extends StatelessWidget {
                 onPrimary: makeSlideCallback('SHOP ESSENTIALS'),
               ),
 
-              // NEW SLIDE: The Print Shack
-              const HeroSlide(
+              // NEW SLIDE: The Print Shack (use Print Shack hero image)
+              HeroSlide(
                 imageUrl:
-                    'https://images.unsplash.com/photo-1580711749644-0a9f4d9e0f8e?auto=format&fit=crop&w=1200&q=80',
+                    'https://shop.upsu.net/cdn/shop/files/Hoodie.jpg?v=1632306034',
                 title: 'The Print Shack',
                 subtitle:
                     'Let’s create something uniquely you with our personalisation service — From £3 for one line of text!',
