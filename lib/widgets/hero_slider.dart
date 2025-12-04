@@ -55,11 +55,39 @@ class _HeroSliderState extends State<HeroSlider> {
     }
   }
 
+  @override
+  void didUpdateWidget(covariant HeroSlider oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // restart/stop autoplay when slides or autoplay flag change
+    final slidesChanged = oldWidget.slides.length != widget.slides.length;
+    final autoplayChanged = oldWidget.autoPlay != widget.autoPlay;
+    if (slidesChanged || autoplayChanged) {
+      _stopAutoPlay();
+      // clamp current index to new range
+      if (widget.slides.isNotEmpty) {
+        _currentIndex = _currentIndex.clamp(0, widget.slides.length - 1);
+        _controller.jumpToPage(_currentIndex);
+      } else {
+        _currentIndex = 0;
+      }
+      if (widget.autoPlay && widget.slides.length > 1) {
+        _startAutoPlay();
+      }
+    }
+  }
+
   void _startAutoPlay() {
+    // avoid multiple timers
+    if (_timer != null) return;
+    if (!widget.autoPlay || widget.slides.length <= 1) return;
     _timer?.cancel();
     _timer = Timer.periodic(widget.autoPlayInterval, (t) {
+      if (!mounted) return;
       if (_userInteracting) return;
+      if (widget.slides.isEmpty) return;
       final next = (_currentIndex + 1) % widget.slides.length;
+      // animate only if still mounted
+      if (!mounted) return;
       _controller.animateToPage(next, duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
     });
   }
