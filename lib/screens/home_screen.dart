@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/hero_slider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../widgets/union_page_scaffold.dart';
 import '../data/products.dart';
 import '../product_page.dart';
@@ -45,34 +46,48 @@ class HomeScreen extends StatelessWidget {
             heroSubtitleSize: heroSubtitleSize,
             heroTop: heroTop,
             slides: [
+              // 1) Essential range — links to /collections
               HeroSlide(
                 imageUrl:
                     'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
-                title: 'Union Essentials Sale',
-                subtitle:
-                    'Everything you need – up to 50% off selected essentials',
-                primaryLabel: 'SHOP ESSENTIALS',
-                onPrimary: makeSlideCallback('SHOP ESSENTIALS'),
+                title: 'Essential range',
+                subtitle: 'Browse our essential collection — timeless pieces for every day',
+                primaryLabel: 'Browse Collection',
+                onPrimary: () => Navigator.pushNamed(context, '/collections'),
               ),
+
+              // 2) Essential hoodie — navigate to the hoodie product page
               HeroSlide(
-                imageUrl:
-                    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
-                title: 'Student Discounts',
-                subtitle:
-                    'Verified students get exclusive savings across the store',
-                primaryLabel: 'VERIFY & SAVE',
-                onPrimary: makeSlideCallback('VERIFY & SAVE'),
+                imageUrl: 'https://picsum.photos/id/1003/1200/800',
+                title: 'Essential Hoodie',
+                subtitle: 'Limited Edition Essential Zip Hoodie',
+                primaryLabel: 'VIEW HOODIE',
+                onPrimary: () {
+                  final product = products.firstWhere(
+                    (p) => p.name.toLowerCase().contains('hoodie') || p.name.toLowerCase().contains('zip hoodie'),
+                    orElse: () => products.first,
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => ProductPage(product: product)),
+                  );
+                },
               ),
+
+              // 3) Pizza slide — opens external Domino's website
               HeroSlide(
-                imageUrl:
-                    'https://images.unsplash.com/photo-1520975912602-0efb0f4e0f4f?auto=format&fit=crop&w=1200&q=80',
-                title: 'New Merchandise Drop',
-                subtitle: 'Limited-run designs — shop the latest arrivals',
-                primaryLabel: 'SEE NEW MERCH',
-                onPrimary: makeSlideCallback('SEE NEW MERCH'),
+                imageUrl: 'https://images.unsplash.com/photo-1601924582975-4f45a9d3b1b2?auto=format&fit=crop&w=1200&q=80',
+                title: 'Craving Pizza?',
+                subtitle: 'Order hot, fresh pizza from Domino\'s',
+                primaryLabel: 'ORDER PIZZA',
+                onPrimary: () async {
+                  final uri = Uri.parse('https://www.dominos.co.uk');
+                  if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+                    debugPrint('Could not launch $uri');
+                  }
+                },
               ),
             ],
-          ),
 
           // Promotions banner (unchanged)
           Container(
