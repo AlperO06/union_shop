@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../data/print_shack.dart';
 
 class PrintShackProductPage extends StatefulWidget {
@@ -172,11 +173,12 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                   padding: const EdgeInsets.only(bottom: 8),
                   child: TextField(
                     controller: _controllers[i],
-                    maxLength: widget.product.maxCharsPerLine,
+                    maxLength: 10,
+                    inputFormatters: [LengthLimitingTextInputFormatter(10)],
                     decoration: InputDecoration(
                       labelText: 'Line ${i + 1}',
                       border: const OutlineInputBorder(),
-                      counterText: '',
+                      // no counterText override — default counter will be shown
                     ),
                   ),
                 );
