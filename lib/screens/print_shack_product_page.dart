@@ -305,47 +305,54 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
               const SizedBox(height: 12),
               Row(
                 children: [
+                  // left-aligned label
                   const Text('Quantity:', style: TextStyle(fontSize: 16)),
-                  const SizedBox(width: 12),
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                    decoration: BoxDecoration(
-                      color: Colors.grey[100], // light grey background
-                      borderRadius: BorderRadius.circular(8), // rounded border
-                      border: Border.all(color: Colors.grey.shade300),
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SizedBox(
-                          width: 36,
-                          height: 36,
-                          child: IconButton(
-                            padding: EdgeInsets.zero,
-                            iconSize: 20,
-                            onPressed: () => _changeQuantity(-1),
-                            icon: const Icon(Icons.remove),
-                          ),
+
+                  // center the selector by placing it inside an Expanded > Center
+                  Expanded(
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                        decoration: BoxDecoration(
+                          color: Colors.grey[100], // light grey background
+                          borderRadius: BorderRadius.circular(8), // rounded border
+                          border: Border.all(color: Colors.grey.shade300),
                         ),
-                        Container(
-                          width: 44,
-                          alignment: Alignment.center,
-                          child: Text('$_quantity', style: const TextStyle(fontSize: 16)),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            SizedBox(
+                              width: 36,
+                              height: 36,
+                              child: IconButton(
+                                padding: EdgeInsets.zero,
+                                iconSize: 20,
+                                onPressed: () => _changeQuantity(-1),
+                                icon: const Icon(Icons.remove),
+                              ),
+                            ),
+                            Container(
+                              width: 44,
+                              alignment: Alignment.center,
+                              child: Text('$_quantity', style: const TextStyle(fontSize: 16)),
+                            ),
+                            SizedBox(
+                              width: 36,
+                              height: 36,
+                              child: IconButton(
+                                padding: EdgeInsets.zero,
+                                iconSize: 20,
+                                onPressed: () => _changeQuantity(1),
+                                icon: const Icon(Icons.add),
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          width: 36,
-                          height: 36,
-                          child: IconButton(
-                            padding: EdgeInsets.zero,
-                            iconSize: 20,
-                            onPressed: () => _changeQuantity(1),
-                            icon: const Icon(Icons.add),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                  const Spacer(),
+
+                  // right-aligned total
                   Text(
                     'Total: £${_totalPrice.toStringAsFixed(2)}',
                     style: const TextStyle(fontWeight: FontWeight.w700),
