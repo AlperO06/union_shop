@@ -370,6 +370,69 @@ class _HeroSliderState extends State<HeroSlider> {
                 ),
               ),
             ),
+            // Prev / Next arrow buttons
+            Align(
+              alignment: Alignment.centerLeft,
+              child: Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black45,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: IconButton(
+                    tooltip: 'Previous',
+                    icon: const Icon(Icons.chevron_left, color: Colors.white, size: 28),
+                    onPressed: () async {
+                      if (widget.slides.isEmpty) return;
+                      final prev = (_currentIndex - 1 + widget.slides.length) % widget.slides.length;
+                      // pause autoplay while animating
+                      final wasAutoplay = widget.autoPlay && _timer != null;
+                      _stopAutoPlay();
+                      _userInteracting = true;
+                      await _controller.animateToPage(prev, duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
+                      setState(() {
+                        _currentIndex = prev;
+                      });
+                      _userInteracting = false;
+                      if (wasAutoplay) _startAutoPlay();
+                    },
+                  ),
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Padding(
+                padding: const EdgeInsets.only(right: 8.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.black45,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: IconButton(
+                    tooltip: 'Next',
+                    icon: const Icon(Icons.chevron_right, color: Colors.white, size: 28),
+                    onPressed: () async {
+                      if (widget.slides.isEmpty) return;
+                      final next = (_currentIndex + 1) % widget.slides.length;
+                      // pause autoplay while animating
+                      final wasAutoplay = widget.autoPlay && _timer != null;
+                      _stopAutoPlay();
+                      _userInteracting = true;
+                      await _controller.animateToPage(next, duration: const Duration(milliseconds: 400), curve: Curves.easeInOut);
+                      setState(() {
+                        _currentIndex = next;
+                      });
+                      _userInteracting = false;
+                      if (wasAutoplay) _startAutoPlay();
+                    },
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),
