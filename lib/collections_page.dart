@@ -130,26 +130,29 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                 ),
                 child: Row(
                   children: [
-                    // Category control (left)
+                    // FILTER BY (label above dropdown)
                     Expanded(
-                      child: Row(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Category:', style: TextStyle(fontSize: 14)),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: DropdownButton<String>(
-                              isExpanded: true,
-                              value: _selectedCategory,
-                              items: _categories
-                                  .map((c) => DropdownMenuItem(value: c, child: Text(c)))
-                                  .toList(),
-                              onChanged: (v) {
-                                if (v == null) return;
-                                setState(() {
-                                  _selectedCategory = v;
-                                });
-                              },
-                            ),
+                          const Text(
+                            'FILTER BY',
+                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.black54),
+                          ),
+                          const SizedBox(height: 8),
+                          DropdownButton<String>(
+                            isExpanded: true,
+                            value: _selectedCategory,
+                            items: _categories
+                                .map((c) => DropdownMenuItem(value: c, child: Text(c)))
+                                .toList(),
+                            onChanged: (v) {
+                              if (v == null) return;
+                              setState(() {
+                                _selectedCategory = v;
+                              });
+                            },
                           ),
                         ],
                       ),
@@ -157,32 +160,38 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
 
                     const SizedBox(width: 16),
 
-                    // Sort control (center-left)
+                    // SORT BY (label above dropdown)
                     Expanded(
-                      child: Row(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Sort:', style: TextStyle(fontSize: 14)),
-                          const SizedBox(width: 8),
-                          Expanded(
-                            child: DropdownButton<String>(
-                              isExpanded: true,
-                              value: _selectedSort,
-                              items: _sortOptions
-                                  .map((s) => DropdownMenuItem(value: s, child: Text(s)))
-                                  .toList(),
-                              onChanged: (v) {
-                                if (v == null) return;
-                                setState(() {
-                                  _selectedSort = v;
-                                });
-                              },
-                            ),
+                          const Text(
+                            'SORT BY',
+                            style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700, color: Colors.black54),
+                          ),
+                          const SizedBox(height: 8),
+                          DropdownButton<String>(
+                            isExpanded: true,
+                            value: _selectedSort,
+                            items: _sortOptions
+                                .map((s) => DropdownMenuItem(value: s, child: Text(s)))
+                                .toList(),
+                            onChanged: (v) {
+                              if (v == null) return;
+                              setState(() {
+                                _selectedSort = v;
+                              });
+                            },
                           ),
                         ],
                       ),
                     ),
 
                     const SizedBox(width: 16),
+
+                    // push count to the right
+                    const Spacer(),
 
                     // Item count (right)
                     Text('${sortedProducts.length} item(s)', style: const TextStyle(color: Colors.black54)),
