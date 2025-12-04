@@ -46,36 +46,30 @@ class HomeScreen extends StatelessWidget {
             heroTop: heroTop,
             slides: [
               HeroSlide(
-                image:
+                imageUrl:
                     'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
                 title: 'Union Essentials Sale',
                 subtitle:
-                    'Everything you need — up to 50% off selected essentials',
-                buttonText: 'SHOP ESSENTIALS',
-                onPressed: makeSlideCallback('SHOP ESSENTIALS'),
-                imageUrl:
-                    'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
+                    'Everything you need – up to 50% off selected essentials',
+                primaryLabel: 'SHOP ESSENTIALS',
+                onPrimary: makeSlideCallback('SHOP ESSENTIALS'),
               ),
               HeroSlide(
-                image:
+                imageUrl:
                     'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
                 title: 'Student Discounts',
                 subtitle:
                     'Verified students get exclusive savings across the store',
-                buttonText: 'VERIFY & SAVE',
-                onPressed: makeSlideCallback('VERIFY & SAVE'),
-                imageUrl:
-                    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
+                primaryLabel: 'VERIFY & SAVE',
+                onPrimary: makeSlideCallback('VERIFY & SAVE'),
               ),
               HeroSlide(
-                image:
+                imageUrl:
                     'https://images.unsplash.com/photo-1520975912602-0efb0f4e0f4f?auto=format&fit=crop&w=1200&q=80',
                 title: 'New Merchandise Drop',
                 subtitle: 'Limited-run designs — shop the latest arrivals',
-                buttonText: 'SEE NEW MERCH',
-                onPressed: makeSlideCallback('SEE NEW MERCH'),
-                imageUrl:
-                    'https://images.unsplash.com/photo-1520975912602-0efb0f4e0f4f?auto=format&fit=crop&w=1200&q=80',
+                primaryLabel: 'SEE NEW MERCH',
+                onPrimary: makeSlideCallback('SEE NEW MERCH'),
               ),
             ],
           ),
