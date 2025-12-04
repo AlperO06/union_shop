@@ -69,3 +69,11 @@ class PrintShackProduct {
     return true;
   }
 }
+
+// Sample Print Shack product
+const PrintShackProduct samplePersonalisedHoodie = PrintShackProduct(
+  name: 'Personalised Hoodie',
+  pricePerLine: 3.0,
+  maxCharsPerLine: 10,
+  imageUrls: ['https://picsum.photos/seed/personalised_hoodie/800/600'],
+);
