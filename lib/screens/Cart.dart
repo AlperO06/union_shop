@@ -171,8 +171,10 @@ class _CartPageState extends State<CartPage> {
                     // Null-safe image URL: consider empty or whitespace-only strings as "no image".
                     final String? imageUrl = item.image.trim().isEmpty ? null : item.image;
 
-                    // --- Changed: detect mobile and use Column layout on small widths ---
-                    final bool isMobile = MediaQuery.of(context).size.width < 700;
+                    // --- Changed: detect mobile and handle very narrow phones to avoid overflow ---
+                    final double width = MediaQuery.of(context).size.width;
+                    final bool isMobile = width < 700;
+                    final bool isNarrow = width < 360; // very small phones
 
                     return Card(
                       margin: const EdgeInsets.symmetric(vertical: 8),
@@ -247,21 +249,31 @@ class _CartPageState extends State<CartPage> {
 
                                   const SizedBox(height: 12),
 
-                                  // Bottom row: price | quantity controls | line total
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: Align(
-                                          alignment: Alignment.centerLeft,
+                                  // Bottom section: adapt layout for very narrow screens
+                                  if (isNarrow) ...[
+                                    // Stack price/total and put quantity control on its own line (centered)
+                                    Row(
+                                      children: [
+                                        Expanded(
                                           child: Text('£${item.price.toStringAsFixed(2)}', style: const TextStyle(fontSize: 14)),
                                         ),
-                                      ),
-
-                                      Expanded(
-                                        flex: 2,
-                                        child: Align(
-                                          alignment: Alignment.center,
+                                        Expanded(
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child: Text(
+                                              '£${(item.price * item.quantity).toStringAsFixed(2)}',
+                                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Center(
+                                      child: ConstrainedBox(
+                                        constraints: const BoxConstraints(maxWidth: 140),
+                                        child: FittedBox(
+                                          fit: BoxFit.scaleDown,
                                           child: Container(
                                             height: 34,
                                             decoration: BoxDecoration(
@@ -315,19 +327,21 @@ class _CartPageState extends State<CartPage> {
                                           ),
                                         ),
                                       ),
-
-                                      Expanded(
-                                        flex: 2,
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: Text(
-                                            '£${(item.price * item.quantity).toStringAsFixed(2)}',
-                                            style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                                    ),
+ 
+                                        Expanded(
+                                          flex: 2,
+                                          child: Align(
+                                            alignment: Alignment.centerRight,
+                                            child: Text(
+                                              '£${(item.price * item.quantity).toStringAsFixed(2)}',
+                                              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
+                                      ],
+                                    ),
+                                  ],
                                 ],
                               )
                             : Row(
