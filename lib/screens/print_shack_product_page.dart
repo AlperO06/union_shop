@@ -220,12 +220,30 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                 children: [
                   const Text('Number of lines:'),
                   const SizedBox(width: 12),
-                  DropdownButton<int>(
-                    value: _lines,
-                    items: List.generate(4, (i) => i + 1).map((n) => DropdownMenuItem(value: n, child: Text('$n'))).toList(),
-                    onChanged: (v) {
-                      if (v != null) _changeLines(v);
-                    },
+                  // replaced plain DropdownButton with a decorated container to look like a form select
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[50], // light background
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(color: Colors.grey.shade300),
+                    ),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<int>(
+                        value: _lines,
+                        items: List.generate(4, (i) => i + 1)
+                            .map((n) => DropdownMenuItem(value: n, child: Text('$n')))
+                            .toList(),
+                        onChanged: (v) {
+                          if (v != null) _changeLines(v);
+                        },
+                        isDense: true,
+                        elevation: 2,
+                        icon: Icon(Icons.keyboard_arrow_down, color: Colors.grey[700]),
+                        style: const TextStyle(color: Colors.black, fontSize: 14),
+                        dropdownColor: Colors.white,
+                      ),
+                    ),
                   ),
                   const SizedBox(width: 16),
                   Text('Max chars/line: ${widget.product.maxCharsPerLine}'),
