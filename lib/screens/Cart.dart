@@ -490,3 +490,26 @@ class _CartPageState extends State<CartPage> {
                 ),
 
                 const SizedBox(height: 20),
+
+                // Summary box (shown only when items exist)
+                Card(
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 18.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Row(
+                          children: [
+                            const Text(
+                              'Subtotal',
+                              style: TextStyle(fontSize: 16, color: Colors.black87),
+                            ),
+                            const Spacer(),
+                            Text(
+                              '£${subtotal.toStringAsFixed(2)}',
+                              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                            ),
+                          ],
+                        ),
