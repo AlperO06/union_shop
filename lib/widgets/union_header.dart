@@ -147,6 +147,63 @@ class UnionHeader extends StatelessWidget {
     );
   }
 
+  // New: show a temporary mobile menu with navigation items
+  void _openMobileMenu(BuildContext context) {
+    showModalBottomSheet<void>(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
+      ),
+      builder: (ctx) => SafeArea(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                Navigator.pop(ctx);
+                navigateToHome(context);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.storefront),
+              title: const Text('Shop'),
+              onTap: () {
+                Navigator.pop(ctx);
+                Navigator.pushNamed(context, '/collections');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.print),
+              title: const Text('The Print Shack'),
+              onTap: () {
+                Navigator.pop(ctx);
+                Navigator.pushNamed(context, '/print-shack');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.local_offer),
+              title: const Text('SALE'),
+              onTap: () {
+                Navigator.pop(ctx);
+                Navigator.pushNamed(context, '/sale');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.info_outline),
+              title: const Text('About'),
+              onTap: () {
+                Navigator.pop(ctx);
+                navigateToAbout(context);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
@@ -262,20 +319,15 @@ class UnionHeader extends StatelessWidget {
                                 onPressed: () => Navigator.pushNamed(context, '/login'),
                               ),
                               _buildCartButton(context),
-                              const IconButton(
-                                icon: Icon(Icons.menu, size: 18, color: Colors.grey),
-                                padding: EdgeInsets.all(8),
-                                constraints: BoxConstraints(minWidth: 32, minHeight: 32),
-                                onPressed: placeholderCallbackForButtons,
-                              ),
+                              // removed desktop-only hamburger menu so it only appears on narrow screens
                             ]
                           : [
                               _buildCartButton(context),
-                              const IconButton(
-                                icon: Icon(Icons.menu, size: 18, color: Colors.grey),
+                              IconButton(
+                                icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
                                 padding: EdgeInsets.all(8),
-                                constraints: BoxConstraints(minWidth: 32, minHeight: 32),
-                                onPressed: placeholderCallbackForButtons,
+                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                onPressed: () => _openMobileMenu(context),
                               ),
                             ],
                     ),
