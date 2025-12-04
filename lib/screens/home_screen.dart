@@ -54,6 +54,35 @@ class HomeScreen extends StatelessWidget {
                 primaryLabel: 'SHOP ESSENTIALS',
                 onPrimary: makeSlideCallback('SHOP ESSENTIALS'),
               ),
+
+              // NEW SLIDE: The Print Shack
+              HeroSlide(
+                imageUrl:
+                    'https://images.unsplash.com/photo-1580711749644-0a9f4d9e0f8e?auto=format&fit=crop&w=1200&q=80',
+                title: 'The Print Shack',
+                subtitle:
+                    'Let’s create something uniquely you with our personalisation service — From £3 for one line of text!',
+                primaryLabel: 'LEARN MORE',
+                // no onPrimary provided — leave callback nil or hook as needed
+              ),
+
+              // 2) Essential hoodie — navigate to the hoodie product page
+              HeroSlide(
+                imageUrl: 'https://picsum.photos/id/1003/1200/800',
+                title: 'Essential Hoodie',
+                subtitle: 'Limited Edition Essential Zip Hoodie',
+                primaryLabel: 'VIEW HOODIE',
+                onPrimary: () {
+                  final product = products.firstWhere(
+                    (p) => p.name.toLowerCase().contains('hoodie') || p.name.toLowerCase().contains('zip hoodie'),
+                    orElse: () => products.first,
+                  );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => ProductPage(product: product)),
+                  );
+                },
+              ),
               HeroSlide(
                 imageUrl:
                     'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
