@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/hero_slider.dart';
 import '../widgets/union_page_scaffold.dart';
+import '../models/product.dart';
 import '../data/products.dart';
 import '../product_page.dart';
 
