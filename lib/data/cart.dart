@@ -155,6 +155,8 @@ class CartItem {
     // Fallback safe default.
     return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '');
   }
+
+  get personalisationLines => null;
 }
 
 // Reactive list of cart items: listen to this to update UI immediately

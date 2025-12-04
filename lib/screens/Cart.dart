@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/screens/print_shack_product_page.dart';
 import '../widgets/union_page_scaffold.dart';
 import '../data/cart.dart';
 
@@ -217,6 +218,15 @@ class _CartPageState extends State<CartPage> {
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                         const SizedBox(height: 6),
+                                        if (item is PrintShackCartItem && (item.personalisationLines ?? <String>[]).isNotEmpty) ...[
+                                          for (var i = 0; i < (item.personalisationLines ?? <String>[]).length; i++)
+                                            Text(
+                                              'Personalisation Line ${i + 1}: ${item.personalisationLines![i]}',
+                                              style: TextStyle(fontSize: 13, color: Colors.grey[800]),
+                                              softWrap: true,
+                                            ),
+                                          const SizedBox(height: 6),
+                                        ],
                                         Text(
                                           '${item.colour} • Size: ${item.size}',
                                           style: TextStyle(color: Colors.grey[700], fontSize: 13),
