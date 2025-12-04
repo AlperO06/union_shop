@@ -16,6 +16,10 @@ class PrintShackCartItem {
     required this.quantity,
   });
 
+  // Compatibility accessor so callers can check `item.personalisationLines`
+  // without changing existing code that expects that property (nullable).
+  List<String>? get personalisationLines => lines;
+
   @override
   String toString() => 'PrintShackCartItem(name: $productName, qty: $quantity, lines: $lines)';
 }
