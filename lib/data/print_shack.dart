@@ -25,3 +25,12 @@ class PrintShackProduct {
       imageUrls: imageUrls ?? this.imageUrls,
     );
   }
+
+  factory PrintShackProduct.fromJson(Map<String, dynamic> json) {
+    return PrintShackProduct(
+      name: json['name'] as String? ?? '',
+      pricePerLine: (json['pricePerLine'] is num) ? (json['pricePerLine'] as num).toDouble() : double.tryParse('${json['pricePerLine']}') ?? 0.0,
+      maxCharsPerLine: (json['maxCharsPerLine'] is int) ? json['maxCharsPerLine'] as int : int.tryParse('${json['maxCharsPerLine']}') ?? 0,
+      imageUrls: (json['imageUrls'] as List<dynamic>?)?.map((e) => e.toString()).toList() ?? const [],
+    );
+  }
