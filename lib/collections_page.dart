@@ -108,10 +108,10 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
             children: [
               // Big centered category heading for the products grid
               const SizedBox(height: 8),
-              const Center(
+              Center(
                 child: Text(
-                  'Clothing',
-                  style: TextStyle(
+                  widget.title,
+                  style: const TextStyle(
                     fontSize: 28,
                     fontWeight: FontWeight.w800,
                     letterSpacing: 0.4,
