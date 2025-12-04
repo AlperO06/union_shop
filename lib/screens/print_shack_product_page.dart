@@ -105,3 +105,35 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
               ),
             ),
             const SizedBox(height: 8),
+
+            // Thumbnails
+            if (images.isNotEmpty)
+              SizedBox(
+                height: 64,
+                child: ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: images.length,
+                  separatorBuilder: (_, __) => const SizedBox(width: 8),
+                  itemBuilder: (context, i) {
+                    final url = images[i];
+                    final selected = i == _selectedImage;
+                    return GestureDetector(
+                      onTap: () => _setImage(i),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 200),
+                        padding: selected ? const EdgeInsets.all(2) : EdgeInsets.zero,
+                        decoration: BoxDecoration(
+                          border: selected ? Border.all(color: const Color(0xFF4d2963), width: 2) : null,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(6),
+                          child: Image.network(url, width: 96, height: 64, fit: BoxFit.cover,
+                              errorBuilder: (c, e, s) => Container(color: Colors.grey[200], width: 96, height: 64)),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            const SizedBox(height: 16),
