@@ -17,6 +17,8 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
   int _quantity = 1;
   late List<TextEditingController> _controllers;
 
+  double get _totalPrice => (_lines * widget.product.pricePerLine) * _quantity;
+
   @override
   void initState() {
     super.initState();
@@ -215,7 +217,7 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                 const Spacer(),
                 // Total preview
                 Text(
-                  'Total: £${((_lines * widget.product.pricePerLine) * _quantity).toStringAsFixed(2)}',
+                  'Total: £${_totalPrice.toStringAsFixed(2)}',
                   style: const TextStyle(fontWeight: FontWeight.w700),
                 ),
               ],
