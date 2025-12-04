@@ -275,6 +275,7 @@ void _cartPersistenceListener() {
   _saveCartToPrefs();
 }
 
+// ignore: unused_element
 bool _persistenceListenerAttached = false;
 
 void _attachPersistenceListener() {
