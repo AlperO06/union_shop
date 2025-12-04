@@ -606,7 +606,7 @@ class _CartPageState extends State<CartPage> {
                           child: ElevatedButton(
                             onPressed: () {
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Checkout pressed (UI demo only)')),
+                                const SnackBar(content: Text('Checkout pressed')),
                               );
                             },
                             style: ElevatedButton.styleFrom(
