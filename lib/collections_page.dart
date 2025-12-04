@@ -118,6 +118,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
 
           // get filtered & sorted products
           final sortedProducts = _applyFilterAndSort();
+          // only display the items for the current page
+          final pageProducts = _paginatedProducts();
 
           return Center(
             child: SizedBox(
@@ -230,12 +232,12 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                       mainAxisSpacing: 24,
                       childAspectRatio: 0.72,
                     ),
-                    itemCount: sortedProducts.length,
+                    itemCount: pageProducts.length,
                     // allow embedding in outer scroll view
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
-                      final p = sortedProducts[index];
+                      final p = pageProducts[index];
                       return Card(
                         // flatter card style, edge-to-edge inside grid cell
                         margin: EdgeInsets.zero,
