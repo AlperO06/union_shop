@@ -37,7 +37,8 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
   // pagination state
   int _currentPage = 1;
   final int _itemsPerPage = 6;
-  late final List<Map<String, String>> _allProducts;
+  // avoid null access by providing an empty list default; initState will populate it
+  List<Map<String, String>> _allProducts = [];
   // total pages based on current filtered/sorted products
   int get totalPages {
     final totalItems = _applyFilterAndSort().length;
