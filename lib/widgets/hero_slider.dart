@@ -311,6 +311,23 @@ class _HeroSliderState extends State<HeroSlider> {
                     ),
                     child: const Text('LEARN MORE', style: TextStyle(fontSize: 13, color: Colors.white)),
                   ),
+                  const SizedBox(width: 8),
+                  // Play / Pause toggle
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.black45,
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: IconButton(
+                      onPressed: togglePlayPause,
+                      icon: Icon(
+                        (_timer != null && !_autoplayPaused) ? Icons.pause : Icons.play_arrow,
+                        color: Colors.white,
+                        size: 20,
+                      ),
+                      tooltip: (_timer != null && !_autoplayPaused) ? 'Pause autoplay' : 'Play autoplay',
+                    ),
+                  ),
                 ],
               ),
             ),
