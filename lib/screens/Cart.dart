@@ -471,4 +471,22 @@ class _CartPageState extends State<CartPage> {
                                     ),
                                   ),
 
- 
+                                  // Total column (line total)
+                                  Expanded(
+                                    flex: 2,
+                                    child: Align(
+                                      alignment: Alignment.centerRight,
+                                      child: Text(
+                                        '£${(item.price * item.quantity).toStringAsFixed(2)}',
+                                        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                      ),
+                    );
+                  }).toList(),
+                ),
+
+                const SizedBox(height: 20),
