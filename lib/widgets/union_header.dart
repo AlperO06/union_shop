@@ -38,7 +38,7 @@ void navigateToHome(BuildContext context) {
 
 // New: reusable header widget containing the purple sale banner and white nav row
 class UnionHeader extends StatelessWidget {
-  const UnionHeader({super.key, required Future<Object?> Function() onProfilePressed, required Future<Object?> Function() onCartPressed});
+  const UnionHeader({super.key, required Future<Object?> Function() onProfilePressed, required Future<Object?> Function() onCartPressed, required Null Function() onPrintShackPressed});
 
   // builds the cart icon with a red circular badge showing the item count
   Widget _buildCartButton(BuildContext context) {
