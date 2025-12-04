@@ -78,3 +78,30 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
     final mainImage = images.isNotEmpty
         ? images[_selectedImage.clamp(0, images.length - 1)]
         : 'https://picsum.photos/seed/placeholder/1200/800';
+
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(widget.product.name),
+        backgroundColor: const Color(0xFF4d2963),
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Main image
+            AspectRatio(
+              aspectRatio: 16 / 9,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.network(
+                  mainImage,
+                  fit: BoxFit.cover,
+                  errorBuilder: (c, e, s) => Container(
+                    color: Colors.grey[200],
+                    child: const Center(child: Icon(Icons.broken_image)),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
