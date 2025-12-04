@@ -24,96 +24,13 @@ class HomeScreen extends StatelessWidget {
 
         // Build the main children list once and reuse for both mobile (ListView) and desktop (Column).
         final mainChildren = <Widget>[
-          // Hero Section (height switches based on isMobile)
-          SizedBox(
+          // Replaced static hero banner with a reusable HeroSlider
+          HeroSlider(
             height: heroHeight,
-            width: double.infinity,
-            child: Stack(
-              children: [
-                Positioned.fill(
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: NetworkImage(
-                          'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                        ),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    child: Container(
-                      // fixed overlay: use withOpacity
-                      decoration: BoxDecoration(
-                        // ignore: deprecated_member_use
-                        color: Colors.black.withOpacity(0.58),
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 24,
-                  right: 24,
-                  // place inner content slightly higher on mobile to avoid pushing past the bottom
-                  top: heroTop,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Union Shop',
-                        style: TextStyle(
-                          fontSize: heroTitleSize,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                          height: 1.1,
-                        ),
-                      ),
-                      SizedBox(height: isMobile ? 8 : 12),
-                      Text(
-                        "Official merchandise, campus essentials and local gifts — delivered to your door.",
-                        style: TextStyle(
-                          fontSize: heroSubtitleSize,
-                          color: Colors.white70,
-                          height: 1.35,
-                        ),
-                        textAlign: TextAlign.center,
-                        maxLines: isMobile ? 3 : 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      SizedBox(height: isMobile ? 18 : 28),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          ElevatedButton(
-                            onPressed: placeholderCallbackForButtons,
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF4d2963),
-                              foregroundColor: Colors.white,
-                              shape: const RoundedRectangleBorder(
-                                borderRadius: BorderRadius.zero,
-                              ),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 18, vertical: 14),
-                            ),
-                            child: const Text(
-                              'SHOP NOW',
-                              style:
-                                  TextStyle(fontSize: 14, letterSpacing: 1),
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          OutlinedButton(
-                            onPressed: placeholderCallbackForButtons,
-                            style: OutlinedButton.styleFrom(
-                                side: const BorderSide(color: Colors.white70),
-                                foregroundColor: Colors.white),
-                            child: const Text('LEARN MORE'),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            isMobile: isMobile,
+            heroTitleSize: heroTitleSize,
+            heroSubtitleSize: heroSubtitleSize,
+            heroTop: heroTop,
           ),
 
           // Promotions banner (unchanged)
@@ -484,6 +401,120 @@ class ProductCard extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// Lightweight HeroSlider implementation (local to this file)
+class HeroSlider extends StatelessWidget {
+  final double height;
+  final bool isMobile;
+  final double heroTitleSize;
+  final double heroSubtitleSize;
+  final double heroTop;
+
+  const HeroSlider({
+    Key? key,
+    required this.height,
+    required this.isMobile,
+    required this.heroTitleSize,
+    required this.heroSubtitleSize,
+    required this.heroTop,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final images = [
+      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+      // add more slides here if desired
+      'https://picsum.photos/1200/600?image=1067',
+    ];
+
+    return SizedBox(
+      height: height,
+      width: double.infinity,
+      child: PageView(
+        children: images.map((img) {
+          return Stack(
+            children: [
+              Positioned.fill(
+                child: Image.network(
+                  img,
+                  fit: BoxFit.cover,
+                  errorBuilder: (context, error, stackTrace) =>
+                      Container(color: Colors.grey[200]),
+                ),
+              ),
+              Positioned.fill(
+                child: Container(
+                  color: Colors.black.withOpacity(0.58),
+                ),
+              ),
+              Positioned(
+                left: 24,
+                right: 24,
+                top: heroTop,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'Union Shop',
+                      style: TextStyle(
+                        fontSize: heroTitleSize,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white,
+                        height: 1.1,
+                      ),
+                    ),
+                    SizedBox(height: isMobile ? 8 : 12),
+                    Text(
+                      "Official merchandise, campus essentials and local gifts — delivered to your door.",
+                      style: TextStyle(
+                        fontSize: heroSubtitleSize,
+                        color: Colors.white70,
+                        height: 1.35,
+                      ),
+                      textAlign: TextAlign.center,
+                      maxLines: isMobile ? 3 : 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: isMobile ? 18 : 28),
+                    Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        ElevatedButton(
+                          onPressed: placeholderCallbackForButtons,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF4d2963),
+                            foregroundColor: Colors.white,
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.zero,
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 18, vertical: 14),
+                          ),
+                          child: const Text(
+                            'SHOP NOW',
+                            style: TextStyle(fontSize: 14, letterSpacing: 1),
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        OutlinedButton(
+                          onPressed: placeholderCallbackForButtons,
+                          style: OutlinedButton.styleFrom(
+                              side: const BorderSide(color: Colors.white70),
+                              foregroundColor: Colors.white),
+                          child: const Text('LEARN MORE'),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          );
+        }).toList(),
       ),
     );
   }
