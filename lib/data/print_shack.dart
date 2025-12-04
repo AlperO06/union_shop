@@ -81,23 +81,6 @@ const PrintShackProduct samplePersonalisedHoodie = PrintShackProduct(
 
     // Hero slider images (multiple sizes for responsive rendering)
     'https://shop.upsu.net/cdn/shop/files/Hoodie_180x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_360x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_540x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_720x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_900x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_1080x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_1296x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_1512x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_1728x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_1950x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_2100x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_2260x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_2450x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_2700x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_3000x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_3350x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_3750x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_4100x.jpg?v=1632306034',
     'https://shop.upsu.net/cdn/shop/files/Hoodie.jpg?v=1632306034',
   ],
 );
