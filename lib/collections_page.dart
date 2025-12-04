@@ -121,13 +121,6 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
               ),
               const SizedBox(height: 12),
 
-              // page title (AppBar removed; keep title inside body)
-              Text(widget.title, style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-              const SizedBox(height: 8),
-
-              Text(widget.subtitle, style: const TextStyle(fontSize: 16, color: Colors.black54)),
-              const SizedBox(height: 12),
-
               // Horizontal filter bar: Category + Sort, neatly spaced and padded
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
