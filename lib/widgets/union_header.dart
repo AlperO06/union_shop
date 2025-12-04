@@ -10,14 +10,14 @@ class ShopMenuItem {
 }
 
 // New: canonical list of menu items used across the app
-const List<ShopMenuItem> kShopMenuItems = [
-  ShopMenuItem(label: 'Clothing', routeName: '/collections'),
-  ShopMenuItem(label: 'Merchandise', routeName: '/collections'),
-  ShopMenuItem(label: 'Halloween', routeName: '/collections'),
-  ShopMenuItem(label: 'Signature & Essential Range', routeName: '/collections'),
-  ShopMenuItem(label: 'Portsmouth City Collection', routeName: '/collections'),
-  ShopMenuItem(label: 'Pride Collection', routeName: '/collections'),
-  ShopMenuItem(label: 'Graduation', routeName: '/collections'),
+const List<ShopMenuItem> shopMenuItems = [
+  ShopMenuItem(label: 'Clothing', routeName: '/collections/clothing'),
+  ShopMenuItem(label: 'Merchandise', routeName: '/collections/clothing'),
+  ShopMenuItem(label: 'Halloween', routeName: '/collections/clothing'),
+  ShopMenuItem(label: 'Signature & Essential Range', routeName: '/collections/clothing'),
+  ShopMenuItem(label: 'Portsmouth City Collection', routeName: '/collections/clothing'),
+  ShopMenuItem(label: 'Pride Collection', routeName: '/collections/clothing'),
+  ShopMenuItem(label: 'Graduation', routeName: '/collections/clothing'),
 ];
 
 // The helper functions are duplicated here so the widget remains self-contained
@@ -137,7 +137,7 @@ class UnionHeader extends StatelessWidget {
 
     // Narrow screens: unchanged simple TextButton (already matches style)
     return TextButton(
-      onPressed: () => Navigator.pushNamed(context, '/collections'),
+      onPressed: () => Navigator.pushNamed(context, '/collections/clothing'),
       style: TextButton.styleFrom(
         foregroundColor: Colors.black,
         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -171,7 +171,7 @@ class UnionHeader extends StatelessWidget {
               title: const Text('Shop'),
               onTap: () {
                 Navigator.pop(ctx);
-                Navigator.pushNamed(context, '/collections');
+                Navigator.pushNamed(context, '/collections/clothing');
               },
             ),
             ListTile(

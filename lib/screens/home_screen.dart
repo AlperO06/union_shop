@@ -28,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         VoidCallback makeSlideCallback(String label) {
           final lower = label.toLowerCase();
           if (lower.contains('shop')) {
-            return () => Navigator.pushNamed(context, '/collections');
+            return () => Navigator.pushNamed(context, '/collections/clothing');
           }
           if (lower.contains('learn')) {
             return () => Navigator.pushNamed(context, '/about');
