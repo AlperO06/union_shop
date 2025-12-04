@@ -91,6 +91,25 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
         padding: const EdgeInsets.all(12.0),
         child: LayoutBuilder(builder: (context, constraints) {
           final width = constraints.maxWidth;
+          // responsive columns: wide screens use 3 columns, medium 2, small 1
+          int columns = 1;
+          if (width >= 900) {
+            columns = 3;
+          } else if (width >= 600) {
+            columns = 2;
+          }
+
+          // center content and constrain to a max width to match reference layout
+          const double maxContentWidth = 1100.0;
+          final double contentWidth = width > maxContentWidth ? maxContentWidth : width;
+
+          // get filtered & sorted products
+          final sortedProducts = _applyFilterAndSort();
+
+          return Center(
+            child: SizedBox(
+              width: contentWidth,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   // Big centered category heading for the products grid
