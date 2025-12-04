@@ -19,32 +19,15 @@ class CollectionsLandingPage extends StatelessWidget {
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 1200),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       // Title
-                      Center(
-                        child: Text(
-                          'Collections',
-                          style: TextStyle(
-                            fontSize: isMobile ? 28 : 36,
-                            fontWeight: FontWeight.bold,
-                            letterSpacing: 1.2,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: isMobile ? 12 : 16),
-                      // Subtitle
-                      Center(
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: isMobile ? 16.0 : 0),
-                          child: Text(
-                            'Browse our curated collections of clothing, merchandise, and accessories',
-                            style: TextStyle(
-                              fontSize: isMobile ? 14 : 16,
-                              color: Colors.black54,
-                            ),
-                            textAlign: TextAlign.center,
-                          ),
+                      Text(
+                        'Collections',
+                        style: TextStyle(
+                          fontSize: isMobile ? 28 : 36,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 1.2,
                         ),
                       ),
                       SizedBox(height: isMobile ? 32 : 48),
@@ -52,75 +35,83 @@ class CollectionsLandingPage extends StatelessWidget {
                       // Collections Grid
                       GridView.count(
                         crossAxisCount: isMobile ? 1 : (width < 900 ? 2 : 3),
-                        crossAxisSpacing: isMobile ? 16 : 24,
-                        mainAxisSpacing: isMobile ? 16 : 24,
-                        childAspectRatio: isMobile ? 2.5 : 1.5,
+                        crossAxisSpacing: isMobile ? 16 : 20,
+                        mainAxisSpacing: isMobile ? 16 : 20,
+                        childAspectRatio: isMobile ? 1.4 : 1.3,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         children: [
                           _buildCollectionCard(
                             context,
+                            title: 'Autumn Favourites',
+                            route: '/collections/clothing',
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/crewnecks.jpg?v=1731079265&width=480',
+                          ),
+                          _buildCollectionCard(
+                            context,
+                            title: 'Black Friday',
+                            route: '/sale',
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/black_friday_2_1.jpg?v=1700487733&width=480',
+                          ),
+                          _buildCollectionCard(
+                            context,
                             title: 'Clothing',
-                            description: 'Explore our full range of apparel',
                             route: '/collections/clothing',
-                            icon: Icons.checkroom,
-                            color: const Color(0xFF4d2963),
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/hoodies_35c6a90c-27fa-45df-a50f-b4833029fc6f.jpg?v=1731078851&width=480',
                           ),
                           _buildCollectionCard(
                             context,
-                            title: 'Merchandise',
-                            description: 'Official university merchandise',
+                            title: 'Clothing - Original',
                             route: '/collections/clothing',
-                            icon: Icons.shopping_bag,
-                            color: Colors.deepPurple,
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/hoodies_f9ca7e5f-cbf5-46c6-8ce2-f914ef24ee93.jpg?v=1731078873&width=480',
                           ),
                           _buildCollectionCard(
                             context,
-                            title: 'Accessories',
-                            description: 'Complete your look',
+                            title: 'Elections Discounts',
                             route: '/collections/clothing',
-                            icon: Icons.watch,
-                            color: Colors.indigo,
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/hoodies.jpg?v=1731078792&width=480',
                           ),
                           _buildCollectionCard(
                             context,
-                            title: 'Halloween',
-                            description: 'Spooky season essentials',
+                            title: 'Essential Range',
                             route: '/collections/clothing',
-                            icon: Icons.celebration,
-                            color: Colors.orange,
-                          ),
-                          _buildCollectionCard(
-                            context,
-                            title: 'Signature & Essential Range',
-                            description: 'Classic must-haves',
-                            route: '/collections/clothing',
-                            icon: Icons.star,
-                            color: Colors.amber,
-                          ),
-                          _buildCollectionCard(
-                            context,
-                            title: 'Portsmouth City Collection',
-                            description: 'Local pride and landmarks',
-                            route: '/collections/clothing',
-                            icon: Icons.location_city,
-                            color: Colors.blue,
-                          ),
-                          _buildCollectionCard(
-                            context,
-                            title: 'Pride Collection',
-                            description: 'Celebrate diversity and inclusion',
-                            route: '/collections/clothing',
-                            icon: Icons.favorite,
-                            color: Colors.pink,
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/essentials.jpg?v=1731079286&width=480',
                           ),
                           _buildCollectionCard(
                             context,
                             title: 'Graduation',
-                            description: 'Celebrate your achievement',
                             route: '/collections/clothing',
-                            icon: Icons.school,
-                            color: Colors.teal,
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/graduation.jpg?v=1731079305&width=480',
+                          ),
+                          _buildCollectionCard(
+                            context,
+                            title: 'Limited Edition Essential Zip Hoodies',
+                            route: '/collections/clothing',
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/zip_hoodie.jpg?v=1731079318&width=480',
+                          ),
+                          _buildCollectionCard(
+                            context,
+                            title: 'Merchandise',
+                            route: '/collections/clothing',
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/merchandise.jpg?v=1731079329&width=480',
+                          ),
+                          _buildCollectionCard(
+                            context,
+                            title: 'Nike Final Chance',
+                            route: '/sale',
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/nike.jpg?v=1731079341&width=480',
+                          ),
+                          _buildCollectionCard(
+                            context,
+                            title: 'Personalisation',
+                            route: '/print-shack',
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/personalisation_1.jpg?v=1704203808&width=480',
+                          ),
+                          _buildCollectionCard(
+                            context,
+                            title: 'Popular',
+                            route: '/collections/clothing',
+                            imageUrl: 'https://shop.upsu.net/cdn/shop/collections/popular.jpg?v=1731079353&width=480',
                           ),
                         ],
                       ),
@@ -138,56 +129,76 @@ class CollectionsLandingPage extends StatelessWidget {
   Widget _buildCollectionCard(
     BuildContext context, {
     required String title,
-    required String description,
     required String route,
-    required IconData icon,
-    required Color color,
+    required String imageUrl,
   }) {
-    return Card(
-      elevation: 2,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: InkWell(
-        onTap: () => Navigator.pushNamed(context, route),
-        borderRadius: BorderRadius.circular(12),
-        child: Container(
-          padding: const EdgeInsets.all(20),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                color.withOpacity(0.1),
-                color.withOpacity(0.05),
-              ],
+    return InkWell(
+      onTap: () => Navigator.pushNamed(context, route),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 4,
+              offset: const Offset(0, 2),
             ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
+          ],
+        ),
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(8),
+          child: Stack(
+            fit: StackFit.expand,
             children: [
-              Icon(
-                icon,
-                size: 40,
-                color: color,
+              // Background Image
+              Image.network(
+                imageUrl,
+                fit: BoxFit.cover,
+                errorBuilder: (context, error, stackTrace) {
+                  return Container(
+                    color: Colors.grey[300],
+                    child: const Center(
+                      child: Icon(Icons.image_not_supported, color: Colors.grey),
+                    ),
+                  );
+                },
               ),
-              const SizedBox(height: 12),
-              Text(
-                title,
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: color,
+              // Dark Overlay
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    begin: Alignment.topCenter,
+                    end: Alignment.bottomCenter,
+                    colors: [
+                      Colors.black.withOpacity(0.1),
+                      Colors.black.withOpacity(0.5),
+                    ],
+                  ),
                 ),
               ),
-              const SizedBox(height: 6),
-              Text(
-                description,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black54,
+              // Text Overlay
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Text(
+                    title,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      shadows: [
+                        Shadow(
+                          offset: Offset(0, 1),
+                          blurRadius: 3,
+                          color: Colors.black54,
+                        ),
+                      ],
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
             ],
