@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/union_page_scaffold.dart'; // added import
+import '../models/product.dart';
+import '../data/products.dart';
+import '../product_page.dart';
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
@@ -38,7 +41,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
   int _currentPage = 1;
   final int _itemsPerPage = 6;
   // avoid null access by providing an empty list default; initState will populate it
-  List<Map<String, String>> _allProducts = [];
+  List<Product> _allProducts = [];
   // total pages based on current filtered/sorted products
   int get totalPages {
     final totalItems = _applyFilterAndSort().length;
@@ -49,88 +52,40 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
   @override
   void initState() {
     super.initState();
-    // realistic product list (names/prices/categories/images)
-    _allProducts = [
-      {
-        'name': 'Oxford Shirt',
-        'price': '£45.00',
-        'category': 'Tops',
-        'image': 'https://picsum.photos/seed/oxford_shirt/400/400',
-      },
-      {
-        'name': 'Classic T‑Shirt',
-        'price': '£25.00',
-        'category': 'Tops',
-        'image': 'https://picsum.photos/seed/classic_tshirt/400/400',
-      },
-      {
-        'name': 'Denim Jacket',
-        'price': '£85.00',
-        'category': 'Tops',
-        'image': 'https://picsum.photos/seed/denim_jacket/400/400',
-      },
-      {
-        'name': 'Chinos',
-        'price': '£50.00',
-        'category': 'Tops',
-        'image': 'https://picsum.photos/seed/chinos/400/400',
-      },
-      {
-        'name': 'Crewneck Sweater',
-        'price': '£60.00',
-        'category': 'Tops',
-        'image': 'https://picsum.photos/seed/crewneck_sweater/400/400',
-      },
-      {
-        'name': 'Parka Coat',
-        'price': '£120.00',
-        'category': 'Tops',
-        'image': 'https://picsum.photos/seed/parka_coat/400/400',
-      },
-      {
-        'name': 'Leather Belt',
-        'price': '£30.00',
-        'category': 'Accessories',
-        'image': 'https://picsum.photos/seed/leather_belt/400/400',
-      },
-      {
-        'name': 'Canvas Sneakers',
-        'price': '£65.00',
-        'category': 'Accessories',
-        'image': 'https://picsum.photos/seed/canvas_sneakers/400/400',
-      },
-      {
-        'name': 'Wool Scarf',
-        'price': '£25.00',
-        'category': 'Accessories',
-        'image': 'https://picsum.photos/seed/wool_scarf/400/400',
-      },
-    ];
+    // Use actual Product objects from products.dart (IDs 9-17 are the collection items)
+    _allProducts = products.where((p) => p.id >= 9 && p.id <= 17).toList();
   }
 
-  double _priceValue(String priceText) {
-    final m = RegExp(r'[\d\.]+').firstMatch(priceText);
-    return m != null ? double.tryParse(m.group(0)!) ?? 0.0 : 0.0;
+  // Helper to determine category based on product ID ranges or name
+  String _getCategory(Product product) {
+    // IDs 9-14 are Tops, 15-17 are Accessories
+    if (product.id >= 9 && product.id <= 14) return 'Tops';
+    if (product.id >= 15 && product.id <= 17) return 'Accessories';
+    return 'All';
   }
 
-  List<Map<String, String>> _applyFilterAndSort() {
+  double _priceValue(Product product) {
+    return product.newPrice;
+  }
+
+  List<Product> _applyFilterAndSort() {
     final filtered = _selectedCategory == 'All'
         ? _allProducts.toList()
-        : _allProducts.where((p) => p['category'] == _selectedCategory).toList();
+        : _allProducts.where((p) => _getCategory(p) == _selectedCategory).toList();
 
     final sorted = filtered.toList();
     switch (_selectedSort) {
       case 'Name (A-Z)':
-        sorted.sort((a, b) => a['name']!.compareTo(b['name']!));
+        sorted.sort((a, b) => a.name.compareTo(b.name));
         break;
       case 'Name (Z-A)':
-        sorted.sort((a, b) => b['name']!.compareTo(a['name']!));
+        sorted.sort((a, b) => b.name.compareTo(a.name));
         break;
       case 'Price (Low-High)':
-        sorted.sort((a, b) => _priceValue(a['price']!).compareTo(_priceValue(b['price']!)));
+        sorted.sort((a, b) => _priceValue(a).compareTo(_priceValue(b)));
         break;
       case 'Price (High-Low)':
-        sorted.sort((a, b) => _priceValue(b['price']!).compareTo(_priceValue(a['price']!)));
+        sorted.sort((a, b) => _priceValue(b).compareTo(_priceValue(a)));
         break;
       default:
         break;
@@ -139,10 +94,10 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
   }
 
   // return only the products for the current page based on _itemsPerPage
-  List<Map<String, String>> _paginatedProducts() {
+  List<Product> _paginatedProducts() {
     final all = _applyFilterAndSort();
     final int start = (_currentPage - 1) * _itemsPerPage;
-    if (start >= all.length) return <Map<String, String>>[];
+    if (start >= all.length) return <Product>[];
     int end = start + _itemsPerPage;
     if (end > all.length) end = all.length;
     return all.sublist(start, end);
@@ -304,30 +259,12 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
                         child: InkWell(
                           onTap: () {
-                            // show a simple product dialog (keeps cards clickable)
-                            showDialog(
-                              context: context,
-                              builder: (ctx) {
-                                return AlertDialog(
-                                  title: Text(p['name'] ?? ''),
-                                  content: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    children: [
-                                      if ((p['image'] ?? '').isNotEmpty)
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.circular(6),
-                                          child: Image.network(p['image']!, height: 140, width: double.infinity, fit: BoxFit.cover),
-                                        ),
-                                      const SizedBox(height: 12),
-                                      Text(p['price'] ?? ''),
-                                    ],
-                                  ),
-                                  actions: [
-                                    TextButton(onPressed: () => Navigator.of(ctx).pop(), child: const Text('Close')),
-                                    // placeholder for future navigation to a real product page
-                                  ],
-                                );
-                              },
+                            // Navigate to the product page with the actual Product object
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProductPage(product: p),
+                              ),
                             );
                           },
                           child: Padding(
@@ -340,7 +277,7 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(4),
                                     child: Image.network(
-                                      p['image'] ?? '',
+                                      p.image,
                                       width: double.infinity,
                                       height: double.infinity,
                                       fit: BoxFit.cover,
@@ -357,14 +294,14 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  p['name']!,
+                                  p.name,
                                   style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
                                   maxLines: 2,
                                   overflow: TextOverflow.ellipsis,
                                 ),
                                 const SizedBox(height: 6),
                                 Text(
-                                  p['price']!,
+                                  '£${p.newPrice.toStringAsFixed(2)}',
                                   style: const TextStyle(fontSize: 13, color: Colors.grey),
                                 ),
                               ],
