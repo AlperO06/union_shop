@@ -17,7 +17,7 @@ class HeroSlide {
     this.onPrimary,
     this.onSecondary,
     this.primaryLabel = 'Shop now',
-    this.secondaryLabel,
+    this.secondaryLabel, required String image, required String buttonText, required void Function() onPressed,
   });
 }
 
