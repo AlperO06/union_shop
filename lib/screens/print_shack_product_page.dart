@@ -113,6 +113,8 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false, // remove default back button
+        elevation: 0, // flat purple bar
         title: const SizedBox.shrink(), // keep purple bar but no title text
         backgroundColor: const Color(0xFF4d2963),
       ),
