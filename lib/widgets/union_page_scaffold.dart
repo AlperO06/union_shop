@@ -12,6 +12,9 @@ class UnionPageScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // compute screen-size boolean using MediaQuery
+    final isMobile = MediaQuery.of(context).size.width < 600;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -29,6 +32,8 @@ class UnionPageScaffold extends StatelessWidget {
                   ),
                 );
               },
+              // pass screen-size flag
+              isMobile: isMobile,
             ),
             body,
             const UnionFooter(), // positioned after the body; scrolls together with body
