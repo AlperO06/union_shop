@@ -278,9 +278,9 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                             controller: _controllers[i],
                             maxLength: 10,
                             inputFormatters: [LengthLimitingTextInputFormatter(10)],
-                            decoration: InputDecoration(
-                              labelText: 'Line ${i + 1}',
-                              border: const OutlineInputBorder(),
+                            decoration: const InputDecoration(
+                              // removed labelText / hint so field starts empty
+                              border: OutlineInputBorder(),
                             ),
                           ),
                         ],
