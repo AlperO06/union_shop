@@ -14,6 +14,8 @@ class CartItem {
   final String _size;
   final String _colour;
   final String _image;
+  // store optional personalisation lines (nullable)
+  final List<String>? _personalisationLines;
 
   // Constructor accepts nullable inputs but converts them to safe defaults.
   CartItem({
@@ -24,10 +26,12 @@ class CartItem {
     String? size,
     String? colour,
     String? image,
+    List<String>? personalisationLines,
   })  : _price = price ?? 0.0,
         _size = size ?? '',
         _colour = colour ?? '',
-        _image = image ?? '';
+        _image = image ?? '',
+        _personalisationLines = personalisationLines;
 
   // Public non-nullable accessors (never return null).
   double get price => _price;
@@ -44,6 +48,7 @@ class CartItem {
     String? size,
     String? colour,
     String? image,
+    List<String>? personalisationLines,
   }) {
     return CartItem(
       id: id ?? this.id,
@@ -53,6 +58,7 @@ class CartItem {
       size: size ?? _size,
       colour: colour ?? _colour,
       image: image ?? _image,
+      personalisationLines: personalisationLines ?? _personalisationLines,
     );
   }
 
@@ -66,6 +72,7 @@ class CartItem {
       'size': _size,
       'colour': _colour,
       'image': _image,
+      'personalisationLines': _personalisationLines,
     };
   }
 
@@ -98,6 +105,18 @@ class CartItem {
       return double.tryParse(s) ?? fallback;
     }
 
+    // parse personalisation lines robustly
+    List<String>? parseStringList(dynamic v) {
+      if (v == null) return null;
+      if (v is List) return v.map((e) => e == null ? '' : e.toString()).toList();
+      // if it's a JSON string containing a list, try decoding
+      try {
+        final decoded = v is String ? jsonDecode(v) : null;
+        if (decoded is List) return decoded.map((e) => e == null ? '' : e.toString()).toList();
+      } catch (_) {}
+      return null;
+    }
+
     final id = parseString(map['id']);
     final name = parseString(map['name']);
     final quantity = parseInt(map['quantity'], 1);
@@ -105,6 +124,7 @@ class CartItem {
     final size = parseString(map['size']);
     final colour = parseString(map['colour']);
     final image = parseString(map['image']);
+    final personalisationLines = parseStringList(map['personalisationLines']);
 
     return CartItem(
       id: id,
@@ -114,6 +134,7 @@ class CartItem {
       size: size,
       colour: colour,
       image: image,
+      personalisationLines: personalisationLines,
     );
   }
 
@@ -135,13 +156,13 @@ class CartItem {
       // fall through to return a safe default below
     }
     // Return safe default instance (no nulls).
-    return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '');
+    return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '', personalisationLines: null);
   }
 
   // Convenience factory: accept null / String / Map and always return a non-null instance.
   factory CartItem.safeFrom(dynamic source) {
     if (source == null) {
-      return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '');
+      return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '', personalisationLines: null);
     }
     if (source is String) {
       return CartItem.fromJson(source);
@@ -153,10 +174,11 @@ class CartItem {
       return CartItem.fromMap(Map<String, dynamic>.from(source));
     }
     // Fallback safe default.
-    return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '');
+    return CartItem(id: '', name: '', quantity: 1, price: 0.0, size: '', colour: '', image: '', personalisationLines: null);
   }
 
-  get personalisationLines => null;
+  // Public accessor for optional personalisation lines.
+  List<String>? get personalisationLines => _personalisationLines;
 }
 
 // Reactive list of cart items: listen to this to update UI immediately
