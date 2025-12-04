@@ -87,6 +87,16 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
     return sorted;
   }
 
+  // return only the products for the current page based on _itemsPerPage
+  List<Map<String, String>> _paginatedProducts() {
+    final all = _applyFilterAndSort();
+    final int start = (_currentPage - 1) * _itemsPerPage;
+    if (start >= all.length) return <Map<String, String>>[];
+    int end = start + _itemsPerPage;
+    if (end > all.length) end = all.length;
+    return all.sublist(start, end);
+  }
+
   @override
   Widget build(BuildContext context) {
     return UnionPageScaffold(
