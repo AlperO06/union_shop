@@ -81,6 +81,5 @@ const PrintShackProduct samplePersonalisedHoodie = PrintShackProduct(
 
     // Hero slider images (multiple sizes for responsive rendering)
     'https://shop.upsu.net/cdn/shop/files/Hoodie_180x.jpg?v=1632306034',
-    'https://shop.upsu.net/cdn/shop/files/Hoodie.jpg?v=1632306034',
   ],
 );
