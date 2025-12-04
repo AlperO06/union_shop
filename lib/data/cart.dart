@@ -79,7 +79,8 @@ class CartItem {
       'size': _size,
       'colour': _colour,
       'image': _image,
-      'personalisationLines': _personalisationLines,
+      // Always store as a list for predictable persistence (may be empty).
+      'personalisationLines': _personalisationLines ?? <String>[],
     };
   }
 
@@ -112,16 +113,16 @@ class CartItem {
       return double.tryParse(s) ?? fallback;
     }
 
-    // parse personalisation lines robustly
-    List<String>? parseStringList(dynamic v) {
-      if (v == null) return null;
+    // parse personalisation lines robustly and always return a List<String> (may be empty)
+    List<String> parseStringList(dynamic v) {
+      if (v == null) return <String>[];
       if (v is List) return v.map((e) => e == null ? '' : e.toString()).toList();
       // if it's a JSON string containing a list, try decoding
       try {
         final decoded = v is String ? jsonDecode(v) : null;
         if (decoded is List) return decoded.map((e) => e == null ? '' : e.toString()).toList();
       } catch (_) {}
-      return null;
+      return <String>[];
     }
 
     final id = parseString(map['id']);
@@ -141,7 +142,9 @@ class CartItem {
       size: size,
       colour: colour,
       image: image,
-      personalisationLines: personalisationLines,
+      // If the parsed list is empty, we still pass an empty list — the model accepts nullable,
+      // but persisting/restoring will consistently use a list representation.
+      personalisationLines: personalisationLines.isEmpty ? <String>[] : personalisationLines,
     );
   }
 
