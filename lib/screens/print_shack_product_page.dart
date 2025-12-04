@@ -113,7 +113,7 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.product.name),
+        title: const SizedBox.shrink(), // keep purple bar but no title text
         backgroundColor: const Color(0xFF4d2963),
       ),
       body: LayoutBuilder(
