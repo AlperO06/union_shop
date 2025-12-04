@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../data/print_shack.dart';
+import '../widgets/union_page_scaffold.dart'; // use the app's shared scaffold (header/footer)
 
 // simple in-memory cart for Print Shack items
 class PrintShackCartItem {
@@ -111,13 +112,7 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
         ? images[_selectedImage.clamp(0, images.length - 1)]
         : 'https://picsum.photos/seed/placeholder/1200/800';
 
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false, // remove default back button
-        elevation: 0, // flat purple bar
-        title: const SizedBox.shrink(), // keep purple bar but no title text
-        backgroundColor: const Color(0xFF4d2963),
-      ),
+    return UnionPageScaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
           final isDesktop = constraints.maxWidth >= 800;
