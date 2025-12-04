@@ -354,7 +354,25 @@ class _CartPageState extends State<CartPage> {
                                                     border: Border.all(color: Colors.grey.shade300),
                                                     borderRadius: BorderRadius.circular(6),
                                                   ),
- 
+                                                  child: Row(
+                                                    mainAxisSize: MainAxisSize.min,
+                                                    children: [
+                                                      SizedBox(
+                                                        width: 34,
+                                                        height: 34,
+                                                        child: Material(
+                                                          color: Colors.transparent,
+                                                          child: InkWell(
+                                                            borderRadius: const BorderRadius.only(
+                                                                topLeft: Radius.circular(6), bottomLeft: Radius.circular(6)),
+                                                            onTap: () async => await _decrementQuantity(index),
+                                                            child: const Center(
+                                                              child: Icon(Icons.remove, size: 16, color: Colors.black54),
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ),
+                                                     
                                         Expanded(
                                           flex: 2,
                                           child: Align(
