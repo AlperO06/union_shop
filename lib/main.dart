@@ -4,6 +4,7 @@ import 'package:union_shop/screens/print_shack_product_page.dart';
 import 'screens/home_screen.dart';
 import 'about_page.dart';
 import 'screens/collections_page.dart';
+import 'screens/collections_landing_page.dart';
 import 'screens/sale_page.dart';
 import 'screens/signup_page.dart';
 import 'screens/login_page.dart';
@@ -48,7 +49,7 @@ class _UnionShopAppState extends State<UnionShopApp> {
         '/': (context) => const HomeScreen(),
         '/print-shack': (context) => const PrintShackProductPage(product: samplePersonalisedHoodie),
         '/about': (context) => const AboutPage(),
-        '/collections': (context) => const CollectionsPage(), // Redirect for old links
+        '/collections': (context) => const CollectionsLandingPage(),
         '/collections/clothing': (context) => const CollectionsPage(),
         '/sale': (context) => const SalePage(),
         '/cart': (context) => const CartPage(),
