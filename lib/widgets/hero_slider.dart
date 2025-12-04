@@ -58,6 +58,23 @@ class _HeroSliderState extends State<HeroSlider> {
     if (widget.autoPlay && widget.slides.length > 1) _startAutoPlay();
   }
 
+  // toggles between play and pause states for autoplay
+  void togglePlayPause() {
+    if (_timer != null) {
+      // currently playing -> pause
+      setState(() {
+        _autoplayPaused = true;
+      });
+      _stopAutoPlay();
+    } else {
+      // currently paused -> resume
+      setState(() {
+        _autoplayPaused = false;
+      });
+      if (widget.autoPlay && widget.slides.length > 1) _startAutoPlay();
+    }
+  }
+
   @override
   void initState() {
     super.initState();
