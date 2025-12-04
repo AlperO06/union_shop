@@ -285,9 +285,7 @@ class _HeroSliderState extends State<HeroSlider> {
               child: Row(
                 children: [
                   ElevatedButton(
-                    onPressed: (widget.slides.isNotEmpty && widget.slides[_currentIndex].onPrimary != null)
-                        ? widget.slides[_currentIndex].onPrimary
-                        : null,
+                    onPressed: () => Navigator.pushNamed(context, '/sale'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF6C4CE5), // purple
                       foregroundColor: Colors.white,
