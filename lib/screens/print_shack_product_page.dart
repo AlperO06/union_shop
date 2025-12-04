@@ -164,3 +164,23 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
               ],
             ),
             const SizedBox(height: 12),
+
+            // Text fields for each line
+            Column(
+              children: List.generate(_lines, (i) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: TextField(
+                    controller: _controllers[i],
+                    maxLength: widget.product.maxCharsPerLine,
+                    decoration: InputDecoration(
+                      labelText: 'Line ${i + 1}',
+                      border: const OutlineInputBorder(),
+                      counterText: '',
+                    ),
+                  ),
+                );
+              }),
+            ),
+
+            const SizedBox(height: 12),
