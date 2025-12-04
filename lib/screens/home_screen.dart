@@ -56,7 +56,7 @@ class HomeScreen extends StatelessWidget {
               ),
 
               // NEW SLIDE: The Print Shack
-              HeroSlide(
+              const HeroSlide(
                 imageUrl:
                     'https://images.unsplash.com/photo-1580711749644-0a9f4d9e0f8e?auto=format&fit=crop&w=1200&q=80',
                 title: 'The Print Shack',

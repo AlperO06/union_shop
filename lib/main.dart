@@ -9,6 +9,7 @@ import 'screens/signup_page.dart';
 import 'screens/login_page.dart';
 import 'screens/cart.dart';
 import 'data/cart.dart';
+import 'data/print_shack.dart'; // <-- provide samplePersonalisedHoodie
 
 
 Future<void> main() async {
@@ -45,7 +46,7 @@ class _UnionShopAppState extends State<UnionShopApp> {
       initialRoute: '/',
       routes: {
         '/': (context) => const HomeScreen(),
-        '/print-shack': (context) => const PrintShackProductPage(), // new route
+        '/print-shack': (context) => PrintShackProductPage(product: samplePersonalisedHoodie),
         '/about': (context) => const AboutPage(),
         '/collections': (context) => const CollectionsPage(),
         '/sale': (context) => const SalePage(),
