@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/hero_slider.dart';
 import '../widgets/union_page_scaffold.dart';
 import '../data/products.dart';
 import '../product_page.dart';
@@ -24,7 +25,7 @@ class HomeScreen extends StatelessWidget {
 
         // Build the main children list once and reuse for both mobile (ListView) and desktop (Column).
         final mainChildren = <Widget>[
-          // Replaced static hero banner with a reusable HeroSlider
+          // Replace the previous static hero banner with the shared HeroSlider widget
           HeroSlider(
             height: heroHeight,
             isMobile: isMobile,
