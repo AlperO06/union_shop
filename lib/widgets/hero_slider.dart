@@ -17,7 +17,7 @@ class HeroSlide {
     this.onPrimary,
     this.onSecondary,
     this.primaryLabel = 'Shop now',
-    this.secondaryLabel, required String image, required String buttonText, required void Function() onPressed,
+    this.secondaryLabel, 
   });
 }
 
@@ -36,6 +36,7 @@ class HeroSlider extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _HeroSliderState createState() => _HeroSliderState();
 }
 
