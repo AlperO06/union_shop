@@ -44,6 +44,19 @@ class _HeroSliderState extends State<HeroSlider> {
   late int _currentIndex;
   Timer? _timer;
   bool _userInteracting = false;
+  // tracks whether autoplay is explicitly paused (separate from transient user interaction)
+  bool _autoplayPaused = false;
+
+  // programmatic controls if needed elsewhere
+  void pauseAutoplay() {
+    _autoplayPaused = true;
+    _stopAutoPlay();
+  }
+
+  void resumeAutoplay() {
+    _autoplayPaused = false;
+    if (widget.autoPlay && widget.slides.length > 1) _startAutoPlay();
+  }
 
   @override
   void initState() {
@@ -84,6 +97,7 @@ class _HeroSliderState extends State<HeroSlider> {
     _timer = Timer.periodic(widget.autoPlayInterval, (t) {
       if (!mounted) return;
       if (_userInteracting) return;
+      if (_autoplayPaused) return;
       if (widget.slides.isEmpty) return;
       final next = (_currentIndex + 1) % widget.slides.length;
       // animate only if still mounted
@@ -131,10 +145,14 @@ class _HeroSliderState extends State<HeroSlider> {
           if (notification is ScrollStartNotification && notification.dragDetails != null) {
             // user started dragging
             _userInteracting = true;
+            // mark autoplay as paused during user interaction
+            _autoplayPaused = true;
             _stopAutoPlay();
           } else if (notification is ScrollEndNotification) {
             // scrolling ended
             _userInteracting = false;
+            // resume autoplay after interaction
+            _autoplayPaused = false;
             if (widget.autoPlay && widget.slides.length > 1) _startAutoPlay();
           }
           return false;
