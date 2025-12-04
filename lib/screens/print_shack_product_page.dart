@@ -262,6 +262,32 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
               const SizedBox(height: 12),
               Column(
                 children: List.generate(_lines, (i) {
+                  // Add a label above the first input only
+                  if (i == 0) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Personalisation Line 1',
+                            style: TextStyle(fontWeight: FontWeight.w600),
+                          ),
+                          const SizedBox(height: 6),
+                          TextField(
+                            controller: _controllers[i],
+                            maxLength: 10,
+                            inputFormatters: [LengthLimitingTextInputFormatter(10)],
+                            decoration: InputDecoration(
+                              labelText: 'Line ${i + 1}',
+                              border: const OutlineInputBorder(),
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8),
                     child: TextField(
