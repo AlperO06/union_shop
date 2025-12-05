@@ -10,7 +10,7 @@ void main() {
 
       // Check that basic app structure is present
       expect(find.byType(MaterialApp), findsOneWidget);
-    });
+    }, variant: TargetPlatformVariant.all());
 
     testWidgets('should display product cards', (tester) async {
       await tester.pumpWidget(const UnionShopApp());
@@ -18,7 +18,7 @@ void main() {
 
       // Check that the app structure is present
       expect(find.byType(MaterialApp), findsOneWidget);
-    });
+    }, variant: TargetPlatformVariant.all());
 
     testWidgets('should display header', (tester) async {
       await tester.pumpWidget(const UnionShopApp());
@@ -26,7 +26,7 @@ void main() {
 
       // Check that MaterialApp is present
       expect(find.byType(MaterialApp), findsOneWidget);
-    });
+    }, variant: TargetPlatformVariant.all());
 
     testWidgets('should display app correctly', (tester) async {
       await tester.pumpWidget(const UnionShopApp());
@@ -34,6 +34,6 @@ void main() {
 
       // Check that the app renders successfully
       expect(find.byType(MaterialApp), findsOneWidget);
-    });
+    }, variant: TargetPlatformVariant.all());
   });
 }

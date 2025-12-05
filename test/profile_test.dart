@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:union_shop/screens/profile_settings.dart';
+import 'package:union_shop/screens/login_page.dart';
 import 'package:union_shop/services/auth_service.dart';
 
 void main() {
@@ -11,8 +12,11 @@ void main() {
       
       return ChangeNotifierProvider.value(
         value: authService,
-        child: const MaterialApp(
-          home: ProfileSettingsPage(),
+        child: MaterialApp(
+          home: const ProfileSettingsPage(),
+          routes: {
+            '/login': (context) => const LoginPage(),
+          },
         ),
       );
     }
@@ -33,7 +37,7 @@ void main() {
 
     testWidgets('should display Profile Settings text', (WidgetTester tester) async {
       await tester.pumpWidget(createProfileSettings());
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       expect(find.byType(MaterialApp), findsOneWidget);
     });
