@@ -3,6 +3,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart'; // added import
+import 'package:cached_network_image/cached_network_image.dart';
 
 class HeroSlide {
   final String imageUrl;
@@ -233,20 +234,17 @@ class _HeroSliderState extends State<HeroSlider> {
                 return Stack(
                   fit: StackFit.expand,
                   children: [
-                    Image.network(
-                      slide.imageUrl,
+                    CachedNetworkImage(
+                      imageUrl: slide.imageUrl,
                       fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
+                      placeholder: (context, url) => Container(
+                        color: Colors.grey[200],
+                        child: const Center(child: CircularProgressIndicator()),
+                      ),
+                      errorWidget: (context, url, error) => Container(
                         color: Colors.grey[300],
                         child: const Center(child: Icon(Icons.broken_image, size: 48, color: Colors.grey)),
                       ),
-                      loadingBuilder: (context, child, loadingProgress) {
-                        if (loadingProgress == null) return child;
-                        return Container(
-                          color: Colors.grey[200],
-                          child: const Center(child: CircularProgressIndicator()),
-                        );
-                      },
                     ),
                     Container(
                       decoration: BoxDecoration(
