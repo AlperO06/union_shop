@@ -54,7 +54,7 @@ const List<Product> products = [
     image: 'https://i.ebayimg.com/images/g/DTUAAOSwyJ1k43mj/s-l1200.jpg',
     description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
     images: [
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3QUYOKhTntE-L4eVmc4ME9UD6tKDiXoIW1w&s',
+      'https://www.kershkicks.co.uk/cdn/shop/files/Screenshot-2024-07-10-at-10-39-42.png?v=1720608034s',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoMLAbZ0xqNNMFPtScF47Ctxs712cDdp0mfAGaDWd4mbWjycHf8rRgs6PULRr44ebkeSY&usqp=CAU',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU'
     ],
