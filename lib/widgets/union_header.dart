@@ -395,14 +395,6 @@ class UnionHeader extends StatelessWidget {
                   navigateToAbout(context);
                 },
               ),
-              ListTile(
-                leading: const Icon(Icons.person),
-                title: const Text('Account'),
-                onTap: () {
-                  Navigator.pop(ctx);
-                  Navigator.pushNamed(context, '/account');
-                },
-              ),
             ],
           ),
         ),
@@ -531,6 +523,12 @@ class UnionHeader extends StatelessWidget {
                                 padding: const EdgeInsets.all(8),
                                 constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                                 onPressed: () => Navigator.pushNamed(context, '/search'),
+                              ),
+                              IconButton(
+                                icon: const Icon(Icons.person_outline, size: 18, color: Colors.grey),
+                                padding: const EdgeInsets.all(8),
+                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                onPressed: () => Navigator.pushNamed(context, '/account'),
                               ),
                               _buildCartButton(context),
                               IconButton(
