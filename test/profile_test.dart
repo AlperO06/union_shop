@@ -23,21 +23,18 @@ void main() {
 
     testWidgets('should display scaffold', (WidgetTester tester) async {
       await tester.pumpWidget(createProfileSettings());
-      await tester.pump();
 
       expect(find.byType(Scaffold), findsOneWidget);
     });
 
     testWidgets('should have app bar', (WidgetTester tester) async {
       await tester.pumpWidget(createProfileSettings());
-      await tester.pump();
 
       expect(find.byType(AppBar), findsWidgets);
     });
 
     testWidgets('should display Profile Settings text', (WidgetTester tester) async {
       await tester.pumpWidget(createProfileSettings());
-      await tester.pump();
 
       expect(find.byType(MaterialApp), findsOneWidget);
     });

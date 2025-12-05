@@ -21,21 +21,18 @@ void main() {
 
     testWidgets('should display sale page', (WidgetTester tester) async {
       await tester.pumpWidget(createSalePage());
-      await tester.pump();
 
       expect(find.text('SALE'), findsWidgets);
     });
 
     testWidgets('should display sale subtitle', (WidgetTester tester) async {
       await tester.pumpWidget(createSalePage());
-      await tester.pump();
 
       expect(find.textContaining('Don\'t miss out'), findsOneWidget);
     });
 
     testWidgets('should display filter and sort options', (WidgetTester tester) async {
       await tester.pumpWidget(createSalePage());
-      await tester.pump();
 
       expect(find.text('FILTER BY'), findsWidgets);
       expect(find.text('SORT BY'), findsWidgets);
@@ -43,21 +40,18 @@ void main() {
 
     testWidgets('should display product grid', (WidgetTester tester) async {
       await tester.pumpWidget(createSalePage());
-      await tester.pump();
 
       expect(find.byType(GridView), findsOneWidget);
     });
 
     testWidgets('should display product count', (WidgetTester tester) async {
       await tester.pumpWidget(createSalePage());
-      await tester.pump();
 
       expect(find.textContaining('products'), findsWidgets);
     });
 
     testWidgets('should build without errors', (WidgetTester tester) async {
       await tester.pumpWidget(createSalePage());
-      await tester.pump();
 
       expect(find.byType(MaterialApp), findsOneWidget);
     });

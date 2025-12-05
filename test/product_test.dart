@@ -23,7 +23,6 @@ void main() {
       tester,
     ) async {
       await tester.pumpWidget(createTestWidget());
-      await tester.pump();
 
       // Check that basic UI elements are present
       expect(
@@ -37,7 +36,6 @@ void main() {
 
     testWidgets('should display product name and description', (tester) async {
       await tester.pumpWidget(createTestWidget());
-      await tester.pump();
 
       // Check that product name and description label exist
       expect(
@@ -49,7 +47,6 @@ void main() {
 
     testWidgets('should display app structure', (tester) async {
       await tester.pumpWidget(createTestWidget());
-      await tester.pump();
 
       // Check that basic app structure is present
       expect(find.byType(MaterialApp), findsOneWidget);
@@ -57,7 +54,6 @@ void main() {
 
     testWidgets('should display product with widget tree', (tester) async {
       await tester.pumpWidget(createTestWidget());
-      await tester.pump();
 
       // Check that product page renders
       expect(find.byType(MaterialApp), findsOneWidget);
