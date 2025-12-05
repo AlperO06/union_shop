@@ -527,6 +527,12 @@ class UnionHeader extends StatelessWidget {
                               // removed desktop-only hamburger menu so it only appears on narrow screens
                             ]
                           : [
+                              IconButton(
+                                icon: const Icon(Icons.search, size: 18, color: Colors.grey),
+                                padding: const EdgeInsets.all(8),
+                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+                                onPressed: () => Navigator.pushNamed(context, '/search'),
+                              ),
                               _buildCartButton(context),
                               IconButton(
                                 icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
