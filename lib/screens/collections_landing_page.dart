@@ -75,7 +75,7 @@ class CollectionsLandingPage extends StatelessWidget {
                             context,
                             title: 'Essential Range',
                             route: '/collections/clothing',
-                            imageUrl: 'https://www.thetimes.com/imageserver/image/%2Fmethode%2Fsundaytimes%2Fprod%2Fweb%2Fbin%2F82e89334-6f32-11ed-b4c7-e77de57f61fe.jpg?crop=2608%2C3912%2C1704%2C49,
+                            imageUrl: 'https://www.thetimes.com/imageserver/image/%2Fmethode%2Fsundaytimes%2Fprod%2Fweb%2Fbin%2F82e89334-6f32-11ed-b4c7-e77de57f61fe.jpg?crop=2608%2C3912%2C1704%2C49',
                           ),
                           _buildCollectionCard(
                             context,
