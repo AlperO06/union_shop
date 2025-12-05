@@ -47,7 +47,6 @@ void main() {
       expect(find.text('Description'), findsOneWidget);
     });
 
-    testWidgets('should display header icons', (tester) async {
     testWidgets('should display app structure', (tester) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
@@ -56,14 +55,13 @@ void main() {
       expect(find.byType(MaterialApp), findsOneWidget);
       expect(find.byType(Scaffold), findsWidgets);
     });
-    testWidgets('should display footer', (tester) async {
+
     testWidgets('should display product with widget tree', (tester) async {
       await tester.pumpWidget(createTestWidget());
       await tester.pumpAndSettle();
 
       // Check that product page renders
       expect(find.byType(MaterialApp), findsOneWidget);
-    });
     });
   });
 }
