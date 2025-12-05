@@ -6,7 +6,7 @@ void main() {
   group('OrderHistory', () {
     Widget createOrderHistory() {
       return const MaterialApp(
-        home: OrderHistory(),
+        home: OrderHistoryPage(),
       );
     }
 

@@ -63,4 +63,5 @@ void main() {
       
       expect(authService.resetPassword, isA<Function>());
     });
-
+  });
+}

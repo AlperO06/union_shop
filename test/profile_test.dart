@@ -7,47 +7,32 @@ import 'package:union_shop/models/user.dart';
 
 void main() {
   group('ProfileSettings', () {
-    Widget createProfileSettings(AppUser user) {
+    Widget createProfileSettings() {
       final authService = AuthService();
       
       return ChangeNotifierProvider.value(
         value: authService,
-        child: MaterialApp(
-          home: ProfileSettingsPage(user: user),
+        child: const MaterialApp(
+          home: ProfileSettingsPage(),
         ),
       );
     }
 
     testWidgets('should display scaffold', (WidgetTester tester) async {
-      final user = AppUser(
-        uid: 'test123',
-        email: 'test@test.com',
-        displayName: 'Test User',
-      );
-      
-      await tester.pumpWidget(createProfileSettings(user));
+      await tester.pumpWidget(createProfileSettings());
       await tester.pump();
 
       expect(find.byType(Scaffold), findsOneWidget);
     });
 
     testWidgets('should have app bar', (WidgetTester tester) async {
-      final user = AppUser(
-        uid: 'test123',
-        email: 'test@test.com',
-      );
-      
-      await tester.pumpWidget(createProfileSettings(user));
+      await tester.pumpWidget(createProfileSettings());
       await tester.pump();
 
       expect(find.byType(AppBar), findsWidgets);
     });
 
     testWidgets('should display Profile Settings text', (WidgetTester tester) async {
-      final user = AppUser(
-        uid: 'test123',
-        email: 'test@test.com',
-      );
       
       await tester.pumpWidget(createProfileSettings(user));
       await tester.pump();
@@ -55,13 +40,8 @@ void main() {
       expect(find.text('Profile Settings'), findsWidgets);
     });
 
-    testWidgets('should build without errors', (WidgetTester tester) async {
-      final user = AppUser(
-        uid: 'test123',
-        email: 'test@test.com',
-      );
-      
-      await tester.pumpWidget(createProfileSettings(user));
+    testWidgets('should display Profile Settings text', (WidgetTester tester) async {
+      await tester.pumpWidget(createProfileSettings());
       await tester.pumpAndSettle();
 
       expect(find.byType(MaterialApp), findsOneWidget);
