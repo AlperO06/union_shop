@@ -356,13 +356,27 @@ class UnionHeader extends StatelessWidget {
                 Navigator.pushNamed(context, '/collections/clothing');
               },
             ),
-            ListTile(
+            ExpansionTile(
               leading: const Icon(Icons.print),
               title: const Text('The Print Shack'),
-              onTap: () {
-                Navigator.pop(ctx);
-                Navigator.pushNamed(context, '/print-shack');
-              },
+              children: [
+                ListTile(
+                  contentPadding: const EdgeInsets.only(left: 72),
+                  title: const Text('The Print Shack'),
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    Navigator.pushNamed(context, '/print-shack');
+                  },
+                ),
+                ListTile(
+                  contentPadding: const EdgeInsets.only(left: 72),
+                  title: const Text('About Print Shack'),
+                  onTap: () {
+                    Navigator.pop(ctx);
+                    Navigator.pushNamed(context, '/about-print-shack');
+                  },
+                ),
+              ],
             ),
             ListTile(
               leading: const Icon(Icons.local_offer),
