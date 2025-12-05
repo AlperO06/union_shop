@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../models/product.dart';
 
 class ProductCard extends StatefulWidget {
@@ -45,13 +46,17 @@ class _ProductCardState extends State<ProductCard> {
                     child: Container(
                       width: double.infinity,
                       color: Colors.grey[200],
-                      child: Image.network(
-                        widget.product.image,
+                      child: CachedNetworkImage(
+                        imageUrl: widget.product.image,
                         fit: BoxFit.cover,
                         width: double.infinity,
                         height: double.infinity,
                         alignment: Alignment.center,
-                        errorBuilder: (context, error, stackTrace) {
+                        placeholder: (context, url) => Container(
+                          color: Colors.grey[200],
+                          child: const Center(child: CircularProgressIndicator()),
+                        ),
+                        errorWidget: (context, url, error) {
                           return Container(
                             color: Colors.grey[300],
                             child: const Center(
@@ -70,11 +75,15 @@ class _ProductCardState extends State<ProductCard> {
                   height: 353.32,
                   width: double.infinity,
                   color: Colors.grey[200],
-                  child: Image.network(
-                    widget.product.image,
+                  child: CachedNetworkImage(
+                    imageUrl: widget.product.image,
                     fit: BoxFit.cover,
                     alignment: Alignment.center,
-                    errorBuilder: (context, error, stackTrace) {
+                    placeholder: (context, url) => Container(
+                      color: Colors.grey[200],
+                      child: const Center(child: CircularProgressIndicator()),
+                    ),
+                    errorWidget: (context, url, error) {
                       return Container(
                         color: Colors.grey[300],
                         child: const Center(
