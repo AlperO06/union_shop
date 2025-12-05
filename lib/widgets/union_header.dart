@@ -362,7 +362,7 @@ class UnionHeader extends StatelessWidget {
               children: [
                 ListTile(
                   contentPadding: const EdgeInsets.only(left: 72),
-                  title: const Text('The Print Shack'),
+                  title: const Text('Personalisation'),
                   onTap: () {
                     Navigator.pop(ctx);
                     Navigator.pushNamed(context, '/print-shack');
@@ -370,7 +370,7 @@ class UnionHeader extends StatelessWidget {
                 ),
                 ListTile(
                   contentPadding: const EdgeInsets.only(left: 72),
-                  title: const Text('About Print Shack'),
+                  title: const Text('About'),
                   onTap: () {
                     Navigator.pop(ctx);
                     Navigator.pushNamed(context, '/about-print-shack');
