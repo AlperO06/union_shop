@@ -285,33 +285,6 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
                         const SizedBox(height: 12),
-                        SizedBox(
-                          height: 48,
-                          child: OutlinedButton.icon(
-                            onPressed: authService.isLoading
-                                ? null
-                                : () async {
-                                    final success = await authService.signInWithFacebook();
-                                    if (success && context.mounted) {
-                                      Navigator.pushReplacementNamed(context, '/');
-                                    } else if (authService.errorMessage != null && context.mounted) {
-                                      ScaffoldMessenger.of(context).showSnackBar(
-                                        SnackBar(
-                                          content: Text(authService.errorMessage!),
-                                          backgroundColor: Colors.red,
-                                        ),
-                                      );
-                                    }
-                                  },
-                            icon: const Icon(Icons.facebook, color: Color(0xFF1877F2), size: 24),
-                            label: const Text('Continue with Facebook'),
-                            style: OutlinedButton.styleFrom(
-                              side: BorderSide(color: Colors.grey[400]!),
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
