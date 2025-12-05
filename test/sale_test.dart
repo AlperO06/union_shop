@@ -50,14 +50,14 @@ void main() {
 
     testWidgets('should display product count', (WidgetTester tester) async {
       await tester.pumpWidget(createSalePage());
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       expect(find.textContaining('products'), findsWidgets);
     });
 
     testWidgets('should build without errors', (WidgetTester tester) async {
       await tester.pumpWidget(createSalePage());
-      await tester.pumpAndSettle();
+      await tester.pump();
 
       expect(find.byType(MaterialApp), findsOneWidget);
     });
