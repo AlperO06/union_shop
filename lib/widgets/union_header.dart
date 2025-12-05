@@ -354,7 +354,7 @@ class UnionHeader extends StatelessWidget {
                 title: const Text('Shop'),
                 onTap: () {
                   Navigator.pop(ctx);
-                  Navigator.pushNamed(context, '/collections');
+                  Navigator.pushNamed(context, '/collections/clothing');
                 },
               ),
               ExpansionTile(
