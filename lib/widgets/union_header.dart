@@ -22,8 +22,8 @@ const List<ShopMenuItem> shopMenuItems = [
 
 // Print Shack menu items
 const List<ShopMenuItem> printShackMenuItems = [
-  ShopMenuItem(label: 'About', route: '/about-print-shack'),
-  ShopMenuItem(label: 'Personalisation', route: '/print-shack'),
+  ShopMenuItem(label: 'About', routeName: '/about-print-shack'),
+  ShopMenuItem(label: 'Personalisation', routeName: '/print-shack'),
 ];
 
 // The helper functions are duplicated here so the widget remains self-contained
