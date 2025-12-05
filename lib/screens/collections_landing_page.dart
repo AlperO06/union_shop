@@ -51,7 +51,7 @@ class CollectionsLandingPage extends StatelessWidget {
                             context,
                             title: 'Black Friday',
                             route: '/sale',
-                            imageUrl: 'https://www.cavendishschool.com/wp-content/uploads/black-friday-2894130_960_720.png',
+                            imageUrl: 'https://derschutze.com/cdn/shop/files/processed_black_friday_2025_lookbook_14.jpg?v=1764755788&width=480g',
                           ),
                           _buildCollectionCard(
                             context,
