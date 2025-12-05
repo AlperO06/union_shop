@@ -27,9 +27,9 @@ const List<Product> products = [
     image: 'https://static01.nyt.com/images/2022/02/24/fashion/24YE-DEMNA-1/merlin_202739772_b4699c52-2eca-40fd-8fb2-642b619ca83e-mediumSquareAt3X.jpg',
     description: 'A soft, breathable cotton tee with a classic fit—perfect for everyday wear.',
     images: [
-      'https://files.ekmcdn.com/nn2wadmin/images/charli-xcx-brat-11055-p.jpg',
-      'https://www.centraltshirts.com/cdn/shop/files/BratAT_brat_Charli_xcx_dublin_ireland.png?v=1749561729&width=416',
-      'https://ae01.alicdn.com/kf/S2c1cfc6a12c445fcbdd9c81ee3009fbc3.jpg'
+      'https://www.mstc.shop/cdn/shop/files/Sc483d961418944b9a3160d75c85693b4L.jpg?v=1696200552&width=800',
+      'https://static01.nyt.com/images/2022/02/24/fashion/24YE-DEMNA-1/merlin_202739772_b4699c52-2eca-40fd-8fb2-642b619ca83e-videoSixteenByNineJumbo1600.jpg',
+      'https://www.mstc.shop/cdn/shop/files/S039cbf13bc594313b755ecd45e0216dei.jpg?v=1698089370'
     ],
   ),
   Product(
