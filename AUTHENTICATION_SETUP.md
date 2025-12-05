@@ -6,7 +6,6 @@ The Union Shop now includes a complete user authentication system with the follo
 ### Authentication Methods
 - ✅ Email/Password registration and login
 - ✅ Google Sign-In
-- ✅ Facebook Sign-In
 - ✅ Password reset functionality
 
 ### Account Management Features
@@ -28,7 +27,6 @@ The Union Shop now includes a complete user authentication system with the follo
 2. Enable the following providers:
    - **Email/Password**: Click "Enable" and save
    - **Google**: Click "Enable", add a support email, and save
-   - **Facebook**: Click "Enable" and follow the Facebook app setup instructions
 
 ### 3. Register Your App
 
@@ -49,32 +47,30 @@ The Union Shop now includes a complete user authentication system with the follo
 3. Download `GoogleService-Info.plist` and add it to `ios/Runner/`
 
 ### 4. Update Firebase Configuration
-Open `lib/main.dart` and replace the Firebase configuration (around line 25):
-
-```dart
-await Firebase.initializeApp(
-  options: const FirebaseOptions(
-    apiKey: 'YOUR_API_KEY',                    // From Firebase config
-    appId: 'YOUR_APP_ID',                      // From Firebase config
-    messagingSenderId: 'YOUR_MESSAGING_ID',    // From Firebase config
-    projectId: 'YOUR_PROJECT_ID',              // From Firebase config
-    authDomain: 'YOUR_AUTH_DOMAIN',            // From Firebase config
-    storageBucket: 'YOUR_STORAGE_BUCKET',      // From Firebase config
-  ),
-);
-```
+The Firebase configuration is already set in `lib/main.dart` with your project details.
 
 ## Google Sign-In Setup
 
-### Web Configuration
-1. In [Google Cloud Console](https://console.cloud.google.com/), go to your project
+### IMPORTANT: Get Your Web Client ID
+
+1. In [Google Cloud Console](https://console.cloud.google.com/), select your Firebase project
 2. Navigate to **APIs & Services** → **Credentials**
-3. Create an **OAuth 2.0 Client ID** for Web application
-4. Add authorized JavaScript origins:
+3. Find your **Web client** OAuth 2.0 Client ID (created automatically by Firebase)
+4. Copy the **Client ID** (it looks like: `123456789-abc123xyz.apps.googleusercontent.com`)
+5. Open `web/index.html` and replace the placeholder:
+   ```html
+   <meta name="google-signin-client_id" content="YOUR_WEB_CLIENT_ID_HERE.apps.googleusercontent.com">
+   ```
+
+### Web Configuration
+1. In the same Credentials page, edit your Web client
+2. Add authorized JavaScript origins:
    - `http://localhost:5000` (for local testing)
+   - `http://localhost` (for local testing)
    - Your production domain (when deployed)
-5. Add authorized redirect URIs:
+3. Add authorized redirect URIs:
    - `http://localhost:5000/__/auth/handler`
+   - `http://localhost/__/auth/handler`
    - Your production redirect URI
 
 ### Android Configuration
