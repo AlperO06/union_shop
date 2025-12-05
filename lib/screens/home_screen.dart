@@ -49,7 +49,7 @@ class HomeScreen extends StatelessWidget {
             slides: [
               HeroSlide(
                 imageUrl:
-                    'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&h=800&fit=crop',
                 title: 'Union Essentials Sale',
                 subtitle:
                     'Everything you need – up to 50% off selected essentials',
@@ -60,17 +60,17 @@ class HomeScreen extends StatelessWidget {
               // NEW SLIDE: The Print Shack (use Print Shack hero image)
               const HeroSlide(
                 imageUrl:
-                    'https://shop.upsu.net/cdn/shop/files/Hoodie.jpg?v=1632306034',
+                    'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=1200&h=800&fit=crop',
                 title: 'The Print Shack',
                 subtitle:
-                    'Let’s create something uniquely you with our personalisation service — From £3 for one line of text!',
+                    'Let\'s create something uniquely you with our personalisation service — From £3 for one line of text!',
                 primaryLabel: 'LEARN MORE',
                 // no onPrimary provided — leave callback nil or hook as needed
               ),
 
               // 2) Essential hoodie — navigate to the hoodie product page
               HeroSlide(
-                imageUrl: 'https://picsum.photos/id/1003/1200/800',
+                imageUrl: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=1200&h=800&fit=crop',
                 title: 'Essential Hoodie',
                 subtitle: 'Limited Edition Essential Zip Hoodie',
                 primaryLabel: 'VIEW HOODIE',
@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
               ),
               HeroSlide(
                 imageUrl:
-                    'https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=800&fit=crop',
                 title: 'Student Discounts',
                 subtitle:
                     'Verified students get exclusive savings across the store',
@@ -96,7 +96,7 @@ class HomeScreen extends StatelessWidget {
               ),
               HeroSlide(
                 imageUrl:
-                    'https://images.unsplash.com/photo-1520975912602-0efb0f4e0f4f?auto=format&fit=crop&w=1200&q=80',
+                    'https://images.unsplash.com/photo-1445205170230-053b83016050?w=1200&h=800&fit=crop',
                 title: 'New Merchandise Drop',
                 subtitle: 'Limited-run designs — shop the latest arrivals',
                 primaryLabel: 'SEE NEW MERCH',
