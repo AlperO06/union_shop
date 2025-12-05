@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../data/cart.dart';
+import '../services/auth_service.dart';
 
 // Small model used for menu items (label + optional route name)
 class ShopMenuItem {
@@ -44,7 +46,7 @@ void navigateToHome(BuildContext context) {
 
 // New: reusable header widget containing the purple sale banner and white nav row
 class UnionHeader extends StatelessWidget {
-  const UnionHeader({super.key, required Future<Object?> Function() onProfilePressed, required Future<Object?> Function() onCartPressed, required Null Function() onPrintShackPressed, required bool isMobile});
+  const UnionHeader({super.key});
 
   // builds the cart icon with a red circular badge showing the item count
   Widget _buildCartButton(BuildContext context) {
@@ -98,8 +100,132 @@ class UnionHeader extends StatelessWidget {
               ),
           ],
         );
-      },
+      ],
     );
+  }
+
+  // Build profile button - shows avatar if logged in, login button otherwise
+  Widget _buildProfileButton(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
+    final user = authService.currentUser;
+
+    if (user != null) {
+      // User is logged in - show avatar with dropdown menu
+      return PopupMenuButton<String>(
+        offset: const Offset(0, 50),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CircleAvatar(
+            radius: 14,
+            backgroundColor: const Color(0xFF4d2963),
+            backgroundImage: user.photoUrl != null ? NetworkImage(user.photoUrl!) : null,
+            child: user.photoUrl == null
+                ? Text(
+                    user.initials,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  )
+                : null,
+          ),
+        ),
+        itemBuilder: (context) => [
+          PopupMenuItem(
+            enabled: false,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  user.displayName ?? 'User',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                  ),
+                ),
+                Text(
+                  user.email,
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey[600],
+                  ),
+                ),
+                const Divider(),
+              ],
+            ),
+          ),
+          const PopupMenuItem(
+            value: 'account',
+            child: Row(
+              children: [
+                Icon(Icons.person, size: 18),
+                SizedBox(width: 12),
+                Text('My Account'),
+              ],
+            ),
+          ),
+          const PopupMenuItem(
+            value: 'orders',
+            child: Row(
+              children: [
+                Icon(Icons.shopping_bag, size: 18),
+                SizedBox(width: 12),
+                Text('My Orders'),
+              ],
+            ),
+          ),
+          const PopupMenuItem(
+            value: 'settings',
+            child: Row(
+              children: [
+                Icon(Icons.settings, size: 18),
+                SizedBox(width: 12),
+                Text('Settings'),
+              ],
+            ),
+          ),
+          const PopupMenuItem(
+            value: 'signout',
+            child: Row(
+              children: [
+                Icon(Icons.logout, size: 18, color: Colors.red),
+                SizedBox(width: 12),
+                Text('Sign Out', style: TextStyle(color: Colors.red)),
+              ],
+            ),
+          ),
+        ],
+        onSelected: (value) async {
+          switch (value) {
+            case 'account':
+              Navigator.pushNamed(context, '/account');
+              break;
+            case 'orders':
+              Navigator.pushNamed(context, '/order-history');
+              break;
+            case 'settings':
+              Navigator.pushNamed(context, '/profile-settings');
+              break;
+            case 'signout':
+              await authService.signOut();
+              if (context.mounted) {
+                Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+              }
+              break;
+          }
+        },
+      );
+    } else {
+      // User not logged in - show login button
+      return IconButton(
+        icon: const Icon(Icons.person_outline, size: 18, color: Colors.grey),
+        padding: const EdgeInsets.all(8),
+        constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
+        onPressed: () => Navigator.pushNamed(context, '/login'),
+      );
+    }
   }
 
   // Updated: popup trigger now uses the same padding & text style as the other nav buttons
@@ -369,12 +495,7 @@ class UnionHeader extends StatelessWidget {
                                 constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                                 onPressed: () => Navigator.pushNamed(context, '/search'),
                               ),
-                              IconButton(
-                                icon: const Icon(Icons.person_outline, size: 18, color: Colors.grey),
-                                padding: const EdgeInsets.all(8),
-                                constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
-                                onPressed: () => Navigator.pushNamed(context, '/login'),
-                              ),
+                              _buildProfileButton(context),
                               _buildCartButton(context),
                               // removed desktop-only hamburger menu so it only appears on narrow screens
                             ]
