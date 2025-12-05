@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:union_shop/widgets/hero_slider.dart';
 import '../widgets/union_page_scaffold.dart';
 import '../models/product.dart';
@@ -410,10 +411,14 @@ class ProductCard extends StatelessWidget {
             AspectRatio(
               aspectRatio: 4 / 3,
               child: product.image.startsWith('http')
-                  ? Image.network(
-                      product.image,
+                  ? CachedNetworkImage(
+                      imageUrl: product.image,
                       fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
+                      placeholder: (context, url) => Container(
+                        color: Colors.grey[200],
+                        child: const Center(child: CircularProgressIndicator()),
+                      ),
+                      errorWidget: (context, url, error) => Container(
                         color: Colors.grey[200],
                         child: const Center(child: Icon(Icons.broken_image)),
                       ),
