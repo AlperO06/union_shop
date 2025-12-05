@@ -205,8 +205,8 @@ const List<Product> products = [
     description: 'Comfortable canvas sneakers with cushioned insoles and durable rubber soles.',
     images: [
       'https://images.stockx.com/images/Air-Jordan-4-Retro-Pure-Money-2017-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1738193358',
-      'https://images.stockx.com/images/Air-Jordan-4-Retro-Pure-Money-2017-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1738193358',
-      'https://images.stockx.com/images/Air-Jordan-4-Retro-Pure-Money-2017-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1738193358'
+      'https://images.stockx.com/images/Air-Jordan-4-Retro-Classic-Green-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1738193358',
+      'https://images.stockx.com/images/Air-Jordan-4-Retro-White-Court-Purple-Product.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&q=60&dpr=1&trim=color&updated_at=1738193358'
       
     ],
     sizes: ['7', '8', '9', '10', '11', '12'],
