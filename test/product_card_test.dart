@@ -15,18 +15,18 @@ void main() {
     );
 
     testWidgets('should create ProductCard instance', (tester) async {
-      final card = ProductCard(product: testProduct);
+      const card = ProductCard(product: testProduct);
       expect(card, isA<ProductCard>());
       expect(card, isNotNull);
     });
 
     testWidgets('should be a StatefulWidget', (tester) async {
-      final card = ProductCard(product: testProduct);
+      const card = ProductCard(product: testProduct);
       expect(card, isA<StatefulWidget>());
     });
 
     testWidgets('should require product parameter', (tester) async {
-      final card = ProductCard(product: testProduct);
+      const card = ProductCard(product: testProduct);
       expect(card.product, equals(testProduct));
     });
 
