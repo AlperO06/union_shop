@@ -12,12 +12,12 @@ const List<Product> products = [
     description:
         'A premium limited edition zip hoodie with soft brushed interior, metal zipper, and a tailored fit.',
     images: [
-      'https://i.etsystatic.com/14709087/r/il/1b28d6/1569780932/il_340x270.1569780932_dzn7.jpg',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoMLAbZ0xqNNMFPtScF47Ctxs712cDdp0mfAGaDWd4mbWjycHf8rRgs6PULRr44ebkeSY&usqp=CAU',
+      'https://www.saintalexanderclo.com/cdn/shop/files/blkh.png?v=1756873889',
+      'https://www.saintalexanderclo.com/cdn/shop/files/stone_H.png?v=1756870898',
       'https://www.saintalexanderclo.com/cdn/shop/files/1_-_box_site_navy_h.png?v=1756662399&width=1200'
     ],
     sizes: ['S', 'M', 'L', 'XL'],
-    colors: ['Black', 'Grey', 'Purple'],
+    colors: ['Black', 'Grey', 'Blue'],
   ),
   Product(
     id: 2,
