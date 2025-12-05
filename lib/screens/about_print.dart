@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../widgets/union_page_scaffold.dart';
 
 class AboutPrintShackPage extends StatelessWidget {
@@ -119,10 +120,15 @@ class AboutPrintShackPage extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 350),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(8),
-        child: Image.network(
-          url,
+        child: CachedNetworkImage(
+          imageUrl: url,
           fit: BoxFit.cover,
-          errorBuilder: (context, error, stackTrace) {
+          placeholder: (context, url) => Container(
+            height: 250,
+            color: Colors.grey[200],
+            child: const Center(child: CircularProgressIndicator()),
+          ),
+          errorWidget: (context, url, error) {
             return Container(
               height: 250,
               color: Colors.grey[300],
