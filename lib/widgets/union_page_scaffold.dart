@@ -12,29 +12,12 @@ class UnionPageScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // compute screen-size boolean using MediaQuery
-    final isMobile = MediaQuery.of(context).size.width < 600;
-
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            UnionHeader(
-              onProfilePressed: () => Navigator.pushNamed(context, '/login'),
-              onCartPressed: () => Navigator.pushNamed(context, '/cart'),
-              // when Print Shack menu is clicked navigate to the PrintShackProductPage
-              onPrintShackPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => const PrintShackProductPage(product: samplePersonalisedHoodie),
-                  ),
-                );
-              },
-              // pass screen-size flag
-              isMobile: isMobile,
-            ),
+            const UnionHeader(),
             body,
             const UnionFooter(), // positioned after the body; scrolls together with body
           ],
