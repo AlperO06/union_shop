@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:union_shop/screens/sale_page.dart';
+import 'package:union_shop/sale_page.dart';
 import 'package:union_shop/services/auth_service.dart';
-import 'package:union_shop/data/cart.dart';
+import 'package:union_shop/data/cart.dart' as cart_data;
 
 void main() {
   group('SalePage', () {
@@ -11,7 +11,7 @@ void main() {
       return MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => AuthService()),
-          ChangeNotifierProvider(create: (_) => Cart()),
+          ChangeNotifierProvider(create: (_) => cart_data.Cart()),
         ],
         child: const MaterialApp(
           home: SalePage(),
