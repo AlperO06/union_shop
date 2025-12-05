@@ -179,13 +179,14 @@ const List<Product> products = [
   ),
   Product(
     id: 14,
-    name: 'Parka Coat',
+    name: 'Corvidae Coat',
     oldPrice: 149.99,
     newPrice: 120.00,
-    image: 'https://picsum.photos/seed/parka_coat/400/400',
+    image: 'https://images.vestiairecollective.com/images/resized/w=1246,q=75,f=auto,/produit/black-polyester-corvidae-coat-31724937-1_4.jpg',
     description: 'Warm and water-resistant parka with insulated lining and adjustable hood.',
     images: [
-      'https://picsum.photos/seed/parka_coat/400/400',
+      'https://images.vestiairecollective.com/images/resized/w=1246,q=75,f=auto,/produit/black-polyester-corvidae-coat-31724937-1_4.jpg',
+      'https://images.vestiairecollective.com/images/resized/w=1246,q=75,f=auto,/produit/black-cotton-corvidae-coat-59340166-1_2.jpg',
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Olive', 'Black', 'Navy'],
@@ -230,7 +231,7 @@ const List<Product> products = [
     description: 'Luxuriously soft wool scarf to keep you warm and stylish in cold weather.',
     images: [
       'https://i.ebayimg.com/images/g/j0cAAOSwjL9nlBge/s-l1200.jpg',
-      'https://cdn-images.farfetch-contents.com/22/89/86/45/22898645_52952792_600.jpg',
+      'https://images.vestiairecollective.com/images/resized/w=1246,q=75,f=auto,/produit/black-wool-burberry-scarf-32189237-1_5.jpg',
     ],
     colors: ['Charcoal', 'Burgundy', 'Navy', 'Cream'],
   ),
