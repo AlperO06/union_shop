@@ -231,11 +231,16 @@ class AuthService extends ChangeNotifier {
 
   // Update Profile
   Future<bool> updateProfile({String? displayName, String? photoUrl}) async {
+    if (!_firebaseAvailable || _auth == null) {
+      _setError('Authentication is not available. Please configure Firebase.');
+      return false;
+    }
+    
     try {
       _setLoading(true);
       _setError(null);
 
-      final user = _auth.currentUser;
+      final user = _auth!.currentUser;
       if (user == null) {
         _setError('No user logged in');
         _setLoading(false);
@@ -250,7 +255,7 @@ class AuthService extends ChangeNotifier {
       }
 
       await user.reload();
-      _currentUser = AppUser.fromFirebaseUser(_auth.currentUser!);
+      _currentUser = AppUser.fromFirebaseUser(_auth!.currentUser!);
       
       _setLoading(false);
       notifyListeners();
@@ -264,11 +269,16 @@ class AuthService extends ChangeNotifier {
 
   // Update Email
   Future<bool> updateEmail(String newEmail) async {
+    if (!_firebaseAvailable || _auth == null) {
+      _setError('Authentication is not available. Please configure Firebase.');
+      return false;
+    }
+    
     try {
       _setLoading(true);
       _setError(null);
 
-      final user = _auth.currentUser;
+      final user = _auth!.currentUser;
       if (user == null) {
         _setError('No user logged in');
         _setLoading(false);
@@ -292,11 +302,16 @@ class AuthService extends ChangeNotifier {
 
   // Update Password
   Future<bool> updatePassword(String newPassword) async {
+    if (!_firebaseAvailable || _auth == null) {
+      _setError('Authentication is not available. Please configure Firebase.');
+      return false;
+    }
+    
     try {
       _setLoading(true);
       _setError(null);
 
-      final user = _auth.currentUser;
+      final user = _auth!.currentUser;
       if (user == null) {
         _setError('No user logged in');
         _setLoading(false);
@@ -320,10 +335,14 @@ class AuthService extends ChangeNotifier {
 
   // Sign Out
   Future<void> signOut() async {
+    if (!_firebaseAvailable || _auth == null) {
+      return;
+    }
+    
     try {
       await _googleSignIn.signOut();
       await FacebookAuth.instance.logOut();
-      await _auth.signOut();
+      await _auth!.signOut();
       _currentUser = null;
       _errorMessage = null;
       notifyListeners();
@@ -334,11 +353,16 @@ class AuthService extends ChangeNotifier {
 
   // Delete Account
   Future<bool> deleteAccount() async {
+    if (!_firebaseAvailable || _auth == null) {
+      _setError('Authentication is not available. Please configure Firebase.');
+      return false;
+    }
+    
     try {
       _setLoading(true);
       _setError(null);
 
-      final user = _auth.currentUser;
+      final user = _auth!.currentUser;
       if (user == null) {
         _setError('No user logged in');
         _setLoading(false);
