@@ -241,10 +241,10 @@ const List<Product> products = [
     name: 'A5 Notepad',
     oldPrice: 5.00,
     newPrice: 3.50,
-    image: 'https://shop.upsu.net/cdn/shop/files/A5Notepad1_720x.jpg',
+    image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Death_Note%2C_Book.svg/250px-Death_Note%2C_Book.svg.png',
     description: 'High-quality A5 notepad with lined pages, perfect for notes and sketches.',
     images: [
-      'https://shop.upsu.net/cdn/shop/files/A5Notepad1_720x.jpg',
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Death_Note%2C_Book.svg/250px-Death_Note%2C_Book.svg.png',
     ],
   ),
   Product(
