@@ -366,3 +366,6 @@ void clearCart() {
 // Public wrapper so callers can explicitly await a save operation.
 // This forwards to the internal async saver.
 Future<void> saveCartToPrefs() => _saveCartToPrefs();
+
+class Cart {
+}
