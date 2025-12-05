@@ -27,6 +27,26 @@ Future<void> main() async {
   // Skip Firebase initialization for now - uncomment when ready to use authentication
   // To enable authentication, follow the guide in AUTHENTICATION_SETUP.md
   
+  await Firebase.initializeApp(
+    options: const FirebaseOptions(
+      apiKey: "AIzaSyDZ-NF7ivJIg7DxI7bsfik98o4-OwB7fC0",
+      authDomain: "programming-cw.firebaseapp.com",
+      projectId: "programming-cw",
+      storageBucket: "programming-cw.firebasestorage.app",
+      messagingSenderId: "136654089300",
+      appId: "1:136654089300:web:ee1928e1fd56564ee411c1",
+      measurementId: "G-9DE6DYCP69",
+    ),
+  );
+  
+  if (kDebugMode) {
+    debugPrint('Firebase initialized successfully');
+  }
+  
+  if (kDebugMode) {
+    debugPrint('Firebase initialized successfully');
+  }
+  
   /*
   try {
     await Firebase.initializeApp(
