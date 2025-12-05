@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../widgets/union_page_scaffold.dart'; // added import
 import '../models/product.dart';
 import '../data/products.dart';
@@ -276,12 +277,16 @@ class _CollectionDetailPageState extends State<CollectionDetailPage> {
                                 Expanded(
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(4),
-                                    child: Image.network(
-                                      p.image,
+                                    child: CachedNetworkImage(
+                                      imageUrl: p.image,
                                       width: double.infinity,
                                       height: double.infinity,
                                       fit: BoxFit.cover,
-                                      errorBuilder: (context, error, stackTrace) {
+                                      placeholder: (context, url) => Container(
+                                        color: Colors.grey[200],
+                                        child: const Center(child: CircularProgressIndicator()),
+                                      ),
+                                      errorWidget: (context, url, error) {
                                         return Container(
                                           color: Colors.grey[200],
                                           child: const Center(
