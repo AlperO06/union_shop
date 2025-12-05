@@ -8,13 +8,13 @@ const List<Product> products = [
     name: 'Limited Edition Essential Zip Hoodie',
     oldPrice: 79.99,
     newPrice: 59.99,
-    image: 'https://www.saintalexanderclo.com/cdn/shop/files/1._CUSTOM_HOODIE_ZIP_1b1e6bc5-7ee3-4e5a-8b13-c29246e1e945.png?v=1763482171&width=1200',
+    image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&h=800&fit=crop',
     description:
         'A premium limited edition zip hoodie with soft brushed interior, metal zipper, and a tailored fit.',
     images: [
-      'https://www.saintalexanderclo.com/cdn/shop/files/blkh.png?v=1756873889',
-      'https://www.saintalexanderclo.com/cdn/shop/files/stone_H.png?v=1756870898',
-      'https://www.saintalexanderclo.com/cdn/shop/files/1_-_box_site_navy_h.png?v=1756662399&width=1200'
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1620799139834-6b8f844fbe61?w=800&h=800&fit=crop'
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Black', 'Grey', 'Blue'],
@@ -24,12 +24,12 @@ const List<Product> products = [
     name: 'Essential T-Shirt',
     oldPrice: 29.99,
     newPrice: 24.99,
-    image: 'https://static01.nyt.com/images/2022/02/24/fashion/24YE-DEMNA-1/merlin_202739772_b4699c52-2eca-40fd-8fb2-642b619ca83e-mediumSquareAt3X.jpg',
+    image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&h=800&fit=crop',
     description: 'A soft, breathable cotton tee with a classic fit—perfect for everyday wear.',
     images: [
-      'https://www.mstc.shop/cdn/shop/files/Sc483d961418944b9a3160d75c85693b4L.jpg?v=1696200552&width=800',
-      'https://static01.nyt.com/images/2022/02/24/fashion/24YE-DEMNA-1/merlin_202739772_b4699c52-2eca-40fd-8fb2-642b619ca83e-videoSixteenByNineJumbo1600.jpg',
-      'https://www.mstc.shop/cdn/shop/files/S039cbf13bc594313b755ecd45e0216dei.jpg?v=1698089370'
+      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1574180566232-aaad1b5b8450?w=800&h=800&fit=crop'
     ],
   ),
   Product(
@@ -37,13 +37,13 @@ const List<Product> products = [
     name: 'Signature Hoodie',
     oldPrice: 89.99,
     newPrice: 69.99,
-    image: 'https://mertra.com/cdn/shop/files/se1_8203239a-c995-427a-b48c-af205c4a632e.png?v=1723762319',
+    image: 'https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?w=800&h=800&fit=crop',
     description:
         'Premium heavyweight fleece hoodie featuring embroidered logo and reinforced seams for lasting comfort.',
     images: [
-      'https://mertra.com/cdn/shop/files/se4.png?v=1723762283',
-      'https://mertra.com/cdn/shop/files/big1.png?v=1731210931',
-      'https://mertra.com/cdn/shop/files/se29.png?v=1723762283&width=2080'
+      'https://images.unsplash.com/photo-1620799140188-3b2a02fd9a77?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1620799139507-2a76f79a2f4d?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1622445275576-721325763afe?w=800&h=800&fit=crop'
     ],
   ),
   Product(
@@ -51,12 +51,12 @@ const List<Product> products = [
     name: 'Signature T-Shirt',
     oldPrice: 34.99,
     newPrice: 29.99,
-    image: 'https://i.ebayimg.com/images/g/DTUAAOSwyJ1k43mj/s-l1200.jpg',
+    image: 'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&h=800&fit=crop',
     description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
     images: [
-      'https://www.kershkicks.co.uk/cdn/shop/files/Screenshot-2024-07-10-at-10-39-42.png?v=1720608034s',
-      'https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/104/726/931/original/1497021_01.jpg.jpeg?action=crop&width=750',
-      'https://images.stockx.com/images/Hellstar-Thorn-T-Shirt-Red.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&q=60&dpr=1&trim=color&updated_at=1727292901'
+      'https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1622470953794-aa9c70b0fb9d?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1503341338985-b91ef0d5a4d1?w=800&h=800&fit=crop'
     ],
   ),
   // appended Portsmouth items
@@ -110,11 +110,11 @@ const List<Product> products = [
     name: 'Derschutze Tshirt',
     oldPrice: 49.99,
     newPrice: 45.00,
-    image: 'https://derschutze.com/cdn/shop/files/2024-05-02-3_2.jpg?v=1716719356&width=480',
+    image: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800&h=800&fit=crop',
     description: 'Classic Oxford button-down shirt with a timeless look and comfortable fit.',
     images: [
-      'https://derschutze.com/cdn/shop/files/2024-05-02-3_2.jpg?v=1716719356&width=480',
-      'https://derschutze.com/cdn/shop/files/2025-03-20-4-1_grande.jpg?v=1744096797',
+      'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1581655353564-df123a1eb820?w=800&h=800&fit=crop',
 
     ],
     sizes: ['S', 'M', 'L', 'XL'],
@@ -125,12 +125,12 @@ const List<Product> products = [
     name: 'Corteiz T‑Shirt',
     oldPrice: 29.99,
     newPrice: 25.00,
-    image: 'https://www.kershkicks.co.uk/cdn/shop/files/Screenshot2024-04-20at15.21.12.png?v=1713623011',
+    image: 'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&h=800&fit=crop',
     description: 'Essential crew neck t-shirt made from premium cotton for everyday comfort.',
     images: [
-      'https://www.kershkicks.co.uk/cdn/shop/files/Screenshot2024-04-20at15.21.12.png?v=1713623011',
-      'https://www.story.capetown/cdn/shop/files/CorteizOGIslandTeeWhite1.png?v=1731928793&width=3775',
-      'https://cdnx.jumpseller.com/casa-do-desporto2/image/50092510/thumb/1438/1438?1719330104',
+      'https://images.unsplash.com/photo-1523381210434-271e8be1f52b?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=800&h=800&fit=crop',
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Black', 'White', 'Grey', 'Navy'],
@@ -140,11 +140,11 @@ const List<Product> products = [
     name: 'OPIUM Denim Jacket',
     oldPrice: 95.00,
     newPrice: 85.00,
-    image: 'https://i.ebayimg.com/images/g/L8AAAeSwhC9oxw3E/s-l400.jpg',
+    image: 'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&h=800&fit=crop',
     description: 'Rugged denim jacket with classic styling and durable construction.',
     images: [
-      'https://i.ebayimg.com/images/g/L8AAAeSwhC9oxw3E/s-l400.jpg',
-      'https://media-assets.grailed.com/prd/listing/temp/4537f230f683418188cae10ae308963c',
+      'https://images.unsplash.com/photo-1551028719-00167b16eac5?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1576995853123-5a10305d93c0?w=800&h=800&fit=crop',
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Light Blue', 'Dark Blue', 'Black'],
