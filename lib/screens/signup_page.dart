@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../services/auth_service.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -26,21 +28,9 @@ class _SignupPageState extends State<SignupPage> {
     super.dispose();
   }
 
-  void _onSignUp() {
-    if (!_formKey.currentState!.validate()) return;
-    setState(() => _loading = true);
-
-    // Placeholder for sign up logic
-    Future.delayed(const Duration(seconds: 1), () {
-      setState(() => _loading = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Sign up pressed (placeholder)')),
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Account'),
@@ -142,22 +132,111 @@ class _SignupPageState extends State<SignupPage> {
                             if (v != _passwordCtrl.text) return 'Passwords do not match';
                             return null;
                           },
-                          onFieldSubmitted: (_) => _onSignUp(),
                         ),
                         const SizedBox(height: 18),
                         SizedBox(
                           height: 48,
                           child: ElevatedButton(
-                            onPressed: _loading ? null : _onSignUp,
+                            onPressed: authService.isLoading
+                                ? null
+                                : () async {
+                                    if (!_formKey.currentState!.validate()) return;
+                                    
+                                    final success = await authService.signUpWithEmail(
+                                      _emailCtrl.text.trim(),
+                                      _passwordCtrl.text,
+                                      _nameCtrl.text.trim(),
+                                    );
+                                    
+                                    if (success && context.mounted) {
+                                      Navigator.pushReplacementNamed(context, '/');
+                                    } else if (authService.errorMessage != null && context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(authService.errorMessage!),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
+                                  },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF4d2963),
                               shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               elevation: 2,
                             ),
-                            child: _loading
+                            child: authService.isLoading
                                 ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5)
                                 : const Text('Sign Up', style: TextStyle(fontSize: 16)),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Expanded(child: Divider(color: Colors.grey[400])),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text('OR', style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+                            ),
+                            Expanded(child: Divider(color: Colors.grey[400])),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        SizedBox(
+                          height: 48,
+                          child: OutlinedButton.icon(
+                            onPressed: authService.isLoading
+                                ? null
+                                : () async {
+                                    final success = await authService.signInWithGoogle();
+                                    if (success && context.mounted) {
+                                      Navigator.pushReplacementNamed(context, '/');
+                                    } else if (authService.errorMessage != null && context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(authService.errorMessage!),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
+                                  },
+                            icon: Image.network(
+                              'https://www.google.com/favicon.ico',
+                              height: 20,
+                              errorBuilder: (_, __, ___) => const Icon(Icons.g_mobiledata, size: 24),
+                            ),
+                            label: const Text('Continue with Google'),
+                            style: OutlinedButton.styleFrom(
+                              side: BorderSide(color: Colors.grey[400]!),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          height: 48,
+                          child: OutlinedButton.icon(
+                            onPressed: authService.isLoading
+                                ? null
+                                : () async {
+                                    final success = await authService.signInWithFacebook();
+                                    if (success && context.mounted) {
+                                      Navigator.pushReplacementNamed(context, '/');
+                                    } else if (authService.errorMessage != null && context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(authService.errorMessage!),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
+                                  },
+                            icon: const Icon(Icons.facebook, color: Color(0xFF1877F2), size: 24),
+                            label: const Text('Continue with Facebook'),
+                            style: OutlinedButton.styleFrom(
+                              side: BorderSide(color: Colors.grey[400]!),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 12),
