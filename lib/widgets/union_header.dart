@@ -349,13 +349,67 @@ class UnionHeader extends StatelessWidget {
                   navigateToHome(context);
                 },
               ),
-              ListTile(
+              ExpansionTile(
                 leading: const Icon(Icons.storefront),
                 title: const Text('Shop'),
-                onTap: () {
-                  Navigator.pop(ctx);
-                  Navigator.pushNamed(context, '/collections/clothing');
-                },
+                children: [
+                  ListTile(
+                    contentPadding: const EdgeInsets.only(left: 72),
+                    title: const Text('Clothing'),
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      Navigator.pushNamed(context, '/collections/clothing');
+                    },
+                  ),
+                  ListTile(
+                    contentPadding: const EdgeInsets.only(left: 72),
+                    title: const Text('Merchandise'),
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      Navigator.pushNamed(context, '/collections/clothing');
+                    },
+                  ),
+                  ListTile(
+                    contentPadding: const EdgeInsets.only(left: 72),
+                    title: const Text('Halloween'),
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      Navigator.pushNamed(context, '/collections/clothing');
+                    },
+                  ),
+                  ListTile(
+                    contentPadding: const EdgeInsets.only(left: 72),
+                    title: const Text('Signature & Essential Range'),
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      Navigator.pushNamed(context, '/collections/clothing');
+                    },
+                  ),
+                  ListTile(
+                    contentPadding: const EdgeInsets.only(left: 72),
+                    title: const Text('Portsmouth City Collection'),
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      Navigator.pushNamed(context, '/collections/clothing');
+                    },
+                  ),
+                  ListTile(
+                    contentPadding: const EdgeInsets.only(left: 72),
+                    title: const Text('Pride Collection'),
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      Navigator.pushNamed(context, '/collections/clothing');
+                    },
+                  ),
+                  ListTile(
+                    contentPadding: const EdgeInsets.only(left: 72),
+                    title: const Text('Graduation'),
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      Navigator.pushNamed(context, '/collections/clothing');
+                    },
+                  ),
+                ],
               ),
               ExpansionTile(
                 leading: const Icon(Icons.print),
