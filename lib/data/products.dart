@@ -221,13 +221,15 @@ const List<Product> products = [
   ),
   Product(
     id: 17,
-    name: 'Wool Scarf',
+    name: 'Acne Studios Wool Scarf',
     oldPrice: 29.99,
     newPrice: 25.00,
-    image: 'https://picsum.photos/seed/wool_scarf/400/400',
+    image: 'https://www.acnestudios.com/dw/image/v2/AAXV_PRD/on/demandware.static/-/Sites-acne-product-catalog/default/dw3239371d/images/CA/CA0084-/2000x/CA0084-DUC_A.jpg?sw=1120&sh=1680',
     description: 'Luxuriously soft wool scarf to keep you warm and stylish in cold weather.',
     images: [
-      'https://picsum.photos/seed/wool_scarf/400/400',
+      'https://www.acnestudios.com/dw/image/v2/AAXV_PRD/on/demandware.static/-/Sites-acne-product-catalog/default/dw3239371d/images/CA/CA0084-/2000x/CA0084-DUC_A.jpg?sw=1120&sh=1680',
+      'https://www.acnestudios.com/dw/image/v2/AAXV_PRD/on/demandware.static/-/Sites-acne-product-catalog/default/dw3c3b3fad/images/CA/CA0084-/2000x/CA0084-DTJ_A.jpg?sw=560&sh=840',
+      'https://www.outbacksylt.com/img/39357/acne-studios-mohair-checked-scarf-vanilla-beige-lavender-ca0084-dl6000-1.jpg?options=rs:fill:1000:1000/g:ce/dpr:1',
     ],
     colors: ['Charcoal', 'Burgundy', 'Navy', 'Cream'],
   ),
