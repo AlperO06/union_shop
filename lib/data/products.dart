@@ -276,10 +276,10 @@ const List<Product> products = [
     name: 'iPhone 14 Charge & Sync Cable',
     oldPrice: 3.00,
     newPrice: 1.50,
-    image: 'https://images.unsplash.com/photo-1590792613148-6c57a628ed0a?w=800&h=800&fit=crop',
+    image: 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=800&h=800&fit=crop',
     description: 'Reliable charging and sync cable compatible with iPhone 5/6 models.',
     images: [
-      'https://images.unsplash.com/photo-1590792613148-6c57a628ed0a?w=800&h=800&fit=crop',
+      'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?w=800&h=800&fit=crop',
     ],
   ),
   Product(
