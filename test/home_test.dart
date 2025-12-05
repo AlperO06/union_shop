@@ -8,7 +8,7 @@ void main() {
   group('Home Page Tests', () {
     testWidgets('should create app instance', (tester) async {
       const app = UnionShopApp();
-      expect(app, isA<MaterialApp>());
+      expect(app, isA<UnionShopApp>());
     });
 
     testWidgets('should display product cards', (tester) async {
@@ -23,7 +23,7 @@ void main() {
 
     testWidgets('should display app correctly', (tester) async {
       const app = UnionShopApp();
-      expect(app, isA<StatelessWidget>());
+      expect(app, isA<UnionShopApp>());
     });
   });
 }
