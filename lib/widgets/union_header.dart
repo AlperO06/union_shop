@@ -423,22 +423,18 @@ class UnionHeader extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 12.0),
                       child: GestureDetector(
                         onTap: () => navigateToHome(context),
-                        child: CachedNetworkImage(
-                          imageUrl: 'https://via.placeholder.com/120x40/6C4CE5/FFFFFF?text=Union+Shop',
-                          height: 28,
+                        child: Image.asset(
+                          'assets/images/union_logo.png',
+                          height: 40,
                           fit: BoxFit.contain,
-                          placeholder: (context, url) => Container(
-                            color: Colors.transparent,
-                            width: 28,
-                            height: 28,
-                          ),
-                          errorWidget: (context, url, error) {
-                            return Container(
-                              color: Colors.grey[300],
-                              width: 28,
-                              height: 28,
-                              child: const Center(
-                                child: Icon(Icons.image_not_supported, color: Colors.grey),
+                          errorBuilder: (context, error, stackTrace) {
+                            // Fallback to text if image not found
+                            return const Text(
+                              'The UNION',
+                              style: TextStyle(
+                                color: Color(0xFF4A3168),
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
                               ),
                             );
                           },
