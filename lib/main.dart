@@ -47,6 +47,32 @@ Future<void> main() async {
     debugPrint('Firebase initialized successfully');
   }
   
+  /*
+  try {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: 'YOUR_API_KEY',
+        appId: 'YOUR_APP_ID',
+        messagingSenderId: 'YOUR_MESSAGING_ID',
+        projectId: 'YOUR_PROJECT_ID',
+        authDomain: 'YOUR_AUTH_DOMAIN',
+        storageBucket: 'YOUR_STORAGE_BUCKET',
+      ),
+    );
+    if (kDebugMode) {
+      debugPrint('Firebase initialized successfully');
+    }
+  } catch (e) {
+    if (kDebugMode) {
+      debugPrint('Firebase initialization skipped - app will work without auth features');
+      debugPrint('To enable authentication, update Firebase config in main.dart');
+      debugPrint('Error: $e');
+    }
+  }
+  */
+
+  // Perform a one-time load from SharedPreferences before starting the app.
+  // loadCartFromPrefs() will attach the persistence listener in its finally block.
   await loadCartFromPrefs();
 
   if (kIsWeb) {
