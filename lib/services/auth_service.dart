@@ -125,6 +125,11 @@ class AuthService extends ChangeNotifier {
 
   // Google Sign In
   Future<bool> signInWithGoogle() async {
+    if (!_firebaseAvailable || _auth == null) {
+      _setError('Authentication is not available. Please configure Firebase.');
+      return false;
+    }
+    
     try {
       _setLoading(true);
       _setError(null);
@@ -143,7 +148,7 @@ class AuthService extends ChangeNotifier {
         idToken: googleAuth.idToken,
       );
 
-      await _auth.signInWithCredential(credential);
+      await _auth!.signInWithCredential(credential);
 
       _setLoading(false);
       return true;
@@ -160,6 +165,11 @@ class AuthService extends ChangeNotifier {
 
   // Facebook Sign In
   Future<bool> signInWithFacebook() async {
+    if (!_firebaseAvailable || _auth == null) {
+      _setError('Authentication is not available. Please configure Firebase.');
+      return false;
+    }
+    
     try {
       _setLoading(true);
       _setError(null);
@@ -170,7 +180,7 @@ class AuthService extends ChangeNotifier {
         final AccessToken accessToken = result.accessToken!;
         final credential = FacebookAuthProvider.credential(accessToken.token);
 
-        await _auth.signInWithCredential(credential);
+        await _auth!.signInWithCredential(credential);
         
         _setLoading(false);
         return true;
@@ -195,11 +205,16 @@ class AuthService extends ChangeNotifier {
 
   // Password Reset
   Future<bool> resetPassword(String email) async {
+    if (!_firebaseAvailable || _auth == null) {
+      _setError('Authentication is not available. Please configure Firebase.');
+      return false;
+    }
+    
     try {
       _setLoading(true);
       _setError(null);
 
-      await _auth.sendPasswordResetEmail(email: email);
+      await _auth!.sendPasswordResetEmail(email: email);
 
       _setLoading(false);
       return true;
