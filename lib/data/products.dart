@@ -13,8 +13,8 @@ const List<Product> products = [
         'A premium limited edition zip hoodie with soft brushed interior, metal zipper, and a tailored fit.',
     images: [
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3QUYOKhTntE-L4eVmc4ME9UD6tKDiXoIW1w&s',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYAxzniN48WGwXI5hSqwgOcPJK0wC8OIEUuw&s',
-      'https://www.centraltshirts.com/cdn/shop/files/BratAT_brat_Charli_xcx_dublin_ireland.png?v=1749561729&width=416'
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoMLAbZ0xqNNMFPtScF47Ctxs712cDdp0mfAGaDWd4mbWjycHf8rRgs6PULRr44ebkeSY&usqp=CAU',
+      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU'
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Black', 'Grey', 'Purple'],
@@ -28,8 +28,8 @@ const List<Product> products = [
     description: 'A soft, breathable cotton tee with a classic fit—perfect for everyday wear.',
     images: [
       'https://files.ekmcdn.com/nn2wadmin/images/charli-xcx-brat-11055-p.jpg',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoMLAbZ0xqNNMFPtScF47Ctxs712cDdp0mfAGaDWd4mbWjycHf8rRgs6PULRr44ebkeSY&usqp=CAU',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU'
+      'https://www.centraltshirts.com/cdn/shop/files/BratAT_brat_Charli_xcx_dublin_ireland.png?v=1749561729&width=416',
+      'https://ae01.alicdn.com/kf/S2c1cfc6a12c445fcbdd9c81ee3009fbc3.jpg'
     ],
   ),
   Product(
