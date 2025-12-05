@@ -87,7 +87,7 @@ class HomeScreen extends StatelessWidget {
               ),
               HeroSlide(
                 imageUrl:
-                    'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1200&h=800&fit=crop',
+                    'https://images.unsplash.com/photo-1513104890138-7c749659a591?w=1200&h=800&fit=crop',
                 title: 'Student Discounts',
                 subtitle:
                     'Verified students get exclusive savings across the store',
