@@ -4,7 +4,7 @@ A modern e-commerce Flutter application for the **University of Portsmouth Stude
 
 [![Flutter](https://img.shields.io/badge/Flutter-3.0+-02569B?logo=flutter)](https://flutter.dev)
 [![Firebase](https://img.shields.io/badge/Firebase-Enabled-FFCA28?logo=firebase)](https://firebase.google.com)
-[![Tests](https://img.shields.io/badge/Tests-122%20Passing-success)](test/)
+[![Tests](https://img.shields.io/badge/Tests-144%20Passing-success)](test/)
 
 ## 📋 Table of Contents
 
