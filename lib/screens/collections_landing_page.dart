@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../widgets/union_page_scaffold.dart';
 
 class CollectionsLandingPage extends StatelessWidget {
@@ -151,10 +152,14 @@ class CollectionsLandingPage extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               // Background Image
-              Image.network(
-                imageUrl,
+              CachedNetworkImage(
+                imageUrl: imageUrl,
                 fit: BoxFit.cover,
-                errorBuilder: (context, error, stackTrace) {
+                placeholder: (context, url) => Container(
+                  color: Colors.grey[200],
+                  child: const Center(child: CircularProgressIndicator()),
+                ),
+                errorWidget: (context, url, error) {
                   return Container(
                     color: Colors.grey[300],
                     child: const Center(
