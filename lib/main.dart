@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
 import 'package:union_shop/screens/print_shack_product_page.dart';
+import 'services/auth_service.dart';
 import 'screens/home_screen.dart';
 import 'about_page.dart';
 import 'screens/about_print.dart';
@@ -11,12 +14,34 @@ import 'screens/search_page.dart';
 import 'screens/signup_page.dart';
 import 'screens/login_page.dart';
 import 'screens/cart.dart';
+import 'screens/account_dashboard.dart';
+import 'screens/profile_settings.dart';
+import 'screens/order_history.dart';
 import 'data/cart.dart';
 import 'data/print_shack.dart' show samplePersonalisedHoodie;
 
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase
+  try {
+    await Firebase.initializeApp(
+      options: const FirebaseOptions(
+        apiKey: 'AIzaSyDemoKey-ReplaceWithYourActualKey',
+        appId: '1:1234567890:web:abcdef1234567890',
+        messagingSenderId: '1234567890',
+        projectId: 'union-shop-demo',
+        authDomain: 'union-shop-demo.firebaseapp.com',
+        storageBucket: 'union-shop-demo.appspot.com',
+      ),
+    );
+  } catch (e) {
+    if (kDebugMode) {
+      debugPrint('Firebase initialization error: $e');
+      debugPrint('Note: Update Firebase config in main.dart with your actual credentials');
+    }
+  }
 
   // Perform a one-time load from SharedPreferences before starting the app.
   // loadCartFromPrefs() will attach the persistence listener in its finally block.
@@ -40,14 +65,16 @@ class _UnionShopAppState extends State<UnionShopApp> {
   @override
   Widget build(BuildContext context) {
     // Cart is guaranteed to be initialized (main awaited cartItemsNotifier.ready).
-    return MaterialApp(
-      title: 'Union Shop',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
-      ),
-      initialRoute: '/',
-      routes: {
+    return ChangeNotifierProvider(
+      create: (_) => AuthService(),
+      child: MaterialApp(
+        title: 'Union Shop',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF4d2963)),
+        ),
+        initialRoute: '/',
+        routes: {
         '/': (context) => const HomeScreen(),
         '/print-shack': (context) => const PrintShackProductPage(product: samplePersonalisedHoodie),
         '/about': (context) => const AboutPage(),
@@ -59,7 +86,11 @@ class _UnionShopAppState extends State<UnionShopApp> {
         '/cart': (context) => const CartPage(),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignupPage(),
+        '/account': (context) => const AccountDashboard(),
+        '/profile-settings': (context) => const ProfileSettingsPage(),
+        '/order-history': (context) => const OrderHistoryPage(),
       },
+      ),
     );
   }
 }
