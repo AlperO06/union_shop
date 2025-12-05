@@ -6,7 +6,7 @@ import '../models/user.dart';
 
 class AuthService extends ChangeNotifier {
   FirebaseAuth? _auth;
-  final GoogleSignIn _googleSignIn = GoogleSignIn();
+  GoogleSignIn? _googleSignIn;
   
   AppUser? _currentUser;
   bool _isLoading = false;
