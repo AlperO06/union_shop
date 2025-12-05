@@ -155,4 +155,99 @@ class _SearchPageState extends State<SearchPage> {
                             ),
                           ),
                         )
- 
+                      else ...[
+                        Text(
+                          '${_searchResults.length} ${_searchResults.length == 1 ? 'result' : 'results'} found',
+                          style: TextStyle(
+                            fontSize: isMobile ? 14 : 16,
+                            color: Colors.black54,
+                          ),
+                        ),
+                        SizedBox(height: isMobile ? 16 : 24),
+                        GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: isMobile ? 2 : (width < 900 ? 3 : 4),
+                            crossAxisSpacing: isMobile ? 12 : 16,
+                            mainAxisSpacing: isMobile ? 20 : 24,
+                            childAspectRatio: isMobile ? 0.75 : 0.72,
+                          ),
+                          itemCount: _searchResults.length,
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            final product = _searchResults[index];
+                            return GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ProductPage(product: product),
+                                  ),
+                                );
+                              },
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  // Product Image
+                                  Expanded(
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(isMobile ? 6 : 8),
+                                      child: Container(
+                                        width: double.infinity,
+                                        color: Colors.grey[200],
+                                        child: Image.network(
+                                          product.image,
+                                          fit: BoxFit.cover,
+                                          errorBuilder: (context, error, stackTrace) {
+                                            return Container(
+                                              color: Colors.grey[300],
+                                              child: const Center(
+                                                child: Icon(
+                                                  Icons.image_not_supported,
+                                                  color: Colors.grey,
+                                                ),
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: isMobile ? 6 : 8),
+                                  // Product Name
+                                  Text(
+                                    product.name,
+                                    style: TextStyle(
+                                      fontSize: isMobile ? 13 : 14,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(height: 4),
+                                  // Product Price
+                                  Text(
+                                    '£${product.newPrice.toStringAsFixed(2)}',
+                                    style: TextStyle(
+                                      fontSize: isMobile ? 13 : 14,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
