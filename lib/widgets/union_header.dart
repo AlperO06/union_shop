@@ -100,7 +100,7 @@ class UnionHeader extends StatelessWidget {
               ),
           ],
         );
-      ],
+      },
     );
   }
 

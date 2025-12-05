@@ -140,7 +140,7 @@ class AuthService extends ChangeNotifier {
 
       if (result.status == LoginStatus.success) {
         final AccessToken accessToken = result.accessToken!;
-        final credential = FacebookAuthProvider.credential(accessToken.tokenString);
+        final credential = FacebookAuthProvider.credential(accessToken.token);
 
         await _auth.signInWithCredential(credential);
         

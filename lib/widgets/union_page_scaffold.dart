@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'union_header.dart';
 import '../bottom_union_footer.dart';
-import '../screens/print_shack_product_page.dart';
-import '../data/print_shack.dart';
 
 
 class UnionPageScaffold extends StatelessWidget {

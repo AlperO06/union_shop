@@ -17,7 +17,6 @@ class _SignupPageState extends State<SignupPage> {
   final _confirmCtrl = TextEditingController();
 
   bool _obscurePassword = true;
-  bool _loading = false;
 
   @override
   void dispose() {
