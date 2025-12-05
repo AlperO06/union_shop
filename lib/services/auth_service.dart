@@ -302,8 +302,9 @@ class AuthService extends ChangeNotifier {
     }
     
     try {
-      await _googleSignIn.signOut();
-      await FacebookAuth.instance.logOut();
+      if (_googleSignIn != null) {
+        await _googleSignIn!.signOut();
+      }
       await _auth!.signOut();
       _currentUser = null;
       _errorMessage = null;
