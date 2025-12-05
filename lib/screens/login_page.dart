@@ -21,19 +21,6 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  void _onLogin() {
-    if (!_formKey.currentState!.validate()) return;
-    setState(() => _loading = true);
-
-    // placeholder for real auth logic
-    Future.delayed(const Duration(seconds: 1), () {
-      setState(() => _loading = false);
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login pressed (placeholder)')),
-      );
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

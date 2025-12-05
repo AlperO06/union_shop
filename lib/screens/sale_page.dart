@@ -63,7 +63,6 @@ class _SalePageState extends State<SalePage> {
         builder: (context, constraints) {
           final width = constraints.maxWidth;
           final isMobile = width < 600;
-          final isTablet = width >= 600 && width < 900;
           
           int columns = 2;
           if (width >= 900) {

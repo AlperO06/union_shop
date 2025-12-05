@@ -39,13 +39,6 @@ class _SignupPageState extends State<SignupPage> {
     });
   }
 
-  void _onSignInNavigate() {
-    // Placeholder for navigation to sign in page
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Navigate to Sign in (placeholder)')),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
