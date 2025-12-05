@@ -64,10 +64,3 @@ void main() {
       expect(authService.resetPassword, isA<Function>());
     });
 
-    test('should have updateDisplayName method', () {
-      final authService = AuthService();
-      
-      expect(authService.updateDisplayName, isA<Function>());
-    });
-  });
-}

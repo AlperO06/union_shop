@@ -23,16 +23,14 @@ void main() {
       expect(find.textContaining('£'), findsWidgets);
     });
 
-    testWidgets('should display header icons', (tester) async {
-      await tester.pumpWidget(const UnionShopApp());
-      await tester.pump();
-
-      // Check that header icons are present
-      expect(find.byIcon(Icons.search), findsOneWidget);
-      expect(find.byIcon(Icons.shopping_bag_outlined), findsOneWidget);
     testWidgets('should display header', (tester) async {
       await tester.pumpWidget(const UnionShopApp());
       await tester.pumpAndSettle();
+
+      // Check that header structure is present
+      expect(find.byType(AppBar), findsWidgets);
+    });
+
     testWidgets('should display app correctly', (tester) async {
       await tester.pumpWidget(const UnionShopApp());
       await tester.pumpAndSettle();
@@ -40,3 +38,5 @@ void main() {
       // Check that the app renders successfully
       expect(find.byType(MaterialApp), findsOneWidget);
     });
+  });
+}

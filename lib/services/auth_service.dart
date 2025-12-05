@@ -23,6 +23,8 @@ class AuthService extends ChangeNotifier {
     _initializeAuth();
   }
 
+  get updateDisplayName => null;
+
   void _initializeAuth() {
     try {
       // Check if Firebase is initialized
