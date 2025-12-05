@@ -8,13 +8,13 @@ const List<Product> products = [
     name: 'Limited Edition Essential Zip Hoodie',
     oldPrice: 79.99,
     newPrice: 59.99,
-    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYyTmj7qHlTsja1Wdpzv7lSqr3OtL7W0m0ObLH7WMXevg3wHr6JAjmsVH29JWnEmbwbvM&usqp=CAU',
+    image: 'https://www.saintalexanderclo.com/cdn/shop/files/1._CUSTOM_HOODIE_ZIP_1b1e6bc5-7ee3-4e5a-8b13-c29246e1e945.png?v=1763482171&width=1200',
     description:
         'A premium limited edition zip hoodie with soft brushed interior, metal zipper, and a tailored fit.',
     images: [
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3QUYOKhTntE-L4eVmc4ME9UD6tKDiXoIW1w&s',
+      'https://i.etsystatic.com/14709087/r/il/1b28d6/1569780932/il_340x270.1569780932_dzn7.jpg',
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoMLAbZ0xqNNMFPtScF47Ctxs712cDdp0mfAGaDWd4mbWjycHf8rRgs6PULRr44ebkeSY&usqp=CAU',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU'
+      'https://www.saintalexanderclo.com/cdn/shop/files/1_-_box_site_navy_h.png?v=1756662399&width=1200'
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Black', 'Grey', 'Purple'],
