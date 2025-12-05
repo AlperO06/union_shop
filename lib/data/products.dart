@@ -146,13 +146,14 @@ const List<Product> products = [
   ),
   Product(
     id: 12,
-    name: 'Chinos',
+    name: 'Corteiz HMP tracksuit',
     oldPrice: 59.99,
     newPrice: 50.00,
-    image: 'https://picsum.photos/seed/chinos/400/400',
+    image: 'https://sidekicks.co.uk/cdn/shop/files/hmp-thermal-zip-hoodie-black-1_grande.jpg?v=1735256786',
     description: 'Versatile chino pants with a modern slim fit and stretch comfort.',
     images: [
-      'https://picsum.photos/seed/chinos/400/400',
+      'https://sidekicks.co.uk/cdn/shop/files/hmp-thermal-zip-hoodie-black-1_grande.jpg?v=1735256786',
+      'https://images.stockx.com/images/Corteiz-HMP-V2-Sweatpant-Black.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1706302081'
     ],
     sizes: ['28', '30', '32', '34', '36'],
     colors: ['Khaki', 'Navy', 'Black', 'Grey'],
