@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../services/auth_service.dart';
 
 class SignupPage extends StatefulWidget {
@@ -272,10 +273,10 @@ class _SignupPageState extends State<SignupPage> {
                                       );
                                     }
                                   },
-                            icon: Image.network(
-                              'https://www.google.com/favicon.ico',
+                            icon: CachedNetworkImage(
+                              imageUrl: 'https://www.google.com/favicon.ico',
                               height: 20,
-                              errorBuilder: (_, __, ___) => const Icon(Icons.g_mobiledata, size: 24),
+                              errorWidget: (_, __, ___) => const Icon(Icons.g_mobiledata, size: 24),
                             ),
                             label: const Text('Continue with Google'),
                             style: OutlinedButton.styleFrom(
