@@ -55,8 +55,8 @@ const List<Product> products = [
     description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
     images: [
       'https://www.kershkicks.co.uk/cdn/shop/files/Screenshot-2024-07-10-at-10-39-42.png?v=1720608034s',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSoMLAbZ0xqNNMFPtScF47Ctxs712cDdp0mfAGaDWd4mbWjycHf8rRgs6PULRr44ebkeSY&usqp=CAU',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU'
+      'https://image.goat.com/transform/v1/attachments/product_template_additional_pictures/images/104/726/931/original/1497021_01.jpg.jpeg?action=crop&width=750',
+      'https://images.stockx.com/images/Hellstar-Thorn-T-Shirt-Red.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&q=60&dpr=1&trim=color&updated_at=1727292901'
     ],
   ),
   // appended Portsmouth items
