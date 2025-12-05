@@ -26,7 +26,6 @@ Future<void> main() async {
 
   // Initialize Firebase (optional for development)
   // The app will work without Firebase, but authentication features will be disabled
-  bool firebaseInitialized = false;
   try {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
@@ -38,7 +37,6 @@ Future<void> main() async {
         storageBucket: 'union-shop-demo.appspot.com',
       ),
     );
-    firebaseInitialized = true;
     if (kDebugMode) {
       debugPrint('Firebase initialized successfully');
     }
