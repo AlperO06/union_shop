@@ -51,7 +51,7 @@ const List<Product> products = [
     name: 'Signature T-Shirt',
     oldPrice: 34.99,
     newPrice: 29.99,
-    image: 'https://picsum.photos/id/1035/800/600',
+    image: 'https://i.ebayimg.com/images/g/DTUAAOSwyJ1k43mj/s-l1200.jpg',
     description: 'Premium cotton tee with signature print and a tailored cut for a modern look.',
     images: [
       'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ3QUYOKhTntE-L4eVmc4ME9UD6tKDiXoIW1w&s',
