@@ -54,7 +54,8 @@ A modern e-commerce Flutter application for the **University of Portsmouth Stude
 
 ## 📱 Screenshots
 
-> *Note: Add screenshots here to showcase your app's features*
+<img width="2879" height="1799" alt="image" src="https://github.com/user-attachments/assets/b9d9138c-b7ad-4cfd-97f5-6602092a8136" />
+
 
 ```
 [Homepage]  [Product Page]  [Cart]  [Login]
