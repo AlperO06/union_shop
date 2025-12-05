@@ -424,7 +424,7 @@ class UnionHeader extends StatelessWidget {
                       child: GestureDetector(
                         onTap: () => navigateToHome(context),
                         child: CachedNetworkImage(
-                          imageUrl: 'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                          imageUrl: 'https://via.placeholder.com/120x40/6C4CE5/FFFFFF?text=Union+Shop',
                           height: 28,
                           fit: BoxFit.contain,
                           placeholder: (context, url) => Container(
