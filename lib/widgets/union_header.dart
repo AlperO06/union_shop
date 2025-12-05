@@ -380,6 +380,14 @@ class UnionHeader extends StatelessWidget {
                 navigateToAbout(context);
               },
             ),
+            ListTile(
+              leading: const Icon(Icons.person),
+              title: const Text('Account'),
+              onTap: () {
+                Navigator.pop(ctx);
+                Navigator.pushNamed(context, '/account');
+              },
+            ),
           ],
         ),
       ),
