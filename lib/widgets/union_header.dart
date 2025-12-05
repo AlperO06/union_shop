@@ -20,6 +20,12 @@ const List<ShopMenuItem> shopMenuItems = [
   ShopMenuItem(label: 'Graduation', routeName: '/collections/clothing'),
 ];
 
+// Print Shack menu items
+const List<ShopMenuItem> printShackMenuItems = [
+  ShopMenuItem(label: 'About', routeName: '/about'),
+  ShopMenuItem(label: 'Personalisation', routeName: '/print-shack'),
+];
+
 // The helper functions are duplicated here so the widget remains self-contained
 // and behaves identically when moved out of `main.dart`.
 void placeholderCallbackForButtons() {
