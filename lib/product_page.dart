@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'widgets/union_page_scaffold.dart'; // use scaffold that provides header/footer
 import 'models/product.dart';
 import 'data/cart.dart';
@@ -64,12 +65,16 @@ class _ProductPageState extends State<ProductPage> {
     BoxFit fit = BoxFit.cover,
   }) {
     if (src.startsWith('http')) {
-      return Image.network(
-        src,
+      return CachedNetworkImage(
+        imageUrl: src,
         width: width,
         height: height,
         fit: fit,
-        errorBuilder: (context, error, stackTrace) =>
+        placeholder: (context, url) => Container(
+          color: Colors.grey[200],
+          child: const Center(child: CircularProgressIndicator()),
+        ),
+        errorWidget: (context, url, error) =>
             Container(color: Colors.grey[300]),
       );
     }
