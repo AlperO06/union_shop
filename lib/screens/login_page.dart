@@ -102,12 +102,26 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(
                           height: 48,
                           child: ElevatedButton(
-                            onPressed: _loading
+                            onPressed: authService.isLoading
                                 ? null
-                                : () {
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(content: Text('Logged in (demo only)')),
+                                : () async {
+                                    if (!_formKey.currentState!.validate()) return;
+                                    
+                                    final success = await authService.signInWithEmail(
+                                      _emailCtrl.text.trim(),
+                                      _passwordCtrl.text,
                                     );
+                                    
+                                    if (success && context.mounted) {
+                                      Navigator.pushReplacementNamed(context, '/');
+                                    } else if (authService.errorMessage != null && context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(authService.errorMessage!),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
                                   },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFF4d2963),
@@ -115,9 +129,108 @@ class _LoginPageState extends State<LoginPage> {
                               padding: const EdgeInsets.symmetric(vertical: 14),
                               elevation: 2,
                             ),
-                            child: _loading
+                            child: authService.isLoading
                                 ? const CircularProgressIndicator(color: Colors.white, strokeWidth: 2.5)
                                 : const Text('Login', style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600)),
+                          ),
+                        ),
+                        const SizedBox(height: 8),
+                        Align(
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () async {
+                              final email = _emailCtrl.text.trim();
+                              if (email.isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Please enter your email address')),
+                                );
+                                return;
+                              }
+                              
+                              final success = await authService.resetPassword(email);
+                              if (context.mounted) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text(
+                                      success 
+                                        ? 'Password reset email sent!' 
+                                        : authService.errorMessage ?? 'Failed to send reset email'
+                                    ),
+                                    backgroundColor: success ? Colors.green : Colors.red,
+                                  ),
+                                );
+                              }
+                            },
+                            child: const Text('Forgot password?', style: TextStyle(fontSize: 13)),
+                          ),
+                        ),
+                        const SizedBox(height: 16),
+                        Row(
+                          children: [
+                            Expanded(child: Divider(color: Colors.grey[400])),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 16),
+                              child: Text('OR', style: TextStyle(color: Colors.grey[600], fontSize: 12)),
+                            ),
+                            Expanded(child: Divider(color: Colors.grey[400])),
+                          ],
+                        ),
+                        const SizedBox(height: 16),
+                        SizedBox(
+                          height: 48,
+                          child: OutlinedButton.icon(
+                            onPressed: authService.isLoading
+                                ? null
+                                : () async {
+                                    final success = await authService.signInWithGoogle();
+                                    if (success && context.mounted) {
+                                      Navigator.pushReplacementNamed(context, '/');
+                                    } else if (authService.errorMessage != null && context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(authService.errorMessage!),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
+                                  },
+                            icon: Image.network(
+                              'https://www.google.com/favicon.ico',
+                              height: 20,
+                              errorBuilder: (_, __, ___) => const Icon(Icons.g_mobiledata, size: 24),
+                            ),
+                            label: const Text('Continue with Google'),
+                            style: OutlinedButton.styleFrom(
+                              side: BorderSide(color: Colors.grey[400]!),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        SizedBox(
+                          height: 48,
+                          child: OutlinedButton.icon(
+                            onPressed: authService.isLoading
+                                ? null
+                                : () async {
+                                    final success = await authService.signInWithFacebook();
+                                    if (success && context.mounted) {
+                                      Navigator.pushReplacementNamed(context, '/');
+                                    } else if (authService.errorMessage != null && context.mounted) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                        SnackBar(
+                                          content: Text(authService.errorMessage!),
+                                          backgroundColor: Colors.red,
+                                        ),
+                                      );
+                                    }
+                                  },
+                            icon: const Icon(Icons.facebook, color: Color(0xFF1877F2), size: 24),
+                            label: const Text('Continue with Facebook'),
+                            style: OutlinedButton.styleFrom(
+                              side: BorderSide(color: Colors.grey[400]!),
+                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                            ),
                           ),
                         ),
                         const SizedBox(height: 12),
