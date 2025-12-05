@@ -3,6 +3,11 @@ import 'package:union_shop/data/cart.dart';
 
 void main() {
   group('Cart', () {
+    setUp(() {
+      // Clear the global cart state before each test
+      clearCart();
+    });
+
     test('should add item to cart', () {
       final cart = Cart();
       final item = CartItem(
@@ -53,13 +58,6 @@ void main() {
       cart.addItem(CartItem(id: '1', name: 'Product 1', price: 10.0, quantity: 2));
       cart.addItem(CartItem(id: '2', name: 'Product 2', price: 15.0, quantity: 1));
 
-      // Debug: print cart items
-      print('Cart items: ${cart.items.length}');
-      for (var item in cart.items) {
-        print('  ${item.id}: ${item.name}, price=${item.price}, qty=${item.quantity}');
-      }
-      print('Subtotal: ${cart.subtotal}');
-      
       // 10*2 + 15*1 = 20 + 15 = 35
       expect(cart.subtotal, 35.0);
     });
