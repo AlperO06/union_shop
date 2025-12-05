@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter/foundation.dart';
 import '../models/user.dart';
 
@@ -159,46 +158,6 @@ class AuthService extends ChangeNotifier {
     } catch (e) {
       _setLoading(false);
       _setError('Google sign-in failed');
-      return false;
-    }
-  }
-
-  // Facebook Sign In
-  Future<bool> signInWithFacebook() async {
-    if (!_firebaseAvailable || _auth == null) {
-      _setError('Authentication is not available. Please configure Firebase.');
-      return false;
-    }
-    
-    try {
-      _setLoading(true);
-      _setError(null);
-
-      final LoginResult result = await FacebookAuth.instance.login();
-
-      if (result.status == LoginStatus.success) {
-        final AccessToken accessToken = result.accessToken!;
-        final credential = FacebookAuthProvider.credential(accessToken.tokenString);
-
-        await _auth!.signInWithCredential(credential);
-        
-        _setLoading(false);
-        return true;
-      } else if (result.status == LoginStatus.cancelled) {
-        _setLoading(false);
-        return false; // User canceled
-      } else {
-        _setLoading(false);
-        _setError('Facebook sign-in failed');
-        return false;
-      }
-    } on FirebaseAuthException catch (e) {
-      _setLoading(false);
-      _setError(_getErrorMessage(e.code));
-      return false;
-    } catch (e) {
-      _setLoading(false);
-      _setError('Facebook sign-in failed');
       return false;
     }
   }
