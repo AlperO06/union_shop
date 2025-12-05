@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:union_shop/sale_page.dart';
+import 'package:union_shop/screens/sale_page.dart';
 import 'package:union_shop/services/auth_service.dart';
-import 'package:union_shop/data/cart.dart' as cart_data;
+import 'package:union_shop/data/cart.dart';
 
 void main() {
   group('SalePage', () {
