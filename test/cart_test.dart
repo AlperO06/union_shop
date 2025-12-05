@@ -53,7 +53,15 @@ void main() {
       cart.addItem(CartItem(id: '1', name: 'Product 1', price: 10.0, quantity: 2));
       cart.addItem(CartItem(id: '2', name: 'Product 2', price: 15.0, quantity: 1));
 
-      expect(cart.subtotal, cart.getTotalPrice());
+      // Debug: print cart items
+      print('Cart items: ${cart.items.length}');
+      for (var item in cart.items) {
+        print('  ${item.id}: ${item.name}, price=${item.price}, qty=${item.quantity}');
+      }
+      print('Subtotal: ${cart.subtotal}');
+      
+      // 10*2 + 15*1 = 20 + 15 = 35
+      expect(cart.subtotal, 35.0);
     });
 
     test('should calculate delivery fee', () {
@@ -67,7 +75,9 @@ void main() {
       final cart = Cart();
       cart.addItem(CartItem(id: '1', name: 'Product 1', price: 10.0, quantity: 2));
 
-      expect(cart.total, cart.getTotalPrice());
+      // subtotal (20.0) + delivery fee (3.99) = 23.99
+      final expectedTotal = 20.0 + 3.99;
+      expect(cart.total, expectedTotal);
     });
 
     test('should save cart to storage', () async {
