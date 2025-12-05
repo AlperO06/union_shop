@@ -5,7 +5,7 @@ import 'package:union_shop/models/product.dart';
 
 void main() {
   group('ProductCard', () {
-    final testProduct = const Product(
+    const testProduct = Product(
       id: 1,
       name: 'Test Product',
       image: 'https://example.com/image.jpg',

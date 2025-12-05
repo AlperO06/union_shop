@@ -12,7 +12,7 @@ void main() {
       clearCart();
     });
 
-    final testProduct = Product(
+    const testProduct = Product(
       id: 1,
       name: 'Test Product',
       image: 'https://example.com/image.jpg',

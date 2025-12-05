@@ -74,7 +74,7 @@ void main() {
       cart.addItem(CartItem(id: '1', name: 'Product 1', price: 10.0, quantity: 2));
 
       // subtotal (20.0) + delivery fee (3.99) = 23.99
-      final expectedTotal = 20.0 + 3.99;
+      const expectedTotal = 20.0 + 3.99;
       expect(cart.total, expectedTotal);
     });
 
