@@ -24,7 +24,9 @@ import 'data/print_shack.dart' show samplePersonalisedHoodie;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase
+  // Initialize Firebase (optional for development)
+  // The app will work without Firebase, but authentication features will be disabled
+  bool firebaseInitialized = false;
   try {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
@@ -36,10 +38,15 @@ Future<void> main() async {
         storageBucket: 'union-shop-demo.appspot.com',
       ),
     );
+    firebaseInitialized = true;
+    if (kDebugMode) {
+      debugPrint('Firebase initialized successfully');
+    }
   } catch (e) {
     if (kDebugMode) {
-      debugPrint('Firebase initialization error: $e');
-      debugPrint('Note: Update Firebase config in main.dart with your actual credentials');
+      debugPrint('Firebase initialization skipped - app will work without auth features');
+      debugPrint('To enable authentication, update Firebase config in main.dart');
+      debugPrint('Error: $e');
     }
   }
 
