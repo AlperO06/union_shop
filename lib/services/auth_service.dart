@@ -1,24 +1,42 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:flutter/foundation.dart';
 import '../models/user.dart';
 
 class AuthService extends ChangeNotifier {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+  FirebaseAuth? _auth;
   final GoogleSignIn _googleSignIn = GoogleSignIn();
   
   AppUser? _currentUser;
   bool _isLoading = false;
   String? _errorMessage;
+  bool _firebaseAvailable = false;
 
   AppUser? get currentUser => _currentUser;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
   bool get isAuthenticated => _currentUser != null;
+  bool get firebaseAvailable => _firebaseAvailable;
 
   AuthService() {
-    _auth.authStateChanges().listen(_onAuthStateChanged);
+    _initializeAuth();
+  }
+
+  void _initializeAuth() {
+    try {
+      // Check if Firebase is initialized
+      Firebase.app();
+      _auth = FirebaseAuth.instance;
+      _firebaseAvailable = true;
+      _auth!.authStateChanges().listen(_onAuthStateChanged);
+    } catch (e) {
+      if (kDebugMode) {
+        debugPrint('Firebase not initialized - Auth features disabled');
+      }
+      _firebaseAvailable = false;
+    }
   }
 
   void _onAuthStateChanged(User? firebaseUser) {
