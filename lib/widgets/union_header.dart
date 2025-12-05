@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../data/cart.dart';
 import '../services/auth_service.dart';
 
@@ -422,11 +423,16 @@ class UnionHeader extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 12.0),
                       child: GestureDetector(
                         onTap: () => navigateToHome(context),
-                        child: Image.network(
-                          'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
+                        child: CachedNetworkImage(
+                          imageUrl: 'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
                           height: 28,
                           fit: BoxFit.contain,
-                          errorBuilder: (context, error, stackTrace) {
+                          placeholder: (context, url) => Container(
+                            color: Colors.transparent,
+                            width: 28,
+                            height: 28,
+                          ),
+                          errorWidget: (context, url, error) {
                             return Container(
                               color: Colors.grey[300],
                               width: 28,
