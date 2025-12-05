@@ -86,80 +86,6 @@ The Firebase configuration is already set in `lib/main.dart` with your project d
 2. Add it to your Xcode project under `ios/Runner/`
 3. In `ios/Runner/Info.plist`, add your reversed client ID
 
-## Facebook Sign-In Setup
-
-### 1. Create a Facebook App
-1. Go to [Facebook Developers](https://developers.facebook.com/)
-2. Create a new app (select "Consumer" type)
-3. Add **Facebook Login** product to your app
-
-### 2. Configure Facebook Login
-1. In your Facebook app dashboard, go to **Facebook Login** → **Settings**
-2. Add these URLs to "Valid OAuth Redirect URIs":
-   - `https://YOUR_PROJECT_ID.firebaseapp.com/__/auth/handler`
-   - `http://localhost:5000/__/auth/handler` (for testing)
-
-### 3. Get App Credentials
-1. Go to **Settings** → **Basic**
-2. Copy your **App ID** and **App Secret**
-3. In Firebase Console, go to **Authentication** → **Sign-in method** → **Facebook**
-4. Paste the App ID and App Secret, then save
-
-### 4. Update Platform Settings
-
-#### Web
-Add this to your `web/index.html` before `</body>`:
-```html
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : 'YOUR_FACEBOOK_APP_ID',
-      cookie     : true,
-      xfbml      : true,
-      version    : 'v18.0'
-    });
-  };
-</script>
-<script async defer crossorigin="anonymous" 
-  src="https://connect.facebook.net/en_US/sdk.js"></script>
-```
-
-#### Android
-Add to `android/app/src/main/res/values/strings.xml`:
-```xml
-<string name="facebook_app_id">YOUR_FACEBOOK_APP_ID</string>
-<string name="fb_login_protocol_scheme">fbYOUR_FACEBOOK_APP_ID</string>
-```
-
-Add to `android/app/src/main/AndroidManifest.xml` inside `<application>`:
-```xml
-<meta-data android:name="com.facebook.sdk.ApplicationId" 
-    android:value="@string/facebook_app_id"/>
-```
-
-#### iOS
-Add to `ios/Runner/Info.plist`:
-```xml
-<key>CFBundleURLTypes</key>
-<array>
-  <dict>
-    <key>CFBundleURLSchemes</key>
-    <array>
-      <string>fbYOUR_FACEBOOK_APP_ID</string>
-    </array>
-  </dict>
-</array>
-<key>FacebookAppID</key>
-<string>YOUR_FACEBOOK_APP_ID</string>
-<key>FacebookDisplayName</key>
-<string>Union Shop</string>
-<key>LSApplicationQueriesSchemes</key>
-<array>
-  <string>fbapi</string>
-  <string>fb-messenger-share-api</string>
-</array>
-```
-
 ## Installation & Running
 
 ### Install Dependencies
@@ -188,7 +114,6 @@ flutter run -d ios
 - Choose from:
   - Email/password (create account or sign in)
   - Google Sign-In (one-click)
-  - Facebook Sign-In (one-click)
 
 #### Account Dashboard
 Once logged in, click your profile avatar to access:
