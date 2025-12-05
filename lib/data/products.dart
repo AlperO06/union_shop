@@ -252,10 +252,10 @@ const List<Product> products = [
     name: 'Gucci Crewneck',
     oldPrice: 17.00,
     newPrice: 10.99,
-    image: 'https://image.goat.com/attachments/product_template_additional_pictures/images/106/116/900/medium/1521067_01.jpg.jpeg',
+    image: 'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&h=800&fit=crop',
     description: 'Comfortable classic sweatshirt in neutral tones, perfect for everyday wear.',
     images: [
-      'https://image.goat.com/attachments/product_template_additional_pictures/images/106/116/900/medium/1521067_01.jpg.jpeg',
+      'https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=800&h=800&fit=crop',
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Beige', 'Grey', 'White'],
@@ -265,10 +265,10 @@ const List<Product> products = [
     name: 'Recycled Notebook',
     oldPrice: 3.50,
     newPrice: 1.80,
-    image: 'https://m.media-amazon.com/images/I/81lziLO-O9L._AC_UF894,1000_QL80_.jpg',
+    image: 'https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=800&h=800&fit=crop',
     description: 'Eco-friendly recycled notebook with quality paper and durable cover.',
     images: [
-      'https://m.media-amazon.com/images/I/81lziLO-O9L._AC_UF894,1000_QL80_.jpg',
+      'https://images.unsplash.com/photo-1531346878377-a5be20888e57?w=800&h=800&fit=crop',
     ],
   ),
   Product(
@@ -276,10 +276,10 @@ const List<Product> products = [
     name: 'iPhone 14 Charge & Sync Cable',
     oldPrice: 3.00,
     newPrice: 1.50,
-    image: 'https://m.media-amazon.com/images/I/51MgbEhkCXL.jpg',
+    image: 'https://images.unsplash.com/photo-1590792613148-6c57a628ed0a?w=800&h=800&fit=crop',
     description: 'Reliable charging and sync cable compatible with iPhone 5/6 models.',
     images: [
-      'https://m.media-amazon.com/images/I/51MgbEhkCXL.jpg',
+      'https://images.unsplash.com/photo-1590792613148-6c57a628ed0a?w=800&h=800&fit=crop',
     ],
   ),
   Product(
@@ -287,10 +287,10 @@ const List<Product> products = [
     name: 'Type C Charge & Sync Cable',
     oldPrice: 3.00,
     newPrice: 1.50,
-    image: 'https://m.media-amazon.com/images/I/519vz82qd6L._SL1500_.jpg',
+    image: 'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&h=800&fit=crop',
     description: 'Universal Type-C charging and sync cable with fast charging support.',
     images: [
-      'https://m.media-amazon.com/images/I/519vz82qd6L._SL1500_.jpg',
+      'https://images.unsplash.com/photo-1583863788434-e58a36330cf0?w=800&h=800&fit=crop',
     ],
   ),
   Product(
@@ -298,10 +298,10 @@ const List<Product> products = [
     name: 'Coach Handbag',
     oldPrice: 3.00,
     newPrice: 1.50,
-    image: 'https://media.johnlewiscontent.com/i/JohnLewis/109199229?',
+    image: 'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=800&h=800&fit=crop',
     description: 'Standard USB to USB cable for charging and data transfer.',
     images: [
-      'https://media.johnlewiscontent.com/i/JohnLewis/109199229?',
+      'https://images.unsplash.com/photo-1591561954557-26941169b49e?w=800&h=800&fit=crop',
     ],
   ),
   Product(
@@ -321,10 +321,10 @@ const List<Product> products = [
     name: 'Nike tech fleece',
     oldPrice: 24.99,
     newPrice: 7.00,
-    image: 'https://i8.amplience.net/i/jpl/jd_716444_a?v=1',
+    image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&h=800&fit=crop',
     description: 'Women\'s Nike tech fleece with Dri-FIT technology for comfort.',
     images: [
-      'https://i8.amplience.net/i/jpl/jd_716444_a?v=1',
+      'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=800&h=800&fit=crop',
     ],
     sizes: ['XS', 'S', 'M', 'L'],
   ),
