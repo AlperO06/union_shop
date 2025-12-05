@@ -163,13 +163,14 @@ const List<Product> products = [
   ),
   Product(
     id: 13,
-    name: 'Crewneck Sweater',
+    name: 'Stussy Crewneck Sweater',
     oldPrice: 69.99,
     newPrice: 60.00,
-    image: 'https://picsum.photos/seed/crewneck_sweater/400/400',
+    image: 'https://cdn.shopify.com/s/files/1/1202/6102/products/stussy-stock-crewneck-sweatshirt-black-1.jpg',
     description: 'Soft merino wool crewneck sweater perfect for layering or wearing solo.',
     images: [
-      'https://picsum.photos/seed/crewneck_sweater/400/400',
+      'https://cdn.shopify.com/s/files/1/1202/6102/products/stussy-stock-crewneck-sweatshirt-black-1.jpg',
+      'https://www.stussy.com/cdn/shop/files/1915000_BLAC_2_8b450e6e-7b50-4fe0-980b-db22ee83b474.jpg?v=1760559260&width=1600',
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Navy', 'Grey', 'Burgundy', 'Forest Green'],
