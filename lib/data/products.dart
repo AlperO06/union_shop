@@ -189,13 +189,15 @@ const List<Product> products = [
   ),
   Product(
     id: 15,
-    name: 'Leather Belt',
+    name: 'Supreme last supper belt',
     oldPrice: 35.00,
     newPrice: 30.00,
-    image: 'https://picsum.photos/seed/leather_belt/400/400',
+    image: 'https://i.ebayimg.com/images/g/k4oAAeSwzhZn5TW6/s-l1200.jpg',
     description: 'Genuine leather belt with classic metal buckle and refined finish.',
     images: [
-      'https://picsum.photos/seed/leather_belt/400/400',
+      'https://i.ebayimg.com/images/g/k4oAAeSwzhZn5TW6/s-l1200.jpg',
+      'https://images.stockx.com/images/Supreme-Last-Supper-Leather-Belt-Multicolor-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1755023680',
+      'https://cdn.sanity.io/images/ldn4d4qt/fw25-production-2025-08-24/eebea171edc5bd6290f3a92b2f0b612da603c863-2647x2533.jpg',
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['Brown', 'Black'],
