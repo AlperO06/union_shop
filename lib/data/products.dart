@@ -107,13 +107,15 @@ const List<Product> products = [
   // Items from collections page
   Product(
     id: 9,
-    name: 'Oxford Shirt',
+    name: 'Derschutze Tshirt',
     oldPrice: 49.99,
     newPrice: 45.00,
-    image: 'https://picsum.photos/seed/oxford_shirt/400/400',
+    image: 'https://derschutze.com/cdn/shop/files/2024-05-02-3_2.jpg?v=1716719356&width=480',
     description: 'Classic Oxford button-down shirt with a timeless look and comfortable fit.',
     images: [
-      'https://picsum.photos/seed/oxford_shirt/400/400',
+      'https://derschutze.com/cdn/shop/files/2024-05-02-3_2.jpg?v=1716719356&width=480',
+      'https://derschutze.com/cdn/shop/files/2025-03-20-4-1_grande.jpg?v=1744096797',
+
     ],
     sizes: ['S', 'M', 'L', 'XL'],
     colors: ['White', 'Blue', 'Pink'],
@@ -221,15 +223,14 @@ const List<Product> products = [
   ),
   Product(
     id: 17,
-    name: 'Acne Studios Wool Scarf',
+    name: 'Burberry Studios Wool Scarf',
     oldPrice: 29.99,
     newPrice: 25.00,
-    image: 'https://www.acnestudios.com/dw/image/v2/AAXV_PRD/on/demandware.static/-/Sites-acne-product-catalog/default/dw3239371d/images/CA/CA0084-/2000x/CA0084-DUC_A.jpg?sw=1120&sh=1680',
+    image: 'https://i.ebayimg.com/images/g/j0cAAOSwjL9nlBge/s-l1200.jpg',
     description: 'Luxuriously soft wool scarf to keep you warm and stylish in cold weather.',
     images: [
-      'https://www.acnestudios.com/dw/image/v2/AAXV_PRD/on/demandware.static/-/Sites-acne-product-catalog/default/dw3239371d/images/CA/CA0084-/2000x/CA0084-DUC_A.jpg?sw=1120&sh=1680',
-      'https://www.acnestudios.com/dw/image/v2/AAXV_PRD/on/demandware.static/-/Sites-acne-product-catalog/default/dw3c3b3fad/images/CA/CA0084-/2000x/CA0084-DTJ_A.jpg?sw=560&sh=840',
-      'https://www.outbacksylt.com/img/39357/acne-studios-mohair-checked-scarf-vanilla-beige-lavender-ca0084-dl6000-1.jpg?options=rs:fill:1000:1000/g:ce/dpr:1',
+      'https://i.ebayimg.com/images/g/j0cAAOSwjL9nlBge/s-l1200.jpg',
+      'https://cdn-images.farfetch-contents.com/22/89/86/45/22898645_52952792_600.jpg',
     ],
     colors: ['Charcoal', 'Burgundy', 'Navy', 'Cream'],
   ),
