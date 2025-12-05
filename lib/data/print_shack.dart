@@ -77,9 +77,10 @@ const PrintShackProduct samplePersonalisedHoodie = PrintShackProduct(
   maxCharsPerLine: 10,
   imageUrls: [
     // Primary personalised image
-    'https://shop.upsu.net/cdn/shop/products/Personalised_Image_1024x1024@2x.jpg?v=1562949869',
+    'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=800&h=600&fit=crop',
 
-    // Hero slider images (multiple sizes for responsive rendering)
-    'https://shop.upsu.net/cdn/shop/files/Hoodie_180x.jpg?v=1632306034',
+    // Additional images for gallery
+    'https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?w=800&h=600&fit=crop',
+    'https://images.unsplash.com/photo-1620799139834-6b8f844fbe61?w=800&h=600&fit=crop',
   ],
 );
