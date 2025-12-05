@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../widgets/union_page_scaffold.dart';
 import '../models/product.dart';
 import '../data/products.dart';
@@ -195,10 +196,14 @@ class _SearchPageState extends State<SearchPage> {
                                       child: Container(
                                         width: double.infinity,
                                         color: Colors.grey[200],
-                                        child: Image.network(
-                                          product.image,
+                                        child: CachedNetworkImage(
+                                          imageUrl: product.image,
                                           fit: BoxFit.cover,
-                                          errorBuilder: (context, error, stackTrace) {
+                                          placeholder: (context, url) => Container(
+                                            color: Colors.grey[200],
+                                            child: const Center(child: CircularProgressIndicator()),
+                                          ),
+                                          errorWidget: (context, url, error) {
                                             return Container(
                                               color: Colors.grey[300],
                                               child: const Center(
