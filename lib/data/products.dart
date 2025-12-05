@@ -43,7 +43,7 @@ const List<Product> products = [
     images: [
       'https://mertra.com/cdn/shop/files/se4.png?v=1723762283',
       'https://mertra.com/cdn/shop/files/big1.png?v=1731210931',
-      'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTa2_AqbR2LzUW5W9r6JpUfCaHqFoPY-S2QKSKgS3b_Uay5YbdJpVO1b2QDNTlqP7LYWno&usqp=CAU'
+      'https://mertra.com/cdn/shop/files/se29.png?v=1723762283&width=2080'
     ],
   ),
   Product(
