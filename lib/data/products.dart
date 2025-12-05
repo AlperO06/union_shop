@@ -288,21 +288,21 @@ const List<Product> products = [
     name: 'Type C Charge & Sync Cable',
     oldPrice: 3.00,
     newPrice: 1.50,
-    image: 'https://shop.upsu.net/cdn/shop/files/TypeCCharge_SyncCable1_720x.jpg',
+    image: 'https://m.media-amazon.com/images/I/519vz82qd6L._SL1500_.jpg',
     description: 'Universal Type-C charging and sync cable with fast charging support.',
     images: [
-      'https://shop.upsu.net/cdn/shop/files/TypeCCharge_SyncCable1_720x.jpg',
+      'https://m.media-amazon.com/images/I/519vz82qd6L._SL1500_.jpg',
     ],
   ),
   Product(
     id: 23,
-    name: 'USB to USB Charge & Sync Cables',
+    name: 'Coach Handbag',
     oldPrice: 3.00,
     newPrice: 1.50,
-    image: 'https://shop.upsu.net/cdn/shop/files/USBtoUSBCharge_SyncCables1_720x.jpg',
+    image: 'https://media.johnlewiscontent.com/i/JohnLewis/109199229?',
     description: 'Standard USB to USB cable for charging and data transfer.',
     images: [
-      'https://shop.upsu.net/cdn/shop/files/USBtoUSBCharge_SyncCables1_720x.jpg',
+      'https://media.johnlewiscontent.com/i/JohnLewis/109199229?',
     ],
   ),
   Product(
