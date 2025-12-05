@@ -418,7 +418,7 @@ class Cart extends ChangeNotifier {
   }
 
   void clearCart() {
-    clearCart();
+    cartItemsNotifier.value = [];
     notifyListeners();
   }
 
