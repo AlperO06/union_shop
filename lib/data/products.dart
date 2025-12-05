@@ -333,10 +333,10 @@ const List<Product> products = [
     name: 'Nike tech pants',
     oldPrice: 24.99,
     newPrice: 22.99,
-    image: 'https://images.prodirectsport.com/ProductImages/Main/1029532_Main_1937249.jpg',
+    image: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop',
     description: 'Men\'s Nike Academy tech pants with Dri-FIT technology for performance.',
     images: [
-      'https://images.prodirectsport.com/ProductImages/Main/1029532_Main_1937249.jpg',
+      'https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=600&h=600&fit=crop',
     ],
     sizes: ['S', 'M', 'L', 'XL'],
   ),
