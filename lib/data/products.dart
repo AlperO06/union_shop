@@ -198,16 +198,19 @@ const List<Product> products = [
   ),
   Product(
     id: 16,
-    name: 'Canvas Sneakers',
+    name: 'Jordan 4 Pure money',
     oldPrice: 75.00,
     newPrice: 65.00,
-    image: 'https://picsum.photos/seed/canvas_sneakers/400/400',
+    image: 'https://images.stockx.com/images/Air-Jordan-4-Retro-Pure-Money-2017-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1738193358',
     description: 'Comfortable canvas sneakers with cushioned insoles and durable rubber soles.',
     images: [
-      'https://picsum.photos/seed/canvas_sneakers/400/400',
+      'https://images.stockx.com/images/Air-Jordan-4-Retro-Pure-Money-2017-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1738193358',
+      'https://images.stockx.com/images/Air-Jordan-4-Retro-Pure-Money-2017-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1738193358',
+      'https://images.stockx.com/images/Air-Jordan-4-Retro-Pure-Money-2017-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1738193358'
+      
     ],
     sizes: ['7', '8', '9', '10', '11', '12'],
-    colors: ['White', 'Black', 'Navy'],
+    colors: ['White', 'Green', 'Purple'],
   ),
   Product(
     id: 17,
