@@ -27,25 +27,25 @@ void main() {
           ChangeNotifierProvider(create: (_) => AuthService()),
           ChangeNotifierProvider(create: (_) => Cart()),
         ],
-        child: MaterialApp(
+        child: const MaterialApp(
           home: ProductPage(product: testProduct),
         ),
       );
     }
 
     testWidgets('should create ProductPage instance', (tester) async {
-      final page = ProductPage(product: testProduct);
+      const page = ProductPage(product: testProduct);
       expect(page, isA<ProductPage>());
       expect(page, isNotNull);
     });
 
     testWidgets('should be a StatefulWidget', (tester) async {
-      final page = ProductPage(product: testProduct);
+      const page = ProductPage(product: testProduct);
       expect(page, isA<StatefulWidget>());
     });
 
     testWidgets('should require product parameter', (tester) async {
-      final page = ProductPage(product: testProduct);
+      const page = ProductPage(product: testProduct);
       expect(page.product, equals(testProduct));
     });
 
