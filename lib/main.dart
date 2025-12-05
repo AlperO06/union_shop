@@ -6,6 +6,7 @@ import 'about_page.dart';
 import 'screens/collections_page.dart';
 import 'screens/collections_landing_page.dart';
 import 'screens/sale_page.dart';
+import 'screens/search_page.dart';
 import 'screens/signup_page.dart';
 import 'screens/login_page.dart';
 import 'screens/cart.dart';
@@ -52,6 +53,7 @@ class _UnionShopAppState extends State<UnionShopApp> {
         '/collections': (context) => const CollectionsLandingPage(),
         '/collections/clothing': (context) => const CollectionsPage(),
         '/sale': (context) => const SalePage(),
+        '/search': (context) => const SearchPage(),
         '/cart': (context) => const CartPage(),
         '/login': (context) => const LoginPage(),
         '/signup': (context) => const SignupPage(),
