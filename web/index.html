@@ -34,8 +34,18 @@
 
   <title>union_shop</title>
   <link rel="manifest" href="manifest.json">
+  
+  <style>
+    /* Ensure images load with CORS */
+    img {
+      image-rendering: auto;
+    }
+  </style>
 </head>
 <body>
+  <!-- Add CORS meta tag for image loading -->
+  <meta http-equiv="Content-Security-Policy" content="img-src * 'self' data: https:;">
+  
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
