@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
 import 'package:union_shop/screens/profile_settings.dart';
 import 'package:union_shop/services/auth_service.dart';
-import 'package:union_shop/models/user.dart';
 
 void main() {
   group('ProfileSettings', () {
@@ -30,14 +29,6 @@ void main() {
       await tester.pump();
 
       expect(find.byType(AppBar), findsWidgets);
-    });
-
-    testWidgets('should display Profile Settings text', (WidgetTester tester) async {
-      
-      await tester.pumpWidget(createProfileSettings(user));
-      await tester.pump();
-
-      expect(find.text('Profile Settings'), findsWidgets);
     });
 
     testWidgets('should display Profile Settings text', (WidgetTester tester) async {
