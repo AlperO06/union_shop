@@ -407,65 +407,68 @@ class ProductCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image area
-            AspectRatio(
-              aspectRatio: 4 / 3,
-              child: product.image.startsWith('http')
-                  ? CachedNetworkImage(
-                      imageUrl: product.image,
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => Container(
-                        color: Colors.grey[200],
-                        child: const Center(child: CircularProgressIndicator()),
+            // Image area - wrapped in Expanded to take available space
+            Expanded(
+              child: AspectRatio(
+                aspectRatio: 4 / 3,
+                child: product.image.startsWith('http')
+                    ? CachedNetworkImage(
+                        imageUrl: product.image,
+                        fit: BoxFit.cover,
+                        placeholder: (context, url) => Container(
+                          color: Colors.grey[200],
+                          child: const Center(child: CircularProgressIndicator()),
+                        ),
+                        errorWidget: (context, url, error) => Container(
+                          color: Colors.grey[200],
+                          child: const Center(child: Icon(Icons.broken_image)),
+                        ),
+                      )
+                    : Image.asset(
+                        product.image,
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          color: Colors.grey[200],
+                          child: const Center(child: Icon(Icons.broken_image)),
+                        ),
                       ),
-                      errorWidget: (context, url, error) => Container(
-                        color: Colors.grey[200],
-                        child: const Center(child: Icon(Icons.broken_image)),
-                      ),
-                    )
-                  : Image.asset(
-                      product.image,
-                      fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        color: Colors.grey[200],
-                        child: const Center(child: Icon(Icons.broken_image)),
-                      ),
-                    ),
+              ),
             ),
             // Textual info
             Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    product.name, // changed from product.title
+                    product.name,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      fontSize: 14,
+                      fontSize: 13,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  const SizedBox(height: 6),
+                  const SizedBox(height: 4),
                   Row(
                     children: [
                       // OLD PRICE (strike-through)
                       Text(
                         '£${product.oldPrice}',
                         style: const TextStyle(
-                          fontSize: 12,
+                          fontSize: 11,
                           color: Colors.grey,
                           decoration: TextDecoration.lineThrough,
                         ),
                       ),
-                      const SizedBox(width: 6),
+                      const SizedBox(width: 4),
 
                       // NEW PRICE (highlighted)
                       Text(
                         '£${product.newPrice}',
                         style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 13,
                           color: Color(0xFF4d2963),
                           fontWeight: FontWeight.bold,
                         ),
