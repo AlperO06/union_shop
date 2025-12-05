@@ -367,5 +367,64 @@ void clearCart() {
 // This forwards to the internal async saver.
 Future<void> saveCartToPrefs() => _saveCartToPrefs();
 
-class Cart {
+class Cart extends ChangeNotifier {
+  List<CartItem> get items => cartItemsNotifier.value;
+
+  Cart() {
+    // Listen to cart changes and notify listeners
+    cartItemsNotifier.addListener(notifyListeners);
+  }
+
+  void addItem(CartItem item) {
+    addToCart(item);
+    notifyListeners();
+  }
+
+  void removeItem(String id) {
+    removeFromCart(id);
+    notifyListeners();
+  }
+
+  void updateItemQuantity(String id, int quantity) {
+    final updated = List<CartItem>.from(cartItemsNotifier.value);
+    final index = updated.indexWhere((i) => i.id == id);
+    if (index >= 0) {
+      final existing = updated[index];
+      updated[index] = existing.copyWith(quantity: quantity);
+      cartItemsNotifier.value = updated;
+      notifyListeners();
+    }
+  }
+
+  double get subtotal {
+    return items.fold(0.0, (sum, item) => sum + (item.price * item.quantity));
+  }
+
+  double get deliveryFee {
+    return items.isEmpty ? 0.0 : 3.99;
+  }
+
+  double get total {
+    return subtotal + deliveryFee;
+  }
+
+  Future<void> saveCart() async {
+    await saveCartToPrefs();
+  }
+
+  Future<void> loadCart() async {
+    await loadCartFromPrefs();
+    notifyListeners();
+  }
+
+  void clearCart() {
+    clearCart();
+    notifyListeners();
+  }
+
+  @override
+  void dispose() {
+    cartItemsNotifier.removeListener(notifyListeners);
+    super.dispose();
+  }
 }
