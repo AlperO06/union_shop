@@ -133,7 +133,10 @@ class AuthService extends ChangeNotifier {
       _setLoading(true);
       _setError(null);
 
-      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      // Initialize Google Sign-In if not already done
+      _googleSignIn ??= GoogleSignIn();
+      
+      final GoogleSignInAccount? googleUser = await _googleSignIn!.signIn();
       
       if (googleUser == null) {
         _setLoading(false);
@@ -157,7 +160,7 @@ class AuthService extends ChangeNotifier {
       return false;
     } catch (e) {
       _setLoading(false);
-      _setError('Google sign-in failed');
+      _setError('Google sign-in failed. ${e.toString()}');
       return false;
     }
   }
