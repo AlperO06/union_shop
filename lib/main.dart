@@ -24,17 +24,19 @@ import 'data/print_shack.dart' show samplePersonalisedHoodie;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Firebase (optional for development)
-  // The app will work without Firebase, but authentication features will be disabled
+  // Skip Firebase initialization for now - uncomment when ready to use authentication
+  // To enable authentication, follow the guide in AUTHENTICATION_SETUP.md
+  
+  /*
   try {
     await Firebase.initializeApp(
       options: const FirebaseOptions(
-        apiKey: 'AIzaSyDemoKey-ReplaceWithYourActualKey',
-        appId: '1:1234567890:web:abcdef1234567890',
-        messagingSenderId: '1234567890',
-        projectId: 'union-shop-demo',
-        authDomain: 'union-shop-demo.firebaseapp.com',
-        storageBucket: 'union-shop-demo.appspot.com',
+        apiKey: 'YOUR_API_KEY',
+        appId: 'YOUR_APP_ID',
+        messagingSenderId: 'YOUR_MESSAGING_ID',
+        projectId: 'YOUR_PROJECT_ID',
+        authDomain: 'YOUR_AUTH_DOMAIN',
+        storageBucket: 'YOUR_STORAGE_BUCKET',
       ),
     );
     if (kDebugMode) {
@@ -47,6 +49,7 @@ Future<void> main() async {
       debugPrint('Error: $e');
     }
   }
+  */
 
   // Perform a one-time load from SharedPreferences before starting the app.
   // loadCartFromPrefs() will attach the persistence listener in its finally block.
