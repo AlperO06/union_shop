@@ -135,8 +135,10 @@ class AuthService extends ChangeNotifier {
       _setLoading(true);
       _setError(null);
 
-      // Initialize Google Sign-In if not already done
-      _googleSignIn ??= GoogleSignIn();
+      // Initialize Google Sign-In with minimal scopes (no People API needed)
+      _googleSignIn ??= GoogleSignIn(
+        scopes: ['email'],
+      );
       
       final GoogleSignInAccount? googleUser = await _googleSignIn!.signIn();
       
