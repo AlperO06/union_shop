@@ -336,7 +336,7 @@ class _SalePageState extends State<SalePage> {
                           crossAxisCount: columns,
                           crossAxisSpacing: isMobile ? 12 : 16,
                           mainAxisSpacing: isMobile ? 20 : 24,
-                          childAspectRatio: isMobile ? 0.75 : 0.72,
+                          childAspectRatio: isMobile ? 0.65 : 0.68,
                         ),
                         itemCount: sortedProducts.length,
                         shrinkWrap: true,
