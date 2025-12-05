@@ -37,7 +37,7 @@ const List<Product> products = [
     name: 'Signature Hoodie',
     oldPrice: 89.99,
     newPrice: 69.99,
-    image: 'https://mertra.net/wp-content/uploads/2024/12/big1-1.webp',
+    image: 'https://mertra.com/cdn/shop/files/se1_8203239a-c995-427a-b48c-af205c4a632e.png?v=1723762319',
     description:
         'Premium heavyweight fleece hoodie featuring embroidered logo and reinforced seams for lasting comfort.',
     images: [
