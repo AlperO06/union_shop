@@ -7,7 +7,7 @@ class AboutPrintShackPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return UnionPageScaffold(
-      child: SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
