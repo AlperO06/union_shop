@@ -168,7 +168,7 @@ class _SalePageState extends State<SalePage> {
                                       const SizedBox(height: 4),
                                       DropdownButtonFormField<String>(
                                         isExpanded: true,
-                                        value: _filterBy,
+                                        initialValue: _filterBy,
                                         decoration: const InputDecoration(
                                           isDense: true,
                                           contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
@@ -206,7 +206,7 @@ class _SalePageState extends State<SalePage> {
                                       const SizedBox(height: 4),
                                       DropdownButtonFormField<String>(
                                         isExpanded: true,
-                                        value: _sortBy,
+                                        initialValue: _sortBy,
                                         decoration: const InputDecoration(
                                           isDense: true,
                                           contentPadding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),

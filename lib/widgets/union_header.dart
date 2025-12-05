@@ -503,7 +503,7 @@ class UnionHeader extends StatelessWidget {
                               _buildCartButton(context),
                               IconButton(
                                 icon: const Icon(Icons.menu, size: 18, color: Colors.grey),
-                                padding: EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(8),
                                 constraints: const BoxConstraints(minWidth: 32, minHeight: 32),
                                 onPressed: () => _openMobileMenu(context),
                               ),

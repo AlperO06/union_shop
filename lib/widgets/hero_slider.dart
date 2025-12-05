@@ -226,7 +226,7 @@ class _HeroSliderState extends State<HeroSlider> {
                 final primaryButtonLabel = (index == 3)
                     ? 'VERIFY AND SAVE'
                     : (index == 1 ? 'FIND OUT MORE' : slide.primaryLabel);
-                final VoidCallback? primaryOnPressed = (index == 3)
+                final VoidCallback primaryOnPressed = (index == 3)
                     ? () => _openDominos()
                     : slide.onPrimary ?? () => Navigator.pushNamed(context, '/print-shack');
 

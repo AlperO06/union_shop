@@ -57,7 +57,7 @@ class HomeScreen extends StatelessWidget {
               ),
 
               // NEW SLIDE: The Print Shack (use Print Shack hero image)
-              HeroSlide(
+              const HeroSlide(
                 imageUrl:
                     'https://shop.upsu.net/cdn/shop/files/Hoodie.jpg?v=1632306034',
                 title: 'The Print Shack',
