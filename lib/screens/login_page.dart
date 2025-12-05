@@ -26,6 +26,78 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     final authService = Provider.of<AuthService>(context);
     
+    // Show message if Firebase isn't configured
+    if (!authService.firebaseAvailable) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text('Sign In'),
+          elevation: 0,
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black87,
+        ),
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.cloud_off, size: 80, color: Colors.grey[400]),
+                const SizedBox(height: 24),
+                const Text(
+                  'Authentication Not Configured',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'Firebase authentication is not set up yet. The shop features are fully functional without login.',
+                  style: TextStyle(fontSize: 16, color: Colors.grey[600]),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 24),
+                ElevatedButton.icon(
+                  onPressed: () => Navigator.pushNamed(context, '/'),
+                  icon: const Icon(Icons.shopping_bag),
+                  label: const Text('Continue Shopping'),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4d2963),
+                    padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: const Text('Setup Instructions'),
+                        content: const SingleChildScrollView(
+                          child: Text(
+                            'To enable authentication:\n\n'
+                            '1. Create a Firebase project\n'
+                            '2. Enable authentication methods\n'
+                            '3. Update Firebase config in lib/main.dart\n'
+                            '4. See AUTHENTICATION_SETUP.md for details',
+                          ),
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(context),
+                            child: const Text('OK'),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                  child: const Text('How to enable authentication?'),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Sign In'),
