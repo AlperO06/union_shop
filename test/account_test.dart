@@ -5,12 +5,28 @@ import 'package:union_shop/screens/account_dashboard.dart';
 import 'package:union_shop/services/auth_service.dart';
 import 'package:union_shop/models/user.dart';
 
+class MockAuthService extends ChangeNotifier implements AuthService {
+  AppUser? _currentUser;
+
+  @override
+  AppUser? get currentUser => _currentUser;
+
+  void setUser(AppUser? user) {
+    _currentUser = user;
+    notifyListeners();
+  }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
+}
+
 void main() {
   group('AccountDashboard', () {
     Widget createDashboard(AppUser? user) {
-      final authService = AuthService();
+      final authService = MockAuthService();
+      authService.setUser(user);
       
-      return ChangeNotifierProvider.value(
+      return ChangeNotifierProvider<AuthService>.value(
         value: authService,
         child: MaterialApp(
           home: const AccountDashboard(),
@@ -25,14 +41,14 @@ void main() {
 
     testWidgets('should display scaffold', (WidgetTester tester) async {
       await tester.pumpWidget(createDashboard(null));
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(find.byType(Scaffold), findsOneWidget);
     });
 
     testWidgets('should have app bar', (WidgetTester tester) async {
       await tester.pumpWidget(createDashboard(null));
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(find.byType(AppBar), findsWidgets);
     });
@@ -45,7 +61,7 @@ void main() {
       );
       
       await tester.pumpWidget(createDashboard(user));
-      await tester.pump();
+      await tester.pumpAndSettle();
 
       expect(find.text('My Account'), findsWidgets);
     });
