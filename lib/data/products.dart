@@ -24,7 +24,7 @@ const List<Product> products = [
     name: 'Essential T-Shirt',
     oldPrice: 29.99,
     newPrice: 24.99,
-    image: 'https://imagin-badges.co.uk/cdn/shop/files/bratt-shirt_3.png?v=1729085364',
+    image: 'https://static01.nyt.com/images/2022/02/24/fashion/24YE-DEMNA-1/merlin_202739772_b4699c52-2eca-40fd-8fb2-642b619ca83e-mediumSquareAt3X.jpg',
     description: 'A soft, breathable cotton tee with a classic fit—perfect for everyday wear.',
     images: [
       'https://files.ekmcdn.com/nn2wadmin/images/charli-xcx-brat-11055-p.jpg',
