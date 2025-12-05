@@ -12,8 +12,8 @@ void main() {
       
       return ChangeNotifierProvider.value(
         value: authService,
-        child: const MaterialApp(
-          home: ProfileSettings(),
+        child: MaterialApp(
+          home: ProfileSettingsPage(user: user),
         ),
       );
     }
