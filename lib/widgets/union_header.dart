@@ -336,73 +336,76 @@ class UnionHeader extends StatelessWidget {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(12)),
       ),
+      isScrollControlled: true,
       builder: (ctx) => SafeArea(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home'),
-              onTap: () {
-                Navigator.pop(ctx);
-                navigateToHome(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.storefront),
-              title: const Text('Shop'),
-              onTap: () {
-                Navigator.pop(ctx);
-                Navigator.pushNamed(context, '/collections/clothing');
-              },
-            ),
-            ExpansionTile(
-              leading: const Icon(Icons.print),
-              title: const Text('The Print Shack'),
-              children: [
-                ListTile(
-                  contentPadding: const EdgeInsets.only(left: 72),
-                  title: const Text('Personalisation'),
-                  onTap: () {
-                    Navigator.pop(ctx);
-                    Navigator.pushNamed(context, '/print-shack');
-                  },
-                ),
-                ListTile(
-                  contentPadding: const EdgeInsets.only(left: 72),
-                  title: const Text('About'),
-                  onTap: () {
-                    Navigator.pop(ctx);
-                    Navigator.pushNamed(context, '/about-print-shack');
-                  },
-                ),
-              ],
-            ),
-            ListTile(
-              leading: const Icon(Icons.local_offer),
-              title: const Text('SALE'),
-              onTap: () {
-                Navigator.pop(ctx);
-                Navigator.pushNamed(context, '/sale');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.info_outline),
-              title: const Text('About'),
-              onTap: () {
-                Navigator.pop(ctx);
-                navigateToAbout(context);
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text('Account'),
-              onTap: () {
-                Navigator.pop(ctx);
-                Navigator.pushNamed(context, '/account');
-              },
-            ),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ListTile(
+                leading: const Icon(Icons.home),
+                title: const Text('Home'),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  navigateToHome(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.storefront),
+                title: const Text('Shop'),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  Navigator.pushNamed(context, '/collections/clothing');
+                },
+              ),
+              ExpansionTile(
+                leading: const Icon(Icons.print),
+                title: const Text('The Print Shack'),
+                children: [
+                  ListTile(
+                    contentPadding: const EdgeInsets.only(left: 72),
+                    title: const Text('Personalisation'),
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      Navigator.pushNamed(context, '/print-shack');
+                    },
+                  ),
+                  ListTile(
+                    contentPadding: const EdgeInsets.only(left: 72),
+                    title: const Text('About'),
+                    onTap: () {
+                      Navigator.pop(ctx);
+                      Navigator.pushNamed(context, '/about-print-shack');
+                    },
+                  ),
+                ],
+              ),
+              ListTile(
+                leading: const Icon(Icons.local_offer),
+                title: const Text('SALE'),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  Navigator.pushNamed(context, '/sale');
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.info_outline),
+                title: const Text('About'),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  navigateToAbout(context);
+                },
+              ),
+              ListTile(
+                leading: const Icon(Icons.person),
+                title: const Text('Account'),
+                onTap: () {
+                  Navigator.pop(ctx);
+                  Navigator.pushNamed(context, '/account');
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
