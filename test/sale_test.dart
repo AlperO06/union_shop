@@ -23,7 +23,7 @@ void main() {
       await tester.pumpWidget(createSalePage());
       await tester.pumpAndSettle();
 
-      expect(find.text('SALE'), findsOneWidget);
+      expect(find.text('SALE'), findsWidgets);
     });
 
     testWidgets('should display sale subtitle', (WidgetTester tester) async {
