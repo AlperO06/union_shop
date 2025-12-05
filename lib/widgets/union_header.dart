@@ -153,6 +153,55 @@ class UnionHeader extends StatelessWidget {
     );
   }
 
+  // Print Shack dropdown button
+  Widget buildPrintShackButton(BuildContext context, bool isWideScreen) {
+    if (isWideScreen) {
+      return PopupMenuButton<ShopMenuItem>(
+        offset: const Offset(0, kToolbarHeight),
+        child: const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 8),
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'The Print Shack',
+                style: TextStyle(fontSize: 16, color: Colors.black),
+              ),
+              SizedBox(width: 6),
+              Icon(Icons.arrow_drop_down, size: 20, color: Colors.black),
+            ],
+          ),
+        ),
+        onSelected: (item) {
+          if (item.routeName != null && item.routeName!.isNotEmpty) {
+            Navigator.pushNamed(context, item.routeName!);
+          } else {
+            debugPrint('Print Shack menu selected: ${item.label}');
+          }
+        },
+        itemBuilder: (context) {
+          return printShackMenuItems.map((item) {
+            return PopupMenuItem<ShopMenuItem>(
+              value: item,
+              child: Text(item.label),
+            );
+          }).toList();
+        },
+      );
+    }
+
+    // Narrow screens: simple button
+    return TextButton(
+      onPressed: () => Navigator.pushNamed(context, '/print-shack'),
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.black,
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        textStyle: const TextStyle(fontSize: 16),
+      ),
+      child: const Text('The Print Shack'),
+    );
+  }
+
   // New: show a temporary mobile menu with navigation items
   void _openMobileMenu(BuildContext context) {
     showModalBottomSheet<void>(
@@ -283,6 +332,8 @@ class UnionHeader extends StatelessWidget {
                                 const SizedBox(width: 8),
                                 // pass the local isWide flag so narrow screens get a TextButton
                                 buildShopButton(context, isWide),
+                                const SizedBox(width: 8),
+                                buildPrintShackButton(context, isWide),
                                 const SizedBox(width: 8),
                                 TextButton(
                                   onPressed: () => Navigator.pushNamed(context, '/sale'),
