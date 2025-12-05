@@ -60,11 +60,16 @@ class AuthService extends ChangeNotifier {
 
   // Email/Password Sign Up
   Future<bool> signUpWithEmail(String email, String password, String displayName) async {
+    if (!_firebaseAvailable || _auth == null) {
+      _setError('Authentication is not available. Please configure Firebase.');
+      return false;
+    }
+    
     try {
       _setLoading(true);
       _setError(null);
 
-      final userCredential = await _auth.createUserWithEmailAndPassword(
+      final userCredential = await _auth!.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
@@ -72,7 +77,7 @@ class AuthService extends ChangeNotifier {
       if (userCredential.user != null) {
         await userCredential.user!.updateDisplayName(displayName);
         await userCredential.user!.reload();
-        _currentUser = AppUser.fromFirebaseUser(_auth.currentUser!);
+        _currentUser = AppUser.fromFirebaseUser(_auth!.currentUser!);
         notifyListeners();
       }
 
@@ -91,11 +96,16 @@ class AuthService extends ChangeNotifier {
 
   // Email/Password Sign In
   Future<bool> signInWithEmail(String email, String password) async {
+    if (!_firebaseAvailable || _auth == null) {
+      _setError('Authentication is not available. Please configure Firebase.');
+      return false;
+    }
+    
     try {
       _setLoading(true);
       _setError(null);
 
-      await _auth.signInWithEmailAndPassword(
+      await _auth!.signInWithEmailAndPassword(
         email: email,
         password: password,
       );
