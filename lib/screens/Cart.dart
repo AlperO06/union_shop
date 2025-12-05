@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../widgets/union_page_scaffold.dart';
 import '../data/cart.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -198,12 +199,16 @@ class _CartPageState extends State<CartPage> {
                                         child: imageUrl != null
                                             ? ClipRRect(
                                                 borderRadius: BorderRadius.circular(6),
-                                                child: Image.network(
-                                                  imageUrl,
+                                                child: CachedNetworkImage(
+                                                  imageUrl: imageUrl,
                                                   width: 84,
                                                   height: 64,
                                                   fit: BoxFit.cover,
-                                                  errorBuilder: (context, error, stackTrace) =>
+                                                  placeholder: (context, url) => Container(
+                                                    color: Colors.grey[200],
+                                                    child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                                                  ),
+                                                  errorWidget: (context, url, error) =>
                                                       const Icon(Icons.broken_image, color: Colors.grey, size: 32),
                                                 ),
                                               )
@@ -435,12 +440,16 @@ class _CartPageState extends State<CartPage> {
                                           child: imageUrl != null
                                               ? ClipRRect(
                                                   borderRadius: BorderRadius.circular(6),
-                                                  child: Image.network(
-                                                    imageUrl,
+                                                  child: CachedNetworkImage(
+                                                    imageUrl: imageUrl,
                                                     width: 84,
                                                     height: 64,
                                                     fit: BoxFit.cover,
-                                                    errorBuilder: (context, error, stackTrace) =>
+                                                    placeholder: (context, url) => Container(
+                                                      color: Colors.grey[200],
+                                                      child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                                                    ),
+                                                    errorWidget: (context, url, error) =>
                                                         const Icon(Icons.broken_image, color: Colors.grey, size: 32),
                                                   ),
                                                 )
