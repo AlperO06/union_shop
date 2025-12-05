@@ -82,7 +82,7 @@ class CollectionsLandingPage extends StatelessWidget {
                             context,
                             title: 'Graduation',
                             route: '/collections/clothing',
-                            imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=400&fit=crop',
+                            imageUrl: 'https://images.unsplash.com/photo-1627556704302-624f3b1c5b39?w=600&h=400&fit=crop',
                           ),
                           _buildCollectionCard(
                             context,
