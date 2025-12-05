@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import '../data/print_shack.dart';
 import '../widgets/union_page_scaffold.dart'; // use the app's shared scaffold (header/footer)
 import '../data/cart.dart'; // integrate with the app-wide cart
@@ -175,10 +176,14 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                 aspectRatio: 16 / 9,
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8),
-                  child: Image.network(
-                    mainImage,
+                  child: CachedNetworkImage(
+                    imageUrl: mainImage,
                     fit: BoxFit.cover,
-                    errorBuilder: (c, e, s) => Container(
+                    placeholder: (context, url) => Container(
+                      color: Colors.grey[200],
+                      child: const Center(child: CircularProgressIndicator()),
+                    ),
+                    errorWidget: (c, url, e) => Container(
                       color: Colors.grey[200],
                       child: const Center(child: Icon(Icons.broken_image)),
                     ),
@@ -215,12 +220,18 @@ class _PrintShackProductPageState extends State<PrintShackProductPage> {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(6),
-                            child: Image.network(
-                              url,
+                            child: CachedNetworkImage(
+                              imageUrl: url,
                               width: 96,
                               height: 64,
                               fit: BoxFit.cover,
-                              errorBuilder: (c, e, s) => Container(color: Colors.grey[200], width: 96, height: 64),
+                              placeholder: (context, url) => Container(
+                                color: Colors.grey[200],
+                                width: 96,
+                                height: 64,
+                                child: const Center(child: CircularProgressIndicator(strokeWidth: 2)),
+                              ),
+                              errorWidget: (c, url, e) => Container(color: Colors.grey[200], width: 96, height: 64),
                             ),
                           ),
                         ),
